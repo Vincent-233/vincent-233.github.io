@@ -2,9 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 诗和远方</title>
-    <link>https://vincent-233.github.io/hugo-blog-deployed/tags/</link>
+    <link>https://vincent-233.github.io/blog/tags/</link>
     <description>Recent content in Tags on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://vincent-233.github.io/hugo-blog-deployed/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python</title>
+      <link>https://vincent-233.github.io/blog/tags/python/</link>
+      <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://vincent-233.github.io/blog/tags/windows/</link>
+      <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/windows/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

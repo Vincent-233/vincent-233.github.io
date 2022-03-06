@@ -2,23 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/posts/a/</loc>
+    <loc>https://vincent-233.github.io/blog/categories/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/python/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/windows/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2021/08/conda-config-windows/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2020/06/use-of-sqlcmd/</loc>
     <lastmod>2020-06-14T17:02:48+00:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/posts/</loc>
-    <lastmod>2020-06-14T17:02:48+00:00</lastmod>
+    <loc>https://vincent-233.github.io/blog/about/</loc>
   </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/posts/blog_2/</loc>
-    <lastmod>2020-06-14T17:02:48+00:00</lastmod>
+    <loc>https://vincent-233.github.io/blog/1/01/</loc>
   </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/</loc>
-    <lastmod>2020-06-14T17:02:48+00:00</lastmod>
+    <loc>https://vincent-233.github.io/blog/1/01/</loc>
   </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/posts/my-first-post/</loc>
-    <lastmod>2013-02-26T01:28:32+08:00</lastmod>
+    <loc>https://vincent-233.github.io/blog/thinking/</loc>
   </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/categories/</loc>
-  </url><url>
-    <loc>https://vincent-233.github.io/hugo-blog-deployed/tags/</loc>
+    <loc>https://vincent-233.github.io/blog/tools/</loc>
   </url>
 </urlset>

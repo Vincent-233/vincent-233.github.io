@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>诗和远方</title>
-    <link>https://vincent-233.github.io/blog/</link>
-    <description>Recent content on 诗和远方</description>
+    <title>Teches on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tech/</link>
+    <description>Recent content in Teches on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>windows conda环境在cmd/powershell/git-bash下的配置</title>
       <link>https://vincent-233.github.io/blog/2021/08/conda-config-windows/</link>
@@ -23,33 +23,6 @@
       
       <guid>https://vincent-233.github.io/blog/2020/06/use-of-sqlcmd/</guid>
       <description>&lt;p&gt;对TSQL开发者来说，为何要使用SQLCMD可能呢？平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常多的SQL，而且执行顺序还非常重要，甚至需要切换实例去执行，如何确保不犯错误？&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/about/</guid>
-      <description>About Me Hello, I&amp;rsquo;am Vincent Ming</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/1/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/1/01/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/1/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/1/01/</guid>
-      <description></description>
     </item>
     
   </channel>
