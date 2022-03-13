@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>random on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tags/random/</link>
+    <description>Recent content in random on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 18:19:13 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/random/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库生成测试数据（SQL实现）</title>
+      <link>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</link>
+      <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</guid>
+      <description>&lt;p&gt;项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000条数据。
+以上需求看上去非常简单，但比较具有代表性，复杂需求也是由小需求排列组合而成。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

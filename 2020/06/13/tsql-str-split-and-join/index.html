@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL数据处理，字符串先拆分后合并 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL数据处理，字符串先拆分后合并</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-13T17:35:24Z">2020-06-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#需求">需求</a></li>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#说明">说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>前同事遇到一奇怪的数据拆分需求，我觉得挺有意思，就自己实现并记录之。</p>
+<h3 id="需求">需求</h3>
+<p><img src="https://img-blog.csdnimg.cn/20200613163450117.png" alt="在这里插入图片描述"> <br>
+以上数据样例，需要转为： <br>
+<img src="https://img-blog.csdnimg.cn/20200613163030614.png" alt="在这里插入图片描述"> <br>
+实际业务数据可能不止以上两列，而且数据量比较大，实现时要考虑性能。 <br>
+本文用SQL实现。</p>
+<h3 id="思路">思路</h3>
+<p>看上去是简单的字符串拆分，实际上是每隔两个分隔符（\）进行拆分，而且要将没拆分的分隔符符号转为冒号（：）。<br>
+可以考虑先全部拆分再每两个进行合并。</p>
+<h3 id="代码">代码</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/***  第一步，移除多余字符，方便后续折分   ***/</span>
+<span style="color:#75715e">-- update invalid splitor, &#34;/ -&gt; / 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">update</span> dbo.physcial_checkup 
+<span style="color:#66d9ef">set</span> check_result <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(check_result,<span style="color:#e6db74">&#39;&#34;/&#39;</span>,<span style="color:#e6db74">&#39;/&#39;</span>) 
+<span style="color:#66d9ef">where</span> charindex(<span style="color:#e6db74">&#39;&#34;/&#39;</span>,check_result) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;
+
+<span style="color:#75715e">-- remove first char / and last char \
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">update</span> dbo.physcial_checkup 
+<span style="color:#66d9ef">set</span> check_result <span style="color:#f92672">=</span> <span style="color:#66d9ef">SUBSTRING</span>(check_result,<span style="color:#ae81ff">2</span>,len(check_result) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/***  第二步，全部拆分为多行   ***/</span>
+<span style="color:#75715e">-- split to temp table
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  a.id
+       ,a.check_result
+       ,b.[value] <span style="color:#66d9ef">as</span> check_result_split
+	   ,CEILING(b.ID<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>.<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">as</span> group_id  <span style="color:#75715e">-- 每两个一组，方便后续合并
+</span><span style="color:#75715e"></span>	   ,ROW_NUMBER() over(partition <span style="color:#66d9ef">by</span> a.id <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> b.id) <span style="color:#66d9ef">as</span> rn
+<span style="color:#66d9ef">into</span> <span style="color:#f92672">#</span>temp_split
+<span style="color:#66d9ef">from</span> dbo.physcial_checkup  a
+<span style="color:#66d9ef">cross</span> apply dbo.SplitString(check_result,<span style="color:#e6db74">&#39;\&#39;</span>) <span style="color:#66d9ef">as</span> b; 
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/***  第三步，列值合并   ***/</span>
+<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span>
+     a.id
+	,stuff((<span style="color:#66d9ef">select</span> N<span style="color:#e6db74">&#39;：&#39;</span> <span style="color:#f92672">+</span> check_result_split <span style="color:#66d9ef">from</span> <span style="color:#f92672">#</span>temp_split 
+	        <span style="color:#66d9ef">where</span> id <span style="color:#f92672">=</span> a.id  <span style="color:#66d9ef">and</span> group_id <span style="color:#f92672">=</span> a.group_id 
+			<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> id,rn
+			<span style="color:#66d9ef">for</span> xml path(<span style="color:#e6db74">&#39;&#39;</span>)),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">as</span> check_result
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">#</span>temp_split a;
+</code></pre></div><h3 id="说明">说明</h3>
+<ul>
+<li>
+<p>以上第三步列值合并是在SQL Server 2017之前的常见写法，2017版本及之后有新函数<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-2017#f-generate-a-sorted-list-of-emails-per-towns"><strong>STRING_AGG</strong></a>，性能应该会快很多。</p>
+</li>
+<li>
+<p>以上代码中的group_id是用来后续进行合并的辅助列，每连续两个ID同一组</p>
+</li>
+<li>
+<p>在不使用STRING_AGG的情况下，提升第三步的性能可以考虑：</p>
+<ul>
+<li>增加索引 create index (id,group_id) include (check_result_split)，这样子查询可走索引</li>
+<li>由于本案例是每个ID按相同Group_ID进行合并，且每个Group两行，合并规则非常固定，可考虑改变写法，只访问一次表即可，按行号分别将同组的两行转为列，最后再拼接：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/***  第三步，列值合并   ***/</span>
+<span style="color:#66d9ef">select</span> id,group_id
+        ,<span style="color:#66d9ef">max</span>(<span style="color:#66d9ef">case</span> rn <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">when</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span> check_result_split <span style="color:#66d9ef">end</span>)  <span style="color:#f92672">+</span> N<span style="color:#e6db74">&#39;：&#39;</span> <span style="color:#f92672">+</span> 
+        <span style="color:#66d9ef">max</span>(<span style="color:#66d9ef">case</span> rn <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">when</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">then</span> check_result_split <span style="color:#66d9ef">end</span>) <span style="color:#66d9ef">as</span> check_result
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">#</span>temp_split a
+<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> id,group_id;
+
+</code></pre></div></li>
+<li>
+<p>第二步比较花时间，SplitString是字符串拆分为多行的函数，可<a href="https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/">参考此文</a></p>
+</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">t-sql</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/sql%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86/" rel="tag">sql字符串拆分</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/03/20/generate-week-num/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">根据日历表生成财年及周编号</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/06/14/use-of-sqlcmd/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQLCMD的使用</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

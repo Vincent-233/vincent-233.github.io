@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>递归 on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tags/%E9%80%92%E5%BD%92/</link>
+    <description>Recent content in 递归 on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Dec 2013 00:12:08 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/%E9%80%92%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL递归查询实战</title>
+      <link>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</link>
+      <pubDate>Wed, 11 Dec 2013 00:12:08 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</guid>
+      <description>假设某公司的人员组织结构如下图：
+数据库表：
+CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT INTO ORG VALUES(6, &amp;#39;Emily&amp;#39;, 3); INSERT INTO ORG VALUES(7, &amp;#39;Kate&amp;#39;, 3); INSERT INTO ORG VALUES(8, &amp;#39;Mark&amp;#39;, 6); GO 需求一： 查询TOM管理的所有员工的名字 查询代码：</description>
+    </item>
+    
+  </channel>
+</rss>
