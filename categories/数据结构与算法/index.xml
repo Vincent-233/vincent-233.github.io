@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据结构与算法 on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 数据结构与算法 on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 Jan 2021 00:34:32 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>排序算法-快速排序（Quick Sort）</title>
+      <link>https://vincent-233.github.io/blog/2021/01/02/112072915/</link>
+      <pubDate>Sat, 02 Jan 2021 00:34:32 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/01/02/112072915/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法-递归-排列组合</title>
+      <link>https://vincent-233.github.io/blog/2020/05/03/105907225/</link>
+      <pubDate>Sun, 03 May 2020 19:51:39 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/03/105907225/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法-求集合所有子集</title>
+      <link>https://vincent-233.github.io/blog/2020/05/03/105901441/</link>
+      <pubDate>Sun, 03 May 2020 15:27:11 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/03/105901441/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>全排列递归算法（Python实现）</title>
+      <link>https://vincent-233.github.io/blog/2019/11/08/102962911/</link>
+      <pubDate>Fri, 08 Nov 2019 17:36:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/08/102962911/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

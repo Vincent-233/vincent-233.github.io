@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Windows下快速合并文本文件 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Windows下快速合并文本文件</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-05-16T12:01:29Z">2021-05-16</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cmd实现">CMD实现</a></li>
+        <li><a href="#powershell实现">PowerShell实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>需求：将当前目录下所有文本文件合并成一个新文件。</p>
+<h3 id="cmd实现">CMD实现</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">copy *.txt cmd_new.txt
+</code></pre></div><p>以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的第一行和前一个文件的最后一行合并在一行的情况。<br>
+想要规避需要再麻烦一点：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#66d9ef">for</span> %f in <span style="color:#f92672">(</span>*.txt<span style="color:#f92672">)</span> <span style="color:#66d9ef">do</span> type <span style="color:#e6db74">&#34;%f&#34;</span> &gt;&gt; cmd_new.txt &amp; echo. &gt;&gt; cmd_new.txt
+</code></pre></div><h3 id="powershell实现">PowerShell实现</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># 写法一</span>
+get-content *.txt | out-file C:\output\PS_New.txt
+
+<span style="color:#75715e"># 写法二</span>
+get-content *.txt | set-content C:\output\PS_New.txt
+
+<span style="color:#75715e"># 写法三（ 还可以更加灵活，加上日期）</span>
+get-content *.txt | set-content (<span style="color:#e6db74">&#39;C:\output\PS_New_&#39;</span>+(get-date).ToString(<span style="color:#e6db74">&#34;yyyymmdd&#34;</span>)+<span style="color:#e6db74">&#39;.txt&#39;</span>)
+
+<span style="color:#75715e"># 写法四 （最简洁）</span>
+cat *.txt &gt; C:\output\PS_New.txt
+</code></pre></div><blockquote>
+<p>说明:以上Powershell脚本中，output目录和要合并的txt所在目录应设为不同，或者换一下合并后文件的后缀名，否则会出现死循环无穷拼接的情况。</p>
+</blockquote>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/batch/" rel="tag">batch</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/powershell/" rel="tag">powershell</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2021/01/02/112072915/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">排序算法-快速排序（Quick Sort）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2021/06/11/117827867/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SSIS - 旧版本OLEDB不支持Always On Availability Group</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

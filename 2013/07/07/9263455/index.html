@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>面试逻辑题 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">面试逻辑题</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-07-07T08:13:43Z">2013-07-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/" rel="category">未分类</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p><strong>1. 工人工作7天，给工人的回报是一根金条，金条平分成相连的7段，必须在每天结束时给他们一段金条，如果只允许两次把金条弄断，如何给工人付费？</strong></p>
+<p>答：两次弄断分成三份，分成1/7、2/7、4/7三段可以满足要求。</p>
+<p>第一天：给工人1/7；</p>
+<p>第二天：给2/7，让工人找回原来的1/7；</p>
+<p>第三天：再将1/7给工人；</p>
+<p>第四天：给工人4/7，让工人将1/7和2/7一起找回；</p>
+<p>第五天：给工人1/7；</p>
+<p>第六天：给2/7，让工人找回1/7；</p>
+<p>第七天：将最后的1/7给工人。</p>
+<p><strong>2. 请把一盒蛋糕切成8份，分给8个人，但蛋糕盒里还必然留有一份。</strong></p>
+<p>答：将切成的8份蛋糕先拿出7份分给人，剩下的1份连盒子一起分给第8个人。</p>
+<p><strong>3. 小明一家过桥，过桥时是黑夜，所以必须有灯。现在小明过桥要1秒，小明的弟弟要3秒，小明的爸爸要6秒，小明的妈妈要8秒，小明的爷爷要12秒。每次过桥最多可过两人，而且过桥的速度依过桥最慢者而定，而且灯在点燃后30秒就会熄灭。问：小明一家如何过桥？</strong></p>
+<p>答：第一步：小明与弟弟过桥，3秒；</p>
+<p>第二步：小明回，1秒；</p>
+<p>第三步：妈妈与爷爷过桥，12秒；</p>
+<p>第四步：弟弟回，3秒；</p>
+<p>第五步：小明与爸爸过桥，6秒；</p>
+<p>第六步：小明回；</p>
+<p>第七步：小明与弟弟过桥，3秒。</p>
+<p>一共：29秒。</p>
+<p>（五与七，二与四，可交叉调换。思路的关键在于先让两个最快的人过河，并让快的人传递灯）</p>
+<p><strong>4. 一群人开舞会，每人头上都戴著一顶帽子。帽子只有黑白两种，黑的至少有一顶。每个人都能看到其他人帽子的颜色，却看不到自己的。主持人先让大家看看别人头上戴的是什么帽子，然后关灯，如果有人认为自己戴的是黑帽子，就打自己一个耳光。第一次关灯，没有声音。于是再开灯，大家再看一遍，关灯时仍然鸦雀无声。一直到第三次关灯，才有劈劈啪啪打耳光的声音响起。问有多少人戴著黑帽子？</strong></p>
+<p>答：假如只有一个人戴黑帽子，那他看到所有人都戴白帽，在第一次关灯时就应自打耳光，所以应该不止一个人戴黑帽子；如果有两顶黑帽子，第一次两人都只看到对方头上的黑帽子，不敢确定自己的颜色，但到第二次关灯，这两人应该明白，如果自己戴著白帽，那对方早在上一次就应打耳光了，因此自己戴的也是黑帽子，于是也会有耳光声响起；可事实是第三次才响起了耳光声，说明全场不止两顶黑帽，依此类推，应该是关了几次灯，有几顶黑帽。第N次关灯，那个看到N-1个黑帽子的人打自己耳光。</p>
+<p><strong>5. 一楼到十楼的每层电梯门口都放著一颗钻石，钻石大小不一。你乘坐电梯从一楼到十楼，每层电梯门都会开一次，只能拿一次钻石，问怎样才能拿到最大的一颗？</strong></p>
+<p>答：她的回答是：选择前五层楼都不拿，观察各层钻石的大小，做到心中有数。后五层楼再选择，选择大小接近前五层楼出现过最大钻石大小的钻石。她至今也不知道这道题的准确答案，&ldquo;没有准确答案，就是考一下你的思路，&ldquo;她如是说。</p>
+<p><strong>6. 烧一根不均匀的绳要用一个小时，如何用它来判断45分钟?</strong></p>
+<p>答：用两根绳子。第一根两头同时点，第二根点一头，并开始计时，当第一根绳子烧完的时候（过了半小时），再将第二根的另一头点燃，烧完（15分针）即过了45分钟。</p>
+<p><strong>7. 井盖为什么是圆的？</strong></p>
+<p>答：&ldquo;井盖是圆的，这样才美观&rdquo;</p>
+<p>&ldquo;圆的井盖利于搬运（搬的时候可以滚动搬运）&rdquo;</p>
+<p>&ldquo;圆的井盖在装卸的时候不至于失手掉下去。&ldquo;找到了最有说服力的答案</p>
+<p>&ldquo;圆的受力最均匀，所以最坚固。&rdquo;</p>
+<p><strong>8. 有7克、2克砝码各一个，天平一只，如何只用这些物品三次将140克的盐分成50、90克各一份？</strong></p>
+<p>答：解决方法多样，现贴出两种：</p>
+<p>（一）</p>
+<p>1.将140分成两个70</p>
+<p>2.将70分成两个35</p>
+<p>3.天平两端各放2克和7克砝码，这样将35可以分成15克和20克（7 + 15 和 2 + 20）</p>
+<p>70 + 20 = 90 35 + 15 = 50搞定</p>
+<p>（二）</p>
+<p>1.用2克和7克称出9克；</p>
+<p>2.将7克放在9克那边，称出16克；</p>
+<ol>
+<li>16克和7克放一边，再称出25克。</li>
+</ol>
+<p>这样一共有两个25克，加一起50克，剩下的就是90克</p>
+<p><strong>9. 有一辆火车以每小时15公里的速度离开洛杉矶直奔纽约，另一辆火车以第小时20公里的速度从纽约开往洛杉矶。如果有一只鸟，以外30公里每小时的速度和两辆火车现时启动，从洛杉矶出发，碰到另辆车后返回，依次在两辆火车来回的飞行，直道两面辆火车相遇，请问，这只小鸟飞行了多长距离？</strong></p>
+<p>答：其实很容易，只要想到小鸟是一直在飞行的就可以了。</p>
+<p>设两地距离是S，则小鸟飞行的距离是 [s/ (20 + 15)] * 30 = 6 / 7 S</p>
+<p><strong>10. 你有两个罐子，50个红色弹球，50个蓝色弹球，随机选出一个罐子，随机选取出一个弹球放入罐子，怎么给红色弹球最大的选中机会？在你的计划中，得到红球的准确几率是多少？</strong></p>
+<p>答：这个题目的意思不是很清楚。可以试著这样理解：&ldquo;你有100个球，红的50个，蓝的也是50个,你需要把它们（所有的球）放在两个罐子中（随便怎么放），请问怎样放使你从中拿出红球（拿一次）的机率最大？&ldquo;这样一样，给红球最大选择机率的方案是：一个罐子放一个红球，另一个放49个红球和50个蓝球。</p>
+<p><strong>11. 你有四个装药丸的罐子，每个药丸都有一定的重量，被污染的药丸是没被污染的重量+1.只称量一次，如何判断哪个罐子的药被污染了？</strong></p>
+<p>答：一种不错的方案如下：</p>
+<p>将4个不同的药丸罐子编号为1、2、3、4，设药丸重一个单位，依次从1~4号罐子从取出1、2、4、8颗药丸，一起称一次，如果没有被污染，结果应该是15个单位重量。16则是1号罐被污染，17则是2号罐被污染&hellip;&hellip;30则是所都有罐子都被污染。</p>
+<p>引申：如果题目确定只有一罐被污染，则依次取出1、2、3、4（互不相同）颗药丸即可，用称出的总重量减去10即得出被污染的罐子号数。</p>
+<p><strong>12. 如果你有无穷多的水，一个3夸脱的和一个5夸脱的提桶，你如何准确称出4夸脱的水？</strong></p>
+<p>答：给出两种方案：</p>
+<p>（一）</p>
+<p>第一步:装3夸脱的水倒向5夸脱的桶中；</p>
+<p>第二步:装3夸脱的水继续往5夸脱的桶倒，直到水满，3夸脱的桶中还有一夸脱水；</p>
+<p>第三步:将5夸脱的水倒掉，3夸脱中剩下的1夸脱水倒向5夸脱水桶；</p>
+<p>第四步:装3夸脱水倒向5夸脱水桶；这样5夸脱水桶就装有了4夸脱水。</p>
+<p>（二）</p>
+<p>第一步:装5夸脱的水倒向3夸脱的桶中，直到水满，这样5夸脱水桶还有2夸脱水；</p>
+<p>第二步:将上面2夸脱水倒进空的3夸脱水桶中，这样还有1夸脱水的空间；</p>
+<p>第三步:新装5夸脱的水向上面的3夸脱水桶中倒，3夸脱水桶水满时，5夸脱水桶中剩下的即为4夸脱水；</p>
+<p><strong>13. 对一批编号为1～100，全部开关朝上(开)的灯进行以下操作：凡是1的倍数反方向拨一次开关；2的倍数反方向又拨一次开关；3的倍数反方向又拨一次开关&hellip;&hellip;问：最后为关熄状态的灯的编号。。</strong></p>
+<p>答：为关灯状态的条件是一共被拨了奇数次，即灯的编号有奇数个因数，只有完全平方数满足这个要求，所以它们是1，4，9，16，25，36，47，64，81，100。</p>
+<p><strong>14. 假设一张圆盘像唱机上的唱盘那样转动。这张盘一半是黑色，一半是白色。假设你有数量不限的一些颜色传感器。要想确定圆盘转动的方向，你需要在它周围摆多少个颜色传感器？它们应该被摆放在什么位置？</strong></p>
+<p>答：用2个即可。只要它们不是放在同一直径上。</p>
+<p><strong>15. 假设时钟到了12点。注意时针和分针重叠在一起。在一天之中，时针和分针共重叠多少次？你知道它们重叠时的具体时间吗？</strong></p>
+<p>（一）抽象分析：</p>
+<p>12个小时一轮回，先看一天中的前12个小时：</p>
+<p>00：00到01：00期间，分针始终走在时针前面，0次重合；</p>
+<p>01：00到02：00期间，分针赶上时针并超越它，1次重合；</p>
+<p>02：00到03：00期间，分针赶上时针并超越它，1次重合；</p>
+<p>11：00到12：00期间，分针赶上时针并和它一起在12：00重合，1次重合。</p>
+<p>（二）精确分析：</p>
+<p>前12小时内，从00：00起，设某一时刻为n时m分，时针走过的角度为X度，分针角速度是时针的12倍，重合点处应有：X =12X – 360n 。得X = 360n / 11。360度60分故每度1/6分，m = (360n / 11) * 1/6 = 60n / 11，得重合点时间为 n：60n/11。后12个小时的重合时间为(12+ n)：60n/11，（n = 0，1，2，&hellip;&hellip;11）。</p>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2013/07/03/9237409/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL练习题（1）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2013/07/27/9532985/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL练习题（2）</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

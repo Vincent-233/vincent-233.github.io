@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>虚拟机Linux安装PostgreSQL，并让宿主机连接 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">虚拟机Linux安装PostgreSQL，并让宿主机连接</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-05-14T23:41:55Z">2019-05-14</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h4 id="安装postgresql">安装PostgreSQL</h4>
+<p>运行如下命令进行安装：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install postgresql
+</code></pre></div><h4 id="linux本地登陆并修改密码">Linux本地登陆并修改密码</h4>
+<p>安装完成之后，Linux会自动创建postgres同名账户，用此账号可直接免密登陆PostgreSQL（类似于SQL Server的Windows账号认证方式）:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo -u postgres psql
+</code></pre></div><p>然后可以用 \password命令更新密码，用于之后的远程连接。<br>
+更新之后，就可以密码的方式登陆，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">psql -U postgres -d postgres -h 127.0.0.1 -p <span style="color:#ae81ff">5432</span> <span style="color:#75715e"># 提示输入密码，输入后登陆到psql</span>
+psql -help <span style="color:#75715e"># 显示帮助</span>
+psql -l <span style="color:#75715e"># 显示数据库列表然后退出</span>
+</code></pre></div><blockquote>
+<p>连接到具体的PostgreSQL之后，可用 <code>\?</code> 显示 psql shell 命令帮助，常用命令如下：<br>
+\password：设置密码<br>
+\q：退出<br>
+\h：查看SQL命令的解释，比如\h select。<br>
+?：查看psql命令列表。<br>
+\l：列出所有数据库。<br>
+\c [database_name]：连接其他数据库。<br>
+\d：列出当前数据库的所有对象，如Table,View等。<br>
+\dt: 列出当前数据库的所有Table。<br>
+\d [table_name]：列出某一张表格的结构。<br>
+\du：列出所有用户。<br>
+\e：打开文本编辑器。<br>
+\conninfo：列出当前数据库和连接的信息。</p>
+</blockquote>
+<h4 id="配置允许远程连接">配置允许远程连接</h4>
+<p>以下10.0版本为例，配置为最大连接权限，若项目中用到请以实际安全策略为准。</p>
+<ul>
+<li>修改监听</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo vi /etc/postgresql/10/main/postgresql.conf 
+</code></pre></div><p>将 #listen_addresses = &lsquo;localhost&rsquo; 的注释去掉并改为 listen_addresses = &lsquo;*&rsquo;</p>
+<ul>
+<li>修改可访问用户的IP段</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo vi /etc/postgresql/10/main/pg_hba.conf 
+</code></pre></div><p>在文件末尾添加： host all all 0.0.0.0 0.0.0.0 md5 ，表示允许任何IP连接</p>
+<ul>
+<li>重启数据库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo /etc/init.d/postgresql restart
+</code></pre></div><h4 id="开启5432端口">开启5432端口</h4>
+<p>上述允许远程连接的设置仅是postgre的设置，真正要让外部可连接，OS层也要设置，即开启相应端口，postgre默认用tcp 5432 端口进行连接，故开启5432端口即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 若 firewalld 未安装，则先进行安装： sudo apt install firewalld</span>
+<span style="color:#75715e"># 允许 tcp 5432 端口</span>
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>5432/tcp
+<span style="color:#75715e"># reload 防火墙，应用规则</span>
+sudo systemctl reload firewalld
+</code></pre></div><h4 id="配置宿主机连接postgresql">配置宿主机连接PostgreSQL</h4>
+<ul>
+<li>若虚拟机用桥接方式连网，则根据虚拟机IP，可用密码正常连即可</li>
+<li>若用NAT方式，需要配置端口转发，配置示例如下所示：<br>
+<img src="/blog/img/20190514233438550.png" alt=""></li>
+</ul>
+<h4 id="连接测试">连接测试</h4>
+<p>配置好之后，用WorkBench/J测试，连接成功：<br>
+<img src="/blog/img/20190514233817316.png" alt=""></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/postgresql/" rel="tag">PostgreSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/27/89609806/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SVN批量移动文件，并保留版本日志</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/05/26/90581596/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">VIM常用命令</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

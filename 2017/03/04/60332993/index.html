@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL CLR函数（以正则表达式为例） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL CLR函数（以正则表达式为例）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-03-04T17:13:51Z">2017-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#创建clr程序集">创建CLR程序集</a></li>
+        <li><a href="#部署clr函数">部署CLR函数</a></li>
+        <li><a href="#使用举例">使用举例</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="创建clr程序集">创建CLR程序集</h3>
+<p>VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择“用户定义的函数“，然后在类文件中写入相关代码，最后生成即可。以下是以创建正则表达式相关函数的代码为例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using Microsoft.SqlServer.Server;
+using System.Text.RegularExpressions;
+using System.Collections;
+
+public partial class SqlRegularExpressions
+{
+    <span style="color:#75715e">// 是否匹配
+</span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
+    public <span style="color:#66d9ef">static</span> SqlBoolean RegExpIsMatch(string input,string pattern)
+    {
+        <span style="color:#66d9ef">return</span> Regex.IsMatch(input, pattern);
+    }
+
+    <span style="color:#75715e">// 第一个匹配的字符串
+</span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
+    public <span style="color:#66d9ef">static</span> SqlString RegExpMatch(string input, string pattern)
+    {
+        <span style="color:#66d9ef">return</span> Regex.Match(input, pattern).Value;
+    }
+
+    <span style="color:#75715e">// 所有匹配的字符串
+</span><span style="color:#75715e"></span>   [SqlFunction(FillRowMethodName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FillMatch&#34;</span>
+               ,TableDefinition <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[index] int, length int, value nvarchar(4000)&#34;</span>)
+   ]
+    public <span style="color:#66d9ef">static</span> IEnumerable RegExpMatches(string input, string pattern)
+    {
+        <span style="color:#66d9ef">return</span> Regex.Matches(input, pattern);
+    }
+
+    <span style="color:#75715e">// 与上面配套的填充函数
+</span><span style="color:#75715e"></span>    public <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> FillMatch(object obj, out <span style="color:#66d9ef">int</span> index,out <span style="color:#66d9ef">int</span> length, out SqlChars value)
+    {
+        Match match <span style="color:#f92672">=</span> (Match)obj;
+        index <span style="color:#f92672">=</span> match.Index;
+        length <span style="color:#f92672">=</span> match.Length;
+        value <span style="color:#f92672">=</span> new SqlChars(match.Value);
+    }
+
+    <span style="color:#75715e">// 正则替换
+</span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
+    public <span style="color:#66d9ef">static</span> SqlString RegExpReplace(string input, string pattern, string replacement)
+    {
+        <span style="color:#66d9ef">return</span> Regex.Replace(input, pattern, replacement);
+    }
+}
+</code></pre></div><h3 id="部署clr函数">部署CLR函数</h3>
+<p>可以直接用VS部署（生成－＞部署），也可以用以下代码手动创建：<br>
+第一步，创建程序集</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> ASSEMBLY SqlRegularExpressions 
+<span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;E:\Study\DotNet\SqlServer_RegExp\bin\Debug\sqlRegExpClass.dll&#39;</span> 
+<span style="color:#66d9ef">WITH</span> PERMISSION_SET <span style="color:#f92672">=</span> SAFE
+<span style="color:#66d9ef">Go</span>
+</code></pre></div><p>第二步，创建引用程序集的函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Regular Expression Like
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> dbo.RegExp_Like
+(
+	<span style="color:#f92672">@</span><span style="color:#66d9ef">Input</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>),
+	<span style="color:#f92672">@</span>Pattern NVARCHAR(<span style="color:#ae81ff">500</span>)
+)
+<span style="color:#66d9ef">RETURNS</span> BIT
+<span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">EXTERNAL</span> NAME 
+<span style="color:#75715e">-- [ASSEMBLY Name].[Class Name].[Function Name]
+</span><span style="color:#75715e"></span>RegularExpression.SqlRegularExpressions.RegExpIsMatch;
+<span style="color:#66d9ef">Go</span>
+
+<span style="color:#75715e">-- First Match Substring
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> dbo.RegExp_FirstMatch
+(
+	<span style="color:#f92672">@</span><span style="color:#66d9ef">Input</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>),
+	<span style="color:#f92672">@</span>Pattern NVARCHAR(<span style="color:#ae81ff">500</span>)
+)
+<span style="color:#66d9ef">RETURNS</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>)
+<span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">EXTERNAL</span> NAME 
+RegularExpression.SqlRegularExpressions.RegExpMatch;
+<span style="color:#66d9ef">Go</span>
+
+<span style="color:#75715e">-- All Matched Substring
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> dbo.RegExp_Matches
+(
+	<span style="color:#f92672">@</span><span style="color:#66d9ef">Input</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>),
+	<span style="color:#f92672">@</span>Pattern NVARCHAR(<span style="color:#ae81ff">500</span>)
+)
+<span style="color:#66d9ef">RETURNS</span> <span style="color:#66d9ef">Table</span>([<span style="color:#66d9ef">Index</span>] INT,[<span style="color:#66d9ef">Length</span>] INT,[Value] NVARCHAR(<span style="color:#ae81ff">500</span>))
+<span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">EXTERNAL</span> NAME 
+RegularExpression.SqlRegularExpressions.RegExpMatches;
+<span style="color:#66d9ef">Go</span>
+
+<span style="color:#75715e">-- Regular Expression Repalce
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> dbo.RegExp_Replace
+(
+	<span style="color:#f92672">@</span><span style="color:#66d9ef">Input</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>),
+	<span style="color:#f92672">@</span>Pattern NVARCHAR(<span style="color:#ae81ff">500</span>),
+	<span style="color:#f92672">@</span>Replacement NVARCHAR(<span style="color:#ae81ff">500</span>)
+)
+<span style="color:#66d9ef">RETURNS</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>)
+<span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">EXTERNAL</span> NAME 
+RegularExpression.SqlRegularExpressions.RegExpReplace;
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h3 id="使用举例">使用举例</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 是否含有汉字
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> dbo.RegExp_Like(N<span style="color:#e6db74">&#39;我是帅哥&#39;</span>,<span style="color:#e6db74">&#39;[\u4e00-\u9fa5]&#39;</span>);
+
+<span style="color:#75715e">-- 第一个含有字母z的单词
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> dbo.RegExp_FirstMatch(<span style="color:#e6db74">&#39;ablaze beagle choral dozen elementary fanatic&#39;</span>,<span style="color:#e6db74">&#39;\b\w*z+\w*\b&#39;</span>);
+
+<span style="color:#75715e">-- 所有含有字母z的单词
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> dbo.RegExp_Matches(<span style="color:#e6db74">&#39;ablaze beagle choral dozen elementary fanatic&#39;</span>,<span style="color:#e6db74">&#39;\b\w*z+\w*\b&#39;</span>);
+</code></pre></div><p>运行结果：<br>
+<img src="/blog/img/sql-clr-function.png" alt=""></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2017/03/04/60330115/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">DBA眼中的CLR</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2017/08/10/77043631/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL Server中的小数近似处理实例</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

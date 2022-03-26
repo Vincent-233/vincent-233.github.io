@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL Server 常见For XML语句比较 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server 常见For XML语句比较</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-29T20:58:42Z">2018-04-29</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#for-xml-raw">For XML Raw</a></li>
+    <li><a href="#for-xml-path">For XML Path</a></li>
+    <li><a href="#for-xml-auto">For XML Auto</a></li>
+    <li><a href="#for-xml-autoelement">For XML Auto，Element</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>SQL语句：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP (<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</code></pre></div><p>结果：<br>
+<img src="/blog/img/20180429203241889" alt=""></p>
+<h2 id="for-xml-raw">For XML Raw</h2>
+<ul>
+<li>sql</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+<span style="color:#66d9ef">FOR</span> XML RAW
+</code></pre></div><ul>
+<li>结果<br>
+<img src="/blog/img/20180429204049811" alt=""></li>
+<li>说明<br>
+每一条记录就是一行，row是固定的标签名，列名对应里面的属性名</li>
+</ul>
+<h2 id="for-xml-path">For XML Path</h2>
+<ul>
+<li>sql</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+<span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;MyOrders&#39;</span>),ROOT(<span style="color:#e6db74">&#39;Root&#39;</span>)
+</code></pre></div><ul>
+<li>结果<br>
+<img src="/blog/img/20180429203704748" alt=""></li>
+<li>说明<br>
+Root（可选）参数的值作为第一层，Path参数的值作为第二层，列名作为第三层，全部以标签的形式展现，最多三层，列与列平级。</li>
+</ul>
+<h2 id="for-xml-auto">For XML Auto</h2>
+<ul>
+<li>sql</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+<span style="color:#66d9ef">FOR</span> XML Auto
+</code></pre></div><ul>
+<li>结果<br>
+<img src="/blog/img/20180429204609562" alt=""></li>
+<li>说明<br>
+根据表的别名，列出现的顺序（第一个列是哪个表的，哪个表名就在最外层），自动依次缩进生成XML，列名是表名中的属性，有多少个表，就有多少层</li>
+</ul>
+<h2 id="for-xml-autoelement">For XML Auto，Element</h2>
+<ul>
+<li>sql</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+<span style="color:#66d9ef">FOR</span> XML Auto<span style="color:#960050;background-color:#1e0010">，</span>Element
+</code></pre></div><ul>
+<li>结果<br>
+<img src="/blog/img/20180429205052660" alt=""></li>
+<li>说明<br>
+在For XML Auto的基础上，将原来是属性的列名变为了标签。</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2017/08/10/77043631/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL Server中的小数近似处理实例</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2018/05/01/80154338/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">关于数据库隔离级别-快照(SnapShot)</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

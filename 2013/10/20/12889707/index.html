@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>字符串拆分为列表（函数） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">字符串拆分为列表（函数）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-10-20T13:56:03Z">2013-10-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/" rel="category">Categories</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p>闲得淡腾，今天试著自己实现了将字符串拆分为列表的功能，中间也有找一些资料，但我知道光看是没有用的，必须要自己试著实现印象才会深刻，必须要在实现过程中遇到问题然后解决问题，反复折腾过才算真正懂了！</p>
+<p>拆分字符串这种数据处理功能性的代码，写成函数比较合适。</p>
+<p>我写的第一个版本（有局限）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/*
+</span><span style="color:#75715e">思路：遍历字符串，保存被分隔字符，遇到分隔符后播入结果表，再重新开始保存新的被分隔字符
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.f_MySplit_1&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
+    <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_1
+<span style="color:#66d9ef">go</span>
+<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_1
+(
+    <span style="color:#f92672">@</span>str varchar(<span style="color:#ae81ff">1000</span>),   <span style="color:#75715e">-- 待拆分字符串
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span> varchar(<span style="color:#ae81ff">5</span>) <span style="color:#75715e">-- 分隔符（仅限一个字符）
+</span><span style="color:#75715e"></span>)
+<span style="color:#66d9ef">returns</span> <span style="color:#f92672">@</span>split <span style="color:#66d9ef">table</span>(item varchar(<span style="color:#ae81ff">100</span>))
+<span style="color:#66d9ef">as</span>
+<span style="color:#66d9ef">begin</span>
+    <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">+</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span>   <span style="color:#75715e">-- 便于统一处理
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>len int, <span style="color:#f92672">@</span>fo int, <span style="color:#f92672">@</span>tmp varchar(<span style="color:#ae81ff">100</span>)
+    <span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#f92672">@</span>len <span style="color:#f92672">=</span> len(<span style="color:#f92672">@</span>str <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">@</span>fo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+    while <span style="color:#f92672">@</span>fo  <span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span>)
+                <span style="color:#66d9ef">begin</span>
+                    <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>tmp <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>tmp <span style="color:#f92672">+</span> <span style="color:#66d9ef">substring</span>(<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span>fo,<span style="color:#ae81ff">1</span>)
+                <span style="color:#66d9ef">end</span>
+            <span style="color:#66d9ef">else</span>
+                <span style="color:#66d9ef">begin</span>
+                    <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>split <span style="color:#66d9ef">values</span>(<span style="color:#f92672">@</span>tmp)
+                    <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+                <span style="color:#66d9ef">end</span>
+            <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">return</span>
+<span style="color:#66d9ef">end</span>
+<span style="color:#75715e">-- 测试
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> testdb.dbo.MySplit_1(<span style="color:#e6db74">&#39;1,t5655565,9tt,10,a,bgfr,c&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)
+item
+<span style="color:#75715e">----------
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span>
+t5655565
+<span style="color:#ae81ff">9</span>tt
+<span style="color:#ae81ff">10</span>
+a
+bgfr
+<span style="color:#66d9ef">c</span>
+(<span style="color:#ae81ff">7</span> <span style="color:#66d9ef">row</span>(s) affected)
+</code></pre></div><p>期本功能是实现了，可以进行常规的拆分，不过在多试验了几个用例之后发现，它有相当的局限性，甚至可以说是bug</p>
+<p>1、仅支持单个分隔符</p>
+<p>2、没考虑 分隔符 为 null 或 空字符 的情况（ <strong>这种情况下，每一个字符被分隔为一列</strong>）</p>
+<p>于是又做了更新，下面是第二个版本，基本上算是通用了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/*
+</span><span style="color:#75715e">思路：定位前后分隔符位置，提取前后分隔之间的字符串
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.f_MySplit_2&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
+	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_2
+<span style="color:#66d9ef">go</span>
+
+<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_2
+(
+    <span style="color:#f92672">@</span>str varchar(<span style="color:#ae81ff">1000</span>),   <span style="color:#75715e">-- 待拆分字符串
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">@</span>split varchar(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>   <span style="color:#75715e">-- 分隔符
+</span><span style="color:#75715e"></span>)
+<span style="color:#66d9ef">returns</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">table</span>(item varchar(<span style="color:#ae81ff">100</span>))
+<span style="color:#66d9ef">as</span>
+<span style="color:#66d9ef">begin</span>
+    <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">+</span> <span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>)
+
+    <span style="color:#66d9ef">declare</span>
+        <span style="color:#f92672">@</span>start_index int,   <span style="color:#75715e">-- 子串搜索开始点
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>split_len int,     <span style="color:#75715e">-- 分隔符长度
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>fore_location int, <span style="color:#75715e">-- 前一个分隔符的位置
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>back_location int  <span style="color:#75715e">-- 后一个分隔符的位置
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">select</span>
+        <span style="color:#f92672">@</span>start_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">@</span>split_len <span style="color:#f92672">=</span> len(<span style="color:#f92672">@</span>split <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,  <span style="color:#75715e">-- len()不包含尾随空格
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>fore_location <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+        <span style="color:#f92672">@</span>back_location <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">if</span> len(<span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e">-- 若 @split 为 null 或 &#39;&#39;
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">begin</span>
+			<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>fo int
+			<span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+			while <span style="color:#f92672">@</span>fo
+</code></pre></div><p>上面代码中两个细节说明一下：</p>
+<p>1、set @str = isnull(@split,'') + @str + isnull(@split,'') ，防止 @split 为空的情况，null 与任何字符串相加的结果都为 null</p>
+<p>2、@split_len = len(@split + &lsquo;x&rsquo;) - 1， 为什么不直接len((@split)呢，因为<a href="http://msdn.microsoft.com/en-us/library/ms190329%28v=sql.90%29.aspx">len(@string)</a>默认不计算尾随的空格，这样处理一下后就变向支持了。</p>
+<p>另一版本，相对好理解一点：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_Split_V2
+(
+	<span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>),
+	<span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span> VARCHAR(<span style="color:#ae81ff">10</span>)
+)
+<span style="color:#66d9ef">RETURNS</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">TABLE</span>(items VARCHAR(<span style="color:#ae81ff">100</span>))
+<span style="color:#66d9ef">AS</span>
+	<span style="color:#66d9ef">BEGIN</span>
+		<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">index</span> INT;
+
+		<span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">ISNULL</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>)<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span> <span style="color:#75715e">--当分隔符号为&#39;&#39;或NULL（这是一个技巧）
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">BEGIN</span>
+				WHILE LEN(<span style="color:#f92672">@</span>str<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>
+					<span style="color:#66d9ef">BEGIN</span>
+						<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">VALUES</span>(<span style="color:#66d9ef">SUBSTRING</span>(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>));
+						<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str,LEN(<span style="color:#f92672">@</span>str<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;x&#39;</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>);
+					<span style="color:#66d9ef">END</span>
+				<span style="color:#66d9ef">RETURN</span>;
+			<span style="color:#66d9ef">END</span>
+
+		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">index</span> <span style="color:#f92672">=</span> CHARINDEX(<span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span>,<span style="color:#f92672">@</span>str);
+		WHILE <span style="color:#f92672">@</span><span style="color:#66d9ef">index</span> <span style="color:#f92672">&lt;&gt;</span> <span style="color:#ae81ff">0</span>
+			<span style="color:#66d9ef">BEGIN</span>
+				<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">VALUES</span>(<span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span><span style="color:#66d9ef">index</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+				<span style="color:#75715e">--SET @str = RIGHT(@str,LEN(@str+&#39;x&#39;)-LEN(@delimiter+&#39;x&#39;)-@index+1);
+</span><span style="color:#75715e"></span>				<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>,<span style="color:#f92672">@</span><span style="color:#66d9ef">index</span><span style="color:#f92672">+</span>LEN(<span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+				<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">index</span> <span style="color:#f92672">=</span> CHARINDEX(<span style="color:#f92672">@</span><span style="color:#66d9ef">delimiter</span>,<span style="color:#f92672">@</span>str);
+			<span style="color:#66d9ef">END</span>
+		<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">VALUES</span>(<span style="color:#f92672">@</span>str);
+
+		<span style="color:#66d9ef">RETURN</span>;
+	<span style="color:#66d9ef">END</span>
+</code></pre></div><p>与大家共享一下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 巧用 union 替换分隔符，拆分字符串为列表
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>str varchar(<span style="color:#ae81ff">500</span>), <span style="color:#f92672">@</span>split varchar(<span style="color:#ae81ff">100</span>), <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> varchar(<span style="color:#ae81ff">800</span>)
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;小明呵呵又变帅呵呵了&#39;</span>,<span style="color:#f92672">@</span>split <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;呵呵&#39;</span>
+
+<span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;select &#39;&#39;&#39;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">replace</span>(<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;&#39; union all select &#39;&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#39;&#39;&#39;</span>
+<span style="color:#75715e">--print @sql
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">exec</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>)
+
+<span style="color:#75715e">------
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">小明</span>
+<span style="color:#960050;background-color:#1e0010">又变帅</span>
+<span style="color:#960050;background-color:#1e0010">了</span>
+(<span style="color:#ae81ff">3</span> <span style="color:#66d9ef">row</span>(s) affected)
+</code></pre></div><p>感谢大神们的奇思妙想，感谢互联网！！！</p>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2013/08/05/9763867/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Excel中查找最后一个匹配字符的位置</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2013/11/03/14111219/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL 递归查询初体验</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

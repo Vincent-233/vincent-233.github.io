@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 19:17:46 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>powershell</title>
+      <link>https://vincent-233.github.io/blog/tags/powershell/</link>
+      <pubDate>Sat, 26 Mar 2022 19:17:46 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>python</title>
       <link>https://vincent-233.github.io/blog/tags/python/</link>
@@ -26,16 +35,43 @@
     </item>
     
     <item>
-      <title>sql字符串拆分</title>
-      <link>https://vincent-233.github.io/blog/tags/sql%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86/</link>
-      <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
+      <title>SSIS</title>
+      <link>https://vincent-233.github.io/blog/tags/ssis/</link>
+      <pubDate>Fri, 11 Jun 2021 23:22:57 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/sql%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/ssis/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>t-sql</title>
+      <title>batch</title>
+      <link>https://vincent-233.github.io/blog/tags/batch/</link>
+      <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/batch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pandas</title>
+      <link>https://vincent-233.github.io/blog/tags/pandas/</link>
+      <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/pandas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MSSQL</title>
+      <link>https://vincent-233.github.io/blog/tags/mssql/</link>
+      <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/mssql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>T-SQL</title>
       <link>https://vincent-233.github.io/blog/tags/t-sql/</link>
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
@@ -44,56 +80,101 @@
     </item>
     
     <item>
-      <title>窗口函数</title>
-      <link>https://vincent-233.github.io/blog/tags/%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
+      <title>spark</title>
+      <link>https://vincent-233.github.io/blog/tags/spark/</link>
+      <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/spark/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>random</title>
-      <link>https://vincent-233.github.io/blog/tags/random/</link>
-      <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
+      <title>Linux</title>
+      <link>https://vincent-233.github.io/blog/tags/linux/</link>
+      <pubDate>Mon, 17 Jun 2019 22:18:02 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/random/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>行列转换</title>
-      <link>https://vincent-233.github.io/blog/tags/%E8%A1%8C%E5%88%97%E8%BD%AC%E6%8D%A2/</link>
-      <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
+      <title>Excel</title>
+      <link>https://vincent-233.github.io/blog/tags/excel/</link>
+      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/%E8%A1%8C%E5%88%97%E8%BD%AC%E6%8D%A2/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/excel/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>mssql</title>
-      <link>https://vincent-233.github.io/blog/tags/mssql/</link>
-      <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
+      <title>VBA</title>
+      <link>https://vincent-233.github.io/blog/tags/vba/</link>
+      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/mssql/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/vba/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>sql server</title>
-      <link>https://vincent-233.github.io/blog/tags/sql-server/</link>
-      <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
+      <title>cheat sheet</title>
+      <link>https://vincent-233.github.io/blog/tags/cheat-sheet/</link>
+      <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/sql-server/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/cheat-sheet/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>递归</title>
-      <link>https://vincent-233.github.io/blog/tags/%E9%80%92%E5%BD%92/</link>
-      <pubDate>Wed, 11 Dec 2013 00:12:08 +0000</pubDate>
+      <title>vim</title>
+      <link>https://vincent-233.github.io/blog/tags/vim/</link>
+      <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/tags/%E9%80%92%E5%BD%92/</guid>
+      <guid>https://vincent-233.github.io/blog/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://vincent-233.github.io/blog/tags/postgresql/</link>
+      <pubDate>Tue, 14 May 2019 23:41:55 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://vincent-233.github.io/blog/tags/ubuntu/</link>
+      <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>virtual box</title>
+      <link>https://vincent-233.github.io/blog/tags/virtual-box/</link>
+      <pubDate>Sat, 13 Apr 2019 13:56:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/virtual-box/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORACLE</title>
+      <link>https://vincent-233.github.io/blog/tags/oracle/</link>
+      <pubDate>Thu, 16 Jan 2014 15:29:59 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/oracle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PL/SQL</title>
+      <link>https://vincent-233.github.io/blog/tags/pl/sql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/pl/sql/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/categories/python/</link>
+    <description>Recent content in Python on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Aug 2021 13:39:50 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于python import的路径问题</title>
+      <link>https://vincent-233.github.io/blog/2021/08/08/119496995/</link>
+      <pubDate>Sun, 08 Aug 2021 13:39:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/08/08/119496995/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pandas数据处理，行列转换</title>
+      <link>https://vincent-233.github.io/blog/2020/06/21/106893478/</link>
+      <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/06/21/106893478/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python深拷贝与浅拷贝说明与举例</title>
+      <link>https://vincent-233.github.io/blog/2020/05/02/105887338/</link>
+      <pubDate>Sat, 02 May 2020 12:08:21 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/02/105887338/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用python的faker库和dataclass快速生成测试数据</title>
+      <link>https://vincent-233.github.io/blog/2020/03/01/104597650/</link>
+      <pubDate>Sun, 01 Mar 2020 19:42:31 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/03/01/104597650/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python并发之异步编程框架AsyncIO简介</title>
+      <link>https://vincent-233.github.io/blog/2020/02/06/104168699/</link>
+      <pubDate>Thu, 06 Feb 2020 12:20:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/02/06/104168699/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python装饰器</title>
+      <link>https://vincent-233.github.io/blog/2020/02/02/104148685/</link>
+      <pubDate>Sun, 02 Feb 2020 20:41:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/02/02/104148685/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python面向对象举例</title>
+      <link>https://vincent-233.github.io/blog/2019/11/16/103103791/</link>
+      <pubDate>Sat, 16 Nov 2019 23:31:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/16/103103791/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python操作符重载特殊方法列表</title>
+      <link>https://vincent-233.github.io/blog/2019/11/16/103104203/</link>
+      <pubDate>Sat, 16 Nov 2019 22:58:07 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/16/103104203/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python文件遍历与匹配过滤</title>
+      <link>https://vincent-233.github.io/blog/2019/10/31/102848314/</link>
+      <pubDate>Thu, 31 Oct 2019 23:49:29 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/10/31/102848314/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>深刻理解python变量</title>
+      <link>https://vincent-233.github.io/blog/2019/09/26/101398064/</link>
+      <pubDate>Thu, 26 Sep 2019 00:17:56 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/09/26/101398064/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python数据库编程（以pyodbc和SQLAlchemy为例）</title>
+      <link>https://vincent-233.github.io/blog/2019/09/14/100814954/</link>
+      <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pandas读取Excel数据，简单清洗后存入数据库</title>
+      <link>https://vincent-233.github.io/blog/2019/04/18/89390714/</link>
+      <pubDate>Thu, 18 Apr 2019 23:32:36 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/18/89390714/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python对Excel求和、合并居中</title>
+      <link>https://vincent-233.github.io/blog/2019/04/01/88945745/</link>
+      <pubDate>Mon, 01 Apr 2019 12:58:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/01/88945745/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

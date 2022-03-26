@@ -1,20 +1,154 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mssql on 诗和远方</title>
+    <title>MSSQL on 诗和远方</title>
     <link>https://vincent-233.github.io/blog/tags/mssql/</link>
-    <description>Recent content in mssql on 诗和远方</description>
+    <description>Recent content in MSSQL on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Dec 2018 12:58:21 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2020 17:02:48 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>再谈SQL Server字符串拆分与分列</title>
-      <link>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</link>
-      <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
+      <title>sqlcmd使用体验</title>
+      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
+      <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</guid>
-      <description>&lt;p&gt;刚工作那会写了一篇关于字符串拆分的&lt;a href=&#34;https://blog.csdn.net/helloword4217/article/details/12889707&#34;&gt;文章&lt;/a&gt;，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。&lt;br&gt;
-为了考虑代码的可读性和复用性，一般用函数将实现细节封装，下面介绍几种常用的方法：&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server Audit 功能体验</title>
+      <link>https://vincent-233.github.io/blog/2018/09/24/82832350/</link>
+      <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/09/24/82832350/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 邮件功能使用</title>
+      <link>https://vincent-233.github.io/blog/2018/08/07/81481585/</link>
+      <pubDate>Tue, 07 Aug 2018 15:07:49 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/08/07/81481585/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL复制（订阅、发布）实践问题记录</title>
+      <link>https://vincent-233.github.io/blog/2018/06/18/80724609/</link>
+      <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/18/80724609/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server数据库复制向导报错解决</title>
+      <link>https://vincent-233.github.io/blog/2018/06/05/80583991/</link>
+      <pubDate>Tue, 05 Jun 2018 17:02:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/05/80583991/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server FileStream 体验</title>
+      <link>https://vincent-233.github.io/blog/2018/06/03/80553895/</link>
+      <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/03/80553895/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server透明数据加密（TDE）实践</title>
+      <link>https://vincent-233.github.io/blog/2018/05/22/80404769/</link>
+      <pubDate>Tue, 22 May 2018 14:19:56 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/22/80404769/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server分区表实践</title>
+      <link>https://vincent-233.github.io/blog/2018/05/21/80387148/</link>
+      <pubDate>Mon, 21 May 2018 00:38:33 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/21/80387148/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于数据库隔离级别-快照(SnapShot)</title>
+      <link>https://vincent-233.github.io/blog/2018/05/01/80154338/</link>
+      <pubDate>Tue, 01 May 2018 10:10:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/01/80154338/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL CLR函数（以正则表达式为例）</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
+      <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DBA眼中的CLR</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60330115/</link>
+      <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>从登陆名与用户名的区别说起，谈SQL Server安全性初步</title>
+      <link>https://vincent-233.github.io/blog/2015/05/31/46288335/</link>
+      <pubDate>Sun, 31 May 2015 14:17:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/05/31/46288335/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server无法删除数据库的解决方法</title>
+      <link>https://vincent-233.github.io/blog/2014/07/11/37717375/</link>
+      <pubDate>Fri, 11 Jul 2014 18:41:45 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/07/11/37717375/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft.ACE.OLEDB.12.0 及其在 MSSQL中的使用</title>
+      <link>https://vincent-233.github.io/blog/2014/02/08/19000277/</link>
+      <pubDate>Sat, 08 Feb 2014 18:47:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/02/08/19000277/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2005 无日志文件附加数据库</title>
+      <link>https://vincent-233.github.io/blog/2013/12/27/17620647/</link>
+      <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/27/17620647/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于SQL Server 排序规则</title>
+      <link>https://vincent-233.github.io/blog/2013/11/17/16645847/</link>
+      <pubDate>Sun, 17 Nov 2013 14:18:46 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/11/17/16645847/</guid>
+      <description></description>
     </item>
     
   </channel>

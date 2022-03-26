@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>深刻理解python变量 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">深刻理解python变量</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-09-26T00:17:56Z">2019-09-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#不可变类型">不可变类型</a></li>
+        <li><a href="#可变类型">可变类型</a></li>
+        <li><a href="#函数传参为引用">函数传参为引用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="概述">概述</h3>
+<ul>
+<li>python的标识符更像C++中的指针或JAVA中的引用变量，每个标识符与其所指向的内存地址相关联</li>
+<li>像 b = a 这样赋值语句，就是为 a 起了一个别名 b，id(a)与id(b)是相等的</li>
+<li>python函数传参，传的也是引用</li>
+</ul>
+<p>下面分情况举例说明，重点看注释说明。</p>
+<h3 id="不可变类型">不可变类型</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+print(id(a))
+b <span style="color:#f92672">=</span> a
+print(id(b))   <span style="color:#75715e"># 仅仅是别名，id(a)与id(b) 是一样的</span>
+</code></pre></div><pre><code>140717113381696  
+140717113381696  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
+print(a)
+print(id(a))   <span style="color:#75715e"># a+4会产生新实例，a指向了新的内容，id已变</span>
+</code></pre></div><pre><code>13  
+140717113382080  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(b)       
+print(id(b))   <span style="color:#75715e"># b指向的还是原来的内容，id不变</span>
+</code></pre></div><pre><code>1  
+140717113381696  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b <span style="color:#f92672">=</span> b <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
+print(b)
+print(id(b))   <span style="color:#75715e"># b的值变为与a一样，此时可能是为了节约内存，指向的是同一个实例，id不变 </span>
+</code></pre></div><pre><code>5  
+140717113381824  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>      
+print(id(a))   <span style="color:#75715e"># a的值与b不等，指向不同实例，id已变</span>
+</code></pre></div><pre><code>140717113382144  
+</code></pre>
+<h3 id="可变类型">可变类型</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+print(id(ls))
+
+lt <span style="color:#f92672">=</span> ls
+print(id(lt))  <span style="color:#75715e"># 仅仅是别名，id(a) 与 id(b) 是一样的</span>
+</code></pre></div><pre><code>2606652175432  
+2606652175432  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
+print(ls)
+print(id(ls))  <span style="color:#75715e"># 此操作改变了 ls 的值，由于 list 是可变类型，支持就地更新，故地址不变，即 id 不变</span>
+</code></pre></div><pre><code>[1, 9, 3]  
+2606652175432  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(id(lt))  <span style="color:#75715e"># lt也是指向相同地址，故ls的修改，就是lt的修改，id不变，内容已变</span>
+print(lt)
+</code></pre></div><pre><code>2606652175432  
+[1, 9, 3]  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">5</span>)) 
+print(id(ls))  <span style="color:#75715e"># ls 指向新的 list 实例，id已变</span>
+</code></pre></div><pre><code>2606658295816  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(id(lt))
+print(lt)      <span style="color:#75715e"># lt仍维持原样</span>
+</code></pre></div><pre><code>2606652175432  
+[1, 9, 3]  
+</code></pre>
+<h3 id="函数传参为引用">函数传参为引用</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">punctuation_remove</span>(my_str):
+    print(<span style="color:#e6db74">&#39;【inside function】&#39;</span>,id(my_str))  <span style="color:#75715e"># my_str未改变时的id值，与所传参数id值一致</span>
+    <span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> punctuation
+    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> punctuation:
+        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">in</span> my_str:
+            my_str <span style="color:#f92672">=</span> my_str<span style="color:#f92672">.</span>replace(p,<span style="color:#e6db74">&#39;&#39;</span>)    <span style="color:#75715e"># str不可变类型，my_str每次指向新的实例</span>
+            print(<span style="color:#e6db74">&#39;【inside function】After Change:&#39;</span>,id(my_str))
+    <span style="color:#66d9ef">return</span> my_str
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;let&#39;s play a game?&#34;</span>
+print(<span style="color:#e6db74">&#39;【outside functoin】&#39;</span>,id(x))
+</code></pre></div><pre><code>【outside functoin】 2606657730720  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">punctuation_remove(x)
+</code></pre></div><pre><code>【inside function】 2606657730720  
+【inside function】After Change: 2606657728848  
+【inside function】After Change: 2606657728704  
+'lets play a game'  
+</code></pre>
+<p>以上可以发现函数内参数最初的id值与外层传入时是一致的，故相当于传引用</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/09/14/100814954/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Python数据库编程（以pyodbc和SQLAlchemy为例）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/10/31/102848314/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">python文件遍历与匹配过滤</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

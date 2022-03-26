@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Windows通过密钥SSH登陆Linux - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Windows通过密钥SSH登陆Linux</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-08T10:22:22Z">2019-04-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#操作">操作</a></li>
+        <li><a href="#问题与解决">问题与解决</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="概述">概述</h3>
+<p>客户端通过密钥SSh登陆Linux的条件：</p>
+<ul>
+<li>服务器端登陆账户home目录下的.ssh文件夹存在公钥，命名authorized_keys</li>
+<li>客户端拥有与公钥配对的私钥<br>
+下面以win 10通过自带的OpenSSH客户端以密钥方式登陆Ubuntu为例进行说明</li>
+</ul>
+<h3 id="操作">操作</h3>
+<ol>
+<li>生成密钥对</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">student@vagrant-ubuntu-trusty-64:~$ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key <span style="color:#f92672">(</span>/home/student/.ssh/id_rsa<span style="color:#f92672">)</span>:这里按enter默认或另外写路径和文件名
+Enter passphrase <span style="color:#f92672">(</span>empty <span style="color:#66d9ef">for</span> no passphrase<span style="color:#f92672">)</span>:是否给私密再加一次密，无需则不填
+Enter same passphrase again:由于我有设置，这里需要再输入一次密码
+Your identification has been saved in /home/student/.ssh/id_rsa.
+Your public key has been saved in /home/student/.ssh/id_rsa.pub.
+The key fingerprint is:
+78:ad:4c:7e:cc:a4:9b:ac:34:50:4c:59:c8:ff:60:a1 student@vagrant-ubuntu-trusty-64
+The key<span style="color:#960050;background-color:#1e0010">&#39;</span>s randomart image is:
++--<span style="color:#f92672">[</span> RSA 2048<span style="color:#f92672">]</span>----+
+|     ..+.        |
+|     o+ .        |
+|      oo .       |
+|     .E.+.       |
+|    . ..Soo      |
+|     . <span style="color:#f92672">=</span> *.      |
+|      o <span style="color:#f92672">=</span> +      |
+|     . o +       |
+|      ..+        |
++-----------------+
+</code></pre></div><ol start="2">
+<li>配置公钥</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 查看密钥对是否生成</span>
+student@vagrant-ubuntu-trusty-64:~$ ls .ssh
+id_rsa  id_rsa.pub
+<span style="color:#75715e"># 将公钥放置在 authorized_keys 中</span>
+student@vagrant-ubuntu-trusty-64:~$ cat .ssh/id_rsa.pub &gt;&gt; .ssh/authorized_keys
+<span style="color:#75715e"># 设置权限</span>
+student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#ae81ff">600</span> .ssh/authorized_keys
+student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#ae81ff">700</span> .ssh
+</code></pre></div><blockquote>
+<p>上面将公钥放置在 authorized_keys中的步骤用到了输出重定向，如果不嫌麻烦可以用mkdir .ssh和touch .ssh/authorized_keys手动创建，然后cat出id_rsa.pub的内容，用vim或nano将其复制到authorized_keys中。</p>
+</blockquote>
+<ol start="3">
+<li>下载私钥到客户端</li>
+</ol>
+<ul>
+<li>手工操作方式：本地新建一个文本文件，将上述id_rsa中内容复制进去</li>
+<li>通过scp命令复制：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\XXX&gt; scp -P 2222 student@127.0.0.1<span style="color:#960050;background-color:#1e0010">:</span>/home/student/.ssh/id_rsa D:\key
+student@127.0.0.1<span style="color:#960050;background-color:#1e0010">&#39;</span>s password<span style="color:#960050;background-color:#1e0010">:</span> 这里输入密码
+id_rsa   100% 1766     1.7KB/s   00<span style="color:#960050;background-color:#1e0010">:</span>00
+</code></pre></div><blockquote>
+<p>上述命令加入了端口号，一般默认22，不用加</p>
+</blockquote>
+<ol start="4">
+<li>通过密钥登陆</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">PS C:\Users\xxx&gt; ssh student@127.0.0.1 -p 2222 -i D:\id_rsa
+Enter passphrase <span style="color:#66d9ef">for</span> key <span style="color:#e6db74">&#39;D:\id_rsa&#39;</span><span style="color:#960050;background-color:#1e0010">:</span> 这里输入密钥保护密码
+Welcome to Ubuntu 14.04.6 LTS (GNU/Linux 3.13.0-167-generic x86_64)
+<span style="color:#960050;background-color:#1e0010">……</span>
+</code></pre></div><blockquote>
+<p>登陆成功！这里只输入了密钥保护密码，而不用再输入账号本身的口令，如果之前设置不用给密钥再加密，这里可直接登陆</p>
+</blockquote>
+<h3 id="问题与解决">问题与解决</h3>
+<p>从远程复制到windows的密钥，在登陆时可能会出现如下提示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Permissions <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;D:\id_rsa&#39;</span> are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+</code></pre></div><p>同样，这是权限的问题，在密钥文件的安全设置中将只加入当前用户的权限即可。操作截图如下：</p>
+<ul>
+<li>文件属性-安全-高级：<br>
+<img src="/blog/img/2019040810190029.png" alt=""></li>
+<li>移除权限继承：<br>
+<img src="/blog/img/20190408101939231.png" alt=""></li>
+<li>加入当前用户：<br>
+<img src="/blog/img/20190408102008891.png" alt=""></li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/linux/" rel="tag">Linux</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/06/89053253/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">用Vagrant快速安装Ubuntu</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/04/09/89160917/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">ls -l命令结果解析</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SSIS读取Excel空值问题解决 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SSIS读取Excel空值问题解决</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-12-04T23:54:10Z">2019-12-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/etl/" rel="category">ETL</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考：</p>
+<h4 id="数据访问驱动问题">数据访问驱动问题</h4>
+<p>报错：<em>Microsoft.ACE.OLEDB.<em>xxx</em> provider is not registered on the local machine</em>。</p>
+<p>微软自家产品访问Excel一般都要安装<em>Microsoft.ACE.OLEDB</em>（后面简称为ACE），安装一个正确版本的ACE到SSDT所在的机器上即可。</p>
+<p>注意：由于SSDT目前只有32位版本，最好安装32bit的ACE驱动，而且相同版本的驱动或Office软件，要么装32位，要么装64位，无法并存。比如已安装了Office 2016 64 bit，就无法安装ACE16.0 32bit，但可以同时安装ACE 12.0 64bit。</p>
+<h4 id="多余空行">多余空行</h4>
+<p>用户提供的Excel中间存在空行，或肉眼看上去没有空行，但实际SSIS抽取的数据中最后会有多余空行。<br>
+<img src="/blog/img/20191204225708725.png" alt=""><br>
+如何去除这些空行呢？方法两有种：</p>
+<ul>
+<li>SSIS不做任何转换，先将原始数据加载到一个中间表，比如stg_xxx，然后再执行过滤空行的SQL语句，将中间表数据加载到最终表；</li>
+<li>在SSIS中用 Conditional Split 组件过滤空行<br>
+<img src="/blog/img/20191204230733163.png" alt=""></li>
+</ul>
+<h4 id="excel中有值但抽出来为null">Excel中有值，但抽出来为NULL</h4>
+<p>这种情况一般出现在含纯数字文本的列中，Excel默认按前8行数据推测数据类型，若某列前8行数据都是数字，ACE抽出来的数，会认定为Float类型，后续行若与Float类型不兼容，会被自动转为NULL。<br>
+<img src="/blog/img/2019120423235678.png" alt=""></p>
+<p>避免以上情况也有两种办法：</p>
+<ul>
+<li>a）<strong>更新注册表，将默认8行，改为更大的数，或者0（无限大），同时连接字符串加上IMEX=1</strong>
+<ul>
+<li>连接字符串示例：Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\my_file.xlsx;Extended Properties=&ldquo;EXCEL 12.0 XML;HDR=YES;IMEX=1&rdquo;`）</li>
+<li>注册表路径：
+<ul>
+<li>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Office\14.0\Access Connectivity Engine\Engines\Excel\TypeGuessRows（32位）</li>
+<li>HKEY_LOCAL_MACHINE\Software\Microsoft\Office\14.0\Access Connectivity Engine\Engines\Excel\TypeGuessRows （64位）<br>
+<img src="/blog/img/20191204234847699.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b）<strong>将Excel中对应列都改为Text类型，而不是General类型</strong><br>
+若没有权限无法更新注册表，就只能更新Excel文件单元格字段属性<br>
+<img src="/blog/img/20191205000223664.png" alt=""></li>
+</ul>
+<h4 id="总结">总结</h4>
+<p>用SSIS直接抽取Excel数据真是问题多多，如果可以，还是用平面文件（如CSV）更方便。<br>
+<br><br>
+参考资料：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/46170343/reading-excel-sheet-using-ace-oledb-12-0-with-imex-1-not-working">https://stackoverflow.com/questions/46170343/reading-excel-sheet-using-ace-oledb-12-0-with-imex-1-not-working</a></li>
+<li><a href="https://docs.microsoft.com/en-us/sql/integration-services/load-data-to-from-excel-with-ssis?view=sql-server-ver15">https://docs.microsoft.com/en-us/sql/integration-services/load-data-to-from-excel-with-ssis?view=sql-server-ver15</a></li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/ssis/" rel="tag">SSIS</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/11/29/103303254/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">DTExec运行SSIS包日志设置无效问题解决</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/12/30/103766391/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">PowerShell调用外部程序或脚本的几种方式</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

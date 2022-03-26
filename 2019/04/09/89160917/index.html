@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ls -l命令结果解析 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">ls -l命令结果解析</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-09T20:26:25Z">2019-04-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p>使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant@vagrant-ubuntu-trusty-64:~$ ls -l
+total <span style="color:#ae81ff">528</span>
+-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1656</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> cephalopods.txt
+-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1264</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> gastropods_draft.txt
+-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1585</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> gastropods.txt
+drwxr-xr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:52 globbing
+drwxr-xr-x <span style="color:#ae81ff">3</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> junk
+-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1450</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> mustelidae.txt
+drwxr-xr-x <span style="color:#ae81ff">3</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:52 ocean
+drwxrwxr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 17:02 test
+drwxrwxr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:56 Test
+-rw-r----- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">351483</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> TheWindintheWillows.txt
+-rw-rw-r-- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">147843</span> Apr  <span style="color:#ae81ff">1</span> 17:31 things.zip
+</code></pre></div><p>我们单拿一行为例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">-rw-rw-r-- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">147843</span> Apr  <span style="color:#ae81ff">1</span> 17:31 things.zip
+</code></pre></div><p>将其拆分成10个字段来说明：  </p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>rw-</td>
+<td>rw-</td>
+<td>r&ndash;</td>
+<td>1</td>
+<td>vagrant</td>
+<td>vagrant</td>
+<td>147843</td>
+<td>Apr  1 17:31</td>
+<td>things.zip</td>
+</tr>
+<tr>
+<td>字段1：文件类型，常见的有：-:普通文件，d:目录文件，l:链接文件，b:块设备文件，c:字符设备文件，p:管道文件</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段2：文件所者对该文件的权限。rwx分别代表可读、可写、可执行，-代码无，如rw-，表示可读可写不可执行</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段3：文件所属组对该文件的权限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段4：其他用户对该文件的权限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段5：链接数量或此目录含有的目录数</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段6：文件拥有者</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段7：文件所属组</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段8：文件大小，默认字段，如果用-h参数，会显示K、M、G这样的单位，更易理解</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段9：最后修改时间</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>字段10：文件名</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/linux/" rel="tag">Linux</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/08/89082770/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Windows通过密钥SSH登陆Linux</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/04/13/89281652/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">VirtualBox找不到桥接网卡问题解决</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

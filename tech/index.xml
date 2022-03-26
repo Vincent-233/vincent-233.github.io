@@ -6,7 +6,16 @@
     <description>Recent content in Teches on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 19:17:46 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows下robocopy的使用</title>
+      <link>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</link>
+      <pubDate>Sat, 26 Mar 2022 19:17:46 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy&#34;&gt;robocopy&lt;/a&gt;是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>windows conda环境在cmd/powershell/git-bash下的配置</title>
       <link>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</link>
@@ -17,156 +26,813 @@
     </item>
     
     <item>
-      <title>SQLCMD的使用</title>
-      <link>https://vincent-233.github.io/blog/2020/06/14/use-of-sqlcmd/</link>
+      <title>关于python import的路径问题</title>
+      <link>https://vincent-233.github.io/blog/2021/08/08/119496995/</link>
+      <pubDate>Sun, 08 Aug 2021 13:39:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/08/08/119496995/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSIS - 旧版本OLEDB不支持Always On Availability Group</title>
+      <link>https://vincent-233.github.io/blog/2021/06/11/117827867/</link>
+      <pubDate>Fri, 11 Jun 2021 23:22:57 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/06/11/117827867/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows下快速合并文本文件</title>
+      <link>https://vincent-233.github.io/blog/2021/05/16/116887159/</link>
+      <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>排序算法-快速排序（Quick Sort）</title>
+      <link>https://vincent-233.github.io/blog/2021/01/02/112072915/</link>
+      <pubDate>Sat, 02 Jan 2021 00:34:32 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2021/01/02/112072915/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pandas数据处理，字符串先拆分再合并</title>
+      <link>https://vincent-233.github.io/blog/2020/06/23/106913549/</link>
+      <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/06/23/106913549/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pandas数据处理，行列转换</title>
+      <link>https://vincent-233.github.io/blog/2020/06/21/106893478/</link>
+      <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/06/21/106893478/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlcmd使用体验</title>
+      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
       <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/14/use-of-sqlcmd/</guid>
-      <description>&lt;p&gt;对T-SQL开发者来说，为何要使用SQLCMD可能呢？平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常多的SQL，而且执行顺序还非常重要，甚至需要切换实例去执行，如何确保不犯错误？&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL数据处理，字符串先拆分后合并</title>
-      <link>https://vincent-233.github.io/blog/2020/06/13/tsql-str-split-and-join/</link>
+      <link>https://vincent-233.github.io/blog/2020/06/13/106734253/</link>
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/13/tsql-str-split-and-join/</guid>
-      <description>&lt;p&gt;前同事遇到一奇怪的数据拆分需求，我觉得挺有意思，就自己实现并记录之。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/06/13/106734253/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法-递归-排列组合</title>
+      <link>https://vincent-233.github.io/blog/2020/05/03/105907225/</link>
+      <pubDate>Sun, 03 May 2020 19:51:39 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/03/105907225/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法-求集合所有子集</title>
+      <link>https://vincent-233.github.io/blog/2020/05/03/105901441/</link>
+      <pubDate>Sun, 03 May 2020 15:27:11 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/03/105901441/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python深拷贝与浅拷贝说明与举例</title>
+      <link>https://vincent-233.github.io/blog/2020/05/02/105887338/</link>
+      <pubDate>Sat, 02 May 2020 12:08:21 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/02/105887338/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>根据日历表生成财年及周编号</title>
-      <link>https://vincent-233.github.io/blog/2020/03/20/generate-week-num/</link>
+      <link>https://vincent-233.github.io/blog/2020/03/20/104987643/</link>
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/20/generate-week-num/</guid>
-      <description>&lt;p&gt;数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。&lt;br&gt;
-现假定已有日历维表字段有限，要求增加财年字段，并增加财年对应的周编号（周编号的逻辑有3种，后续将逐一说明和实现）。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用python的faker库和dataclass快速生成测试数据</title>
+      <link>https://vincent-233.github.io/blog/2020/03/01/104597650/</link>
+      <pubDate>Sun, 01 Mar 2020 19:42:31 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/03/01/104597650/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>数据库生成测试数据（SQL实现）</title>
-      <link>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</link>
+      <link>https://vincent-233.github.io/blog/2020/03/01/104594475/</link>
       <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</guid>
-      <description>&lt;p&gt;项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000条数据。
-以上需求看上去非常简单，但比较具有代表性，复杂需求也是由小需求排列组合而成。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/03/01/104594475/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python并发之异步编程框架AsyncIO简介</title>
+      <link>https://vincent-233.github.io/blog/2020/02/06/104168699/</link>
+      <pubDate>Thu, 06 Feb 2020 12:20:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/02/06/104168699/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python装饰器</title>
+      <link>https://vincent-233.github.io/blog/2020/02/02/104148685/</link>
+      <pubDate>Sun, 02 Feb 2020 20:41:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/02/02/104148685/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>多表Full Outer Join的问题</title>
-      <link>https://vincent-233.github.io/blog/2020/01/10/multi-table-full-join/</link>
+      <link>https://vincent-233.github.io/blog/2020/01/10/103895643/</link>
       <pubDate>Fri, 10 Jan 2020 11:39:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/01/10/multi-table-full-join/</guid>
-      <description>&lt;p&gt;熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的结果，数据可能会重复，这里做一下简单介绍。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/01/10/103895643/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerShell调用外部程序或脚本的几种方式</title>
+      <link>https://vincent-233.github.io/blog/2019/12/30/103766391/</link>
+      <pubDate>Mon, 30 Dec 2019 14:59:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/12/30/103766391/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSIS读取Excel空值问题解决</title>
+      <link>https://vincent-233.github.io/blog/2019/12/04/103395928/</link>
+      <pubDate>Wed, 04 Dec 2019 23:54:10 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/12/04/103395928/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DTExec运行SSIS包日志设置无效问题解决</title>
+      <link>https://vincent-233.github.io/blog/2019/11/29/103303254/</link>
+      <pubDate>Fri, 29 Nov 2019 00:29:45 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/29/103303254/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSIS部署报6522错误问题解决</title>
+      <link>https://vincent-233.github.io/blog/2019/11/26/103266182/</link>
+      <pubDate>Tue, 26 Nov 2019 22:36:01 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/26/103266182/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python面向对象举例</title>
+      <link>https://vincent-233.github.io/blog/2019/11/16/103103791/</link>
+      <pubDate>Sat, 16 Nov 2019 23:31:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/16/103103791/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python操作符重载特殊方法列表</title>
+      <link>https://vincent-233.github.io/blog/2019/11/16/103104203/</link>
+      <pubDate>Sat, 16 Nov 2019 22:58:07 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/16/103104203/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>全排列递归算法（Python实现）</title>
+      <link>https://vincent-233.github.io/blog/2019/11/08/102962911/</link>
+      <pubDate>Fri, 08 Nov 2019 17:36:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/11/08/102962911/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python文件遍历与匹配过滤</title>
+      <link>https://vincent-233.github.io/blog/2019/10/31/102848314/</link>
+      <pubDate>Thu, 31 Oct 2019 23:49:29 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/10/31/102848314/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>深刻理解python变量</title>
+      <link>https://vincent-233.github.io/blog/2019/09/26/101398064/</link>
+      <pubDate>Thu, 26 Sep 2019 00:17:56 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/09/26/101398064/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python数据库编程（以pyodbc和SQLAlchemy为例）</title>
+      <link>https://vincent-233.github.io/blog/2019/09/14/100814954/</link>
+      <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SparkContext、SparkConf以及进化版的SparkSession</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99697500/</link>
+      <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99697500/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pyspark读写S3文件与简单处理（指定Schema，直接写S3或先本地再上传）</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99691961/</link>
+      <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pyspark文件读写示例-（CSV/JSON/Parquet-单个或多个）</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99691830/</link>
+      <pubDate>Sat, 17 Aug 2019 05:11:47 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99691830/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>定时运行conda虚拟环境的python脚本，问题解决</title>
+      <link>https://vincent-233.github.io/blog/2019/08/10/99091928/</link>
+      <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>配置Jupyter Notebook允许远程访问</title>
+      <link>https://vincent-233.github.io/blog/2019/07/26/97418483/</link>
+      <pubDate>Fri, 26 Jul 2019 21:38:21 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/07/26/97418483/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL Server用Cross Apply、Cross Join实现列转行</title>
-      <link>https://vincent-233.github.io/blog/2019/07/20/tsql-cross-query-column-to-row/</link>
+      <link>https://vincent-233.github.io/blog/2019/07/20/96520306/</link>
       <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/20/tsql-cross-query-column-to-row/</guid>
-      <description>&lt;p&gt;今天介绍4种列转行（又称宽表转长表、反透视、unpivot等）写法。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2019/07/20/96520306/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>交叉表转换为横表</title>
-      <link>https://vincent-233.github.io/blog/2019/07/16/cross-table-transfer/</link>
+      <link>https://vincent-233.github.io/blog/2019/07/16/95868267/</link>
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/16/cross-table-transfer/</guid>
-      <description>&lt;p&gt;做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2019/07/16/95868267/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu关闭自动更新和GUI图形界面</title>
+      <link>https://vincent-233.github.io/blog/2019/06/17/92729385/</link>
+      <pubDate>Mon, 17 Jun 2019 22:18:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/06/17/92729385/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>用VBA将xml格式的excel另存为xlsx</title>
+      <link>https://vincent-233.github.io/blog/2019/06/15/92030849/</link>
+      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/06/15/92030849/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VIM常用命令</title>
+      <link>https://vincent-233.github.io/blog/2019/05/26/90581596/</link>
+      <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/05/26/90581596/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>虚拟机Linux安装PostgreSQL，并让宿主机连接</title>
+      <link>https://vincent-233.github.io/blog/2019/05/14/90217603/</link>
+      <pubDate>Tue, 14 May 2019 23:41:55 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/05/14/90217603/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SVN批量移动文件，并保留版本日志</title>
+      <link>https://vincent-233.github.io/blog/2019/04/27/89609806/</link>
+      <pubDate>Sat, 27 Apr 2019 23:37:19 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/27/89609806/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pandas读取Excel数据，简单清洗后存入数据库</title>
+      <link>https://vincent-233.github.io/blog/2019/04/18/89390714/</link>
+      <pubDate>Thu, 18 Apr 2019 23:32:36 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/18/89390714/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>用SQL Workbench/J批量生成DDL和Insert脚本</title>
+      <link>https://vincent-233.github.io/blog/2019/04/14/89295092/</link>
+      <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>配置ubuntu允许远程SSH连接</title>
+      <link>https://vincent-233.github.io/blog/2019/04/13/89282667/</link>
+      <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/13/89282667/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VirtualBox找不到桥接网卡问题解决</title>
+      <link>https://vincent-233.github.io/blog/2019/04/13/89281652/</link>
+      <pubDate>Sat, 13 Apr 2019 13:56:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/13/89281652/</guid>
+      <description>&lt;p&gt;配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ls -l命令结果解析</title>
+      <link>https://vincent-233.github.io/blog/2019/04/09/89160917/</link>
+      <pubDate>Tue, 09 Apr 2019 20:26:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/09/89160917/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows通过密钥SSH登陆Linux</title>
+      <link>https://vincent-233.github.io/blog/2019/04/08/89082770/</link>
+      <pubDate>Mon, 08 Apr 2019 10:22:22 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/08/89082770/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>用Vagrant快速安装Ubuntu</title>
+      <link>https://vincent-233.github.io/blog/2019/04/06/89053253/</link>
+      <pubDate>Sat, 06 Apr 2019 11:10:57 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/06/89053253/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python对Excel求和、合并居中</title>
+      <link>https://vincent-233.github.io/blog/2019/04/01/88945745/</link>
+      <pubDate>Mon, 01 Apr 2019 12:58:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/01/88945745/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Set NoCount On导致触发器@@RowCount为0</title>
+      <link>https://vincent-233.github.io/blog/2018/12/18/85074737/</link>
+      <pubDate>Tue, 18 Dec 2018 19:08:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/12/18/85074737/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>再谈SQL Server字符串拆分与分列</title>
-      <link>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</link>
+      <link>https://vincent-233.github.io/blog/2018/12/08/84891624/</link>
       <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</guid>
-      <description>&lt;p&gt;刚工作那会写了一篇关于字符串拆分的&lt;a href=&#34;https://blog.csdn.net/helloword4217/article/details/12889707&#34;&gt;文章&lt;/a&gt;，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。&lt;br&gt;
-为了考虑代码的可读性和复用性，一般用函数将实现细节封装，下面介绍几种常用的方法：&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2018/12/08/84891624/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>报表动态MTD、YTD查询语句</title>
-      <link>https://vincent-233.github.io/blog/2018/10/08/mtd-ytd-query/</link>
+      <link>https://vincent-233.github.io/blog/2018/10/08/82964958/</link>
       <pubDate>Mon, 08 Oct 2018 10:49:11 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/10/08/mtd-ytd-query/</guid>
-      <description>&lt;p&gt;经常会有报表需要动态查询MTD和YTD汇总。这里解释一下含义：&lt;br&gt;
-MTD（Month To Date）：从月初到当前日期&lt;br&gt;
-YTD（Year To Date）：从年初到当前日期&lt;/p&gt;
-&lt;p&gt;查询举例：&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2018/10/08/82964958/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>SQL CLR函数的创建与使用（以正则表达式为例）</title>
-      <link>https://vincent-233.github.io/blog/2017/03/04/mssql-clr-function/</link>
+      <title>SQL Server Audit 功能体验</title>
+      <link>https://vincent-233.github.io/blog/2018/09/24/82832350/</link>
+      <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/09/24/82832350/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 邮件功能使用</title>
+      <link>https://vincent-233.github.io/blog/2018/08/07/81481585/</link>
+      <pubDate>Tue, 07 Aug 2018 15:07:49 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/08/07/81481585/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL复制（订阅、发布）实践问题记录</title>
+      <link>https://vincent-233.github.io/blog/2018/06/18/80724609/</link>
+      <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/18/80724609/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server数据库复制向导报错解决</title>
+      <link>https://vincent-233.github.io/blog/2018/06/05/80583991/</link>
+      <pubDate>Tue, 05 Jun 2018 17:02:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/05/80583991/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server FileStream 体验</title>
+      <link>https://vincent-233.github.io/blog/2018/06/03/80553895/</link>
+      <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/06/03/80553895/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server透明数据加密（TDE）实践</title>
+      <link>https://vincent-233.github.io/blog/2018/05/22/80404769/</link>
+      <pubDate>Tue, 22 May 2018 14:19:56 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/22/80404769/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server分区表实践</title>
+      <link>https://vincent-233.github.io/blog/2018/05/21/80387148/</link>
+      <pubDate>Mon, 21 May 2018 00:38:33 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/21/80387148/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于数据库隔离级别-快照(SnapShot)</title>
+      <link>https://vincent-233.github.io/blog/2018/05/01/80154338/</link>
+      <pubDate>Tue, 01 May 2018 10:10:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/05/01/80154338/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 常见For XML语句比较</title>
+      <link>https://vincent-233.github.io/blog/2018/04/29/80145292/</link>
+      <pubDate>Sun, 29 Apr 2018 20:58:42 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/04/29/80145292/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server中的小数近似处理实例</title>
+      <link>https://vincent-233.github.io/blog/2017/08/10/77043631/</link>
+      <pubDate>Thu, 10 Aug 2017 11:14:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/08/10/77043631/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL CLR函数（以正则表达式为例）</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/03/04/mssql-clr-function/</guid>
-      <description>&lt;p&gt;SQL Server中函数功能有限，而且不支持正则表达式，如何用.Net语言创建函数，然后在T-SQL中使用呢？ 答案是CLR函数，本文以实现正则表达式为例介绍CLR函数的创建和使用。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>断号查询（查找不连续ID记录）</title>
-      <link>https://vincent-233.github.io/blog/2015/05/20/tsql-broken-id/</link>
+      <title>DBA眼中的CLR</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60330115/</link>
+      <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>win10英文版安装笔记</title>
+      <link>https://vincent-233.github.io/blog/2015/09/26/48754333/</link>
+      <pubDate>Sat, 26 Sep 2015 20:36:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/09/26/48754333/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>从登陆名与用户名的区别说起，谈SQL Server安全性初步</title>
+      <link>https://vincent-233.github.io/blog/2015/05/31/46288335/</link>
+      <pubDate>Sun, 31 May 2015 14:17:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/05/31/46288335/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生成连续ID记录行</title>
+      <link>https://vincent-233.github.io/blog/2015/05/20/45874623/</link>
       <pubDate>Wed, 20 May 2015 19:44:59 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/20/tsql-broken-id/</guid>
-      <description>&lt;p&gt;需求： 找出某列断流的ID号，即连续ID中少掉的ID区间。&lt;br&gt;
-例如：1，2，7，8，9.  断流的ID是 3 至 6.&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2015/05/20/45874623/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL Server事务性编程总结</title>
-      <link>https://vincent-233.github.io/blog/2015/05/17/tsql-trans/</link>
+      <link>https://vincent-233.github.io/blog/2015/05/17/45775271/</link>
       <pubDate>Sun, 17 May 2015 00:19:12 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/17/tsql-trans/</guid>
-      <description>&lt;p&gt;为了保证数据的一致性，&lt;a href=&#34;http://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;事务&lt;/a&gt;在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2015/05/17/45775271/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server返回随机记录</title>
+      <link>https://vincent-233.github.io/blog/2015/05/15/45741533/</link>
+      <pubDate>Fri, 15 May 2015 11:32:20 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/05/15/45741533/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于PL/SQL Developer的配置与快速迁移</title>
+      <link>https://vincent-233.github.io/blog/2015/05/04/45478729/</link>
+      <pubDate>Mon, 04 May 2015 05:17:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/05/04/45478729/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>用Powershell对文件批量重命名</title>
+      <link>https://vincent-233.github.io/blog/2015/02/08/43637581/</link>
+      <pubDate>Sun, 08 Feb 2015 08:25:19 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/02/08/43637581/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 中Merge 的使用</title>
+      <link>https://vincent-233.github.io/blog/2014/12/30/42275987/</link>
+      <pubDate>Tue, 30 Dec 2014 15:00:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/12/30/42275987/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORACLE递归查询</title>
+      <link>https://vincent-233.github.io/blog/2014/07/26/38146339/</link>
+      <pubDate>Sat, 26 Jul 2014 08:36:10 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/07/26/38146339/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORACLE列值合并</title>
+      <link>https://vincent-233.github.io/blog/2014/07/26/38145329/</link>
+      <pubDate>Sat, 26 Jul 2014 07:46:40 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/07/26/38145329/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORACLE字符串拆分</title>
+      <link>https://vincent-233.github.io/blog/2014/07/26/38139137/</link>
+      <pubDate>Sat, 26 Jul 2014 01:24:56 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/07/26/38139137/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server无法删除数据库的解决方法</title>
+      <link>https://vincent-233.github.io/blog/2014/07/11/37717375/</link>
+      <pubDate>Fri, 11 Jul 2014 18:41:45 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/07/11/37717375/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>为什么要刷新视图</title>
+      <link>https://vincent-233.github.io/blog/2014/03/23/21862313/</link>
+      <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/03/23/21862313/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft.ACE.OLEDB.12.0 及其在 MSSQL中的使用</title>
+      <link>https://vincent-233.github.io/blog/2014/02/08/19000277/</link>
+      <pubDate>Sat, 08 Feb 2014 18:47:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/02/08/19000277/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>本地Oracle服务太占用内存的缓解方法</title>
+      <link>https://vincent-233.github.io/blog/2014/01/16/18375543/</link>
+      <pubDate>Thu, 16 Jan 2014 15:29:59 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/01/16/18375543/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2005 无日志文件附加数据库</title>
+      <link>https://vincent-233.github.io/blog/2013/12/27/17620647/</link>
+      <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/27/17620647/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL递归查询实战</title>
-      <link>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</link>
-      <pubDate>Wed, 11 Dec 2013 00:12:08 +0000</pubDate>
+      <link>https://vincent-233.github.io/blog/2013/12/10/17251887/</link>
+      <pubDate>Tue, 10 Dec 2013 16:12:08 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</guid>
-      <description>假设某公司的人员组织结构如下图：
-数据库表：
-CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT INTO ORG VALUES(6, &amp;#39;Emily&amp;#39;, 3); INSERT INTO ORG VALUES(7, &amp;#39;Kate&amp;#39;, 3); INSERT INTO ORG VALUES(8, &amp;#39;Mark&amp;#39;, 6); GO 需求一： 查询TOM管理的所有员工的名字 查询代码：</description>
+      <guid>https://vincent-233.github.io/blog/2013/12/10/17251887/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>奇葩的需求</title>
+      <link>https://vincent-233.github.io/blog/2013/12/09/17231863/</link>
+      <pubDate>Mon, 09 Dec 2013 15:18:18 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/09/17231863/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL 行转列 与 列转行</title>
+      <link>https://vincent-233.github.io/blog/2013/12/08/17202973/</link>
+      <pubDate>Sun, 08 Dec 2013 10:44:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/08/17202973/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Sql提取(去除)字符串中所有汉字、字母、数字</title>
-      <link>https://vincent-233.github.io/blog/2013/11/24/remove-all-num-and-chinese/</link>
-      <pubDate>Sun, 24 Nov 2013 00:37:54 +0000</pubDate>
+      <link>https://vincent-233.github.io/blog/2013/11/23/16911599/</link>
+      <pubDate>Sat, 23 Nov 2013 16:37:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/24/remove-all-num-and-chinese/</guid>
-      <description>&lt;p&gt;核心思想在于下面几个模式的组合使用：&lt;br&gt;
-%[0-9]%：            所有数字&lt;br&gt;
-%[A-Za-z]%:          所有字母&lt;br&gt;
-%[吖-咗]%:           所有汉字&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2013/11/23/16911599/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>SQL Server 中的四种排序函数比较</title>
-      <link>https://vincent-233.github.io/blog/2013/09/15/msssql-rank-function/</link>
-      <pubDate>Sun, 15 Sep 2013 22:54:28 +0000</pubDate>
+      <title>关于Cross Join 和 Outer/Cross Apply</title>
+      <link>https://vincent-233.github.io/blog/2013/11/23/16897427/</link>
+      <pubDate>Sat, 23 Nov 2013 02:22:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/09/15/msssql-rank-function/</guid>
-      <description>&lt;p&gt;先做一下总结：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Row_Number(): 不可并列，排序序号连续（可支持不排序，只加一个行号，这对分页查询很有作用）&lt;br&gt;
-Rank(): 可并列，排序序号不连续&lt;br&gt;
-Dense_Rank(): 可并列，排序序号连续 ( dense意思为茂密/密集，顾名思义排序号连续) 
-nTitle(N): 先排序，再将结果分为N组&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2013/11/23/16897427/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于SQL Server 排序规则</title>
+      <link>https://vincent-233.github.io/blog/2013/11/17/16645847/</link>
+      <pubDate>Sun, 17 Nov 2013 14:18:46 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/11/17/16645847/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL 递归查询初体验</title>
+      <link>https://vincent-233.github.io/blog/2013/11/03/14111219/</link>
+      <pubDate>Sun, 03 Nov 2013 16:00:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/11/03/14111219/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>字符串拆分为列表（函数）</title>
+      <link>https://vincent-233.github.io/blog/2013/10/20/12889707/</link>
+      <pubDate>Sun, 20 Oct 2013 13:56:03 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/10/20/12889707/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Excel中查找最后一个匹配字符的位置</title>
+      <link>https://vincent-233.github.io/blog/2013/08/05/9763867/</link>
+      <pubDate>Mon, 05 Aug 2013 03:26:24 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/08/05/9763867/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL练习题（2）</title>
+      <link>https://vincent-233.github.io/blog/2013/07/27/9532985/</link>
+      <pubDate>Sat, 27 Jul 2013 14:43:45 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/07/27/9532985/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>面试逻辑题</title>
+      <link>https://vincent-233.github.io/blog/2013/07/07/9263455/</link>
+      <pubDate>Sun, 07 Jul 2013 08:13:43 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/07/07/9263455/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL练习题（1）</title>
+      <link>https://vincent-233.github.io/blog/2013/07/03/9237409/</link>
+      <pubDate>Wed, 03 Jul 2013 14:28:57 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/07/03/9237409/</guid>
+      <description></description>
     </item>
     
   </channel>

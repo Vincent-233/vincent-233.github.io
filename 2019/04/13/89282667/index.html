@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>配置ubuntu允许远程SSH连接 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">配置ubuntu允许远程SSH连接</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-13T14:52:13Z">2019-04-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>前面有篇Blog记录了<a href="https://vincent-233.github.io/blog/2019/04/06/89053253/">如何通过vagrant快速安装Ubuntu</a>，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置，可以用来快速部署和使用。但如果用常规方式在VirtualBox中新装的Ubuntu，如何配置使其能够通过SSH连接呢？<br>
+可以分为如下几个步骤：</p>
+<ul>
+<li>配置虚拟机网络</li>
+<li>ubuntu安装ssh服务</li>
+<li>ubuntu配置防火墙，开启22端口</li>
+<li>远程登陆</li>
+</ul>
+<p>下面分别简述操作：</p>
+<h4 id="配置虚拟机网络">配置虚拟机网络</h4>
+<ul>
+<li>默认方式是NAT，但为了让宿主机之外的其它计算机也能访问虚拟机，NAT方式配置起来有些复杂，这里推荐用桥接模式，关于VM的几种网络方式的区别，可以参考<a href="https://penpenguanguan.com/337.html">这篇文章</a><br>
+配置好之后确认下虚拟机是否能上网，网段是否和宿主机相同。<br>
+ubuntu查看ip信息命令：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ifconfig
+<span style="color:#75715e"># 若提示找不到命令，则需安装 net-tools</span>
+sudo apt-get install net-tools
+</code></pre></div><p>如下图，代表ip地址：<br>
+<img src="/blog/img/20190413150331665.png" alt=""><br>
+或直接通过VirtualBox右下角图标查看：<br>
+<img src="/blog/img/20190413153303240.png" alt=""><br>
+注：若 <code>ifconfig</code> 提示找不到命令，安装<code>net-tools</code>也未果，可能是因为<code>ifconfig</code>已不被推荐使用，可用 <code>ip addr show</code> 命令代替，一样可以显示出IP地址。</p>
+<h4 id="ubuntu安装ssh服务">ubuntu安装ssh服务</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 安装 openssh 服务</span>
+sudo apt-get install openssh-server
+<span style="color:#75715e"># 启动 ssh 服务</span>
+sudo /etc/init.d/ssh start
+</code></pre></div><h4 id="ubuntu开启22端口">ubuntu开启22端口</h4>
+<p>虽然可以用命令 <code>systemctl stop firewalld</code>和<code>systemctl disable firewalld</code> 直接关闭防火墙，但不建议这样做，推荐仅允许22端口通过防火墙：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 若 firewalld 未安装，则先进行安装</span>
+sudo apt install firewalld
+<span style="color:#75715e"># 允许 tcp 22端口</span>
+sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>22/tcp
+<span style="color:#75715e"># 可选：允许ssh服务 </span>
+sudo firewall-cmd --permanent  --add-service<span style="color:#f92672">=</span>ssh
+<span style="color:#75715e"># reload 防火墙，应用规则</span>
+sudo systemctl reload firewalld
+</code></pre></div><p>验证22端口是否开启：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo firewall-cmd --list-all
+</code></pre></div><p>若结果中含有22端口，表示已开启：<br>
+<img src="/blog/img/20190413144906870.png" alt=""></p>
+<h4 id="远程ssh登陆">远程SSH登陆</h4>
+<p>最后就是登陆啦，在宿主机或同网段其它计算中，用命令行或各类SSH客户端（如Putty）登陆即可，这里不再描述，若想配置通过密钥登录，可以看<a href="https://vincent-233.github.io/blog/2019/04/08/89082770/">这篇文章</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/13/89281652/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">VirtualBox找不到桥接网卡问题解决</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/04/14/89295092/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">用SQL Workbench/J批量生成DDL和Insert脚本</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>生成连续ID记录行 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">生成连续ID记录行</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2015-05-20T19:44:59Z">2015-05-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#小范围的数字记录">小范围的数字记录</a></li>
+        <li><a href="#特定的枚举值">特定的枚举值</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>ID值记录行，即每一个数字一行的集合，有些时候在SQL中可以作为辅助表使用，从而用SQL的集合思维去高效解决问题，而不是用循环。<br>
+用自定义函数（UDF）来实现就不说了，无非是在里面写一个循环，住表变量里插数据，再返回那个表变量。<br>
+下面介绍几种不用UDF实现的方法。</p>
+<h3 id="小范围的数字记录">小范围的数字记录</h3>
+<p>可以巧用系统表来获取1到2048之间的数字：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> number <span style="color:#66d9ef">FROM</span> master..spt_values
+<span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">Type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;P&#39;</span> <span style="color:#66d9ef">AND</span> number <span style="color:#66d9ef">BETWEEN</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> <span style="color:#ae81ff">1024</span>
+</code></pre></div><h3 id="特定的枚举值">特定的枚举值</h3>
+<p>比如返回1,7,9,10这样没有规律的集合，而且量不大，便于直接枚举。<br>
+可以通过从MSSQL 2008开始的<a href="https://technet.microsoft.com/en-us/library/dd776382(v=sql.105).aspx">表值构造函数(Table Value Constructor)</a>去实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> T.Num
+<span style="color:#66d9ef">FROM</span> (<span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">1</span>),(<span style="color:#ae81ff">7</span>),(<span style="color:#ae81ff">9</span>),(<span style="color:#ae81ff">10</span>)) <span style="color:#66d9ef">AS</span> T(Num)
+</code></pre></div><p>当然用这个特性还可以构建其他多列不同类型值的集合，比如返回a,b,c,d这样的集合。</p>
+<p>###用<a href="https://technet.microsoft.com/en-us/library/ms175972(v=sql.105).aspx">公用表达式（CTE）</a>递归查询产生大量连续数据行（性能不佳）<br>
+利用递归查询的简洁写法去实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">   <span style="color:#66d9ef">WITH</span> cte(Num) <span style="color:#66d9ef">AS</span> 
+	(
+		<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+		<span style="color:#66d9ef">SELECT</span> Num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">FROM</span> cte <span style="color:#66d9ef">WHERE</span> Num <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">99</span>
+	) 
+	<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> cte
+</code></pre></div><p>如果是Oracle，除了CTE外，还可以用它专有的更为简洁的递归语法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> ROWNUM <span style="color:#66d9ef">FROM</span> dual <span style="color:#66d9ef">CONNECT</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">LEVEL</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">50</span>
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2015/05/17/45775271/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL Server事务性编程总结</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2015/05/31/46288335/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">从登陆名与用户名的区别说起，谈SQL Server安全性初步</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

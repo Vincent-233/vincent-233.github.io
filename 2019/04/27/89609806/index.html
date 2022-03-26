@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SVN批量移动文件，并保留版本日志 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SVN批量移动文件，并保留版本日志</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-27T23:37:19Z">2019-04-27</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h4 id="场景">场景</h4>
+<p>希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖拽，详见此<a href="https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-rename.html">链接</a>）即可：<br>
+<img src="/blog/img/20190427221706795.png" alt=""><br>
+但若文件非常多，且具有某类特殊属性，比如<code>某文件夹下的，文件名都包含某关键词的文件</code>就比较棘手,这个时候就体现出了命令行的优势，SVN可以用GUI方式操作的功能，都可以找到对应的命令。</p>
+<h4 id="svn命令行">SVN命令行</h4>
+<p>经查阅<a href="https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-cli-main.html">文档</a>，SVN Rename命令的语法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">svn rename CURR_PATH NEW_PATH
+</code></pre></div><p>下面看如何对某文件夹下的文件批量生成cmd命令并运行</p>
+<h4 id="powershell动态生成cmd命令并调动">PowerShell动态生成CMD命令并调动</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># SVN文件，移动到新建的文件夹下，并保存日志信息</span>
+<span style="color:#75715e"># 需求：KS-Code根目录下，文件名中不包含“脚本”的sql文件，转移到新的文件夹“增加字段”中</span>
+<span style="color:#75715e"># 说明：新文件夹已经进入SVN版本管理体系</span>
+
+<span style="color:#75715e"># 文件目录</span>
+$path = <span style="color:#e6db74">&#39;D:\KS\2019-BP\KS-Code&#39;</span>
+<span style="color:#75715e"># 获取文件名</span>
+$dir = invoke-expression <span style="color:#e6db74">&#34;dir $path *.sql&#34;</span>
+
+<span style="color:#66d9ef">foreach</span>($_ <span style="color:#66d9ef">in</span> $dir)
+{
+	<span style="color:#66d9ef">if</span>($_.Name <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;脚本&#34;</span>) 
+	{	
+		<span style="color:#75715e"># 路径，考虑空格异常，故前后加引号</span>
+		$oldpath = <span style="color:#e6db74">&#39;&#34;&#39;</span> + $path + <span style="color:#e6db74">&#39;\&#39;</span> + $_.Name + <span style="color:#e6db74">&#39;&#34;&#39;</span>
+		$newpath = <span style="color:#e6db74">&#39;&#34;&#39;</span> + $path + <span style="color:#e6db74">&#39;\增加字段\&#39;</span> + $_.Name + <span style="color:#e6db74">&#39;&#34;&#39;</span>
+		
+		<span style="color:#75715e"># svn重命名命令： svn rename CURR_PATH NEW_PATH</span>
+		$cmd = <span style="color:#e6db74">&#34;svn rename $oldpath $newpath&#34;</span>
+		
+		<span style="color:#75715e"># 调用命令</span>
+		invoke-expression $cmd
+	}
+}
+</code></pre></div><h4 id="说明">说明</h4>
+<p>以上PowerShell脚本相关功能点说明：</p>
+<ul>
+<li>invoke-expression将字符串当作脚本执行，即执行动态powershell脚本</li>
+<li>双引号字符串，出现变量名（<em>$variable</em>）时会自动解析</li>
+<li>字符串本身含双引号的表示，上述方法是用单引号包起来('&quot;')，除此之外，还有两种方法：
+<ul>
+<li>和sql一样，引号内的引号数量要加倍，如&quot;&ldquo;&ldquo;&ldquo;代表一个双引号&rdquo;</li>
+<li>用内容引号前加转义字符`，这样引号内的引号，就不用加倍了，&quot;`&rdquo;&rdquo;</li>
+</ul>
+</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/powershell/" rel="tag">powershell</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/18/89390714/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Pandas读取Excel数据，简单清洗后存入数据库</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/05/14/90217603/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">虚拟机Linux安装PostgreSQL，并让宿主机连接</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Excel on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tags/excel/</link>
+    <description>Recent content in Excel on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Jun 2019 01:46:26 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/excel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用VBA将xml格式的excel另存为xlsx</title>
+      <link>https://vincent-233.github.io/blog/2019/06/15/92030849/</link>
+      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/06/15/92030849/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python对Excel求和、合并居中</title>
+      <link>https://vincent-233.github.io/blog/2019/04/01/88945745/</link>
+      <pubDate>Mon, 01 Apr 2019 12:58:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/01/88945745/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft.ACE.OLEDB.12.0 及其在 MSSQL中的使用</title>
+      <link>https://vincent-233.github.io/blog/2014/02/08/19000277/</link>
+      <pubDate>Sat, 08 Feb 2014 18:47:50 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/02/08/19000277/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Excel中查找最后一个匹配字符的位置</title>
+      <link>https://vincent-233.github.io/blog/2013/08/05/9763867/</link>
+      <pubDate>Mon, 05 Aug 2013 03:26:24 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/08/05/9763867/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

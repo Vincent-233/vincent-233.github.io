@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Python深拷贝与浅拷贝说明与举例 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Python深拷贝与浅拷贝说明与举例</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-02T12:08:21Z">2020-05-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识准备">知识准备</a></li>
+    <li><a href="#浅拷贝说明与举例">浅拷贝说明与举例</a>
+      <ul>
+        <li><a href="#无拷贝">无拷贝</a></li>
+        <li><a href="#浅拷贝shallow-copy">浅拷贝（Shallow Copy）</a></li>
+        <li><a href="#深拷贝deep-copy">深拷贝（Deep Copy）</a></li>
+        <li><a href="#可变与不可变元素深拷贝的区别">可变与不可变元素深拷贝的区别</a></li>
+        <li><a href="#画图助理解">画图助理解</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="知识准备">知识准备</h2>
+<ul>
+<li>可变类型(mutable)：list、set、dict可变类型，支持原地址直接改变元素（item）的值</li>
+<li>不可变类型(immutable)：int、float、str、tuple等均为不可变类型，不支持原地址改变元素的值</li>
+</ul>
+<p>相关例子见另一篇博文<a href="https://vincent-233.github.io/blog/2019/09/26/101398064/">深刻理解python变量</a></p>
+<h2 id="浅拷贝说明与举例">浅拷贝说明与举例</h2>
+<h3 id="无拷贝">无拷贝</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)]
+b <span style="color:#f92672">=</span> a
+b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</code></pre></div><pre><code>结果：  
+	id(a) = 2848475391240  
+	id(b) = 2848475391240  
+	a = [4, 2, (3, 4)]  
+	b = [4, 2, (3, 4)]  
+</code></pre>
+<p>直接赋值，相当于取了别名，其地址是一样的，所以对b元素的修改，也影响了a。</p>
+<h3 id="浅拷贝shallow-copy">浅拷贝（Shallow Copy）</h3>
+<p>使用构造函数<code>list</code>，切片或copy.copy()函数可浅拷贝列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
+b <span style="color:#f92672">=</span> list(a) <span style="color:#75715e"># 拷贝列表a值，而不是引用</span>
+b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</code></pre></div><pre><code>结果：  
+	id(a) = 2848460025992  
+	id(b) = 2848475458632  
+	a = [1, 2, [3, 4]]  
+	b = [4, 2, [3, 4]]  
+</code></pre>
+<p>发现a和b的地址不同，对b的改变不会影响a，==但这仅对不可变元素成立==，因为对不可变元素的修改，会生成新的对象，从而指向新的地址，而原来a列表中的元素还是指向老地址。<br>
+由于b[2]是一个List，为可变类型，若对b[2]元素的进行修改，a也会一起变：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</code></pre></div><pre><code>结果:  
+	id(a) = 2848481489096  
+	id(b) = 2848477955016  
+	a = [1, 2, [100, 4]]  
+	b = [4, 2, [100, 4]]  
+</code></pre>
+<p>a[2][0]和b[2][0]的值都变为100。<br>
+所以浅拷贝只是拷贝了<strong>第一层</strong>地址，如果列表中含<strong>可变类型元素</strong>，则对副本的修改也可能会影响原来的值。</p>
+<h3 id="深拷贝deep-copy">深拷贝（Deep Copy）</h3>
+<p>为了解决以上问题，python有一个copy模块可以实现深拷贝，deepcopy为深拷贝，copy为浅拷贝。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> copy
+a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
+b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
+b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</code></pre></div><pre><code>结果：  
+	id(a) = 2848487131400  
+	id(b) = 2848487129480  
+	a = [1, 2, [3, 4]]  
+	b = [1, 2, [100, 4]]  
+</code></pre>
+<p>b[2][0]的值不再影响a[2][0]。<br>
+深拷贝不仅复制列表第一层的地址，==若列表中含有可变类型元素==，则其对应元素也一起复制，依此类推，有多少层可变类型引用，就复制多少层。</p>
+<h3 id="可变与不可变元素深拷贝的区别">可变与不可变元素深拷贝的区别</h3>
+<p>同样是深拷贝，当所拷贝对象可变或不可变属性不一样时，情况是不一样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> copy
+a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]]
+b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
+print(<span style="color:#e6db74">&#39;a = &#39;</span>,id(a))
+<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
+print(<span style="color:#e6db74">&#39;b = &#39;</span>,id(b))
+<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> b: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
+</code></pre></div><pre><code>结果：  
+	a =  2848483339784  
+	  140711207018896  
+	  2848488706632  
+	  2848487130696  
+	b =  2848487129608  
+	  140711207018896  
+	  2848488706632  
+	  2848482189128 （地址不同）  
+</code></pre>
+<p>以上1和(2,3)均为不可变类型，所以即便是深拷贝，在拷贝后的列表b中，其地址还是一致的，但[4,5]是可变类型，拷贝后地址也变了。</p>
+<h3 id="画图助理解">画图助理解</h3>
+<p>最后画一张简单的图帮助理解（add为address缩写）：<br>
+<img src="/blog/img/2020050212035626.png" alt=""></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/03/20/104987643/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">根据日历表生成财年及周编号</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/05/03/105901441/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">算法-求集合所有子集</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

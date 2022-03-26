@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BigData on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/categories/bigdata/</link>
+    <description>Recent content in BigData on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Aug 2019 20:32:37 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/bigdata/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SparkContext、SparkConf以及进化版的SparkSession</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99697500/</link>
+      <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99697500/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pyspark读写S3文件与简单处理（指定Schema，直接写S3或先本地再上传）</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99691961/</link>
+      <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pyspark文件读写示例-（CSV/JSON/Parquet-单个或多个）</title>
+      <link>https://vincent-233.github.io/blog/2019/08/17/99691830/</link>
+      <pubDate>Sat, 17 Aug 2019 05:11:47 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/08/17/99691830/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

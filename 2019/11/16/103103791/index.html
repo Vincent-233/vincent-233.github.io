@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>python面向对象举例 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">python面向对象举例</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-11-16T23:31:52Z">2019-11-16</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#功能说明">功能说明</a></li>
+    <li><a href="#代码">代码</a>
+      <ul>
+        <li><a href="#基类">基类</a></li>
+        <li><a href="#等差数列">等差数列</a></li>
+        <li><a href="#等比数列">等比数列</a></li>
+        <li><a href="#斐波纳契数列">斐波纳契数列</a></li>
+      </ul>
+    </li>
+    <li><a href="#要点说明">要点说明</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="概述">概述</h2>
+<p>面向对象三大特性：封装、继承、多态，本文通过类继承和方法覆盖的例子来说明python的面向对象编程。</p>
+<h2 id="功能说明">功能说明</h2>
+<p>实现“数列”基类，然后通过继承的方式分别实现“等差数列”、“等比数列”、“斐波纳契数列”：<br>
+<img src="/blog/img/2019111622100781.png" alt=""><br>
+先实现一个具有数列通用属性和方法的基类，然后子类只需覆盖产生下一个元素的方法_advance即可。代码如下：</p>
+<h2 id="代码">代码</h2>
+<h3 id="基类">基类</h3>
+<p><code>progression.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Progression</span>:
+    <span style="color:#e6db74">&#34;&#34;&#34;迭代地产生数列，默认产生 0, 1, 2, ...&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__ (self, start<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;初始化数列第一个值&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_current <span style="color:#f92672">=</span> start
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_advance</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;更新数据当前值为新值，此方法应该被继承类重写&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_current <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> 
+
+    <span style="color:#66d9ef">def</span> __next__(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;返回下一个元素, 或抛出StopIteration异常&#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_current <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>: 
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">StopIteration</span>()
+        <span style="color:#66d9ef">else</span>:
+            answer <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_current    <span style="color:#75715e"># 返回当前值</span>
+            self<span style="color:#f92672">.</span>_advance()    <span style="color:#75715e"># 准备下次的返回值</span>
+            <span style="color:#66d9ef">return</span> answer
+
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;按常规，返回自己作为迭代器&#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">return</span> self
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_progression</span>(self, n):
+        <span style="color:#e6db74">&#34;&#34;&#34;打印前n个数列&#34;&#34;&#34;</span>
+        print(<span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(str(next(self)) <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(n)))
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    print(<span style="color:#e6db74">&#39;默认数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> Progression()
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+
+    print(<span style="color:#e6db74">&#39;首项为3的数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> Progression(start<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+</code></pre></div><pre><code>默认数列：  
+0 1 2 3 4 5 6 7 8 9  
+首项为3的数列：  
+3 4 5 6 7 8 9 10 11 12  
+</code></pre>
+<h3 id="等差数列">等差数列</h3>
+<p><code>arithmetic_progression.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> progression <span style="color:#f92672">import</span> Progression
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArithmeticProgression</span>(Progression):
+    <span style="color:#e6db74">&#34;&#34;&#34;等差列数&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__ (self, increment<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, start<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;初始化
+</span><span style="color:#e6db74">        increment:公差
+</span><span style="color:#e6db74">        start:首项
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        super()<span style="color:#f92672">.</span>__init__(start)      <span style="color:#75715e"># 初始化基类</span>
+        self<span style="color:#f92672">.</span>_increment <span style="color:#f92672">=</span> increment
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_advance</span>(self):              <span style="color:#75715e"># 重写基类方法</span>
+        <span style="color:#e6db74">&#34;&#34;&#34;增加公差，得到下一个值&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_current <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>_increment
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    print(<span style="color:#e6db74">&#39;默认等差数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> ArithmeticProgression()
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+    
+    print(<span style="color:#e6db74">&#39;首项为1，公差为3的等差数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> ArithmeticProgression(start<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,increment<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+</code></pre></div><pre><code>默认等差数列：  
+0 1 2 3 4 5 6 7 8 9  
+首项为1，公差为3的等差数列：  
+1 4 7 10 13 16 19 22 25 28  
+</code></pre>
+<h3 id="等比数列">等比数列</h3>
+<p><code>geometric_progression.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> progression <span style="color:#f92672">import</span> Progression
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GeometricProgression</span>(Progression):
+    <span style="color:#e6db74">&#34;&#34;&#34;几何数列/等比数列&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__ (self, base<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, start<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;初始化
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        base：等比数列的公比
+</span><span style="color:#e6db74">        start：数据首项，默认为1
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        super()<span style="color:#f92672">.</span>__init__(start)
+        self<span style="color:#f92672">.</span>_base <span style="color:#f92672">=</span> base
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_advance</span>(self):   <span style="color:#75715e"># 重写基类方法</span>
+        <span style="color:#e6db74">&#34;&#34;&#34;乘以公比，得到下一个元素&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_current <span style="color:#f92672">*=</span> self<span style="color:#f92672">.</span>_base
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    print(<span style="color:#e6db74">&#39;默认等比列数:&#39;</span>)
+    pro <span style="color:#f92672">=</span> GeometricProgression()
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+
+    print(<span style="color:#e6db74">&#39;首项为5，公比为2的等比数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> GeometricProgression(start<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>,base<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+</code></pre></div><pre><code>默认等比列数:  
+1 2 4 8 16 32 64 128 256 512  
+首项为5，公比为2的等比数列：  
+5 10 20 40 80 160 320 640 1280 2560  
+</code></pre>
+<h3 id="斐波纳契数列">斐波纳契数列</h3>
+<p><code>fibonacci_progression.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> progression <span style="color:#f92672">import</span> Progression
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FibonacciProgression</span>(Progression):
+    <span style="color:#e6db74">&#34;&#34;&#34;斐波纳契数列&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__ (self, first<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, second<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;初始化
+</span><span style="color:#e6db74">        first:第一元素
+</span><span style="color:#e6db74">        second:第二元素
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        super()<span style="color:#f92672">.</span>__init__(first)    <span style="color:#75715e"># 初始化基类</span>
+        self<span style="color:#f92672">.</span>_prev <span style="color:#f92672">=</span> second <span style="color:#f92672">-</span> first
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_advance</span>(self):    <span style="color:#75715e"># 重写基类方法</span>
+        <span style="color:#e6db74">&#34;&#34;&#34;后一个元素，等于前两个元素之和&#34;&#34;&#34;</span>
+        <span style="color:#75715e"># temp = self._current</span>
+        <span style="color:#75715e"># self._current = self._prev + self._current</span>
+        <span style="color:#75715e"># self._prev = temp</span>
+        self<span style="color:#f92672">.</span>_prev, self<span style="color:#f92672">.</span>_current <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_current, self<span style="color:#f92672">.</span>_prev <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>_current
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    print(<span style="color:#e6db74">&#39;默认斐波纳契数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> FibonacciProgression()
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+
+    print(<span style="color:#e6db74">&#39;前两位为3和4的斐波纳契数列：&#39;</span>)
+    pro <span style="color:#f92672">=</span> FibonacciProgression(first<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,second<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+    pro<span style="color:#f92672">.</span>print_progression(<span style="color:#ae81ff">10</span>)
+</code></pre></div><pre><code>默认斐波纳契数列：  
+0 1 1 2 3 5 8 13 21 34  
+前两位为3和4的斐波纳契数列：  
+3 4 7 11 18 29 47 76 123 199  
+</code></pre>
+<h2 id="要点说明">要点说明</h2>
+<ul>
+<li>python有一些固定的函数名用来实现特殊功能：
+<ul>
+<li>__init__构造函数，__next__返回下一个元素，支持next内置函数调用</li>
+<li>实现__next__方法之后就可以对象实例进行迭代（实现__len__和__getitem__亦可）</li>
+<li>其它特殊方法见<a href="https://vincent-233.github.io/blog/2019/11/16/103104203/">python操作符重载特殊方法列表</a></li>
+</ul>
+</li>
+<li>python没有private、protected、public这样的成员变量与方法权限控制，但有命名惯例，下划线开头的代表非public的成员</li>
+<li>用super().__init__调用基类构造方法</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/11/16/103104203/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">python操作符重载特殊方法列表</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/11/26/103266182/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SSIS部署报6522错误问题解决</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

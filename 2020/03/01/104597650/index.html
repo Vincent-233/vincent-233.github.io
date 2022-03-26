@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>使用python的faker库和dataclass快速生成测试数据 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">使用python的faker库和dataclass快速生成测试数据</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T19:42:31Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#需求">需求</a></li>
+        <li><a href="#faker简单使用">faker简单使用</a></li>
+        <li><a href="#faker--dataclass-快速生成字典或元组记录">faker + dataclass 快速生成字典或元组记录</a></li>
+        <li><a href="#保存为csv">保存为csv</a></li>
+        <li><a href="#保存为json">保存为json</a></li>
+        <li><a href="#保存到数据库">保存到数据库</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>上一篇介绍了<a href="https://vincent-233.github.io/blog/2020/03/01/104594475/">如何用纯SQL生成测试数据</a>，但SQL功能有限，本篇介绍python faker库的使用。</p>
+<h3 id="需求">需求</h3>
+<p>生成5000条记录，字段如下：<br>
+<img src="/blog/img/20200301185645306.png" alt=""></p>
+<h3 id="faker简单使用">faker简单使用</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
+fake <span style="color:#f92672">=</span> Faker() <span style="color:#75715e"># 默认为英文locale</span>
+fake_zh_cn <span style="color:#f92672">=</span> Faker(locale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;zh_CN&#39;</span>)  <span style="color:#75715e"># 设置为中文locale</span>
+
+print(fake_zh_cn<span style="color:#f92672">.</span>name()) <span style="color:#75715e"># 随机输出中文姓名</span>
+print(fake<span style="color:#f92672">.</span>file_path()) <span style="color:#75715e"># 随机文件路径</span>
+print(fake_zh_cn<span style="color:#f92672">.</span>file_path()) <span style="color:#75715e"># 随机中文文件路径</span>
+print(fake<span style="color:#f92672">.</span>ssn()) <span style="color:#75715e"># 随机社会保障号</span>
+print(fake_zh_cn<span style="color:#f92672">.</span>ssn()) <span style="color:#75715e"># 随机身份证号</span>
+</code></pre></div><p>更多faker支持的数据种类，可参考<a href="https://faker.readthedocs.io/en/stable/providers.html">API文档</a></p>
+<h3 id="faker--dataclass-快速生成字典或元组记录">faker + dataclass 快速生成字典或元组记录</h3>
+<p>有了造数工具，接下来让容纳数据的载体<a href="https://docs.python.org/3/library/dataclasses.html">dataclass</a>（仅3.6+版本支持）登场，使用dataclass可以十分简洁的方式实现数据类的基本功能，简化数据初始化、打印回显（repr、print）、数据序列化（比如to json等）等等的操作。构造一个含需求中字段的类，并指定各字段的数据初始化的方法，代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
+<span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass,field,asdict,astuple
+
+<span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Emp</span>:
+    <span style="color:#75715e"># dataclass 字段</span>
+    badge:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>:str(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">8000</span>))<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">5</span>))
+    name:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>name)
+    ename:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>name)
+    department:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>:random<span style="color:#f92672">.</span>choice(Emp<span style="color:#f92672">.</span>dept))
+    job:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>job)
+    idcard:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>ssn)
+    phone:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>phone_number)
+    gender:str <span style="color:#f92672">=</span> field(init <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+    birthday:str <span style="color:#f92672">=</span> field(init <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+    postcode:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>postalcode)
+    email:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>email)
+    workcity:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>city)
+    address:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>address)
+    
+    <span style="color:#75715e"># 辅助字段</span>
+    dept <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;IT部&#39;</span>,<span style="color:#e6db74">&#39;人事部&#39;</span>,<span style="color:#e6db74">&#39;财务部&#39;</span>,<span style="color:#e6db74">&#39;采购部&#39;</span>,<span style="color:#e6db74">&#39;运营部&#39;</span>,<span style="color:#e6db74">&#39;市场部&#39;</span>,<span style="color:#e6db74">&#39;销售部&#39;</span>,<span style="color:#e6db74">&#39;客服部&#39;</span>]
+    
+    <span style="color:#75715e"># 关联字段（根据身份证获取性别和生日）</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__post_init__</span>(self):
+        self<span style="color:#f92672">.</span>gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;男&#39;</span> <span style="color:#66d9ef">if</span> int(self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">16</span>:<span style="color:#ae81ff">17</span>])<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;女&#39;</span>
+        self<span style="color:#f92672">.</span>birthday <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">14</span>]
+</code></pre></div><p>创建一个类试验一下：<br>
+<img src="/blog/img/20200301191602222.png" alt=""><br>
+看来效果不错，下面可以批量构造并将数据持久化保存。</p>
+<h3 id="保存为csv">保存为csv</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> csv
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake.csv&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>,newline<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    csv_writer <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f,delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;|&#39;</span>)
+    <span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> [astuple(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]:
+        csv_writer<span style="color:#f92672">.</span>writerow(list(emp))
+</code></pre></div><h3 id="保存为json">保存为json</h3>
+<ul>
+<li>单个json array对象</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+emp <span style="color:#f92672">=</span> [asdict(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake_json_list.json&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    json<span style="color:#f92672">.</span>dump(emp,f,ensure_ascii<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,indent<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</code></pre></div><ul>
+<li>每行一个单独的json对象</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake_json_line.json&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>):
+        json<span style="color:#f92672">.</span>dump(asdict(Emp()),f,ensure_ascii<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><h3 id="保存到数据库">保存到数据库</h3>
+<p>若要保存到数据库，可以不使用上面的dataclass，转而使用python的ORM框架（比如SQLAlchemy）构造一个含所需字段的类，然后赋值后保存即可，全程不用写SQL语句。当然也可以循环直接构造Insert SQL语句后执行。下面使用一种偷懒的做法，先转化为pandas的dataframe作为中转，然后将数据保存到数据库：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+<span style="color:#f92672">from</span> sqlalchemy.types <span style="color:#f92672">import</span> NVARCHAR,DATE
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
+
+<span style="color:#75715e"># 设置数据库连接DSN</span>
+db_con_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mssql+pyodbc://@AdventureWorks2012&#39;</span>
+engine <span style="color:#f92672">=</span> create_engine(db_con_str)
+
+<span style="color:#75715e"># 生成数据转并化为字典列表</span>
+emp <span style="color:#f92672">=</span> [asdict(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]
+columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;badge&#39;</span>,<span style="color:#e6db74">&#39;ename&#39;</span>,<span style="color:#e6db74">&#39;name&#39;</span>,<span style="color:#e6db74">&#39;department&#39;</span>,<span style="color:#e6db74">&#39;job&#39;</span>,<span style="color:#e6db74">&#39;idcard&#39;</span>,<span style="color:#e6db74">&#39;phone&#39;</span>
+          ,<span style="color:#e6db74">&#39;gender&#39;</span>,<span style="color:#e6db74">&#39;birthday&#39;</span>,<span style="color:#e6db74">&#39;postcode&#39;</span>,<span style="color:#e6db74">&#39;email&#39;</span>,<span style="color:#e6db74">&#39;workcity&#39;</span>,<span style="color:#e6db74">&#39;address&#39;</span>]
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(emp,columns <span style="color:#f92672">=</span> columns)
+
+<span style="color:#75715e"># 指定字段类型</span>
+dtype <span style="color:#f92672">=</span> {column:NVARCHAR(<span style="color:#ae81ff">2000</span>) <span style="color:#66d9ef">for</span> column <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>columns}
+dtype[<span style="color:#e6db74">&#39;birthday&#39;</span>] <span style="color:#f92672">=</span> DATE
+
+<span style="color:#75715e"># 保存到数据库</span>
+df<span style="color:#f92672">.</span>to_sql(<span style="color:#e6db74">&#39;employee&#39;</span>,con <span style="color:#f92672">=</span> engine,if_exists <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;replace&#39;</span>,dtype <span style="color:#f92672">=</span> dtype,index <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/03/01/104594475/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">数据库生成测试数据（SQL实现）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/03/20/104987643/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">根据日历表生成财年及周编号</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

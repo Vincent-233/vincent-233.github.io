@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>python文件遍历与匹配过滤 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">python文件遍历与匹配过滤</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-10-31T23:49:29Z">2019-10-31</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#显示当前层级文件夹">显示当前层级文件夹</a></li>
+        <li><a href="#遍历所有文件和文件夹含子文件夹">遍历所有文件和文件夹（含子文件夹）</a></li>
+        <li><a href="#模式匹配过滤文件">模式匹配过滤文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>路径/home/ghost/workspace/Other/结构如下</p>
+<pre><code>├── git  
+├── input  
+│   ├── csv  
+│   │   ├── test_file_1.csv  
+│   │   └── test_file_2.csv  
+│   ├── test.csv  
+│   ├── test_file_1.txt  
+│   └── test_file_2.txt  
+├── input-archive  
+└── temp  
+</code></pre>
+<p>现用python进行文件遍历与过滤</p>
+<h3 id="显示当前层级文件夹">显示当前层级文件夹</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+work_folder <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other&#39;</span>
+os<span style="color:#f92672">.</span>listdir(work_folder)
+</code></pre></div><p>结果如下：</p>
+<pre><code>['input', 'temp', 'input-archive', 'git']  
+</code></pre>
+<h3 id="遍历所有文件和文件夹含子文件夹">遍历所有文件和文件夹（含子文件夹）</h3>
+<p>如下代码中root是基准文件夹，dirs是基准文件夹下的文件夹，files为基准文件夹下的文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">exclude  <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;git&#39;</span>,<span style="color:#e6db74">&#39;temp&#39;</span>]    <span style="color:#75715e"># 遍历时希望排除的文件夹</span>
+<span style="color:#66d9ef">for</span> root, dirs, files <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>walk(work_folder):
+    <span style="color:#66d9ef">for</span> ex <span style="color:#f92672">in</span> exclude:
+        <span style="color:#66d9ef">if</span> ex <span style="color:#f92672">in</span> dirs:
+            dirs<span style="color:#f92672">.</span>remove(ex)  <span style="color:#75715e"># 移除 dirs 中不想继续遍历的文件夹</span>
+    print(root,dirs,files)
+</code></pre></div><p>结果如下：</p>
+<pre><code>/home/ghost/workspace/Other ['input', 'input-archive', 'git'] []  
+/home/ghost/workspace/Other/input ['csv'] ['test_file_1.txt', 'test_file_2.txt', 'test.csv']  
+/home/ghost/workspace/Other/input/csv [] ['test_file_2.csv', 'test_file_1.csv']  
+/home/ghost/workspace/Other/input-archive [] []  
+</code></pre>
+<h3 id="模式匹配过滤文件">模式匹配过滤文件</h3>
+<p>找出目录下所有csv文件（含子目录），这里用到<a href="https://docs.python.org/3.7/library/glob.html">glob</a>模块，recursive为True配合 ** 符号代表递归向下搜索。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> glob
+pat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other/input/**/*.csv&#39;</span>
+<span style="color:#66d9ef">for</span> csv <span style="color:#f92672">in</span> glob<span style="color:#f92672">.</span>glob(pat,recursive <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>):
+    print(csv)
+</code></pre></div><p>结果如下：</p>
+<pre><code>/home/ghost/workspace/Other/input/test.csv  
+/home/ghost/workspace/Other/input/csv/test_file_2.csv  
+/home/ghost/workspace/Other/input/csv/test_file_1.csv  
+</code></pre>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/09/26/101398064/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">深刻理解python变量</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/11/08/102962911/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">全排列递归算法（Python实现）</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

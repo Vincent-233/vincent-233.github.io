@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tags/linux/</link>
+    <description>Recent content in Linux on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Jun 2019 22:18:02 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu关闭自动更新和GUI图形界面</title>
+      <link>https://vincent-233.github.io/blog/2019/06/17/92729385/</link>
+      <pubDate>Mon, 17 Jun 2019 22:18:02 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/06/17/92729385/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ls -l命令结果解析</title>
+      <link>https://vincent-233.github.io/blog/2019/04/09/89160917/</link>
+      <pubDate>Tue, 09 Apr 2019 20:26:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/09/89160917/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows通过密钥SSH登陆Linux</title>
+      <link>https://vincent-233.github.io/blog/2019/04/08/89082770/</link>
+      <pubDate>Mon, 08 Apr 2019 10:22:22 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/08/89082770/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

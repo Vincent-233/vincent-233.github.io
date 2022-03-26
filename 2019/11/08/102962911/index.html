@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>全排列递归算法（Python实现） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">全排列递归算法（Python实现）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-11-08T17:36:52Z">2019-11-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="category">数据结构与算法</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#需求">需求</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#暴力穷举">暴力穷举</a></li>
+        <li><a href="#递归实现">递归实现</a></li>
+        <li><a href="#列表">列表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="概述">概述</h3>
+<p>本文由浅入深，由特殊到一般说明全排列的递归实现。</p>
+<h3 id="需求">需求</h3>
+<p>编写程序，输出所有由a，b，c，d四个字母都出现一次所组成的字符串。</p>
+<h3 id="分析">分析</h3>
+<p>这实际是全排列问题，一共有 4! = 24 个结果。</p>
+<h3 id="暴力穷举">暴力穷举</h3>
+<p>思路：和解数学题一样，第一位从四个字母中选择，有4种可能，第二位从剩余3个字母中选择，有3种可能，依此类推，第三位2种，第四位1种。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">result <span style="color:#f92672">=</span> [] <span style="color:#75715e"># 保存全排列结果</span>
+<span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;abcd&#39;</span>):
+    <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;abcd&#39;</span><span style="color:#f92672">.</span>replace(a,<span style="color:#e6db74">&#39;&#39;</span>)):
+        <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;abcd&#39;</span>)<span style="color:#f92672">.</span>replace(a,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>replace(b,<span style="color:#e6db74">&#39;&#39;</span>):
+            <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;abcd&#39;</span>)<span style="color:#f92672">.</span>replace(a,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>replace(b,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>replace(c,<span style="color:#e6db74">&#39;&#39;</span>):
+                result<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}{</span>b<span style="color:#e6db74">}{</span>c<span style="color:#e6db74">}{</span>d<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># f-string，python 3.6 支持的语法</span>
+<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> result:
+	print(x)
+</code></pre></div><p>上述代码虽然实现了需求，但局限也很明显，如果给的字母个数有变，程序需要调整，如果字母个数非常多，程序将变得难以阅读，无法维护，所以以上代码只能算临时代码，无法复用，不能&quot;投产&quot;。</p>
+<h3 id="递归实现">递归实现</h3>
+<h4 id="字符串">字符串</h4>
+<p>思路：abcd的全排列，等于 a + bcd的全排列，b + acd的全排列，c + abd的全排列，d + abc的全排列。显然，从以上描述就可看出问题具有递归性质。<br>
+实现：依次取出一个字母作为前缀加入到当前结果字符串，剩余字母再全排列，直至只剩余最后一个字母。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation_sub</span>(prefix_str,suffix_str,result):
+    <span style="color:#66d9ef">if</span> len(suffix_str) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>: <span style="color:#75715e"># 当后缀为空时，即产生一个结果</span>
+        result<span style="color:#f92672">.</span>append(prefix_str)
+    <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> suffix_str:
+        permutation_sub(prefix_str <span style="color:#f92672">+</span> s, suffix_str<span style="color:#f92672">.</span>replace(s,<span style="color:#e6db74">&#39;&#39;</span>), result)
+        
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation</span>(input_str):
+    perm <span style="color:#f92672">=</span> []
+    permutation_sub(<span style="color:#e6db74">&#39;&#39;</span>,input_str,perm)
+    <span style="color:#66d9ef">return</span> perm
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> permutation(<span style="color:#e6db74">&#39;abcd&#39;</span>):
+        print(x)
+</code></pre></div><p>运行结果正确。</p>
+<h3 id="列表">列表</h3>
+<h5 id="错误写法">错误写法</h5>
+<p>以上写法仅合适字符串的场景，更一般的场景用列表作为输入。那我们用列表模仿以上过程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation_sub</span>(prefix_ls,suffix_ls,result):
+    <span style="color:#66d9ef">if</span> len(suffix_ls) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        result<span style="color:#f92672">.</span>append(list(prefix_ls))
+        <span style="color:#66d9ef">return</span>
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> suffix_ls:
+        prefix_ls<span style="color:#f92672">.</span>append(x)
+        suffix_ls<span style="color:#f92672">.</span>remove(x)
+        permutation_sub(prefix_ls ,suffix_ls ,result)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation</span>(input_ls):
+    perm <span style="color:#f92672">=</span> []
+    permutation_sub([],input_ls,perm)
+    <span style="color:#66d9ef">return</span> perm
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> permutation([<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#e6db74">&#39;d&#39;</span>]):
+        print(x)
+</code></pre></div><p>运行结果错误。因为list在python中是可变类型，不像str是非可变类型，每次操作都会产生一个新对象，list参数传的是一个地址，后续不断的递归调用过程中list内容全一直改变，所以上述写法不适合list参数。</p>
+<h5 id="正确写法">正确写法</h5>
+<p>解决方案是用元素交换来模拟上述字符新加与移除的过程，思路是从下标0开始，依次选择后续元素与领导元素（第0个元素）交换，作为新的领导元素，递归以上过程，直到下标达到最大。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation_sub</span>(ls,start,result):
+    <span style="color:#66d9ef">if</span> start <span style="color:#f92672">==</span> len(ls) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+        result<span style="color:#f92672">.</span>append(list(ls))
+        <span style="color:#66d9ef">return</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(start,len(ls)):
+        ls[i],ls[start] <span style="color:#f92672">=</span> ls[start],ls[i]  <span style="color:#75715e"># 后续元素依次与start交换，作为领导元素</span>
+        permutation_sub(ls,start <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,result)
+        ls[i],ls[start] <span style="color:#f92672">=</span> ls[start],ls[i]  <span style="color:#75715e"># 再次交换，复原上次结构，方便进行下个元素的交换 </span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permutation</span>(ls):
+    perm <span style="color:#f92672">=</span> []
+    permutation_sub(ls,<span style="color:#ae81ff">0</span>,perm)
+    <span style="color:#66d9ef">return</span> perm
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> permutation([<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#e6db74">&#39;d&#39;</span>]):
+        print(x)
+</code></pre></div><p>以上代码有两个细节：</p>
+<ul>
+<li>第3行的list(ls)，相当于copy.copy(ls)，表示复制元素构建一个新的列表，否则最后保存的都是相同的list</li>
+<li>第8行有个再次交换的过程，方便回溯前还原上次调用前的列表元素结构，进行下次调用（i + 1）</li>
+</ul>
+<h5 id="过程图解">过程图解</h5>
+<p>以a,b,c作为输入的图解<br>
+<img src="/blog/img/20191126232200260.png" alt=""><br>
+执行顺序类似一个N叉树深度优先的遍历过程（左边黄色部分从上到下为第一轮输出的执行顺序），递归每向下一层就确定了一个新的前缀，每次向上回溯前都要再次交换还原上次列表状态。</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/10/31/102848314/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">python文件遍历与匹配过滤</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/11/16/103104203/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">python操作符重载特殊方法列表</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Python并发之异步编程框架AsyncIO简介 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Python并发之异步编程框架AsyncIO简介</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-02-06T12:20:25Z">2020-02-06</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">Python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#举例">举例</a></li>
+        <li><a href="#相关概念">相关概念</a></li>
+        <li><a href="#协程">协程</a></li>
+        <li><a href="#举例代码解读">举例代码解读</a></li>
+        <li><a href="#总结与后话">总结与后话</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>在进入并发编程的世界之前，先看一个对比的例子：</p>
+<h3 id="举例">举例</h3>
+<p><strong>串行执行</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(task_name):
+    print(task_name,time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%X</span><span style="color:#e6db74">&#34;</span>),<span style="color:#e6db74">&#34;One&#34;</span>)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 模拟一个需要堵塞一秒的任务</span>
+    print(task_name,time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%X</span><span style="color:#e6db74">&#34;</span>),<span style="color:#e6db74">&#34;Two&#34;</span>)
+    
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    count(<span style="color:#e6db74">&#39;Task-A&#39;</span>)
+    count(<span style="color:#e6db74">&#39;Task-B&#39;</span>)
+    count(<span style="color:#e6db74">&#39;Task-C&#39;</span>)
+    
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    s <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+    main()
+    elapsed <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> s
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Total Run Time </span><span style="color:#e6db74">{</span>elapsed<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds.&#34;</span>)
+</code></pre></div><p>运行结果：</p>
+<pre><code>Task-A 12:00:06 One  
+Task-A 12:00:07 Two  
+Task-B 12:00:07 One  
+Task-B 12:00:08 Two  
+Task-C 12:00:08 One  
+Task-C 12:00:09 Two  
+Total Run Time 3.04 seconds.  
+</code></pre>
+<p>串行执行三次函数，每个函数sleep一秒，一共花费3秒，意料之中。</p>
+<p><strong>并发执行</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">import</span> time
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(task_name):
+    print(task_name,time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%X</span><span style="color:#e6db74">&#34;</span>),<span style="color:#e6db74">&#34;One&#34;</span>)
+    <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 模拟一个需要堵塞一秒的任务</span>
+    print(task_name,time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%X</span><span style="color:#e6db74">&#34;</span>),<span style="color:#e6db74">&#34;Two&#34;</span>)
+
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>gather(
+        count(<span style="color:#e6db74">&#39;Task-A&#39;</span>), 
+        count(<span style="color:#e6db74">&#39;Task-B&#39;</span>), 
+        count(<span style="color:#e6db74">&#39;Task-C&#39;</span>)
+    )
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    s <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+    asyncio<span style="color:#f92672">.</span>run(main())
+    elapsed <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> s
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Total Run Time </span><span style="color:#e6db74">{</span>elapsed<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds.&#34;</span>)
+</code></pre></div><p>运行结果：</p>
+<pre><code>Task-A 12:18:31 One  
+Task-B 12:18:31 One  
+Task-C 12:18:31 One  
+Task-A 12:18:32 Two  
+Task-B 12:18:32 Two  
+Task-C 12:18:32 Two  
+Total Run Time 1.01 seconds.  
+</code></pre>
+<p>完成了相同的任务（执行3次函数），却只用了1秒钟，这就是并发带来的好处。<br>
+还可以发现并发执行程序print出来的内容顺序和串行执行的不一样，但具体到每次调用（比如Task-A），都是Sleep了一秒。<br>
+给人的感觉就是三个函数同时执行了print(&lsquo;One&rsquo;)，集体sleep了一秒，然后print(&lsquo;Two&rsquo;)。</p>
+<h3 id="相关概念">相关概念</h3>
+<p>有了以上感性认识之后，我们来介绍如下术语：<br>
+<strong>并行(Parallelism)</strong>：同时执行多个任务<br>
+<strong>并发(Concurrency)</strong>：多个任务可以来回切换地开展，不用非得做完一个任务再做下一个<br>
+<strong>多进程</strong>：多个相互隔离的进程，每个进程有单独的地址空间，适合计算密集型任务<br>
+<strong>多线程</strong>：线程是CPU调度的最小单位，多个线程共享同一进程的资源<br>
+<strong>同步IO</strong>：CPU等待IO完成，才继续执行下一步动作，CPU利用率低<br>
+<strong>异步IO</strong>：CPU不等当前任务的IO完成，就去执行下一个任务，上一任务的IO完成后，通知CPU，CPU适时返回继续执行后续动作<br>
+<strong>阻塞</strong>：同步（sync）会造成阻塞的，导致CPU过多空闲等待<br>
+<strong>非阻塞</strong>：异步（async）不阻塞，CPU利用率高</p>
+<h3 id="协程">协程</h3>
+<p>多进程实现并行资源代价昂贵，进程之间通信比较复杂，可能还要涉及到序列化和反序列化；<br>
+多线程实现并发节省资源，线程信息交换主要通过共享内存，但线程之间切换开销也比较大；<br>
+与之对应，<strong>协程(coroutine)</strong> 则是单进程、单线程的，通过任务的分解协作，达到并发的效果，属于协作式多任务（cooperative multitasking），而线程和进程都是抢占式多任务（preemptive multitasking）。<br>
+python的协程内部实现，借用了生成器（generator）的思想。</p>
+<h3 id="举例代码解读">举例代码解读</h3>
+<p>上面代码中的函数定义，前面加了async之后，直接调用该函数会返回一个协程对象（coroutine object），需要被包在task或gather之后，用asyncio.run执行。</p>
+<p>asyncio就像一个任务调度器，执行的过程中，遇到await func(x)之后，就挂起当前函数的操作，不等fun(x)执行完就去执行下一个任务，直到fun(x)结束，通知协程调度器已准备就绪，可被选择继续执行。await相当于一个可被中断的代码节点。</p>
+<p>asyncio.gather方法就是将一系统coroutine按传入顺序打包成一个task，等待asyncio.run方法运行。<br>
+如果每个任务单独await，是不会有并发的，要放在gather中或包装成task之后执行，才支持并发。</p>
+<h3 id="总结与后话">总结与后话</h3>
+<p>AsyncIO并不是万能的，它无法取代多进程和多线程，它更适合将CPU从IO密集的任务等待中解放出来的场景，比如大量的网络请求。<br>
+如果上述举例代码将await asyncio.sleep(1)换为time.sleep(1)，将无法实现并行，因为time.sleep方法是堵塞的，所以AsyncIo目前只能和部分实现了aWait机制的模块一起使用，比如：</p>
+<ul>
+<li>aiohttp: 支持异步HTTP请求</li>
+<li>aioredis: 异步 Redis IO</li>
+<li>aiopg: 异步PostgreSQ请求</li>
+<li>aioodbc: pyodbc的异步版本</li>
+</ul>
+<p>更多可以参考<a href="https://github.com/aio-libs?utf8=%E2%9C%93&amp;q=&amp;type=&amp;language=">aio-libs</a></p>
+<p>另外，也可以用AsyncIO实现单纯的异步，比如函数A不断生产数据，函数B不断消费数据，可以用AsyncIO库每隔一段时间交替运行函数A和函数B，而不用等到A将所有数据都生产完之后，再让B去消费。这样就实现了异步调用，但总的生产数据和消费数据的时间并没有减少。</p>
+<h3 id="参考资料">参考资料</h3>
+<p><a href="https://www.cnblogs.com/lxmhhy/p/6041001.html">进程、线程、协程区别</a><br>
+<a href="https://www.zhihu.com/question/33515481">并行与并发区别</a><br>
+<a href="https://docs.python.org/3/library/asyncio-task.html#coroutines">coroutines</a><br>
+<a href="https://www.youtube.com/watch?v=GSiZkP7cI80">what is coroutine anyway</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/02/02/104148685/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Python装饰器</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/03/01/104594475/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">数据库生成测试数据（SQL实现）</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL Server透明数据加密（TDE）实践 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server透明数据加密（TDE）实践</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-05-22T14:19:56Z">2018-05-22</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#设置tde数据库的主要步骤">设置TDE数据库的主要步骤：</a></li>
+        <li><a href="#创建tde数据库">创建TDE数据库</a></li>
+        <li><a href="#迁移到新实例服务器">迁移到新实例/服务器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>透明数据加密（Transparent Data Encryption）主要用于防止数据库文件被未经授权地拷贝或服务器被盗后通过附加/还原等操作访问数据库中的敏感数据。<br>
+本文演示创建TDE数据库的过程，以及备份后还原到新的实例的过程。</p>
+<h3 id="设置tde数据库的主要步骤">设置TDE数据库的主要步骤：</h3>
+<ol start="0">
+<li><strong>创建Master Key主密钥</strong></li>
+<li><strong>创建被Master Key加密的证书</strong></li>
+<li><strong>备份密钥和证书</strong></li>
+<li><strong>创建被证书保护的数据库加密密钥</strong></li>
+<li><strong>开启数据库加密</strong></li>
+</ol>
+<h3 id="创建tde数据库">创建TDE数据库</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> [TDEDataBase]
+ CONTAINMENT <span style="color:#f92672">=</span> <span style="color:#66d9ef">NONE</span>
+ <span style="color:#66d9ef">ON</span>  <span style="color:#66d9ef">PRIMARY</span> 
+( NAME <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;TDEDataBase&#39;</span>,
+  FILENAME <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;C:\MyTest\DB\TDEDataBase.mdf&#39;</span> , 
+  <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3072</span>KB , FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>KB )
+ LOG <span style="color:#66d9ef">ON</span> 
+( NAME <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;TDEDataBase_log&#39;</span>, 
+  FILENAME <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;C:\MyTest\DB\TDEDataBase_log.ldf&#39;</span> ,
+  <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>KB , FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">%</span>)
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- Create master key
+</span><span style="color:#75715e"></span> <span style="color:#66d9ef">CREATE</span> MASTER <span style="color:#66d9ef">KEY</span> ENCRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;!drJP9QXC&amp;Vi%cs&#39;</span>;
+ <span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- Create the certificate used to protect the database encryption key
+</span><span style="color:#75715e"></span> <span style="color:#66d9ef">CREATE</span> CERTIFICATE TDETestDBCert <span style="color:#66d9ef">WITH</span> SUBJECT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;TDE Test&#39;</span>;
+ <span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- Create the database encryption key for TDE.
+</span><span style="color:#75715e"></span>USE TDEDataBase;
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> ENCRYPTION <span style="color:#66d9ef">KEY</span> 
+<span style="color:#66d9ef">WITH</span> ALGORITHM <span style="color:#f92672">=</span> AES_128
+ENCRYPTION <span style="color:#66d9ef">BY</span> SERVER CERTIFICATE TDETestDBCert;
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- Backup  cert and  keys
+</span><span style="color:#75715e"></span>BACKUP CERTIFICATE TDETestDBCert
+<span style="color:#66d9ef">TO</span> FILE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\MyTest\TDETest_DBCert_BackUp&#39;</span>
+<span style="color:#66d9ef">WITH</span> PRIVATE <span style="color:#66d9ef">KEY</span>
+(
+FILE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\MyTest\TDETest_PrivateKeyFile&#39;</span>,
+ENCRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;TDETest123&#39;</span>
+);
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- 备份主密钥  
+</span><span style="color:#75715e"></span>BACKUP MASTER <span style="color:#66d9ef">KEY</span>   
+<span style="color:#66d9ef">TO</span> FILE <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;C:\MyTest\MasterKey&#39;</span>     
+ENCRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;password&#39;</span>  
+<span style="color:#66d9ef">GO</span> 
+<span style="color:#75715e">-- Enable TDE
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">Alter</span> <span style="color:#66d9ef">Database</span> TDEDataBase <span style="color:#66d9ef">Set</span> Encryption <span style="color:#66d9ef">On</span>;
+</code></pre></div><p>开启后查看加密状态：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> DB_NAME(database_id) <span style="color:#66d9ef">AS</span> DatabaseName,
+     key_algorithm <span style="color:#66d9ef">AS</span> [Algorithm],
+     key_length <span style="color:#66d9ef">AS</span> KeyLength,
+     <span style="color:#66d9ef">CASE</span> encryption_state
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;No database encryption key present, no encryption&#39;</span>
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;Unencrypted&#39;</span>
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;Encryption in progress&#39;</span>
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;Encrypted&#39;</span>
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;Key change in progress&#39;</span>
+         <span style="color:#66d9ef">WHEN</span> <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;Decryption in progress&#39;</span>
+     <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> EncryptionStateDesc,
+     percent_complete <span style="color:#66d9ef">AS</span> PercentComplete
+<span style="color:#66d9ef">FROM</span> sys.dm_database_encryption_keys;
+</code></pre></div><p>结果如下：<br>
+<img src="/blog/img/20180522135931580" alt=""><br>
+可以发现除了刚刚创建的数据库外，TempDB也被加密了。其实只要实例中有一个数据库被加密，TempDB也会被跟着加密。</p>
+<h3 id="迁移到新实例服务器">迁移到新实例/服务器</h3>
+<p>如果没有新实例的测试环境，可以先将Master Key和Certificate删除：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DROP</span> CERTIFICATE TDETestDBCert
+<span style="color:#66d9ef">DROP</span> Master <span style="color:#66d9ef">KEY</span>
+</code></pre></div><p>如果直接还原数据库到新的实例/服务器，会报错：找不到指纹为 &lsquo;0xXXXXXXX&rsquo; 的服务器证书，RESTORE DATABASE 正在异常终止。<br>
+应该先还原密钥和证书才能成功还原：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 还原主密钥
+</span><span style="color:#75715e"></span>RESTORE MASTER <span style="color:#66d9ef">KEY</span>
+<span style="color:#66d9ef">FROM</span> FILE <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;C:\MasterKey&#39;</span>
+DECRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;password&#39;</span>
+ENCRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;password&#39;</span>
+
+<span style="color:#75715e">-- 打开主密钥
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">OPEN</span> MASTER <span style="color:#66d9ef">KEY</span> DECRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;password&#39;</span>
+
+<span style="color:#75715e">-- 还原证书
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> CERTIFICATE TDETestDBCert
+<span style="color:#66d9ef">FROM</span> FILE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\TDETest_DBCert_BackUp&#39;</span>
+<span style="color:#66d9ef">WITH</span> PRIVATE <span style="color:#66d9ef">KEY</span> (FILE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\TDETest_PrivateKeyFile&#39;</span>, 
+DECRYPTION <span style="color:#66d9ef">BY</span> PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;TDETest123&#39;</span>);
+
+<span style="color:#75715e">-- 再次还原数据库
+</span><span style="color:#75715e"></span>RESTORE <span style="color:#66d9ef">DATABASE</span> [TDEDataBase] <span style="color:#66d9ef">FROM</span> DISK <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;C:\TDEDataBase_20180522.bak&#39;</span> 
+<span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">MOVE</span> <span style="color:#e6db74">&#39;TDEDataBase&#39;</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;C:\TDEDataBase.mdf&#39;</span>
+,<span style="color:#66d9ef">MOVE</span> <span style="color:#e6db74">&#39;TDEDataBase_Log&#39;</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;C:\TDEDataBase.ldf&#39;</span>
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2018/05/21/80387148/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL Server分区表实践</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2018/06/03/80553895/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL Server FileStream 体验</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

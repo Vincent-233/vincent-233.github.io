@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>用Vagrant快速安装Ubuntu - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">用Vagrant快速安装Ubuntu</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-06T11:10:57Z">2019-04-06</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装virtual-box">安装virtual box</a></li>
+        <li><a href="#安装vagrant">安装vagrant</a></li>
+        <li><a href="#建立工作空间文件夹创建vagrantfile">建立工作空间文件夹，创建vagrantfile</a></li>
+        <li><a href="#vagrant-up">vagrant up</a></li>
+        <li><a href="#ssh连接">SSH连接</a></li>
+        <li><a href="#其他说明">其他说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>学习Uda的Linux免费入门课时知道了Vagrant，发现用它来安装Ubuntu非常方便快捷，特记录之。</p>
+<h3 id="安装virtual-box">安装virtual box</h3>
+<p>vagrant是建立在VM软件基础上的命令工具，所以需要先安装virtual box</p>
+<h3 id="安装vagrant">安装vagrant</h3>
+<p>去<a href="https://www.vagrantup.com/downloads.html">官网</a>下载对应版本进行安装</p>
+<h3 id="建立工作空间文件夹创建vagrantfile">建立工作空间文件夹，创建vagrantfile</h3>
+<p>vagrant需要有存放vagrantfile的文件夹，之后所有命令的运行都要在那个目录下。同时vagrant也会将这个文件夹设置为和虚拟机之间的共享文件夹。<br>
+可以根据个人情况建立一个文件夹，然后在那个文件夹下创建vagrantfile，实际就是一个配置文件，里面含要安装的Liunx的版本等相关信息。可以在这个网址选择一个，这里以最流行的<a href="https://app.vagrantup.com/ubuntu/boxes/trusty64">ubuntu/trusty64</a>为例：</p>
+<pre tabindex="0"><code>Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;ubuntu/trusty64&quot;
+end
+</code></pre><p>如果是windows系统，可以新建一个txt文件，然后将上面内容复制进去，然后保存后将后缀名去除。<br>
+<img src="/blog/img/20190406102534365.png" alt=""></p>
+<h3 id="vagrant-up">vagrant up</h3>
+<p>命令行切换到工作空间文件夹目录，运行vagrant up<br>
+结果如下：<br>
+<img src="/blog/img/20190406103451518.png" alt=""><br>
+如上图所示，vagrant发现配置文件中描述的box不存在，会自动从网上下载文件后添加。运行完毕之后Ubuntu就已装好，在VirtualBox中也可以看到它在运行中了：<br>
+<img src="/blog/img/20190406105633606.png" alt=""><br>
+下一步就是远程连接它了。</p>
+<h3 id="ssh连接">SSH连接</h3>
+<p>同样在工作目录下，运行vagrant ssh<br>
+<img src="/blog/img/20190406105018428.png" alt=""><br>
+如上图，已正常登陆，接下来就可以运行Linux的各种命令啦</p>
+<h3 id="其他说明">其他说明</h3>
+<ul>
+<li>上面安装的ubuntu/trusty64是没有图形界面的Ubuntu Server版本，如果要图形界面，可以在此基础上另外<a href="http://portalstack.blogspot.com/2013/11/vagrant-virtualbox-ubuntu-for-linux.html">安装</a>Desktop软件，也可以直接在vagrantfile中就指定含Desktop版本的Ubuntu进行虚拟机的安装</li>
+<li>vagrant自动下载安装的虚拟机文件是在C盘，会占用大量空间，如果想转移到其他磁盘，可以参考<a href="https://medium.com/@cedricdue/moving-vagrant-boxes-and-related-virtualbox-vms-to-another-drive-f1d7c50d20bc">这篇文章</a></li>
+</ul>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/01/88945745/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Python对Excel求和、合并居中</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/04/08/89082770/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Windows通过密钥SSH登陆Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>pandas数据处理，字符串先拆分再合并 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">pandas数据处理，字符串先拆分再合并</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-23T00:45:35Z">2020-06-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/etl/" rel="category">ETL</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#说明">说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="概述">概述</h3>
+<p>实现<a href="https://vincent-233.github.io/blog/2020/06/13/106734253/"><strong>之前文章</strong></a>中用SQL实现的功能：<br>
+<img src="/blog/img/20200623003605490.png" alt=""> <br>
+得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行：</p>
+<h3 id="代码">代码</h3>
+<h5 id="读取数据预处理">读取数据，预处理</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+
+<span style="color:#75715e"># load data</span>
+df_org <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\check_data.csv&#39;</span>,sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;|&#39;</span>,usecols<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;结果&#39;</span>], encoding<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;utf-8&#39;</span>)
+df <span style="color:#f92672">=</span> df_org<span style="color:#f92672">.</span>copy()
+
+<span style="color:#75715e"># add index to column</span>
+df <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>reset_index()
+
+<span style="color:#75715e"># rename and drop none value</span>
+df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;index&#39;</span>:<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;结果&#39;</span>:<span style="color:#e6db74">&#39;result&#39;</span>},inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+df<span style="color:#f92672">.</span>dropna(inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</code></pre></div><h5 id="原始样本数据">原始样本数据</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># org data where id in (2,3,32) </span>
+df[df[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">.</span>isin([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">32</span>])]
+</code></pre></div><div>  
+<style scoped>  
+    .dataframe tbody tr th:only-of-type {  
+        vertical-align: middle;  
+    }  
+<pre><code>.dataframe tbody tr th {  
+    vertical-align: top;  
+}  
+
+.dataframe thead th {  
+    text-align: right;  
+}  
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">  
+  <thead>  
+    <tr style="text-align: right;">  
+      <th></th>  
+      <th>id</th>  
+      <th>result</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <th>2</th>  
+      <td>2</td>  
+      <td>/*乙型肝炎病毒核酸定量\8.05E+6\</td>  
+    </tr>  
+    <tr>  
+      <th>3</th>  
+      <td>3</td>  
+      <td>/*甲胎蛋白(化学发光微粒子免疫检测法)\1.4\</td>  
+    </tr>  
+    <tr>  
+      <th>32</th>  
+      <td>32</td>  
+      <td>/乙肝e抗原(化学发光微粒子免疫检测法)\88.15\乙肝e抗体(化学发光微粒子免疫检测法)...</td>  
+    </tr>  
+  </tbody>  
+</table>  
+</div>  
+<h5 id="关键代码">关键代码</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># strip and split to list</span>
+df[<span style="color:#e6db74">&#39;result&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;result&#39;</span>]<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;/</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#75715e"># to key:value format</span>
+df[<span style="color:#e6db74">&#39;result&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;result&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x:[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>k<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{</span>v<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> zip(x[<span style="color:#ae81ff">0</span>::<span style="color:#ae81ff">2</span>],x[<span style="color:#ae81ff">1</span>::<span style="color:#ae81ff">2</span>])])
+
+<span style="color:#75715e"># list value to rows</span>
+df <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>explode(<span style="color:#e6db74">&#39;result&#39;</span>)<span style="color:#f92672">.</span>reset_index(drop<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</code></pre></div><h5 id="结果样本数据">结果样本数据</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># see result where id in (2,3,32) </span>
+df[df[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">.</span>isin([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">32</span>])]
+</code></pre></div><div>  
+<style scoped>  
+    .dataframe tbody tr th:only-of-type {  
+        vertical-align: middle;  
+    }  
+<pre><code>.dataframe tbody tr th {  
+    vertical-align: top;  
+}  
+
+.dataframe thead th {  
+    text-align: right;  
+}  
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">  
+  <thead>  
+    <tr style="text-align: right;">  
+      <th></th>  
+      <th>id</th>  
+      <th>result</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <th>51</th>  
+      <td>2</td>  
+      <td>*乙型肝炎病毒核酸定量:8.05E+6</td>  
+    </tr>  
+    <tr>  
+      <th>52</th>  
+      <td>3</td>  
+      <td>*甲胎蛋白(化学发光微粒子免疫检测法):1.4</td>  
+    </tr>  
+    <tr>  
+      <th>279</th>  
+      <td>32</td>  
+      <td>乙肝e抗原(化学发光微粒子免疫检测法):88.15</td>  
+    </tr>  
+    <tr>  
+      <th>280</th>  
+      <td>32</td>  
+      <td>乙肝e抗体(化学发光微粒子免疫检测法):11.42</td>  
+    </tr>  
+  </tbody>  
+</table>  
+</div>  
+<h3 id="说明">说明</h3>
+<ul>
+<li>第一步，将字符拆分拆分为列表，用series.str.split实现</li>
+<li>第二步，每两个值进行合并，用zip函数结合列表推导式批量实现</li>
+<li>第三步，将不固定长度的 list 形式的列数据，转为行，用pandas的explode函数实现</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/06/21/106893478/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">pandas数据处理，行列转换</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2021/01/02/112072915/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">排序算法-快速排序（Quick Sort）</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

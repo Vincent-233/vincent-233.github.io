@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ORACLE递归查询 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">ORACLE递归查询</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-07-26T08:36:10Z">2014-07-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。</p>
+<p>这里通过一个简单的例子来介绍这两种查询方式。</p>
+<p>数据准备：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TBL_TEST( ID NUMBER,  NAME VARCHAR2(<span style="color:#ae81ff">100</span>),  PID NUMBER);
+<span style="color:#f92672">/</span>
+
+<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TBL_TEST(ID,NAME,PID) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#e6db74">&#39;10&#39;</span>,<span style="color:#e6db74">&#39;0&#39;</span>);
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TBL_TEST(ID,NAME,PID) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#e6db74">&#39;11&#39;</span>,<span style="color:#e6db74">&#39;1&#39;</span>);
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TBL_TEST(ID,NAME,PID) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#e6db74">&#39;20&#39;</span>,<span style="color:#e6db74">&#39;0&#39;</span>);
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TBL_TEST(ID,NAME,PID) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;4&#39;</span>,<span style="color:#e6db74">&#39;12&#39;</span>,<span style="color:#e6db74">&#39;1&#39;</span>);
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TBL_TEST(ID,NAME,PID) <span style="color:#66d9ef">VALUES</span>(<span style="color:#e6db74">&#39;5&#39;</span>,<span style="color:#e6db74">&#39;121&#39;</span>,<span style="color:#e6db74">&#39;2&#39;</span>);
+<span style="color:#66d9ef">END</span>;
+ <span style="color:#f92672">/</span>
+</code></pre></div><p>需求：ID = 1结点下所有的子结点（从表中数据可以看出是1、2、4、5）</p>
+<p>ORACLE特有的递归查询方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> TBL_Test
+<span style="color:#66d9ef">START</span> <span style="color:#66d9ef">WITH</span> ID <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>           <span style="color:#75715e">-- 开始行(start row)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CONNECT</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">PRIOR</span> ID <span style="color:#f92672">=</span> pid;  <span style="color:#75715e">-- prior代表上一行(parent row)
+</span></code></pre></div><p>CTE方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">WITH</span> cte(ID,NAME,PID) <span style="color:#66d9ef">AS</span>
+(
+    <span style="color:#66d9ef">SELECT</span> ID,NAME,PID
+    <span style="color:#66d9ef">FROM</span> TBL_TEST
+    <span style="color:#66d9ef">WHERE</span> ID <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+    <span style="color:#66d9ef">SELECT</span> b.ID,b.NAME,b.PID
+    <span style="color:#66d9ef">FROM</span> cte a
+    <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> TBL_TEST b <span style="color:#66d9ef">ON</span> a.id <span style="color:#f92672">=</span> b.PID
+)
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> cte;
+</code></pre></div><p>以上两种方法均查出了正确的结果。</p>
+<p>上面第一种方法的Start With 相当于第二种方法的UNION ALL上面的部分，CONNECT BY 则相当于UNION ALL下面的部分。</p>
+<p>CTE方法具有可移植性，SQL SERVER和DB2也支持。</p>
+<p>关于CTE方法实现递归的更多实例，还可以看下面两遍文章：</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/pl/sql/" rel="tag">PL/SQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2014/07/26/38145329/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">ORACLE列值合并</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2014/12/30/42275987/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL Server 中Merge 的使用</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

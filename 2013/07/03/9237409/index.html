@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL练习题（1） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL练习题（1）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-07-03T14:28:57Z">2013-07-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/" rel="category">未分类</a>
+	</span>
+</div></div>
+		</header>
+		<div class="content post__content clearfix">
+			<p><strong>1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。</strong></p>
+<p>原始数据：</p>
+<p>id ta_year ta_num</p>
+<hr>
+<p>1 2001 500<br>
+2 2002 300<br>
+3 2003 600</p>
+<p>查询后的数据：</p>
+<p>ta_year 销售金额</p>
+<hr>
+<p>2001 500<br>
+2002 800<br>
+2003 1400</p>
+<p>相关SQL:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--build the table
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> testA
+(
+id int <span style="color:#66d9ef">identity</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span> <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>,
+ta_year char(<span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>,
+ta_num int <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
+)
+<span style="color:#66d9ef">go</span>
+
+<span style="color:#75715e">-- insert the records
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> testA <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;2001&#39;</span>,<span style="color:#ae81ff">500</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> testA <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;2002&#39;</span>,<span style="color:#ae81ff">300</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> testA <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;2003&#39;</span>,<span style="color:#ae81ff">600</span>)
+
+<span style="color:#75715e">-- here comes the selection
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> b.ta_year, <span style="color:#66d9ef">sum</span>(a.ta_num) <span style="color:#960050;background-color:#1e0010">销售金额</span>
+<span style="color:#66d9ef">from</span> testA a, testA b   <span style="color:#75715e">-- 自身连接的技巧
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">where</span> a.ta_year
+</code></pre></div><p><strong>2. 写一个SQL语句，取出表S中第11~20条记录（SQL Server，以自动增长的ID作为主键，ID可能不连续）[分页查询]</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> top <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span> tb
+<span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">in</span> (<span style="color:#66d9ef">select</span> top <span style="color:#ae81ff">10</span> id
+                 <span style="color:#66d9ef">from</span> tb)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> top <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span>
+<span style="color:#66d9ef">from</span> tb
+<span style="color:#66d9ef">where</span> id <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">max</span>(id)
+            <span style="color:#66d9ef">from</span>(<span style="color:#66d9ef">select</span> top <span style="color:#ae81ff">10</span> id
+                 <span style="color:#66d9ef">from</span> tb) <span style="color:#66d9ef">as</span> A)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>  <span style="color:#75715e">--或列出实际所需列名
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">from</span>(<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span>, row_number() over(<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> id) row_num
+     <span style="color:#66d9ef">from</span> tb)A
+<span style="color:#66d9ef">where</span> row_num <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">11</span> <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">20</span>
+</code></pre></div><p>注意：</p>
+<p>最后一种方法，不能写成：select *, row_number() over(order by SNO) row_num from SC where row_num between 11 and 20</p>
+<p><strong>3.行列转置。</strong></p>
+<p>假设有张学生成绩表(tba)如下：</p>
+<p>姓名 课程 分数</p>
+<hr>
+<p>张三 语文 74<br>
+张三 数学 83<br>
+张三 物理 93<br>
+李四 语文 74<br>
+李四 数学 84<br>
+李四 物理 94</p>
+<p>查询后变成：</p>
+<p>姓名 语文 数学 物理</p>
+<hr>
+<p>李四 74 84 94<br>
+张三 74 83 93</p>
+<p>相关SQL：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- build the table
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> tba(<span style="color:#960050;background-color:#1e0010">姓名</span> varchar(<span style="color:#ae81ff">10</span>),<span style="color:#960050;background-color:#1e0010">课程</span> varchar(<span style="color:#ae81ff">10</span>),<span style="color:#960050;background-color:#1e0010">分数</span> int)
+<span style="color:#66d9ef">go</span>
+
+<span style="color:#75715e">--insert the records
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;张三&#39;</span> , <span style="color:#e6db74">&#39;语文&#39;</span> , <span style="color:#ae81ff">74</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;张三&#39;</span> , <span style="color:#e6db74">&#39;数学&#39;</span> , <span style="color:#ae81ff">83</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;张三&#39;</span> , <span style="color:#e6db74">&#39;物理&#39;</span> , <span style="color:#ae81ff">93</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;李四&#39;</span> , <span style="color:#e6db74">&#39;语文&#39;</span> , <span style="color:#ae81ff">74</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;李四&#39;</span> , <span style="color:#e6db74">&#39;数学&#39;</span> , <span style="color:#ae81ff">84</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tba <span style="color:#66d9ef">values</span>(<span style="color:#e6db74">&#39;李四&#39;</span> , <span style="color:#e6db74">&#39;物理&#39;</span> , <span style="color:#ae81ff">94</span>)
+<span style="color:#66d9ef">go</span>
+
+<span style="color:#75715e">-- here comes the selection
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#960050;background-color:#1e0010">姓名</span>,
+<span style="color:#66d9ef">max</span>(<span style="color:#66d9ef">case</span> <span style="color:#960050;background-color:#1e0010">课程</span> <span style="color:#66d9ef">when</span> <span style="color:#e6db74">&#39;语文&#39;</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">分数</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">end</span>) <span style="color:#960050;background-color:#1e0010">语文</span>,
+<span style="color:#66d9ef">max</span>(<span style="color:#66d9ef">case</span> <span style="color:#960050;background-color:#1e0010">课程</span> <span style="color:#66d9ef">when</span> <span style="color:#e6db74">&#39;数学&#39;</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">分数</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">end</span>) <span style="color:#960050;background-color:#1e0010">数学</span>,
+<span style="color:#66d9ef">max</span>(<span style="color:#66d9ef">case</span> <span style="color:#960050;background-color:#1e0010">课程</span> <span style="color:#66d9ef">when</span> <span style="color:#e6db74">&#39;物理&#39;</span> <span style="color:#66d9ef">then</span> <span style="color:#960050;background-color:#1e0010">分数</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">end</span>) <span style="color:#960050;background-color:#1e0010">物理</span>
+<span style="color:#66d9ef">from</span> tba
+<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> <span style="color:#960050;background-color:#1e0010">姓名</span>
+</code></pre></div><p><strong>4.两张表如下：</strong></p>
+<p>T1：</p>
+<p>id department</p>
+<hr>
+<p>1 设计<br>
+2 市场<br>
+3 售后</p>
+<p>T2：</p>
+<p>id depID name</p>
+<hr>
+<p>1 1 张三<br>
+2 1 李四<br>
+3 2 王五<br>
+4 3 彭六<br>
+5 4 陈七</p>
+<p>写一条sql语句，使查询结果如下：</p>
+<p>id depID department name</p>
+<hr>
+<p>1 1 设计 张三<br>
+2 1 设计 李四<br>
+3 2 市场 王五<br>
+4 3 售后 彭六<br>
+5 4 未知部门 陈七</p>
+<p>语句如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> T2.id, depID, department <span style="color:#f92672">=</span> <span style="color:#66d9ef">IsNull</span>(department,<span style="color:#e6db74">&#39;未知部门&#39;</span>), [name]
+<span style="color:#66d9ef">from</span> T1 <span style="color:#66d9ef">right</span> <span style="color:#66d9ef">join</span> T2 <span style="color:#66d9ef">on</span> T1.id <span style="color:#f92672">=</span> T2.depID
+</code></pre></div><p>**注：**ISNULL ( check_expression , replacement_value )，表示check_expression若为空就返回replacement_value，否则就返回check_expression。</p>
+<p>左外连接表示左边所有信息均列出，右外同理。</p>
+<p><strong>5.取出分组后的前两条记录[分组后的前几项]</strong></p>
+<p>qu co je</p>
+<hr>
+<p>A 1 3<br>
+A 2 4<br>
+A 4 2<br>
+A 6 9<br>
+B 1 4<br>
+B 2 5<br>
+B 3 6<br>
+C 3 4<br>
+C 6 7<br>
+C 2 3</p>
+<p>查询结果应为：</p>
+<p>qu co je</p>
+<hr>
+<p>A 6 9<br>
+A 2 4<br>
+B 3 6<br>
+B 2 5<br>
+C 6 7<br>
+C 3 4</p>
+<p>即按 qu 分组后，再取 je 最大的前两列</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> qu,co,je
+<span style="color:#66d9ef">from</span> hard a
+<span style="color:#66d9ef">where</span> je <span style="color:#66d9ef">in</span>(<span style="color:#66d9ef">select</span> top <span style="color:#ae81ff">2</span> je
+            <span style="color:#66d9ef">from</span> hard
+            <span style="color:#66d9ef">where</span> qu <span style="color:#f92672">=</span> a.qu
+            <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> je <span style="color:#66d9ef">desc</span>)
+<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> qu,je <span style="color:#66d9ef">desc</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> qu,co,je
+<span style="color:#66d9ef">from</span> hard a
+<span style="color:#66d9ef">where</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>)
+       <span style="color:#66d9ef">from</span> hard
+       <span style="color:#66d9ef">where</span> qu <span style="color:#f92672">=</span> a.qu <span style="color:#66d9ef">and</span> je <span style="color:#f92672">&gt;=</span> a.je)
+</code></pre></div><p>后一种比前一种效率要高！！</p>
+<p><strong>相似类型再来一例（2013-9-16加）</strong></p>
+<p>year product sales</p>
+<hr>
+<p>2005 a 700<br>
+2005 b 550<br>
+2005 c 600<br>
+2006 a 340<br>
+2006 b 500<br>
+2007 a 220<br>
+2007 b 350</p>
+<p>year product sales</p>
+<hr>
+<p>2005 a 700<br>
+2006 b 500<br>
+2007 b 350</p>
+<p>四种方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 方法一：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> a.<span style="color:#66d9ef">year</span>,a.product, a.sales
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t a,(<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">year</span>,<span style="color:#66d9ef">max</span>(sales) max_sales <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">year</span>)b
+<span style="color:#66d9ef">where</span> a.<span style="color:#66d9ef">year</span> <span style="color:#f92672">=</span> b.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> a.sales <span style="color:#f92672">=</span> b.max_sales
+<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> a.<span style="color:#66d9ef">year</span>
+
+<span style="color:#75715e">-- 方法二：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">year</span>,product,sales <span style="color:#66d9ef">from</span>
+(
+<span style="color:#66d9ef">select</span>
+    <span style="color:#66d9ef">year</span>,product,sales,
+    row_number() over(partition <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">year</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> sales <span style="color:#66d9ef">desc</span>) Rank_Num
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t
+)A
+<span style="color:#66d9ef">where</span> Rank_Num <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e">-- 方法三：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>
+    <span style="color:#66d9ef">year</span>,product,sales
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t a
+<span style="color:#66d9ef">where</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">year</span> <span style="color:#f92672">=</span> a.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> sales <span style="color:#f92672">&gt;=</span> a.sales) a.sales)
+</code></pre></div><p>上述四种方法，效率依次升高。</p>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2013/07/07/9263455/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">面试逻辑题</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

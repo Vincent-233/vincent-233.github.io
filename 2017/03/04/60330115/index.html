@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DBA眼中的CLR - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">DBA眼中的CLR</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-03-04T16:13:25Z">2017-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#创建与部署clr"><strong>创建与部署CLR</strong></a></li>
+    <li><a href="#管理clr"><strong>管理CLR</strong></a></li>
+    <li><a href="#clr安全性"><strong>CLR安全性</strong></a></li>
+    <li><a href="#理解clr元数据"><strong>理解CLR元数据</strong></a></li>
+    <li><a href="#移除clr程序集"><strong>移除CLR程序集</strong></a></li>
+    <li><a href="#更好的改变"><strong>更好的改变</strong></a></li>
+    <li><a href="#附常用查询"><strong>附常用查询</strong></a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>SQL Server 2005引入CLR之后，开发者们热情地接受了它。<br>
+CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</p>
+<p>从DBA的视角来看，CLR的引入淡化了编译型代码与数据库代码的区别。它引发了在部署、管理CLR代码以及安全性上，开发者和DBA的角色问题。在某种程度上，它也淡化了在多层架构的系统中，业务逻辑层和数据访问层的区间。</p>
+<p>对许多组织而言，实现CLR需要决策有关开发过程和它们涉及到的角色。如果你准备执行CLR，你需要足够多的非技术细节信息来印证这些决定。</p>
+<p>最后，我将指出如何实现CLR，讨论CLR代码的利弊，以及CLR技术给SQL Server管理和安全方面带来的影响。我也将描述哪些情况适合用CLR，而哪些情况可能不适合。</p>
+<h2 id="创建与部署clr"><strong>创建与部署CLR</strong></h2>
+<p>CLR是一个程序模型，它允许开发者用面向对象语言来写编写代码，然后像T-SQL存储过程、函数或触发器一样去使用它。一般创建过程如下：<br>
+1、创建VS工程，代码可以用C#/VB.Net编写；</p>
+<p>2、代码被编译后，直接从VS部署到目标数据库。编译后会产生一个DLL文件，DLL是一个包含编译后代码的可运行的文件。部署后，将会在sys.assemblies视图和其他相关视图中插入对应程序集信息，</p>
+<p>3、通过对程序集运用EXTERNAL NAME选项，一个或多个T-SQL对象将在数据为中被创建。这些对象对称为原型，一个原型能被定义为存储过程，函数，用户自定义聚集函数或用户自定义类型。原型中不包含代码，它只是一个简单的可被其它数据库代码调用的入口，被调用时，DLL中编译后的代码将会运行。</p>
+<p>通常，当你从VS编译和部署时，上述所有步骤都会被执行，但你也可以手动分开执行每一步。</p>
+<p>现代的面向对象语言有一些对T-SQL来说是非常困难甚至无法实现的功能。CLR则提供了一种在数据库中运用这些语言丰富特性的方式。对于计算或迭代性的操作，CLR通常提供比T-SQL更优的性能。CLR代码和SQL Server在同一个内存上下文中运行，所以它运行得非常有效率。</p>
+<p>CLR代码是被托管的代码，这意味着它在『CLR运行时』中运行时，可以确保不会出现代码运行时使服务器不稳定的情况。尽管这是好事，但任何形式的虚拟化都会有一定程序的开销，CLR如果运用不当还是会影响性能的。尽管编译后的代码在SQL内存空间中会运行得很有效率，但T-SQL仍然是繁重工作的最好选择，如果要访问和返回大批量的数据，CLR并不是一个好的选择。</p>
+<p>总之一句话，T-SQL处理集合类操作更加有效率，而CLR对迭代、过程、计算类操作更加在行。当然也会有例外的时候。</p>
+<h2 id="管理clr"><strong>管理CLR</strong></h2>
+<p>有时DBA与CLR打的第一个交道就是有人提议在服务器上启用CLR。虽然启用CLR只是在服务的选项中启用CLR配置项这么简单，但在启动它之前你需要考虑很多问题。</p>
+<p>将脚本部署到数据库是DBA的传统职责，DBA同时也要保证脚本正常工作而且不影响性能或引发服务器上的其它问题。然而，CLR代码一般是从VS开发环境中直接部署到数据库中的，而DBA一般不使用VS，这似乎意味著开发人员比DBA更适合去部署CLR代码。</p>
+<p>开发人员可以编写编译过后的代码在SQL Server中像SQL代码一样运行，DBA或许会对此感觉不爽，但DBA仍然可以控制谁可以加载CLR程序集，在什么安全级别下运行CLR功能。</p>
+<h2 id="clr安全性"><strong>CLR安全性</strong></h2>
+<p>默认的，只有sysadmin、db_ower、ddl_admin角色的用户有权限去运行程序集相关的DDL语句。这个权限可以赋给其他角色和用户。另外，如下三种权限集可以让你设置程序集本身的三种安全级别：</p>
+<p><strong>SAFE</strong>。此安全级别只允许访问本地数据和内部计算。对系统资源，比如文件、网络、环境变量或者注册表的访问是禁止的。任何有创建程序集权限的用户都可以创建一个SAFE级别的程序集。如果CREATE ASSEMBLY语句没有显示指定安全级别，SAFE将是默认的级别。</p>
+<p><strong>EXTERNAL ACCESS</strong>。此安全级别允许程序集访问外部资源。拥有EXTERNAL ACCESS权限的用户才可以创建此安全级别的信息集。</p>
+<p><strong>UNSAFE</strong>。在将程序集设为UNSAFE时请三思，此级别的程序集在SQL Server内外都拥有不受约束的访问权限。在UNSAFE程序集里的代码也可能是不受管理的代码，意味著它有让服务器不稳定的可能。仅sysadmins用户组的用户可以登陆UNSAFE的程序集。</p>
+<p>默认的，CLR代码都是在SQL SERVER服务帐号的安全上下文运行，如果你要访问SQL Server之外的资源，这就会有问题，最好的做法是不超过服务帐号的权限。但是CLR代码可以通过模拟其他Windows帐号来运行。UNSAFE和EXTERNAL ACCESS安全级别的程序集有这种能力。可以创建这种程序集的人必须是深受公司信任的。</p>
+<h2 id="理解clr元数据"><strong>理解CLR元数据</strong></h2>
+<p>在一个启用了CLR选项的环境中，DBA应该对如下5个包含了元数据信息的系统视图非常熟悉：<br>
+<strong>sys.assembiles.</strong> 此视图每行记录对应一个程序集。它包含了程序集的一些属性，比如名称、安全级别和创建日期。<br>
+<strong>sys.assembly_files.</strong> 对数据库中每一个程序集，这个视图都包含了一行信息说明其源文件、DLL文件。<br>
+**sys.assembly_modules. ** 一个程序集可能包含多个类，比如存储过程和函数。程序集里的类可能包含多个实现不同功能的代码模块。这个视图将各自独立的代码模块ID与引用它们的数据库对象ID关联在一起了。如下查询可以查出每个CLR数据库对象引用的程序集的类和方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(m.object_id) <span style="color:#66d9ef">AS</span> db_object
+      ,a.name <span style="color:#66d9ef">AS</span> assembly
+      ,m.assembly_class
+      ,m.assembly_method
+<span style="color:#66d9ef">FROM</span> sys.assembly_modules m
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> m.assembly_id
+</code></pre></div><p>**sys.assembly_references.**程序集之间的相互引用依赖关系。<br>
+<strong>sys.module_assembly_usages</strong>将程序集的ID与引用它们的数据库对象ID，关系起来了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> db_object
+      ,a.name <span style="color:#66d9ef">AS</span> assembly
+<span style="color:#66d9ef">FROM</span> sys.module_assembly_usages u 
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> u.assembly_id
+</code></pre></div><h2 id="移除clr程序集"><strong>移除CLR程序集</strong></h2>
+<p>VS可以很方便创建和部署CLR程序集到SQL Server中，但并没有同样方便的工具去卸载它们。你必须有顺序地手动将它们移动。<br>
+在移除某程序集之前可以通过查看依赖项先移动那些引用此程序集的T-Sql对象，可以Sp_Depends或在对象资源管理器中右键查看。</p>
+<h2 id="更好的改变"><strong>更好的改变</strong></h2>
+<p>纯T-SQL的数据库编程时代正在发生变化，CLR正是这一迹象的例子。尽管有人会有点排斥，但正是变化让DBA生涯变得有趣。CLR真正突破了T-SQL在某些方面的限制。两种模式的混合编程能力是一个强大的工具，DBA和开发者都应该掌握它们。</p>
+<p><a href="http://sqlmag.com/database-development/common-language-runtime-dba-point-view">原文链接</a></p>
+<h2 id="附常用查询"><strong>附常用查询</strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Assembly Query 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_modules;
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assemblies;
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_files;
+
+<span style="color:#75715e">-- CLR Object In Database
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.objects <span style="color:#66d9ef">WHERE</span> type_desc <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;CLR%&#39;</span>;
+
+<span style="color:#75715e">-- 哪些系统对象引用了CLR程序集
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> [Object_Name],b.Name <span style="color:#66d9ef">AS</span> Assembly_Name
+<span style="color:#66d9ef">FROM</span> sys.module_assembly_usages a
+<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies b <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> b.assembly_id;
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2015/09/26/48754333/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">win10英文版安装笔记</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2017/03/04/60332993/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL CLR函数（以正则表达式为例）</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

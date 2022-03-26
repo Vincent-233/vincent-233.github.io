@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>关于Cross Join 和 Outer/Cross Apply - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">关于Cross Join 和 Outer/Cross Apply</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-11-23T02:22:07Z">2013-11-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-cross-join">1. Cross Join</a></li>
+    <li><a href="#2-cross--outer-apply">2. Cross / Outer Apply</a></li>
+    <li><a href="#3-cross--outer-apply的专属功能">3. Cross / Outer Apply的专属功能</a></li>
+    <li><a href="#4-小结">4. 小结</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>先为大家准备点数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TA(Acol INT);
+<span style="color:#66d9ef">GO</span>
+
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TA
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">2</span>;
+<span style="color:#66d9ef">GO</span>
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TB(Bcol1 INT,Bcol2 VARCHAR(<span style="color:#ae81ff">10</span>));
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TB
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;c&#39;</span>;
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h2 id="1-cross-join">1. Cross Join</h2>
+<p>Cross Join，交叉联接，其实就是笛卡尔积。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> TB
+<span style="color:#960050;background-color:#1e0010">或</span>
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,TB
+</code></pre></div><p>的结果是一样的：</p>
+<p><img src="/blog/img/20131123102018328" alt=""></p>
+<h2 id="2-cross--outer-apply">2. Cross / Outer Apply</h2>
+<p>请看下面这条语句：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">cross</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
+</code></pre></div><p>结果是：</p>
+<p>是不是觉得很眼熟，是的，上面的语句和</p>
+<p>select * from TA a inner join TB b on a .Acol = b .Bcol1</p>
+<p>是一样的，甚至执行计划都是一样的，上面的语句完全按照inner join的思路去执行。</p>
+<p>再看用outer apply:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">outer</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
+</code></pre></div><p>结果是：</p>
+<p>是不是依然很眼熟，没错，它和</p>
+<p>select * from TA a left join TBb on a .ACol = b .BCol1</p>
+<p>是一样的。执行计划依然一样，上面的语句按left join的思路去执行。</p>
+<p>既然这样，为什么还要多出一个Cross/Outer Apply呢？</p>
+<h2 id="3-cross--outer-apply的专属功能">3. Cross / Outer Apply的专属功能</h2>
+<p>测试数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tmp([str] VARCHAR(<span style="color:#ae81ff">100</span>))
+<span style="color:#66d9ef">GO</span>
+
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tmp
+<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;I@@Love@@Coding&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;This@@is@@it&#39;</span>
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>假设现在有一个需求，将tmp中每一行都以@@作为分隔符拆分为列表，然后与拆分前的那一行作交叉联接（笛卡尔积）。</p>
+<p>拆分函数网上有很多，为了节省篇幅就不放代码了，可以到我<a href="https://vincent-233.github.io/blog/2013/10/20/12889707/">另一篇博文</a>中看。假设此拆分函数为dbo.f_Split(@str varchar(1000),@delimiter varchar(100) = '' )，@str为源字符串，@delimiter为分隔符。先用常量作为函数参数来理解一下上面所说的需求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
+<span style="color:#960050;background-color:#1e0010">或</span>
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
+</code></pre></div><p>结果：</p>
+<p>可以看到TA中的行和表值函数返回的表作了联接。上面的cross join就可以做到。再看一下用表中的列作函数参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">Join</span> dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>)b
+</code></pre></div><p>结果是报错：</p>
+<p>现在Cross Apply 的作用就真正体现出来了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> apply dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>) b
+</code></pre></div><p>结果：</p>
+<h2 id="4-小结">4. 小结</h2>
+<ol>
+<li>
+<p>Cross Join 就是笛卡尔积；</p>
+</li>
+<li>
+<p>在不涉及到表值函数的情况下，Cross Apply 和Outer Apply所起的作用与Inner Join和Left Join一样，所以一般情况下不要用Apply，这样反而容易造成不易理解的负面效应；</p>
+</li>
+<li>
+<p>Cross / Outer Apply 可以说完全为<a href="http://technet.microsoft.com/zh-cn/library/ms191165%28v=SQL.105%29.aspx">表值函数</a>而生，支持了表的每一行和由此行中数据作为参数去调用表值函数而返回的结果表作交叉连接（类笛卡尔积）。看MSDN的介绍Apply的<a href="http://technet.microsoft.com/zh-cn/library/ms175156%28v=sql.105%29.aspx">文档</a>，没有一个实例没有用到表值函数（TF）的。</p>
+</li>
+</ol>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2013/11/17/16645847/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">关于SQL Server 排序规则</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2013/11/23/16911599/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Sql提取(去除)字符串中所有汉字、字母、数字</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

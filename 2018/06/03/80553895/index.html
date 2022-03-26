@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL Server FileStream 体验 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server FileStream 体验</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-03T07:50:47Z">2018-06-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#开启filestream">开启FileStream</a></li>
+        <li><a href="#创建支持filestream的文件组和表">创建支持FileStream的文件组和表</a></li>
+        <li><a href="#插入文件数据体验效果">插入文件数据体验效果</a></li>
+        <li><a href="#关于filestream文件的删除">关于FileStream文件的删除</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>FileStream是SQL Server 2008提供的新特性，之前附件在SQL的存储一种是直接放数据库，一种是存储一个路径，附件单独放在磁盘上。前一种方法会使数据库空间更快变大，而且读写占用较多数据库资源，后一种方法使附件的管理脱离于数据库，不能和数据库一起备份，不支持事务等。FileStream的引入同时解决了以上问题，即能带来文件系统读写附件的效率，又能让附件读写处在SQL Server的控制之下。</p>
+<h3 id="开启filestream">开启FileStream</h3>
+<p>操作步骤：<br>
+1、在MSSQL实例服务上右键属性，在FileStream面板上将相关选项打上勾；<br>
+2、在SSMS上运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 0表示关闭FileStream访问，1表示只允许T-SQL访问，2表示允许T-SQL和Win32访问
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> sp_configure filestream_access_level, <span style="color:#ae81ff">2</span>
+RECONFIGURE
+</code></pre></div><p>3、重启SQL服务。</p>
+<h3 id="创建支持filestream的文件组和表">创建支持FileStream的文件组和表</h3>
+<p>为TestDB增加支持FileStream的文件组：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILEGROUP TestDBFG <span style="color:#66d9ef">CONTAINS</span> FILESTREAM
+</code></pre></div><p>为文件组添加文件，作为存储文件的路径，注意下面代码中的路径不要已经存在，否则会报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILE (
+NAME <span style="color:#f92672">=</span> FileStrmFile,
+FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\MyTest\FileStreamPath&#39;</span>)
+<span style="color:#66d9ef">TO</span> FILEGROUP TestDBFG
+</code></pre></div><p>创建带FileStream列的表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.Records
+(
+	[Id] [uniqueidentifier] ROWGUIDCOL <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">UNIQUE</span>, 
+	[SerialNumber] INTEGER <span style="color:#66d9ef">UNIQUE</span>,
+	[Chart] VARBINARY(<span style="color:#66d9ef">MAX</span>) FILESTREAM <span style="color:#66d9ef">NULL</span>
+)
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>执行上面代码后，发现FileStream文件夹已自动创建：<br>
+<img src="/blog/img/2018060307301298" alt=""></p>
+<h3 id="插入文件数据体验效果">插入文件数据体验效果</h3>
+<p>下面的代码将一图片插入到表中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>img <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>)
+
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>img <span style="color:#f92672">=</span> <span style="color:#66d9ef">CAST</span>(bulkcolumn <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>))
+      <span style="color:#66d9ef">FROM</span> OPENROWSET(
+            BULK
+            <span style="color:#e6db74">&#39;C:\MyTest\TestPic.png&#39;</span>,
+            SINGLE_BLOB ) <span style="color:#66d9ef">AS</span> x
+            
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Records(Id,SerialNumber,Chart) 
+<span style="color:#66d9ef">SELECT</span> NEWID(), <span style="color:#ae81ff">1</span>,<span style="color:#f92672">@</span>img
+</code></pre></div><p>用sp_spaceused查看表的占用空间，远比图片本身的空间少。说明表中的二进制列存储的并不是文件本身，而是一个类似文件指针的属性数据。</p>
+<h3 id="关于filestream文件的删除">关于FileStream文件的删除</h3>
+<p>如果直接运行Delete语句FileStream并不会马上被删除，这是因为SQL并不会实时对它进行维护，而是有一个垃圾回收后台进程在异步处理，当到达一个<a href="https://docs.microsoft.com/en-us/sql/relational-databases/logs/database-checkpoints-sql-server?view=sql-server-2017">checkpoint</a>时，才会回收不需要的数据。如果想手动触发，可以直接运行CheckPoint命令达到效果，若数据库的恢复模式是Full，还要先备份事务日志才可以。</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2018/05/22/80404769/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL Server透明数据加密（TDE）实践</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2018/06/05/80583991/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL Server数据库复制向导报错解决</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

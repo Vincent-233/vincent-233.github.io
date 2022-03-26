@@ -90,130 +90,8 @@
 	</span>
 </div></div>
 		</header>
-		
-<div class="post__toc toc">
-	<div class="toc__title">Page content</div>
-	<div class="toc__menu">
-		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#字符串拆分函数">字符串拆分函数</a>
-      <ul>
-        <li><a href="#循环拆分实现">循环拆分实现</a></li>
-        <li><a href="#递归函数实现">递归函数实现</a></li>
-        <li><a href="#xml实现">XML实现</a></li>
-        <li><a href="#结果展示">结果展示</a></li>
-        <li><a href="#性能提示">性能提示</a></li>
-      </ul>
-    </li>
-    <li><a href="#分列">分列</a></li>
-    <li><a href="#后话">后话</a></li>
-  </ul>
-</nav>
-	</div>
-</div><div class="content post__content clearfix">
-			<p>刚工作那会写了一篇关于字符串拆分的<a href="https://blog.csdn.net/helloword4217/article/details/12889707">文章</a>，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。<br>
-为了考虑代码的可读性和复用性，一般用函数将实现细节封装，下面介绍几种常用的方法：</p>
-<h2 id="字符串拆分函数">字符串拆分函数</h2>
-<h3 id="循环拆分实现">循环拆分实现</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> [dbo].[SplitString]  
-(  
-    <span style="color:#f92672">@</span>str NVARCHAR(<span style="color:#ae81ff">4000</span>)  
-   ,<span style="color:#f92672">@</span>char NVARCHAR(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;,&#39;</span>  
-)  
-<span style="color:#66d9ef">RETURNS</span> <span style="color:#f92672">@</span>SplitStr <span style="color:#66d9ef">TABLE</span>  
-(  
-     ID int <span style="color:#66d9ef">IDENTITY</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>  
-    ,Value nvarchar(<span style="color:#ae81ff">2000</span>)  
-)  
-<span style="color:#66d9ef">AS</span>  
-    <span style="color:#66d9ef">BEGIN</span>  
-        <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>char  
-        WHILE LEN(<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>  
-            <span style="color:#66d9ef">BEGIN</span>  
-                <span style="color:#66d9ef">INSERT</span> <span style="color:#f92672">@</span>SplitStr  
-                <span style="color:#66d9ef">SELECT</span>  <span style="color:#66d9ef">SUBSTRING</span>(<span style="color:#f92672">@</span>str, <span style="color:#ae81ff">1</span>, CHARINDEX(<span style="color:#f92672">@</span>char, <span style="color:#f92672">@</span>str) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)  
-                <span style="color:#66d9ef">SELECT</span>  <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str, LEN(<span style="color:#f92672">@</span>str) <span style="color:#f92672">-</span> CHARINDEX(<span style="color:#f92672">@</span>char, <span style="color:#f92672">@</span>str) <span style="color:#f92672">-</span> (LEN(<span style="color:#f92672">@</span>char) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))  
-            <span style="color:#66d9ef">END</span>     
-        <span style="color:#66d9ef">RETURN</span>  
-    <span style="color:#66d9ef">END</span>  
-</code></pre></div><p>以上方法从SQL SERVER 2000时代就可以使用，可以说是最具版本兼容性的写法。</p>
-<h3 id="递归函数实现">递归函数实现</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> [dbo].[SplitString_CTE]  
-(  
-    <span style="color:#f92672">@</span>String NVARCHAR(<span style="color:#ae81ff">4000</span>),  
-    <span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span> NVARCHAR(<span style="color:#ae81ff">10</span>)  
-)  
-<span style="color:#66d9ef">RETURNS</span> <span style="color:#66d9ef">TABLE</span>  
-<span style="color:#66d9ef">AS</span>  
-<span style="color:#66d9ef">RETURN</span>  
-(  
-    <span style="color:#66d9ef">WITH</span> Split(StartPos,EndPos) <span style="color:#66d9ef">AS</span>  
-    (  
-        <span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">AS</span> StartPos, CHARINDEX(<span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span>,<span style="color:#f92672">@</span>String) <span style="color:#66d9ef">AS</span> EndPos  
-        <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>  
-        <span style="color:#66d9ef">SELECT</span> EndPos<span style="color:#f92672">+</span>LEN(<span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span>), CHARINDEX(<span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span>,<span style="color:#f92672">@</span>String,EndPos<span style="color:#f92672">+</span>LEN(<span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span>))  
-        <span style="color:#66d9ef">FROM</span> Split  
-        <span style="color:#66d9ef">WHERE</span> EndPos <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>  
-    )  
-    <span style="color:#66d9ef">SELECT</span> ROW_NUMBER() OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">AS</span> ID  
-          ,<span style="color:#66d9ef">SUBSTRING</span>(<span style="color:#f92672">@</span>String,StartPos,COALESCE(<span style="color:#66d9ef">NULLIF</span>(EndPos,<span style="color:#ae81ff">0</span>),LEN(<span style="color:#f92672">@</span>String)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">-</span>StartPos) <span style="color:#66d9ef">AS</span> Value  
-    <span style="color:#66d9ef">FROM</span> Split   
-	<span style="color:#75715e">--OPTION(MAXRECURSION 0) 这里不能使用，要放在最终查询中使用  
-</span><span style="color:#75715e"></span>)  
-</code></pre></div><p>从SQL SERVER 2005 开始，出现了公共表达式这一利器，可以实现递归查询，于有了上面的版本。<br>
-基本思路是从上一次查询分隔符的位置加1开始成为新的起点，一直递归到找不到分隔符为止。<br>
-CTE的结果是每个分隔符号的起始位置，最外层查询是利用起始位置查询出最终结果。</p>
-<h3 id="xml实现">XML实现</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> [dbo].[SplitString_XML]  
-(  
-    <span style="color:#f92672">@</span>String NVARCHAR(<span style="color:#ae81ff">4000</span>),  
-    <span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span> NVARCHAR(<span style="color:#ae81ff">10</span>)  
-)  
-<span style="color:#66d9ef">RETURNS</span> <span style="color:#66d9ef">TABLE</span>  
-<span style="color:#66d9ef">AS</span>  
-<span style="color:#66d9ef">RETURN</span>  
-(  
-	<span style="color:#66d9ef">SELECT</span> ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">NULL</span>)) <span style="color:#66d9ef">AS</span> ID,b.Value  
-	<span style="color:#66d9ef">FROM</span>   
-	(  
-		<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CAST</span>((<span style="color:#e6db74">&#39;&lt;V&gt;&#39;</span><span style="color:#f92672">+</span><span style="color:#66d9ef">REPLACE</span>(<span style="color:#f92672">@</span>String,<span style="color:#f92672">@</span><span style="color:#66d9ef">Delimiter</span>,<span style="color:#e6db74">&#39;&lt;/V&gt;&lt;V&gt;&#39;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;/V&gt;&#39;</span>) <span style="color:#66d9ef">AS</span> XML) <span style="color:#66d9ef">AS</span> XMLString  
-	) <span style="color:#66d9ef">AS</span> a  
-	<span style="color:#66d9ef">CROSS</span> APPLY  
-    (  
-		<span style="color:#66d9ef">SELECT</span> N.value(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;nvarchar(10)&#39;</span>) <span style="color:#66d9ef">AS</span> Value  
-		<span style="color:#66d9ef">FROM</span> a.XMLString.nodes(<span style="color:#e6db74">&#39;V&#39;</span>) <span style="color:#66d9ef">As</span> T(N)  
-	) <span style="color:#66d9ef">AS</span> b  
-)  
-</code></pre></div><p>此方法通过构造XML字符串去使用XML的特有方法进行实现。</p>
-<h3 id="结果展示">结果展示</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>  [dbo].[SplitString](<span style="color:#e6db74">&#39;12,123,21312&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)  
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>  [dbo].[SplitString_CTE](<span style="color:#e6db74">&#39;12,123,21312&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)  
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>  [dbo].[SplitString_XML](<span style="color:#e6db74">&#39;12,123,21312&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)  
-</code></pre></div><p>均得到了正确的结果：<br>
-<img src="https://img-blog.csdnimg.cn/20181208121706810.png" alt="在这里插入图片描述"></p>
-<h3 id="性能提示">性能提示</h3>
-<p>通过执行计划评估以及时间统计，发现CTE版本的性能最好。但如果分隔的项目太多，可能会超过SQL Server默认的最大100层递归，需要在查询后面加上OPTION(MAXRECURSION 0)以防止报错。<br>
-常用的循环法性能次之，主要消耗在每次的表变量插入上。<br>
-XML的性能最差，不建议使用。</p>
-<h2 id="分列">分列</h2>
-<p>有了以上对单个字符串进行拆分的函数，可以利用它们进行字符串分列（根据分隔符将字符串拆分为多列）。<br>
-如下，左边的列表，想要变为右边的列表。<br>
-<img src="https://img-blog.csdnimg.cn/20181208124829267.png" alt="在这里插入图片描述"><br>
-选择以上函数中的一种实现，代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 生成测试数据  
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Test_TB(Title NVARCHAR(<span style="color:#ae81ff">200</span>))  
-<span style="color:#66d9ef">INSERT</span> Test_TB <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;AA-BB-CC&#39;</span>),(<span style="color:#e6db74">&#39;CC-DD-EE&#39;</span>),(<span style="color:#e6db74">&#39;XX-YY&#39;</span>),(<span style="color:#e6db74">&#39;YY-ZZ&#39;</span>)  
-<span style="color:#75715e">-- 分列转换  
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> Title,[<span style="color:#ae81ff">1</span>],[<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">3</span>]  
-<span style="color:#66d9ef">FROM</span> (<span style="color:#66d9ef">SELECT</span> a.Title,b.ID,b.Value  
-      <span style="color:#66d9ef">FROM</span> Test_TB a  
-	  <span style="color:#66d9ef">CROSS</span> APPLY [dbo].[SplitString](a.Title,<span style="color:#e6db74">&#39;-&#39;</span>) <span style="color:#66d9ef">AS</span> b  
-) <span style="color:#66d9ef">AS</span> a  
-PIVOT(<span style="color:#66d9ef">MAX</span>(Value) <span style="color:#66d9ef">FOR</span> ID <span style="color:#66d9ef">IN</span> ([<span style="color:#ae81ff">1</span>],[<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">3</span>])) <span style="color:#66d9ef">AS</span> b  
-</code></pre></div><p>结果如下：<br>
-<img src="https://img-blog.csdnimg.cn/20181208125652620.png" alt="在这里插入图片描述"></p>
-<h2 id="后话">后话</h2>
-<p>最后说一点题外话，SQL Server 2016对字符串的拆分和合并已经有了内置的系统函数<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-split-transact-sql?view=sql-server-2017">STRING_SPLIT</a>和<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-2017">STRING_AGG</a>。以后再也没有自己实现的乐趣了，感慨编程语言越来越强大，轮子越来越多，多年以后可能傻瓜都会编程了，编程将和英语一样成为一门多数人都要会的通用技能。</p>
+		<div class="content post__content clearfix">
+			
 		</div>
 		<footer class="post__footer">
 			
@@ -238,15 +116,15 @@ PIVOT(<span style="color:#66d9ef">MAX</span>(Value) <span style="color:#66d9ef">
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2018/10/08/mtd-ytd-query/" rel="prev">
+		<a class="pager__link" href="/blog/2018/12/08/84891624/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">报表动态MTD、YTD查询语句</p>
+			<p class="pager__title">再谈SQL Server字符串拆分与分列</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2019/07/16/cross-table-transfer/" rel="next">
+		<a class="pager__link" href="/blog/2018/12/18/85074737/" rel="next">
 			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">交叉表转换为横表</p>
+			<p class="pager__title">Set NoCount On导致触发器@@RowCount为0</p>
 		</a>
 	</div>
 </nav>

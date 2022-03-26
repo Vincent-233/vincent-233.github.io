@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>排序算法-快速排序（Quick Sort） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">排序算法-快速排序（Quick Sort）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-01-02T00:34:32Z">2021-01-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="category">数据结构与算法</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#partition函数">partition函数</a></li>
+        <li><a href="#主函数">主函数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>关于Quick Sort的介绍网上资料非常多，本文仅是我重新学习此算法时的笔记，如有纰漏，还请网友指出。<br>
+快排算法利用分治法（divide and conquer）思想，每次将数组中的一个基准元素(pivot)放在其应该在的位置，所有比基准小的数放在其左边，比基准大的元素放在其右边。然后将左右两个子序列进行递归处理。算法的关键是用基准将数组拆分成两个子序列，我们暂且将这个过程称之为partition，具体有几种不同的实现方法。这里均用python实现。</p>
+<h3 id="partition函数">partition函数</h3>
+<p><strong>实现一</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
+    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot</span>
+    i, j <span style="color:#f92672">=</span> left, right
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:      <span style="color:#75715e"># check j first, the order is important</span>
+        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:
+            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
+    ls[i], ls[left] <span style="color:#f92672">=</span> ls[left], ls[i]
+    <span style="color:#66d9ef">return</span> i
+</code></pre></div><p>以第一个元素作为基准，维护左右两个指针，从后往前遍历数组S，找到第一个比基准数小的元素，从前往后遍历数组，找到第一个比基准数大的元素，交换这两个数，重复以上过程，直到指针下标相等，最后再将基准元素与指针所在元素交换。<br>
+每一次交换如下：<br>
+<img src="/blog/img/20210105212349186.png" alt=""><br>
+<strong>实现二</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
+    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot, treat ls[left] as an hole</span>
+    i, j <span style="color:#f92672">=</span> left, right
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:
+        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:    <span style="color:#75715e"># find ls[j] less than pivot, put it to the hole ls[i], then move i forward </span>
+            ls[i] <span style="color:#f92672">=</span> ls[j]
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:  
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:   <span style="color:#75715e"># find ls[i] greater than pivot, put it to the hole ls[j], then move j backward</span>
+            ls[j] <span style="color:#f92672">=</span> ls[i]
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+    ls[i] <span style="color:#f92672">=</span> pivot   <span style="color:#75715e"># if i == j, put pivot back to hole</span>
+    <span style="color:#66d9ef">return</span> i
+</code></pre></div><p>以上代码看上去有点奇怪，每次只是赋值，并没有像第一种方法一样进行交换操作，实际可以这样理解：移出pivot，ls[0]的值已重复多余，就当它是一个空白/洞，等着别的值来覆盖/填充，然后右边找到第一个比pivot小的元素ls[j]，将它填充到ls[0]，此时轮到ls[j]的值重复多余……，最后用pivot的值覆盖ls[i]。<br>
+第一轮交换：<br>
+<img src="/blog/img/20210105213111631.png" alt=""><br>
+<strong>实现三</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
+    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot</span>
+    i, j <span style="color:#f92672">=</span> left, right
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:      <span style="color:#75715e"># check j first, the order is important</span>
+        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:     <span style="color:#75715e"># find a[j] &lt; pivot, swap them, then move i forward</span>
+            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:     <span style="color:#75715e"># find a[i] &gt; pivot, swap them, then move j backward</span>
+            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> i
+</code></pre></div><p>以上代码与实现二有点相似，唯一的差别在于每次都交换，所以不用像实现二一样做最后一次将pivot归位的操作。<br>
+第一轮交换：<br>
+<img src="/blog/img/20210105213212808.png" alt=""></p>
+<h3 id="主函数">主函数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort</span>(ls, left, right):
+    <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&lt;</span> right:
+        i <span style="color:#f92672">=</span> partition(ls, left, right)
+        quick_sort(ls, left, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+        quick_sort(ls, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">63</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">85</span>]
+    quick_sort(ls, <span style="color:#ae81ff">0</span>, len(ls) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+    print(ls)
+</code></pre></div><h4 id="代码关键点说明">代码关键点说明</h4>
+<ul>
+<li>partition函数是核心，其中第一版最简洁，交换次数也最少</li>
+<li>其实以上三种实现，差别并不大，这里啰嗦的将他们都列出来，只是希望通过比较实现细节，从而能更深刻地理解快速排序算法</li>
+<li>以上算法均以第一个元素作为pivot，<strong>需要先移动右边的指针</strong>，因为最后一次交换是pivot与ls[i]的交换，而pivot位于最左边，所以ls[i]不能大于pivot，否则交换之后ls[i]在最左边，却比pivot大，这显然是不正确的。反之如果算法将最后一个元素作为pivot，则需要先移动左边的指针。</li>
+</ul>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/06/23/106913549/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">pandas数据处理，字符串先拆分再合并</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2021/05/16/116887159/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Windows下快速合并文本文件</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

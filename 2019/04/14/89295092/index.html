@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>用SQL Workbench/J批量生成DDL和Insert脚本 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">用SQL Workbench/J批量生成DDL和Insert脚本</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-14T04:41:52Z">2019-04-14</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/" rel="category">工具技巧</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#数据库连接">数据库连接</a></li>
+        <li><a href="#生成ddl脚本">生成DDL脚本</a></li>
+        <li><a href="#生成insert脚本">生成Insert脚本</a></li>
+        <li><a href="#insert语句字段对应提示">Insert语句字段对应提示</a></li>
+        <li><a href="#其它说明">其它说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫<a href="https://www.sql-workbench.eu">SQL Workbench/J</a>的免费产品，试用了一下，发现功能还挺强大，特此记录几个我目前比较关注的功能：</p>
+<h3 id="数据库连接">数据库连接</h3>
+<p>用JDBC连接数据库，支持大多数支持JDBC驱动的数据库，包括Hive，见<a href="https://aws.amazon.com/blogs/big-data/using-amazon-emr-with-sql-workbench-and-other-bi-tools/">这个例子</a><br>
+<img src="/blog/img/20190414120147565.png" alt=""></p>
+<blockquote>
+<p>连接数据库需要对应的JDBC驱动包（jar文件，一般对应的数据库官网均可下载）</p>
+</blockquote>
+<h3 id="生成ddl脚本">生成DDL脚本</h3>
+<p>除了可以在图形界面，通过选中单个或多个对象（不限于Table、View等），右键Show Source外（见下图），还可以用命令行以更灵活的方式生成DDL。<br>
+<img src="/blog/img/20190414115956412.png" alt=""><br>
+命令生成DDL一例：<br>
+运行安装目录下的 sqlwbconsole64.exe，弹出命令行窗口，然后运行<br>
+wbconnect <em>profilename</em> （请将profilename替换为实际名称）进行连接，连接成功后贴/键入如下命令，<strong>或直接在GUI编辑界面中输入</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">WbGenerateScript
+	<span style="color:#f92672">-</span>objects <span style="color:#f92672">=</span> Department,Employee,JobCandidate
+	<span style="color:#f92672">-</span>schemas <span style="color:#f92672">=</span> HumanResources
+	<span style="color:#f92672">-</span>types <span style="color:#f92672">=</span> <span style="color:#66d9ef">Table</span>
+	<span style="color:#f92672">-</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;D:\Users\Documents\Temp\DDL-SQL.sql&#39;</span>
+	<span style="color:#f92672">-</span>includeDrop
+	<span style="color:#f92672">-</span>includeForeignKeys <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">encoding</span> <span style="color:#f92672">=</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>
+	<span style="color:#f92672">-</span>includeTableGrants <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+	<span style="color:#f92672">-</span>useSeparator <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</code></pre></div><p>即可生成上述3个表的CREATE脚本，生成脚本命令的参数说明见此<a href="https://www.sql-workbench.eu/manual/script-generation.html">链接</a></p>
+<h3 id="生成insert脚本">生成Insert脚本</h3>
+<p>同样可以在图形界面右键Export Data，然后选择生成SQL脚本的方式，如下图：<br>
+<img src="/blog/img/20190414121522264.png" alt=""><br>
+下面介绍用命令行以更灵活的方式生成Insert脚本的方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 生成Insert 脚本，某个架构的多个表
+</span><span style="color:#75715e"></span>WbExport
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> sqlInsert
+	<span style="color:#f92672">-</span>types <span style="color:#f92672">=</span> <span style="color:#66d9ef">Table</span>
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">schema</span> <span style="color:#f92672">=</span> Person
+	<span style="color:#f92672">-</span>useSchema <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+	<span style="color:#f92672">-</span>sourceTable <span style="color:#f92672">=</span> ContactType,AddressType
+	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">encoding</span> <span style="color:#f92672">=</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>;
+
+<span style="color:#75715e">-- 生成Insert 脚本，某个架构除某些表之外的所有表
+</span><span style="color:#75715e"></span>WbExport
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> sqlInsert
+	<span style="color:#f92672">-</span>types <span style="color:#f92672">=</span> <span style="color:#66d9ef">Table</span>
+	<span style="color:#f92672">-</span><span style="color:#66d9ef">schema</span> <span style="color:#f92672">=</span> Person
+	<span style="color:#f92672">-</span>useSchema <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+	<span style="color:#f92672">-</span>sourceTable<span style="color:#f92672">=</span> <span style="color:#f92672">*</span>
+	<span style="color:#f92672">-</span>excludeTables <span style="color:#f92672">=</span> Address, BusinessEntity
+	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
+<span style="color:#f92672">-</span><span style="color:#66d9ef">encoding</span> <span style="color:#f92672">=</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>;
+</code></pre></div><p>生成的脚本形式是每个Table一个文件，完整的导出数据命令行参数说明见此<a href="https://www.sql-workbench.eu/manual/command-export.html">链接</a></p>
+<blockquote>
+<ul>
+<li>生成Insert脚本的速度还是偏慢，建议多个表但数据均不是很多的场景下使用</li>
+<li>上述脚本也可不使用命令行模式，直接在GUI查询界面运行</li>
+</ul>
+</blockquote>
+<h3 id="insert语句字段对应提示">Insert语句字段对应提示</h3>
+<p>若Insert目标表字段太多，字段容易错位（特别是事后对比时），此软件可以设快捷建出现字段对应的提示：<br>
+<img src="/blog/img/20190415001131292.png" alt=""><br>
+另外，在新定Insert语句时，除上述方式，也可事先生成Insert字段模板，再逐一替换：<br>
+<img src="/blog/img/20190415001745242.png" alt=""></p>
+<h3 id="其它说明">其它说明</h3>
+<ul>
+<li>SQL WorkBench作为开源的免费的产品，在跨平台和跨数据库方面已经做很好了</li>
+<li>如果对某种数据库，如MSSQL非常熟悉，当然还是推荐用SSMS来管理和运行SQL，但对于日常要接触多种数据库的开发者（非DBA）来说，不可能每个官方或流行的SQL Client（比如Toad 、PL/SQL Developer之于ORACLE，SSMS之于MSSQL，MYSQL Workbench等等）都去学习深入研究一遍，此时像SQL WorkBench这样的软件就体现出了优势</li>
+<li>当然如果不缺钱或电脑配置非常高，不在乎软件吃太多内存和有太多花哨的功能，可以用商业软件，比如<a href="www.navicat.com">Navicat</a>和<a href="https://www.jetbrains.com/datagrip/">DataGrip</a></li>
+<li>另外有个更加小巧的客户端<a href="http://www.sqldbx.com/">SQLDbx</a>，有个免费版可以和此软件配合一起使用</li>
+</ul>
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/04/13/89282667/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">配置ubuntu允许远程SSH连接</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/04/18/89390714/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Pandas读取Excel数据，简单清洗后存入数据库</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

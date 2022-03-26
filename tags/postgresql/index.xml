@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PostgreSQL on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/tags/postgresql/</link>
+    <description>Recent content in PostgreSQL on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 May 2019 23:41:55 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>虚拟机Linux安装PostgreSQL，并让宿主机连接</title>
+      <link>https://vincent-233.github.io/blog/2019/05/14/90217603/</link>
+      <pubDate>Tue, 14 May 2019 23:41:55 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/05/14/90217603/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

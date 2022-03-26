@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具技巧 on 诗和远方</title>
+    <link>https://vincent-233.github.io/blog/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in 工具技巧 on 诗和远方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 May 2020 09:23:58 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>无管理员权限如何运行Everything</title>
+      <link>https://vincent-233.github.io/blog/2020/05/16/106153966/</link>
+      <pubDate>Sat, 16 May 2020 09:23:58 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/05/16/106153966/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>配置everything支持网络路径共享文件夹搜索</title>
+      <link>https://vincent-233.github.io/blog/2019/07/09/95170415/</link>
+      <pubDate>Tue, 09 Jul 2019 10:15:53 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/07/09/95170415/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>用SQL Workbench/J批量生成DDL和Insert脚本</title>
+      <link>https://vincent-233.github.io/blog/2019/04/14/89295092/</link>
+      <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Notepad&#43;&#43; 自定义关键字</title>
+      <link>https://vincent-233.github.io/blog/2014/09/17/39349951/</link>
+      <pubDate>Wed, 17 Sep 2014 15:00:28 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/09/17/39349951/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

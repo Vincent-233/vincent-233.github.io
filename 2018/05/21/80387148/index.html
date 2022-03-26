@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL Server分区表实践 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server分区表实践</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-05-21T00:38:33Z">2018-05-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>建立分区表的步骤：</p>
+<h4 id="新建文件组filegroups">新建文件组（FileGroups）</h4>
+<p>新建用于承载具体分区的文件组，数据库默认有只有一个Primary文件组。<br>
+也可以在单个文件中建立多个分区。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">USE [master]
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_1]
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_2]
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- 增加文件组-物理文件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
+<span style="color:#66d9ef">ADD</span> FILE   
+(  
+    NAME <span style="color:#f92672">=</span> TestDB_FG_1,  
+    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_1.ndf&#39;</span>,  
+    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
+    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
+)  
+<span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_1]; 
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
+<span style="color:#66d9ef">ADD</span> FILE   
+(  
+    NAME <span style="color:#f92672">=</span> TestDB_FG_2,  
+    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_2.ndf&#39;</span>,  
+    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
+    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
+)  
+<span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_2]; 
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h4 id="创建-分区函数partition-function">创建 分区函数（Partition Function）</h4>
+<p>分区函数用于决定分区表中数据如何对应到具体的分区</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 代表以20000为分界点，实际也可以声明多个分界点
+</span><span style="color:#75715e">-- Left表示 &lt;= 20000,即20000存储在分界点左边分区
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION <span style="color:#66d9ef">FUNCTION</span> MyPF_Test(INT)
+<span style="color:#66d9ef">AS</span> RANGE <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">20000</span>)
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h4 id="创建-分区方案partition-scheme">创建 分区方案（Partition Scheme）</h4>
+<p>根据分区函数将表中数据Map到具体的文件组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 分区函数有N个分界点，则引用它的分区方案有N+1个文件组
+</span><span style="color:#75715e">-- 分区列&lt;=20000的数据放在默认的Primary文件组，其余的放在TestDB_FG_1文件组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test
+<span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>],TestDB_FG_1)
+<span style="color:#66d9ef">GO</span> 
+
+<span style="color:#75715e">-- 若为单文件多个分区
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test2
+<span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">All</span> <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>])
+<span style="color:#66d9ef">GO</span>
+
+</code></pre></div><h4 id="创建-分区表partition-table">创建 分区表（Partition Table）</h4>
+<ul>
+<li><strong>新建分区表</strong></li>
+</ul>
+<p>在创建表时定义分区方案，这个根据EID的值进行分区</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TestEmp
+(
+EID INT,
+Name NVARCHAR(<span style="color:#ae81ff">200</span>),
+JoinDate DATETIME
+) 
+<span style="color:#66d9ef">ON</span> MyPS_Test(EID)
+</code></pre></div><ul>
+<li><strong>将非分区表转换为分区表</strong><br>
+可以先备份原表数据，Drop原表，再将数据插回来。<br>
+若不想这么麻烦，可以直接重建索引来实现。<br>
+若表存在聚集索引，则分区列必须为聚焦索引的一部分。<br>
+下面将Employee（以EID为主键）表转换为分区表：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 移除主键约束(SQL会同步移除聚焦索引)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] 
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- 重新创建分区索引
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> CLUSTERED ([EID]) <span style="color:#66d9ef">ON</span> myPS_Test(EID)
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h4 id="分区表元数据查询">分区表元数据查询</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 分区表数据分布情况
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  OBJECT_NAME(i.object_id) <span style="color:#66d9ef">AS</span> ObjectName
+       ,<span style="color:#66d9ef">c</span>.name <span style="color:#66d9ef">AS</span> PartitioningColumn
+       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">50</span>), ps.name) <span style="color:#66d9ef">AS</span> partition_scheme
+       ,p.partition_number
+       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">10</span>), ds2.name) <span style="color:#66d9ef">AS</span> filegroup
+       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">19</span>), <span style="color:#66d9ef">ISNULL</span>(v.value, <span style="color:#e6db74">&#39;&#39;</span>), <span style="color:#ae81ff">120</span>) <span style="color:#66d9ef">AS</span> range_boundary
+       ,p.<span style="color:#66d9ef">rows</span>
+       ,df.physical_name <span style="color:#66d9ef">AS</span> DatabaseFileName
+<span style="color:#66d9ef">FROM</span>    sys.indexes i
+        <span style="color:#66d9ef">JOIN</span> sys.partition_schemes ps <span style="color:#66d9ef">ON</span> i.data_space_id <span style="color:#f92672">=</span> ps.data_space_id
+        <span style="color:#66d9ef">JOIN</span> sys.destination_data_spaces dds <span style="color:#66d9ef">ON</span> ps.data_space_id <span style="color:#f92672">=</span> dds.partition_scheme_id
+        <span style="color:#66d9ef">JOIN</span> sys.data_spaces ds2 <span style="color:#66d9ef">ON</span> dds.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
+        <span style="color:#66d9ef">JOIN</span> sys.partitions p <span style="color:#66d9ef">ON</span> dds.destination_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#66d9ef">AND</span> p.object_id <span style="color:#f92672">=</span> i.object_id <span style="color:#66d9ef">AND</span> p.index_id <span style="color:#f92672">=</span> i.index_id
+        <span style="color:#66d9ef">JOIN</span> sys.partition_functions pf <span style="color:#66d9ef">ON</span> ps.function_id <span style="color:#f92672">=</span> pf.function_id
+        <span style="color:#66d9ef">JOIN</span> sys.database_files df <span style="color:#66d9ef">ON</span> df.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
+        <span style="color:#66d9ef">JOIN</span> sys.index_columns <span style="color:#66d9ef">AS</span> ic <span style="color:#66d9ef">ON</span> ic.[object_id] <span style="color:#f92672">=</span> i.[object_id] <span style="color:#66d9ef">AND</span> ic.index_id <span style="color:#f92672">=</span> i.index_id <span style="color:#66d9ef">AND</span> ic.partition_ordinal <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span> 
+        <span style="color:#66d9ef">JOIN</span> sys.columns <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> i.[object_id] <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.[object_id] <span style="color:#66d9ef">AND</span> ic.column_id <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.column_id
+        <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">JOIN</span> sys.partition_range_values v <span style="color:#66d9ef">ON</span> pf.function_id <span style="color:#f92672">=</span> v.function_id <span style="color:#66d9ef">AND</span> v.boundary_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#f92672">-</span> pf.boundary_value_on_right
+<span style="color:#66d9ef">WHERE</span>   i.index_id <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> ObjectName
+       ,partition_number
+</code></pre></div><p><img src="/blog/img/20180521093138798" alt=""></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2018/05/01/80154338/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">关于数据库隔离级别-快照(SnapShot)</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2018/05/22/80404769/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SQL Server透明数据加密（TDE）实践</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

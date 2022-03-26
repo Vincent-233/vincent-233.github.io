@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SQL Server Audit 功能体验 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server Audit 功能体验</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-09-24T21:52:38Z">2018-09-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#业务场景">业务场景</a></li>
+    <li><a href="#创建数据库审计audit步骤">创建数据库审计（Audit）步骤</a>
+      <ul>
+        <li><a href="#图形界面">图形界面</a></li>
+        <li><a href="#对应-t-sql-命令">对应 T-SQL 命令</a></li>
+        <li><a href="#效果">效果</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>@[TOC](SQL Server Audit 功能体验 )<br>
+SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法还请自行翻阅联机丛书。</p>
+<h2 id="业务场景">业务场景</h2>
+<p>对用户dbo对某个表的Delete操作进行审计</p>
+<h2 id="创建数据库审计audit步骤">创建数据库审计（Audit）步骤</h2>
+<ol>
+<li>创建Server Audit</li>
+<li>创建Database Audit Specification</li>
+<li>分别启用Server Audit 和 Database Audit Specification</li>
+</ol>
+<h3 id="图形界面">图形界面</h3>
+<ol>
+<li>创建Server Audit<br>
+<img src="/blog/img/20180924212342719" alt=""></li>
+</ol>
+<blockquote>
+<p>说明：上图设置的审计日志输出到文件(File)，也可以选择到系统的应用程序/安全日志(Application Log/Security Log)。</p>
+</blockquote>
+<ol start="2">
+<li>Database Audit Specification<br>
+<img src="/blog/img/20180924212641558" alt=""></li>
+<li>分别启用<br>
+分别右键选择启动即可（图略）</li>
+</ol>
+<h3 id="对应-t-sql-命令">对应 T-SQL 命令</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 1、创建 Server Audit 
+</span><span style="color:#75715e"></span>USE [master]
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">CREATE</span> SERVER AUDIT [TestAudit_Temp_Bank]
+<span style="color:#66d9ef">TO</span> FILE 
+(	FILEPATH <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;D:\DB-File&#39;</span>
+	,MAXSIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> GB
+	,MAX_ROLLOVER_FILES <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+	,RESERVE_DISK_SPACE <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>
+)
+<span style="color:#66d9ef">WITH</span>
+(	QUEUE_DELAY <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+	,ON_FAILURE <span style="color:#f92672">=</span> <span style="color:#66d9ef">CONTINUE</span>
+)
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- 2、创建 Database Audit Specification
+</span><span style="color:#75715e"></span>USE [MyDB]
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB]
+<span style="color:#66d9ef">FOR</span> SERVER AUDIT [TestAudit_Temp_Bank]
+<span style="color:#66d9ef">ADD</span> (<span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">OBJECT</span>::[dbo].[temp_bank] <span style="color:#66d9ef">BY</span> [dbo])
+<span style="color:#75715e">-- 3、分别启用
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> SERVER AUDIT [TestAudit_Temp_Bank] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><h3 id="效果">效果</h3>
+<p>用数据库拥有者账号（会映射到用户dbo）运行对表temp_bank的Delete语句之后，用<a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-2017">sys.fn_get_audit_file</a>函数查看审计日志：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> DATEADD(mi,DATEDIFF(mi,GETUTCDATE(),GETDATE()),event_time) <span style="color:#66d9ef">AS</span> RealEventTime,<span style="color:#f92672">*</span> 
+<span style="color:#66d9ef">FROM</span> sys.fn_get_audit_file (<span style="color:#e6db74">&#39;D:\DB-File\TestAudit_Temp_Bank_AC916F20-A23F-4244-8509-5E3B3ED51445_0_131822638146730000.sqlaudit&#39;</span>
+,<span style="color:#66d9ef">default</span>,<span style="color:#66d9ef">default</span>);
+</code></pre></div><p>结果：<br>
+<img src="/blog/img/20180924214350282" alt=""><br>
+<img src="/blog/img/20180924214129441" alt=""></p>
+<blockquote>
+<p>1.日志中的EventTime实际是UTC时间，查询SQL中转换为了本地时间<br>
+2.不管运行的Delete语句是否真的删除了数据（可能Where条件不满足），均会被记录。<br>
+3. 如果Delete语句在存储过程中，审计也会被记录，在Additional Informaiton一列中会有调用栈信息。</p>
+</blockquote>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2018/08/07/81481585/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SQL Server 邮件功能使用</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2018/10/08/82964958/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">报表动态MTD、YTD查询语句</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

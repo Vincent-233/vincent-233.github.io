@@ -1,154 +1,226 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>t-sql on 诗和远方</title>
+    <title>T-SQL on 诗和远方</title>
     <link>https://vincent-233.github.io/blog/tags/t-sql/</link>
-    <description>Recent content in t-sql on 诗和远方</description>
+    <description>Recent content in T-SQL on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 13 Jun 2020 17:35:24 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/t-sql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SQL数据处理，字符串先拆分后合并</title>
-      <link>https://vincent-233.github.io/blog/2020/06/13/tsql-str-split-and-join/</link>
+      <link>https://vincent-233.github.io/blog/2020/06/13/106734253/</link>
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/13/tsql-str-split-and-join/</guid>
-      <description>&lt;p&gt;前同事遇到一奇怪的数据拆分需求，我觉得挺有意思，就自己实现并记录之。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/06/13/106734253/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>根据日历表生成财年及周编号</title>
-      <link>https://vincent-233.github.io/blog/2020/03/20/generate-week-num/</link>
+      <link>https://vincent-233.github.io/blog/2020/03/20/104987643/</link>
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/20/generate-week-num/</guid>
-      <description>&lt;p&gt;数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。&lt;br&gt;
-现假定已有日历维表字段有限，要求增加财年字段，并增加财年对应的周编号（周编号的逻辑有3种，后续将逐一说明和实现）。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>数据库生成测试数据（SQL实现）</title>
-      <link>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</link>
+      <link>https://vincent-233.github.io/blog/2020/03/01/104594475/</link>
       <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/01/tsql-random-data/</guid>
-      <description>&lt;p&gt;项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000条数据。
-以上需求看上去非常简单，但比较具有代表性，复杂需求也是由小需求排列组合而成。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/03/01/104594475/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>多表Full Outer Join的问题</title>
-      <link>https://vincent-233.github.io/blog/2020/01/10/multi-table-full-join/</link>
+      <link>https://vincent-233.github.io/blog/2020/01/10/103895643/</link>
       <pubDate>Fri, 10 Jan 2020 11:39:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/01/10/multi-table-full-join/</guid>
-      <description>&lt;p&gt;熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的结果，数据可能会重复，这里做一下简单介绍。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2020/01/10/103895643/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL Server用Cross Apply、Cross Join实现列转行</title>
-      <link>https://vincent-233.github.io/blog/2019/07/20/tsql-cross-query-column-to-row/</link>
+      <link>https://vincent-233.github.io/blog/2019/07/20/96520306/</link>
       <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/20/tsql-cross-query-column-to-row/</guid>
-      <description>&lt;p&gt;今天介绍4种列转行（又称宽表转长表、反透视、unpivot等）写法。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2019/07/20/96520306/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>交叉表转换为横表</title>
-      <link>https://vincent-233.github.io/blog/2019/07/16/cross-table-transfer/</link>
+      <link>https://vincent-233.github.io/blog/2019/07/16/95868267/</link>
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/16/cross-table-transfer/</guid>
-      <description>&lt;p&gt;做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2019/07/16/95868267/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Set NoCount On导致触发器@@RowCount为0</title>
+      <link>https://vincent-233.github.io/blog/2018/12/18/85074737/</link>
+      <pubDate>Tue, 18 Dec 2018 19:08:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/12/18/85074737/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>再谈SQL Server字符串拆分与分列</title>
-      <link>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</link>
+      <link>https://vincent-233.github.io/blog/2018/12/08/84891624/</link>
       <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/12/08/t-sql-str-split/</guid>
-      <description>&lt;p&gt;刚工作那会写了一篇关于字符串拆分的&lt;a href=&#34;https://blog.csdn.net/helloword4217/article/details/12889707&#34;&gt;文章&lt;/a&gt;，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。&lt;br&gt;
-为了考虑代码的可读性和复用性，一般用函数将实现细节封装，下面介绍几种常用的方法：&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2018/12/08/84891624/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>报表动态MTD、YTD查询语句</title>
-      <link>https://vincent-233.github.io/blog/2018/10/08/mtd-ytd-query/</link>
+      <link>https://vincent-233.github.io/blog/2018/10/08/82964958/</link>
       <pubDate>Mon, 08 Oct 2018 10:49:11 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/10/08/mtd-ytd-query/</guid>
-      <description>&lt;p&gt;经常会有报表需要动态查询MTD和YTD汇总。这里解释一下含义：&lt;br&gt;
-MTD（Month To Date）：从月初到当前日期&lt;br&gt;
-YTD（Year To Date）：从年初到当前日期&lt;/p&gt;
-&lt;p&gt;查询举例：&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2018/10/08/82964958/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>SQL CLR函数的创建与使用（以正则表达式为例）</title>
-      <link>https://vincent-233.github.io/blog/2017/03/04/mssql-clr-function/</link>
+      <title>SQL Server 常见For XML语句比较</title>
+      <link>https://vincent-233.github.io/blog/2018/04/29/80145292/</link>
+      <pubDate>Sun, 29 Apr 2018 20:58:42 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2018/04/29/80145292/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server中的小数近似处理实例</title>
+      <link>https://vincent-233.github.io/blog/2017/08/10/77043631/</link>
+      <pubDate>Thu, 10 Aug 2017 11:14:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/08/10/77043631/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL CLR函数（以正则表达式为例）</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/03/04/mssql-clr-function/</guid>
-      <description>&lt;p&gt;SQL Server中函数功能有限，而且不支持正则表达式，如何用.Net语言创建函数，然后在T-SQL中使用呢？ 答案是CLR函数，本文以实现正则表达式为例介绍CLR函数的创建和使用。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>断号查询（查找不连续ID记录）</title>
-      <link>https://vincent-233.github.io/blog/2015/05/20/tsql-broken-id/</link>
+      <title>DBA眼中的CLR</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60330115/</link>
+      <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生成连续ID记录行</title>
+      <link>https://vincent-233.github.io/blog/2015/05/20/45874623/</link>
       <pubDate>Wed, 20 May 2015 19:44:59 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/20/tsql-broken-id/</guid>
-      <description>&lt;p&gt;需求： 找出某列断流的ID号，即连续ID中少掉的ID区间。&lt;br&gt;
-例如：1，2，7，8，9.  断流的ID是 3 至 6.&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2015/05/20/45874623/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL Server事务性编程总结</title>
-      <link>https://vincent-233.github.io/blog/2015/05/17/tsql-trans/</link>
+      <link>https://vincent-233.github.io/blog/2015/05/17/45775271/</link>
       <pubDate>Sun, 17 May 2015 00:19:12 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/17/tsql-trans/</guid>
-      <description>&lt;p&gt;为了保证数据的一致性，&lt;a href=&#34;http://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;事务&lt;/a&gt;在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2015/05/17/45775271/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server返回随机记录</title>
+      <link>https://vincent-233.github.io/blog/2015/05/15/45741533/</link>
+      <pubDate>Fri, 15 May 2015 11:32:20 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2015/05/15/45741533/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server 中Merge 的使用</title>
+      <link>https://vincent-233.github.io/blog/2014/12/30/42275987/</link>
+      <pubDate>Tue, 30 Dec 2014 15:00:04 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/12/30/42275987/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>为什么要刷新视图</title>
+      <link>https://vincent-233.github.io/blog/2014/03/23/21862313/</link>
+      <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/03/23/21862313/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>SQL递归查询实战</title>
-      <link>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</link>
-      <pubDate>Wed, 11 Dec 2013 00:12:08 +0000</pubDate>
+      <link>https://vincent-233.github.io/blog/2013/12/10/17251887/</link>
+      <pubDate>Tue, 10 Dec 2013 16:12:08 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/11/tsql-recursive/</guid>
-      <description>假设某公司的人员组织结构如下图：
-数据库表：
-CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT INTO ORG VALUES(6, &amp;#39;Emily&amp;#39;, 3); INSERT INTO ORG VALUES(7, &amp;#39;Kate&amp;#39;, 3); INSERT INTO ORG VALUES(8, &amp;#39;Mark&amp;#39;, 6); GO 需求一： 查询TOM管理的所有员工的名字 查询代码：</description>
+      <guid>https://vincent-233.github.io/blog/2013/12/10/17251887/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>奇葩的需求</title>
+      <link>https://vincent-233.github.io/blog/2013/12/09/17231863/</link>
+      <pubDate>Mon, 09 Dec 2013 15:18:18 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/09/17231863/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL 行转列 与 列转行</title>
+      <link>https://vincent-233.github.io/blog/2013/12/08/17202973/</link>
+      <pubDate>Sun, 08 Dec 2013 10:44:16 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/12/08/17202973/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Sql提取(去除)字符串中所有汉字、字母、数字</title>
-      <link>https://vincent-233.github.io/blog/2013/11/24/remove-all-num-and-chinese/</link>
-      <pubDate>Sun, 24 Nov 2013 00:37:54 +0000</pubDate>
+      <link>https://vincent-233.github.io/blog/2013/11/23/16911599/</link>
+      <pubDate>Sat, 23 Nov 2013 16:37:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/24/remove-all-num-and-chinese/</guid>
-      <description>&lt;p&gt;核心思想在于下面几个模式的组合使用：&lt;br&gt;
-%[0-9]%：            所有数字&lt;br&gt;
-%[A-Za-z]%:          所有字母&lt;br&gt;
-%[吖-咗]%:           所有汉字&lt;/p&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2013/11/23/16911599/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>SQL Server 中的四种排序函数比较</title>
-      <link>https://vincent-233.github.io/blog/2013/09/15/msssql-rank-function/</link>
-      <pubDate>Sun, 15 Sep 2013 22:54:28 +0000</pubDate>
+      <title>关于Cross Join 和 Outer/Cross Apply</title>
+      <link>https://vincent-233.github.io/blog/2013/11/23/16897427/</link>
+      <pubDate>Sat, 23 Nov 2013 02:22:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/09/15/msssql-rank-function/</guid>
-      <description>&lt;p&gt;先做一下总结：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Row_Number(): 不可并列，排序序号连续（可支持不排序，只加一个行号，这对分页查询很有作用）&lt;br&gt;
-Rank(): 可并列，排序序号不连续&lt;br&gt;
-Dense_Rank(): 可并列，排序序号连续 ( dense意思为茂密/密集，顾名思义排序号连续) 
-nTitle(N): 先排序，再将结果分为N组&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <guid>https://vincent-233.github.io/blog/2013/11/23/16897427/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL 递归查询初体验</title>
+      <link>https://vincent-233.github.io/blog/2013/11/03/14111219/</link>
+      <pubDate>Sun, 03 Nov 2013 16:00:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2013/11/03/14111219/</guid>
+      <description></description>
     </item>
     
   </channel>

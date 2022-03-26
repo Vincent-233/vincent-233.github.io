@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>windows下robocopy的使用 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">windows下robocopy的使用</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-03-26T19:17:46&#43;08:00">2022-03-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#需求">需求</a></li>
+        <li><a href="#脚本实现">脚本实现</a></li>
+        <li><a href="#测试与日志">测试与日志</a></li>
+        <li><a href="#总结与说明">总结与说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy">robocopy</a>是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大</p>
+<p>比如：</p>
+<ul>
+<li>多线程模式。/MT选项</li>
+<li>镜像模式，copy时自动删除target中有而source中不再存在的文件。/mir选项</li>
+<li>copy前检查是否有相同的文件，快速跳过，实现增量copy</li>
+<li>可重启，相当于断点续传</li>
+<li>监控模式，可设置一段时间内持续监听source，若有变化立即同步到target。/mon和/mot选项</li>
+</ul>
+<p>以上只是简单列举，详细选项请去查官网文档。<br>
+下面记录一下我的需求场景与脚本实现。</p>
+<h3 id="需求">需求</h3>
+<p>将电脑个人用户文件夹( $env:USERPROFILE )下某些指定的文件和文件夹同步到H盘的Backup文件夹下。</p>
+<p>方案：写一个ps1脚本，配置在Task scheduler里每天自动执行。</p>
+<h3 id="脚本实现">脚本实现</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e">&lt;#
+</span><span style="color:#75715e">	$env:USERPROFILE -&gt; c:\user\your_user_name
+</span><span style="color:#75715e">	$env:USERNAME    -&gt; your_user_name
+</span><span style="color:#75715e">#&gt;</span>
+$bk_folder = <span style="color:#e6db74">&#34;H:\Backup&#34;</span>
+
+<span style="color:#75715e"># backup manifest</span>
+$folder = <span style="color:#e6db74">&#39;.bash_history&#39;</span>,
+<span style="color:#e6db74">&#39;.bash_profile&#39;</span>,
+<span style="color:#e6db74">&#39;.bashrc&#39;</span>,
+<span style="color:#e6db74">&#39;.condarc&#39;</span>,,
+<span style="color:#e6db74">&#39;.gitconfig&#39;</span>,
+<span style="color:#e6db74">&#39;.ssh&#39;</span>,
+<span style="color:#e6db74">&#39;.vscode&#39;</span>,
+<span style="color:#e6db74">&#39;Desktop&#39;</span>,
+<span style="color:#e6db74">&#39;Downloads&#39;</span>,
+<span style="color:#e6db74">&#39;My Documents&#39;</span>
+
+<span style="color:#75715e"># for each of above file and folder perform copy or robocopy</span>
+<span style="color:#66d9ef">foreach</span>($_ <span style="color:#66d9ef">in</span> $folder)
+{
+	<span style="color:#66d9ef">if</span> (test-path <span style="color:#e6db74">&#34;$env:USERPROFILE\$_&#34;</span> -PathType Leaf)
+	{
+		copy <span style="color:#e6db74">&#34;$env:USERPROFILE\$_&#34;</span> <span style="color:#e6db74">&#34;$bk_folder\personal_files\$env:USERNAME&#34;</span>
+	}
+	<span style="color:#66d9ef">if</span> (test-path <span style="color:#e6db74">&#34;$env:USERPROFILE\$_&#34;</span> -PathType Container)
+	{
+		robocopy <span style="color:#e6db74">&#34;$env:USERPROFILE\$_&#34;</span> <span style="color:#e6db74">&#34;$bk_folder\personal_files\$env:USERNAME\$_&#34;</span> /e /xa<span style="color:#960050;background-color:#1e0010">:</span>SHT /mir
+	}
+}
+</code></pre></div><p>功能说明：先枚举要备份的根目录下的文件和文件夹，然后遍历，如果是文件直接用copy命令，文件夹则用强大的robocopy</p>
+<h3 id="测试与日志">测试与日志</h3>
+<ul>
+<li>以上脚本只是实现了核心的功能，在开发过程中可以使用robocopy的<code>/l</code>选项，可以实现仅打印出受影响的文件列表，而不直接执行操作，非常方便进行测试</li>
+<li>为方便日后进行故障排查，可增加日志选项，用robocopy自带的日志选项，或直接用输出重定向</li>
+</ul>
+<h3 id="总结与说明">总结与说明</h3>
+<ul>
+<li>robocopy的source和target只能是文件夹</li>
+<li>robocopy只支持在copy时排除特定文件夹，但不直接支持只包括特定文件夹，如果这些文件或文件夹的命令有某种规则，可以用通配符来实现，否则就只能分多个步骤去copy</li>
+<li>copy之后的文件夹可能会被隐藏，貌似是一个Bug，所以如果发现copy之后文件找不到，不用紧张，先将查看隐藏文件的选项打开，或用 类似 <code>ls -a</code>  命令查看所有文件</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/powershell/" rel="tag">powershell</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2021/08/15/conda-config-windows/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">windows conda环境在cmd/powershell/git-bash下的配置</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

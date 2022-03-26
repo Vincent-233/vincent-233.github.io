@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>pyspark读写S3文件与简单处理（指定Schema，直接写S3或先本地再上传） - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">pyspark读写S3文件与简单处理（指定Schema，直接写S3或先本地再上传）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-08-17T13:47:05Z">2019-08-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/bigdata/" rel="category">BigData</a>, <a class="meta__link" href="/blog/categories/etl/" rel="category">ETL</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#初始化spark-session">初始化Spark Session</a></li>
+        <li><a href="#从s3读取文件">从S3读取文件</a></li>
+        <li><a href="#读取csv">读取CSV</a></li>
+        <li><a href="#指定分隔符号">指定分隔符号</a></li>
+        <li><a href="#数据类型转换">数据类型转换</a></li>
+        <li><a href="#增加月份列">增加月份列</a></li>
+        <li><a href="#sql聚合计算-计算月度利润">SQL聚合计算-计算月度利润</a></li>
+        <li><a href="#读取csv指定schema">读取CSV，指定schema</a></li>
+        <li><a href="#写文件到s3">写文件到S3</a></li>
+        <li><a href="#相关参考">相关参考</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h3 id="概述">概述</h3>
+<p>随着AWS的流行，越来越多的企业将数据存储在S3上构建数据湖，本文示例如何用PySpark读取S3上的数据，并用结构化API处理与展示，最后简单并讨论直接写到S3与先写到本地再上传到S3的性能对比。</p>
+<h3 id="初始化spark-session">初始化Spark Session</h3>
+<p>读取Spark需要<code>$SPARK_HOME/jars</code>下包含hadoop-aws相关jar包，目前 aws-java-sdk-1.7.4.jar、hadoop-aws-2.7.7.jar为推荐版本，   一般上述jar包在 <code>$HADOOP_HOME/share/hadoop/tools/lib/</code> 下均可找到，复制到<code>$SPARK_HOME/jars</code> 下即可。若没装Hadoop可以自行网上下载上述Jar包。</p>
+<p>以下代码中，cfg配置文件存储了AWS的访问凭证，用 configparser 模块读取。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> pyspark
+<span style="color:#f92672">from</span> pyspark.sql <span style="color:#f92672">import</span> SparkSession
+<span style="color:#f92672">import</span> configparser
+
+config <span style="color:#f92672">=</span> configparser<span style="color:#f92672">.</span>ConfigParser()
+config<span style="color:#f92672">.</span>read(<span style="color:#e6db74">&#34;dl.cfg&#34;</span>)
+
+AWS_ACCESS_KEY_ID <span style="color:#f92672">=</span> config[<span style="color:#e6db74">&#39;AWS&#39;</span>][<span style="color:#e6db74">&#39;AWS_ACCESS_KEY_ID&#39;</span>]
+AWS_SECRET_ACCESS_KEY <span style="color:#f92672">=</span> config[<span style="color:#e6db74">&#39;AWS&#39;</span>][<span style="color:#e6db74">&#39;AWS_SECRET_ACCESS_KEY&#39;</span>]
+
+spark <span style="color:#f92672">=</span> SparkSession<span style="color:#f92672">.</span>builder\
+            <span style="color:#f92672">.</span>config(<span style="color:#e6db74">&#34;spark.hadoop.fs.s3a.access.key&#34;</span>, AWS_ACCESS_KEY_ID)\
+            <span style="color:#f92672">.</span>config(<span style="color:#e6db74">&#34;spark.hadoop.fs.s3a.secret.key&#34;</span>, AWS_SECRET_ACCESS_KEY)\
+            <span style="color:#f92672">.</span>config(<span style="color:#e6db74">&#34;spark.hadoop.fs.s3a.impl&#34;</span>, <span style="color:#e6db74">&#34;org.apache.hadoop.fs.s3a.S3AFileSystem&#34;</span>)\
+            <span style="color:#f92672">.</span>getOrCreate()
+</code></pre></div><p>也可直接<code>指定包配置</code>来启动，运行时会自动下载，这样 sparkSession 初始化会比较缓慢，不推荐：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> pyspark
+<span style="color:#f92672">from</span> pyspark.sql <span style="color:#f92672">import</span> SparkSession
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;AWS_ACCESS_KEY_ID&#39;</span>] <span style="color:#f92672">=</span> config[<span style="color:#e6db74">&#39;AWS&#39;</span>][<span style="color:#e6db74">&#39;AWS_ACCESS_KEY_ID&#39;</span>]
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;AWS_SECRET_ACCESS_KEY&#39;</span>] <span style="color:#f92672">=</span> config[<span style="color:#e6db74">&#39;AWS&#39;</span>][<span style="color:#e6db74">&#39;AWS_SECRET_ACCESS_KEY&#39;</span>]
+
+spark <span style="color:#f92672">=</span> SparkSession<span style="color:#f92672">.</span>builder\
+                     <span style="color:#f92672">.</span>config(<span style="color:#e6db74">&#34;spark.jars.packages&#34;</span>,<span style="color:#e6db74">&#34;org.apache.hadoop:hadoop-aws:2.7.7&#34;</span>)\
+                     <span style="color:#f92672">.</span>getOrCreate()
+</code></pre></div><h3 id="从s3读取文件">从S3读取文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 读取单个文件</span>
+df_song <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;s3a://MyBucket/song_data/A/A/A/TRAAAAK128F9318786.json&#39;</span>)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 读取多个文件</span>
+df_songs <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;s3a://MyBucket/song_data/A/A/A/*.json&#39;</span>)
+<span style="color:#75715e"># cache到本地，下次读取加快速度</span>
+df_songs<span style="color:#f92672">.</span>cache() 
+df_songs<span style="color:#f92672">.</span>count()
+</code></pre></div><pre><code>24  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_songs<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;artist_id&#39;</span>)<span style="color:#f92672">.</span>take(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>[Row(artist_id='ARTC1LV1187B9A4858'),  
+ Row(artist_id='ARA23XO1187B9AF18F'),  
+ Row(artist_id='ARSVTNL1187B992A91'),  
+ Row(artist_id='AR73AIO1187B9AD57B'),  
+ Row(artist_id='ARXQBR11187B98A2CC')]  
+</code></pre>
+<h3 id="读取csv">读取CSV</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 若文件巨大，cache慎用</span>
+df <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>csv(<span style="color:#e6db74">&#34;s3a://MyBucket/pagila/payment/payment.csv&#34;</span>)<span style="color:#f92672">.</span>cache()
+df<span style="color:#f92672">.</span>printSchema()
+df<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+df<span style="color:#f92672">.</span>count()
+</code></pre></div><pre><code>root  
+ |-- _c0: string (nullable = true)  
+
++--------------------+  
+|                 _c0|  
++--------------------+  
+|payment_id;custom...|  
+|16050;269;2;7;1.9...|  
+|16051;269;1;98;0....|  
+|16052;269;2;678;6...|  
+|16053;269;2;703;0...|  
++--------------------+  
+only showing top 5 rows  
+16050  
+</code></pre>
+<p>可以发现CSV默认以逗号分隔，但上述文件是分号，故读出来只有一列，且应指定表头</p>
+<h3 id="指定分隔符号">指定分隔符号</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 这里换一种方法读 csv，本质是一样的</span>
+df <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read\
+    <span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;sep&#39;</span>,<span style="color:#e6db74">&#39;;&#39;</span>)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;inferSchema&#39;</span>,<span style="color:#66d9ef">True</span>)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>,<span style="color:#66d9ef">True</span>)\
+    <span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#34;s3a://MyBucket/pagila/payment/payment.csv&#34;</span>)
+<span style="color:#75715e"># 若文件巨大，cache慎用</span>
+df<span style="color:#f92672">.</span>cache()
+<span style="color:#75715e"># 成功分列</span>
+df<span style="color:#f92672">.</span>printSchema()
+</code></pre></div><pre><code>root  
+ |-- payment_id: integer (nullable = true)  
+ |-- customer_id: integer (nullable = true)  
+ |-- staff_id: integer (nullable = true)  
+ |-- rental_id: integer (nullable = true)  
+ |-- amount: double (nullable = true)  
+ |-- payment_date: string (nullable = true)  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>+----------+-----------+--------+---------+------+--------------------+  
+|payment_id|customer_id|staff_id|rental_id|amount|        payment_date|  
++----------+-----------+--------+---------+------+--------------------+  
+|     16050|        269|       2|        7|  1.99|2017-01-24 21:40:...|  
+|     16051|        269|       1|       98|  0.99|2017-01-25 15:16:...|  
+|     16052|        269|       2|      678|  6.99|2017-01-28 21:44:...|  
+|     16053|        269|       2|      703|  0.99|2017-01-29 00:58:...|  
+|     16054|        269|       1|      750|  4.99|2017-01-29 08:10:...|  
++----------+-----------+--------+---------+------+--------------------+  
+only showing top 5 rows  
+</code></pre>
+<h3 id="数据类型转换">数据类型转换</h3>
+<p>将 payment_date 列由字符串转换为日期类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pyspark.sql.functions <span style="color:#66d9ef">as</span> fn
+df_new <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>withColumn(<span style="color:#e6db74">&#39;payment_date&#39;</span>,fn<span style="color:#f92672">.</span>to_timestamp(<span style="color:#e6db74">&#39;payment_date&#39;</span>,<span style="color:#e6db74">&#39;yyyy-MM-dd HH:mm:ss&#39;</span>))
+df_new<span style="color:#f92672">.</span>printSchema()
+df_new<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>root  
+ |-- payment_id: integer (nullable = true)  
+ |-- customer_id: integer (nullable = true)  
+ |-- staff_id: integer (nullable = true)  
+ |-- rental_id: integer (nullable = true)  
+ |-- amount: double (nullable = true)  
+ |-- payment_date: timestamp (nullable = true)  
+
++----------+-----------+--------+---------+------+-------------------+  
+|payment_id|customer_id|staff_id|rental_id|amount|       payment_date|  
++----------+-----------+--------+---------+------+-------------------+  
+|     16050|        269|       2|        7|  1.99|2017-01-24 21:40:19|  
+|     16051|        269|       1|       98|  0.99|2017-01-25 15:16:50|  
+|     16052|        269|       2|      678|  6.99|2017-01-28 21:44:14|  
+|     16053|        269|       2|      703|  0.99|2017-01-29 00:58:02|  
+|     16054|        269|       1|      750|  4.99|2017-01-29 08:10:06|  
++----------+-----------+--------+---------+------+-------------------+  
+only showing top 5 rows  
+</code></pre>
+<h3 id="增加月份列">增加月份列</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># DataFrame API 方法</span>
+df_new <span style="color:#f92672">=</span> df_new<span style="color:#f92672">.</span>withColumn(<span style="color:#e6db74">&#39;month&#39;</span>,fn<span style="color:#f92672">.</span>month(<span style="color:#e6db74">&#39;payment_date&#39;</span>))
+df_new<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>+----------+-----------+--------+---------+------+-------------------+-----+  
+|payment_id|customer_id|staff_id|rental_id|amount|       payment_date|month|  
++----------+-----------+--------+---------+------+-------------------+-----+  
+|     16050|        269|       2|        7|  1.99|2017-01-24 21:40:19|    1|  
+|     16051|        269|       1|       98|  0.99|2017-01-25 15:16:50|    1|  
+|     16052|        269|       2|      678|  6.99|2017-01-28 21:44:14|    1|  
+|     16053|        269|       2|      703|  0.99|2017-01-29 00:58:02|    1|  
+|     16054|        269|       1|      750|  4.99|2017-01-29 08:10:06|    1|  
++----------+-----------+--------+---------+------+-------------------+-----+  
+only showing top 5 rows  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># SQL API 方法</span>
+df_new<span style="color:#f92672">.</span>drop(<span style="color:#e6db74">&#39;momth&#39;</span>) <span style="color:#75715e"># 先删除上述已有 month 列</span>
+df_new<span style="color:#f92672">.</span>createOrReplaceTempView(<span style="color:#e6db74">&#39;vw_df_payment&#39;</span>)
+df_new <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>sql(<span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    select payment_id
+</span><span style="color:#e6db74">          ,customer_id
+</span><span style="color:#e6db74">          ,staff_id
+</span><span style="color:#e6db74">          ,rental_id
+</span><span style="color:#e6db74">          ,amount
+</span><span style="color:#e6db74">          ,payment_date
+</span><span style="color:#e6db74">          ,month(payment_date) as month
+</span><span style="color:#e6db74">    from vw_df_payment
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>)
+df_new<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>+----------+-----------+--------+---------+------+-------------------+-----+  
+|payment_id|customer_id|staff_id|rental_id|amount|       payment_date|month|  
++----------+-----------+--------+---------+------+-------------------+-----+  
+|     16050|        269|       2|        7|  1.99|2017-01-24 21:40:19|    1|  
+|     16051|        269|       1|       98|  0.99|2017-01-25 15:16:50|    1|  
+|     16052|        269|       2|      678|  6.99|2017-01-28 21:44:14|    1|  
+|     16053|        269|       2|      703|  0.99|2017-01-29 00:58:02|    1|  
+|     16054|        269|       1|      750|  4.99|2017-01-29 08:10:06|    1|  
++----------+-----------+--------+---------+------+-------------------+-----+  
+only showing top 5 rows  
+</code></pre>
+<h3 id="sql聚合计算-计算月度利润">SQL聚合计算-计算月度利润</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_new<span style="color:#f92672">.</span>createOrReplaceTempView(<span style="color:#e6db74">&#39;vw_df_payment&#39;</span>)
+spark<span style="color:#f92672">.</span>sql(<span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    select Month,sum(amount) as Revenue
+</span><span style="color:#e6db74">    from vw_df_payment
+</span><span style="color:#e6db74">    group by month
+</span><span style="color:#e6db74">    order by month
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>)<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>+-----+------------------+  
+|Month|           Revenue|  
++-----+------------------+  
+|    1| 4824.429999999856|  
+|    2| 9631.879999999608|  
+|    3|23886.560000002115|  
+|    4|28559.460000003943|  
+|    5|  514.180000000001|  
++-----+------------------+  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>count()
+</code></pre></div><pre><code>16049  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_new<span style="color:#f92672">.</span>count()
+</code></pre></div><pre><code>16049  
+</code></pre>
+<h3 id="读取csv指定schema">读取CSV，指定schema</h3>
+<p>infer schema比较费时而且难免会有与实际不符的情况，下面我们指定schema。<br>
+指定Schema需要构造StructType类，或直接用类似SQL DDL风格的字符串。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># from pyspark.sql.types import StructType,StructField,IntegerType,DoubleType,DateType,TimestampType</span>
+
+<span style="color:#75715e"># my_schema = StructType([</span>
+<span style="color:#75715e">#     StructField(&#39;payment_id&#39; ,IntegerType()),</span>
+<span style="color:#75715e">#     StructField(&#39;customer_id&#39;,IntegerType()),</span>
+<span style="color:#75715e">#     StructField(&#39;staff_id&#39;,IntegerType()),</span>
+<span style="color:#75715e">#     StructField(&#39;rental_id&#39;,IntegerType()),</span>
+<span style="color:#75715e">#     StructField(&#39;amount&#39;,DoubleType()),</span>
+<span style="color:#75715e">#     StructField(&#39;payment_date&#39;,TimestampType())</span>
+<span style="color:#75715e"># ])</span>
+
+<span style="color:#75715e"># 除上述定义方法外，如下 DDL风格的 schema 定义亦可 (varchar 对应 string，datetime 对应 timestamp )</span>
+<span style="color:#75715e"># 注：含 timestamp 类型时，一定要指定 timestampFormat</span>
+<span style="color:#75715e"># yyyy-MM-dd HH:mm:ss，如果用 yyyy-MM-dd HH:mm:ss.SSSSSS</span>
+<span style="color:#75715e"># spark会将 2017-01-24 21:40:19.996577+00 的微秒读为 996577000，并加到分钟</span>
+<span style="color:#75715e"># 所以只能舍掉 SSSSSS 秒，或先读为字符串，再另外处理</span>
+
+my_schema <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    payment_id int,
+</span><span style="color:#e6db74">    customer_id int,
+</span><span style="color:#e6db74">    staff_id int,
+</span><span style="color:#e6db74">    rental_id int,
+</span><span style="color:#e6db74">    amount double,
+</span><span style="color:#e6db74">    payment_date timestamp
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+df <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read\
+    <span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
+    <span style="color:#f92672">.</span>schema(my_schema)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;sep&#39;</span>,<span style="color:#e6db74">&#39;;&#39;</span>)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>,<span style="color:#66d9ef">True</span>)\
+    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#34;timestampFormat&#34;</span>, <span style="color:#e6db74">&#34;yyyy-MM-dd HH:mm:ss&#34;</span>)\
+    <span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#34;s3a://MyBucket/pagila/payment/payment.csv&#34;</span>)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>printSchema()
+df<span style="color:#f92672">.</span>show(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>root  
+ |-- payment_id: integer (nullable = true)  
+ |-- customer_id: integer (nullable = true)  
+ |-- staff_id: integer (nullable = true)  
+ |-- rental_id: integer (nullable = true)  
+ |-- amount: double (nullable = true)  
+ |-- payment_date: timestamp (nullable = true)  
+
++----------+-----------+--------+---------+------+-------------------+  
+|payment_id|customer_id|staff_id|rental_id|amount|       payment_date|  
++----------+-----------+--------+---------+------+-------------------+  
+|     16050|        269|       2|        7|  1.99|2017-01-24 21:40:19|  
+|     16051|        269|       1|       98|  0.99|2017-01-25 15:16:50|  
+|     16052|        269|       2|      678|  6.99|2017-01-28 21:44:14|  
+|     16053|        269|       2|      703|  0.99|2017-01-29 00:58:02|  
+|     16054|        269|       1|      750|  4.99|2017-01-29 08:10:06|  
++----------+-----------+--------+---------+------+-------------------+  
+only showing top 5 rows  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;payment_date&#39;</span>)<span style="color:#f92672">.</span>take(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>[Row(payment_date=datetime.datetime(2017, 1, 24, 21, 40, 19)),  
+ Row(payment_date=datetime.datetime(2017, 1, 25, 15, 16, 50)),  
+ Row(payment_date=datetime.datetime(2017, 1, 28, 21, 44, 14)),  
+ Row(payment_date=datetime.datetime(2017, 1, 29, 0, 58, 2)),  
+ Row(payment_date=datetime.datetime(2017, 1, 29, 8, 10, 6))]  
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>createOrReplaceTempView(<span style="color:#e6db74">&#39;vw_df_payment&#39;</span>)
+spark<span style="color:#f92672">.</span>sql(<span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    select month(payment_date) as Month,sum(amount) as Revenue
+</span><span style="color:#e6db74">    from vw_df_payment
+</span><span style="color:#e6db74">    group by month(payment_date)
+</span><span style="color:#e6db74">    order by month
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>)<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>+-----+------------------+  
+|Month|           Revenue|  
++-----+------------------+  
+|    1| 4824.429999999856|  
+|    2| 9631.879999999608|  
+|    3|23886.560000002115|  
+|    4|28559.460000003943|  
+|    5|  514.180000000001|  
++-----+------------------+  
+</code></pre>
+<h3 id="写文件到s3">写文件到S3</h3>
+<p>直接写到S3应该是比较慢的，可以先保存在本地再上传到S3，或保存到AWS EMR的HDFS中，再传到S3，虽然麻烦，可能会快一些 。</p>
+<h6 id="直接写s3">直接写S3</h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+s <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+
+df<span style="color:#f92672">.</span>write<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)\
+    <span style="color:#f92672">.</span>mode(<span style="color:#e6db74">&#39;overwrite&#39;</span>)\
+    <span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;s3a://bucket-vincent/payment.json&#39;</span>)
+
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">run time:</span><span style="color:#e6db74">{</span>time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> s<span style="color:#e6db74">}</span><span style="color:#e6db74"> s&#39;</span>)
+</code></pre></div><pre><code>run time:121.28353834152222 s  
+</code></pre>
+<h6 id="先写到本地再copy到s3">先写到本地，再copy到S3</h6>
+<p>copy到S3调用了<code>AWS CLI</code>命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> subprocess <span style="color:#66d9ef">as</span> sub
+s <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+
+df<span style="color:#f92672">.</span>write<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)\
+    <span style="color:#f92672">.</span>mode(<span style="color:#e6db74">&#39;overwrite&#39;</span>)\
+    <span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;/home/ghost/workdata/payment.json&#39;</span>)
+
+s3_copy_cmd <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#39;aws&#39;</span>,<span style="color:#e6db74">&#39;s3&#39;</span>,<span style="color:#e6db74">&#39;cp&#39;</span>,
+    <span style="color:#e6db74">&#39;/home/ghost/workdata/payment.json&#39;</span>,
+    <span style="color:#e6db74">&#39;s3://bucket-vincent/payment.json&#39;</span>,
+    <span style="color:#e6db74">&#39;--recursive&#39;</span>,<span style="color:#e6db74">&#39;--exclude&#39;</span>,<span style="color:#e6db74">&#39;*.crc&#39;</span>
+]
+
+sub<span style="color:#f92672">.</span>run(s3_copy_cmd)
+
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">run time:</span><span style="color:#e6db74">{</span>time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> s<span style="color:#e6db74">}</span><span style="color:#e6db74"> s&#39;</span>)
+</code></pre></div><pre><code>run time:30.206376314163208 s  
+</code></pre>
+<p>可以发现后者运行时间有所减少。</p>
+<h3 id="相关参考">相关参考</h3>
+<p><a href="https://sparkour.urizone.net/recipes/using-s3/">https://sparkour.urizone.net/recipes/using-s3/</a><br>
+<a href="https://www.jitsejan.com/using-spark-to-read-from-s3.html">https://www.jitsejan.com/using-spark-to-read-from-s3.html</a><br>
+<a href="https://gist.github.com/claudinei-daitx/3766d01b070f3f0f8d1b64fd06b71585">https://gist.github.com/claudinei-daitx/3766d01b070f3f0f8d1b64fd06b71585</a><br>
+<a href="https://gist.github.com/bachwehbi/49e0035bdcf3d420a181415e02a189b7">https://gist.github.com/bachwehbi/49e0035bdcf3d420a181415e02a189b7</a><br>
+<a href="https://stackoverflow.com/questions/42822483/extremely-slow-s3-write-times-from-emr-spark">https://stackoverflow.com/questions/42822483/extremely-slow-s3-write-times-from-emr-spark</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/spark/" rel="tag">spark</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2019/08/17/99691830/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">pyspark文件读写示例-（CSV/JSON/Parquet-单个或多个）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2019/08/17/99697500/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SparkContext、SparkConf以及进化版的SparkSession</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>
