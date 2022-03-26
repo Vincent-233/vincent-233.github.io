@@ -104,23 +104,32 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<h2 id="1microsoftaceoledb120-简介">1.Microsoft.ACE.OLEDB.12.0 简介</h2>
-<p>就是一个数据访问接口，用于在office文件和非office应用程序间传输数据。例如Microsoft Office Access 2010（<em>.mdb和</em>.accdb）文件和Microsoft Office Excel 2010（<em>.xls、</em>.xlsx和*.xlsb）文件）与其他资料源（例如Microsoft SQL Server）之间传输资料。</p>
+<p>实施上就是一个数据访问接口，用于在office文件和非office应用程序间传输数据。例如Microsoft Office Access 2010（<em>.mdb和</em>.accdb）文件和Microsoft Office Excel 2010（<em>.xls、</em>.xlsx和*.xlsb）文件）与其他资料源（例如Microsoft SQL Server）之间传输资料。</p>
 <h2 id="2microsoftaceoledb120-在-mssql中的应用">2.Microsoft.ACE.OLEDB.12.0 在 MSSQL中的应用</h2>
 <p>进入SSMS后，在对象资源管理器中，位次展开&quot;服务器对象&quot;&mdash; &ldquo;链接服务器&rdquo;&mdash;&ldquo;访问接口&rdquo;，如果在访问接口下面找到了Microsoft.ACE.OLEDB.12.0（如下图），则说明已经安装此接口。也有可能版本号不是12.0，此版本是对应Office 2010的。一般情况下，如果安装了Office，此接口会跟著一起被安装。</p>
+<p><img src="/blog/img/19000277.png" alt=""></p>
 <p>如果没能找到此接口，说明系统没有安装Office或者所安装版本（32bit或64bit）与SQL Server版本不一致。可以有如下解决方案：</p>
-<p>a) 若Office与MSSQL位数不一致，重新安装与SQL Server位数相同的Office，同为32bit或64bit；</p>
+<p>a) 若Office与MSSQL位数不一致，重新安装与SQL Server位数相同的Office，同为32bit或64bit；<br>
+b) 若不准备安装Office，可以单独安装Microsoft.ACE.OLEDB.12.0：<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine.exe">32bit</a>下载或<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine_X64.exe">64bit</a>下载。</p>
 <p>若安装时出现点击后闪退，可以先用WINRAR将exe安装包解压，再运行里面的setup</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 读取D盘目录下的Test.xlsx文件Sheet1中的内容
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  ID,Content
 <span style="color:#66d9ef">FROM</span>    OPENDATASOURCE (<span style="color:#e6db74">&#39;Microsoft.ACE.OLEDB.12.0&#39;</span>,
                        <span style="color:#e6db74">&#39;Excel 12.0;HDR=Yes;IMEX=1;Database=D:\Test.xlsx&#39;</span>)... [sheet1$]
 </code></pre></div><h2 id="3常见问题">3.常见问题</h2>
-<p>消息 7403&hellip;&hellip;尚未注册 OLE DB 访问接口 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo;。</p>
-<p><strong>原因：当前所连数据库所在服务器，未安装此接口。</strong></p>
-<p><strong>解决方案：参见上面第2点。</strong></p>
-<p>消息 15281&hellip;&hellip;SQL Server 阻止了对组件 &lsquo;Ad Hoc Distributed Queries&rsquo; 的 STATEMENT &lsquo;OpenRowset/OpenDatasource&rsquo; 的访问，因为此组件已作为此伺服器安全配置的一部分而被关闭</p>
-<p>**可能原因：**未开启 Ad Hoc Distributed Queries（即席分布式查询）</p>
-<p>**参考解决方案：**用代码开启 Ad Hoc Distributed Queries</p>
+<ul>
+<li>
+<p><strong>消息 7403&hellip;&hellip;尚未注册 OLE DB 访问接口 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo;</strong></p>
+<ul>
+<li>原因：当前所连数据库所在服务器，未安装此接口</li>
+<li>解决方案：参见上面第2点</li>
+</ul>
+</li>
+<li>
+<p><strong>消息 15281&hellip;&hellip;SQL Server 阻止了对组件 &lsquo;Ad Hoc Distributed Queries&rsquo; 的 STATEMENT &lsquo;OpenRowset/OpenDatasource&rsquo; 的访问，因为此组件已作为此伺服器安全配置的一部分而被关闭</strong></p>
+<ul>
+<li>可能原因：未开启 Ad Hoc Distributed Queries（即席分布式查询）</li>
+<li>参考解决方案：用代码开启 Ad Hoc Distributed Queries
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>, <span style="color:#ae81ff">1</span>;
 <span style="color:#66d9ef">GO</span>
 RECONFIGURE;
@@ -130,17 +139,40 @@ sp_configure <span style="color:#e6db74">&#39;Ad Hoc Distributed Queries&#39;</s
 <span style="color:#66d9ef">GO</span>
 RECONFIGURE;
 <span style="color:#66d9ef">GO</span>
-</code></pre></div><p>消息 7399&hellip;&hellip;链接伺服器 &ldquo;(null)&rdquo; 的 OLE DB 访问介面 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo; 报错。访问被拒绝。</p>
-<p>消息 7301&hellip;&hellip;无法从链接伺服器 &ldquo;(null)&rdquo; 的 OLE DB 访问介面 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo; 获取所需的介面(&ldquo;IID_IDBCreateCommand&rdquo;)。</p>
-<p>消息 7302 &hellip;&hellip;无法创建链接服务器 &ldquo;(null)&rdquo; 的 OLE DB 访问接口 &ldquo;MSDASC&rdquo; 的实例</p>
-<p><strong>可能原因</strong>：SQL Server(MSSQLSERVER) 的登陆身份不合适</p>
-<p><strong>参考解决方案</strong>：将相关服务的登陆身份改为 local system</p>
-<p><strong>操作方法：</strong></p>
-<p>运行 services.msc，找到SQL Server(MSSQLSERVER)，右键属性，登陆相关选项卡，本地系统帐户。</p>
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>消息 7399&hellip;&hellip;链接服务器 &ldquo;(null)&rdquo; 的 OLE DB 访问介面 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo; 报错。访问被拒绝</strong></p>
+</li>
+<li>
+<p><strong>消息 7301&hellip;&hellip;无法从链接服务器 &ldquo;(null)&rdquo; 的 OLE DB 访问介面 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo; 获取所需的介面(&ldquo;IID_IDBCreateCommand&rdquo;)</strong></p>
+</li>
+<li>
+<p><strong>消息 7302 &hellip;&hellip;无法创建链接服务器 &ldquo;(null)&rdquo; 的 OLE DB 访问接口 &ldquo;MSDASC&rdquo; 的实例</strong></p>
+<ul>
+<li>
+<p>可能原因：SQL Server(MSSQLSERVER) 的登陆身份不合适</p>
+</li>
+<li>
+<p>参考解决方案：将相关服务的登陆身份改为 local system</p>
+</li>
+<li>
+<p>操作方法： 
+运行 services.msc，找到SQL Server(MSSQLSERVER)，右键属性，登陆相关选项卡，本地系统帐户。</p>
+<p>或</p>
 <p>开始&mdash;所有程序&mdash;MicrosoftSQL Server 2008 R2(或其他版本)&mdash;配置工具&mdash;SQLServer 配置管理器，找到SQL Server(MSSQLSERVER) ，右键属性，登陆选项卡，内置帐户改为Local system。</p>
 <p>最后，若在MSSQL JOB中也要用到此接口，则SQL Server代理（MSSQLSERVER）这个服务也要做相同修改。</p>
-<p>返回了消息 &ldquo;Microsoft Access 数据库引擎无法打开文件&quot;&ldquo;或向其写入数据。它已经被其他用户以独占方式打开，或者您没有查看和写入其数据的权限</p>
-<p>文档已被本地帐号打开，关闭即可，如果要打开时也可以访问，请用Windows身份验证方式登陆。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>返回了消息 &ldquo;Microsoft Access 数据库引擎无法打开文件&quot;&ldquo;或向其写入数据。它已经被其他用户以独占方式打开，或者您没有查看和写入其数据的权限</strong></p>
+<ul>
+<li>原因： 文档已被本地帐号打开，关闭即可，如果要打开时也可以访问，请用Windows身份验证方式登陆。</li>
+</ul>
+</li>
+</ul>
 		</div>
 		<footer class="post__footer">
 			

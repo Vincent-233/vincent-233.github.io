@@ -91,7 +91,7 @@
 </div></div>
 		</header>
 		<div class="content post__content clearfix">
-			<p>闲得淡腾，今天试著自己实现了将字符串拆分为列表的功能，中间也有找一些资料，但我知道光看是没有用的，必须要自己试著实现印象才会深刻，必须要在实现过程中遇到问题然后解决问题，反复折腾过才算真正懂了！</p>
+			<p>今天试著自己实现了将字符串拆分为列表的功能，中间也有找一些资料，但我知道光看是没有用的，必须要自己试著实现印象才会深刻，必须要在实现过程中遇到问题然后解决问题，反复折腾过才算真正懂了！</p>
 <p>拆分字符串这种数据处理功能性的代码，写成函数比较合适。</p>
 <p>我写的第一个版本（有局限）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">/*
@@ -148,7 +148,7 @@ bgfr
 <span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.f_MySplit_2&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
 	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_2
 <span style="color:#66d9ef">go</span>
-
+ 
 <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> dbo.f_MySplit_2
 (
     <span style="color:#f92672">@</span>str varchar(<span style="color:#ae81ff">1000</span>),   <span style="color:#75715e">-- 待拆分字符串
@@ -156,26 +156,54 @@ bgfr
 </span><span style="color:#75715e"></span>)
 <span style="color:#66d9ef">returns</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span> <span style="color:#66d9ef">table</span>(item varchar(<span style="color:#ae81ff">100</span>))
 <span style="color:#66d9ef">as</span>
-<span style="color:#66d9ef">begin</span>
+<span style="color:#66d9ef">begin</span>    
     <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">+</span> <span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>)
-
-    <span style="color:#66d9ef">declare</span>
+    
+    <span style="color:#66d9ef">declare</span> 
         <span style="color:#f92672">@</span>start_index int,   <span style="color:#75715e">-- 子串搜索开始点
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>split_len int,     <span style="color:#75715e">-- 分隔符长度
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>fore_location int, <span style="color:#75715e">-- 前一个分隔符的位置
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>back_location int  <span style="color:#75715e">-- 后一个分隔符的位置
-</span><span style="color:#75715e"></span>
+</span><span style="color:#75715e"></span>    
     <span style="color:#66d9ef">select</span>
         <span style="color:#f92672">@</span>start_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
         <span style="color:#f92672">@</span>split_len <span style="color:#f92672">=</span> len(<span style="color:#f92672">@</span>split <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,  <span style="color:#75715e">-- len()不包含尾随空格
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">@</span>fore_location <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
         <span style="color:#f92672">@</span>back_location <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-
+    
     <span style="color:#66d9ef">if</span> len(<span style="color:#66d9ef">isnull</span>(<span style="color:#f92672">@</span>split,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;x&#39;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e">-- 若 @split 为 null 或 &#39;&#39;
 </span><span style="color:#75715e"></span>		<span style="color:#66d9ef">begin</span>
 			<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>fo int
 			<span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-			while <span style="color:#f92672">@</span>fo
+			while <span style="color:#f92672">@</span>fo <span style="color:#f92672">&lt;=</span> len(<span style="color:#f92672">@</span>str)
+				<span style="color:#66d9ef">begin</span>
+					<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span>
+					<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">substring</span>(<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span>fo,<span style="color:#ae81ff">1</span>)
+					<span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>fo <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+				<span style="color:#66d9ef">end</span>
+		<span style="color:#66d9ef">end</span>
+	<span style="color:#66d9ef">else</span>
+        while (<span style="color:#f92672">@</span>start_index <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>split_len  <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;</span> len(<span style="color:#f92672">@</span>str)
+            <span style="color:#66d9ef">begin</span>
+                <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>fore_location <span style="color:#f92672">=</span> charindex(<span style="color:#f92672">@</span>split,<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span>start_index)
+                <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>back_location <span style="color:#f92672">=</span> charindex(<span style="color:#f92672">@</span>split,<span style="color:#f92672">@</span>str,<span style="color:#f92672">@</span>start_index <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>split_len)
+                
+                <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">result</span>
+                <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">substring</span>(<span style="color:#f92672">@</span>str, 
+                                <span style="color:#f92672">@</span>fore_location <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>split_len,                  <span style="color:#75715e">-- 取子串开始点
+</span><span style="color:#75715e"></span>                                <span style="color:#f92672">@</span>back_location <span style="color:#f92672">-</span> <span style="color:#f92672">@</span>fore_location <span style="color:#f92672">-</span> <span style="color:#f92672">@</span>split_len) <span style="color:#75715e">-- 子串长度
+</span><span style="color:#75715e"></span>                                
+                <span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>start_index <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>back_location
+            <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">return</span>
+<span style="color:#66d9ef">end</span>
+ 
+<span style="color:#75715e">-- 测试
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> f_MySplit_2(<span style="color:#e6db74">&#39;I,@,like,@,coding&#39;</span>,<span style="color:#e6db74">&#39;,@,&#39;</span>)
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> f_MySplit_2(<span style="color:#e6db74">&#39;1,2,3,4&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> f_MySplit_2(<span style="color:#e6db74">&#39;1,2,3,4&#39;</span>,<span style="color:#66d9ef">null</span>)
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> f_MySplit_2(<span style="color:#e6db74">&#39;1,2,3,4&#39;</span>,<span style="color:#66d9ef">default</span>)
+<span style="color:#960050;background-color:#1e0010">均能得到预期结果</span>
 </code></pre></div><p>上面代码中两个细节说明一下：</p>
 <p>1、set @str = isnull(@split,'') + @str + isnull(@split,'') ，防止 @split 为空的情况，null 与任何字符串相加的结果都为 null</p>
 <p>2、@split_len = len(@split + &lsquo;x&rsquo;) - 1， 为什么不直接len((@split)呢，因为<a href="http://msdn.microsoft.com/en-us/library/ms190329%28v=sql.90%29.aspx">len(@string)</a>默认不计算尾随的空格，这样处理一下后就变向支持了。</p>
@@ -212,7 +240,8 @@ bgfr
 
 		<span style="color:#66d9ef">RETURN</span>;
 	<span style="color:#66d9ef">END</span>
-</code></pre></div><p>与大家共享一下：</p>
+</code></pre></div><p>后来在网上看到了另一种奇特的方法，除了不支持分隔为空或null外，其余都支持，只是不好写为函数，可以考虑用存储过程，真的很简洁很强大。<br>
+与大家共享一下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 巧用 union 替换分隔符，拆分字符串为列表
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>str varchar(<span style="color:#ae81ff">500</span>), <span style="color:#f92672">@</span>split varchar(<span style="color:#ae81ff">100</span>), <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> varchar(<span style="color:#ae81ff">800</span>)
 <span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;小明呵呵又变帅呵呵了&#39;</span>,<span style="color:#f92672">@</span>split <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;呵呵&#39;</span>
