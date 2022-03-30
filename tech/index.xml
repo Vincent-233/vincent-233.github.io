@@ -386,15 +386,6 @@
     </item>
     
     <item>
-      <title>用SQL Workbench/J批量生成DDL和Insert脚本</title>
-      <link>https://vincent-233.github.io/blog/2019/04/14/89295092/</link>
-      <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>配置ubuntu允许远程SSH连接</title>
       <link>https://vincent-233.github.io/blog/2019/04/13/89282667/</link>
       <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>

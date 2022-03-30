@@ -86,9 +86,7 @@
 			<h1 class="post__title">用SQL Workbench/J批量生成DDL和Insert脚本</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-14T04:41:52Z">2019-04-14</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/" rel="category">工具技巧</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-14T04:41:52Z">2019-04-14</time></div></div>
 		</header>
 		
 <div class="post__toc toc">
@@ -144,7 +142,7 @@ wbconnect <em>profilename</em> （请将profilename替换为实际名称）进�
 	<span style="color:#f92672">-</span><span style="color:#66d9ef">schema</span> <span style="color:#f92672">=</span> Person
 	<span style="color:#f92672">-</span>useSchema <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
 	<span style="color:#f92672">-</span>sourceTable <span style="color:#f92672">=</span> ContactType,AddressType
-	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
+	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>xxx<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
 	<span style="color:#f92672">-</span><span style="color:#66d9ef">encoding</span> <span style="color:#f92672">=</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>;
 
 <span style="color:#75715e">-- 生成Insert 脚本，某个架构除某些表之外的所有表
@@ -155,7 +153,7 @@ wbconnect <em>profilename</em> （请将profilename替换为实际名称）进�
 	<span style="color:#f92672">-</span>useSchema <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
 	<span style="color:#f92672">-</span>sourceTable<span style="color:#f92672">=</span> <span style="color:#f92672">*</span>
 	<span style="color:#f92672">-</span>excludeTables <span style="color:#f92672">=</span> Address, BusinessEntity
-	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
+	<span style="color:#f92672">-</span>outputDir <span style="color:#f92672">=</span> D:<span style="color:#960050;background-color:#1e0010">\</span>Users<span style="color:#960050;background-color:#1e0010">\</span>xxx<span style="color:#960050;background-color:#1e0010">\</span>Documents<span style="color:#960050;background-color:#1e0010">\</span>Temp
 <span style="color:#f92672">-</span><span style="color:#66d9ef">encoding</span> <span style="color:#f92672">=</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>;
 </code></pre></div><p>生成的脚本形式是每个Table一个文件，完整的导出数据命令行参数说明见此<a href="https://www.sql-workbench.eu/manual/command-export.html">链接</a></p>
 <blockquote>
@@ -173,25 +171,36 @@ wbconnect <em>profilename</em> （请将profilename替换为实际名称）进�
 <ul>
 <li>SQL WorkBench作为开源的免费的产品，在跨平台和跨数据库方面已经做很好了</li>
 <li>如果对某种数据库，如MSSQL非常熟悉，当然还是推荐用SSMS来管理和运行SQL，但对于日常要接触多种数据库的开发者（非DBA）来说，不可能每个官方或流行的SQL Client（比如Toad 、PL/SQL Developer之于ORACLE，SSMS之于MSSQL，MYSQL Workbench等等）都去学习深入研究一遍，此时像SQL WorkBench这样的软件就体现出了优势</li>
-<li>当然如果不缺钱或电脑配置非常高，不在乎软件吃太多内存和有太多花哨的功能，可以用商业软件，比如<a href="www.navicat.com">Navicat</a>和<a href="https://www.jetbrains.com/datagrip/">DataGrip</a></li>
+<li>当然如果不缺钱或电脑配置非常高，不在乎软件吃太多内存和有太多花哨的功能，可以用商业软件，比如<a href="https://www.navicat.com">Navicat</a>和<a href="https://www.jetbrains.com/datagrip/">DataGrip</a></li>
 <li>另外有个更加小巧的客户端<a href="http://www.sqldbx.com/">SQLDbx</a>，有个免费版可以和此软件配合一起使用</li>
 </ul>
 		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/tools/" rel="tag">Tools</a>
+		</li>
+	</ul>
+</div>
+		</footer>
 	</article>
 </main>
 
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2019/04/13/89282667/" rel="prev">
+		<a class="pager__link" href="/blog/1/01/01/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">配置ubuntu允许远程SSH连接</p>
+			<p class="pager__title"></p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2019/04/18/89390714/" rel="next">
+		<a class="pager__link" href="/blog/2019/07/09/95170415/" rel="next">
 			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">Pandas读取Excel数据，简单清洗后存入数据库</p>
+			<p class="pager__title">配置everything支持网络路径共享文件夹搜索</p>
 		</a>
 	</div>
 </nav>

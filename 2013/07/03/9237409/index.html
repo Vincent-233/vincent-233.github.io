@@ -86,7 +86,7 @@
 			<h1 class="post__title">SQL练习题（1）</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-07-03T14:28:57Z">2013-07-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/" rel="category">未分类</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-07-03T14:28:57Z">2013-07-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
 	</span>
 </div></div>
 		</header>
@@ -237,8 +237,8 @@ C 3 4</p>
 <span style="color:#66d9ef">from</span> hard a
 <span style="color:#66d9ef">where</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>)
        <span style="color:#66d9ef">from</span> hard
-       <span style="color:#66d9ef">where</span> qu <span style="color:#f92672">=</span> a.qu <span style="color:#66d9ef">and</span> je <span style="color:#f92672">&gt;=</span> a.je)
-</code></pre></div><p>后一种比前一种效率要高！！</p>
+       <span style="color:#66d9ef">where</span> qu <span style="color:#f92672">=</span> a.qu <span style="color:#66d9ef">and</span> je <span style="color:#f92672">&gt;=</span> a.je) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e">-- n则为前n条记录
+</span></code></pre></div><p>后一种比前一种效率要高</p>
 <p><strong>相似类型再来一例（2013-9-16加）</strong></p>
 <p>year product sales</p>
 <hr>
@@ -264,7 +264,7 @@ C 3 4</p>
 <span style="color:#75715e">-- 方法二：
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">year</span>,product,sales <span style="color:#66d9ef">from</span>
 (
-<span style="color:#66d9ef">select</span>
+<span style="color:#66d9ef">select</span> 
     <span style="color:#66d9ef">year</span>,product,sales,
     row_number() over(partition <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">year</span> <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> sales <span style="color:#66d9ef">desc</span>) Rank_Num
 <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t
@@ -275,9 +275,25 @@ C 3 4</p>
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>
     <span style="color:#66d9ef">year</span>,product,sales
 <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t a
-<span style="color:#66d9ef">where</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">year</span> <span style="color:#f92672">=</span> a.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> sales <span style="color:#f92672">&gt;=</span> a.sales) a.sales)
+<span style="color:#66d9ef">where</span> (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">year</span> <span style="color:#f92672">=</span> a.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> sales <span style="color:#f92672">&gt;=</span> a.sales) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">-- n則為前n項
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">-- 方法四：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> a.<span style="color:#66d9ef">year</span>,a.product, a.sales
+<span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t a
+<span style="color:#66d9ef">where</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span>(<span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">year</span><span style="color:#f92672">=</span>a.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> sales <span style="color:#f92672">&gt;</span> a.sales)
 </code></pre></div><p>上述四种方法，效率依次升高。</p>
 		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
 	</article>
 </main>
 
