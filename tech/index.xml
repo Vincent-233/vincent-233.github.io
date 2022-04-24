@@ -6,7 +6,16 @@
     <description>Recent content in Teches on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Mar 2022 19:17:46 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Apr 2022 20:17:46 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于SQL Server LocalDB的使用</title>
+      <link>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</link>
+      <pubDate>Sat, 23 Apr 2022 20:17:46 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</guid>
+      <description>&lt;p&gt;日常工作电脑不方便自行安装SQL Server实例，服务器又是多人共享开发，权限也管理得很严格，不方便个人测试和临时数据存储，好在安装的SSDT附带一个叫LocalDB的功能，可以很方便地进行T-SQL的开发与测试工作。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>windows下robocopy的使用</title>
       <link>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</link>
