@@ -154,11 +154,17 @@ colD CHAR(<span style="color:#ae81ff">6</span>)
 </code></pre></div><p>或</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">sp_refreshview <span style="color:#e6db74">&#39;MyView&#39;</span>
 </code></pre></div><h3 id="4小结">4.小结</h3>
-<p>1）当更改视图所依赖的对象时，应刷新视图，否则查询视图时，可能会生成意外的结果；</p>
-<p>2）不要在视图中用 SELECT *，这样可以一定程度上避免产生意外结果;</p>
-<ol start="3">
-<li>根据实情情况，如果基础表确定不会修改结构或修改结构是非法的，可以创建绑定到架构的视图。</li>
-</ol>
+<ul>
+<li>
+<p>当更改视图所依赖的对象时，应刷新视图，否则查询视图时，可能会生成意外的结果；</p>
+</li>
+<li>
+<p>不要在视图中用 SELECT *，这样可以一定程度上避免产生意外结果;</p>
+</li>
+<li>
+<p>根据实情情况，如果基础表确定不会修改结构或修改结构是非法的，可以创建绑定到架构的视图。</p>
+</li>
+</ul>
 <p>附：刷新所有视图的代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR( <span style="color:#66d9ef">max</span>),<span style="color:#f92672">@</span>quote VARCHAR( <span style="color:#ae81ff">10</span>)
 <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;&#39;</span>;
