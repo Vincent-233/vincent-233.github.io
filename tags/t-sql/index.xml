@@ -170,6 +170,15 @@
     </item>
     
     <item>
+      <title>SQL Server自增列（Identity列）的所有操作</title>
+      <link>https://vincent-233.github.io/blog/2014/04/13/23562967/</link>
+      <pubDate>Sun, 13 Apr 2014 06:13:58 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2014/04/13/23562967/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>为什么要刷新视图</title>
       <link>https://vincent-233.github.io/blog/2014/03/23/21862313/</link>
       <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
