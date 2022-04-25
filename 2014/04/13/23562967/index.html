@@ -169,7 +169,11 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">DBCC CHECKIDENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>,RESEED,<span style="color:#ae81ff">10</span>) <span style="color:#75715e">--下次从11开始
 </span></code></pre></div><h3 id="六将identity11改为identity100001">六、将Identity(1,1)改为Identity(10000,1)</h3>
 <p>这个没有直接的办法，只能绕道而行：</p>
-<p>执行后，表中所有记录的ID会自动按新的种子和递增赋值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span> ID
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">ADD</span> ID INT <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">10000</span>,<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">Go</span>
+</code></pre></div><p>执行后，表中所有记录的ID会自动按新的种子和递增赋值。</p>
 <p>查询数据库中所有含自增列的：表名，表中自增列列表，种子值，增量，当前ID值</p>
 <h3 id="七查询数据库的所有自增列identity列的情况">七、查询数据库的所有自增列（Identity列）的情况</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
