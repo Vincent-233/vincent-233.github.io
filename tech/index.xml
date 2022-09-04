@@ -6,7 +6,17 @@
     <description>Recent content in Teches on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Sep 2022 17:08:34 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Sep 2022 18:59:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自动为git commit message添加JIRA号</title>
+      <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>
+      <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
+      <description>&lt;p&gt;很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Git在线代码管理仓库，若在Branch Name/Pull Request Title/Commit Message中包含JIRA中的Issue号，会自动出现对应JIRA页面的超链接，非常方便追踪问题。&lt;br&gt;
+在commit message中添加JIRA号可作为一个开发规范，但每次提交时都去写一遍Issue Number总感觉很费事，能否让其自动添加呢？&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>SQL Server空表依然占用空间</title>
       <link>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</link>
