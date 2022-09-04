@@ -116,64 +116,64 @@
 <h3 id="思路">思路</h3>
 <p>遍历Excel行，从第一个非空Date列开始，到下个非空Date列，对Amount列进行求和，结果赋给第一个非空Data列对应行的Total列。</p>
 <h3 id="代码">代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> openpyxl
-<span style="color:#f92672">from</span> openpyxl.styles <span style="color:#f92672">import</span> Border, Side, PatternFill, Font, GradientFill, Alignment
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">range_sum</span>(worksheet,start,end):
-    sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> worksheet[start:end]:
-        <span style="color:#66d9ef">for</span> cell <span style="color:#f92672">in</span> row:
-            <span style="color:#66d9ef">if</span> cell<span style="color:#f92672">.</span>value <span style="color:#f92672">!=</span> <span style="color:#66d9ef">None</span>:
-                sum <span style="color:#f92672">+=</span> cell<span style="color:#f92672">.</span>value
-    <span style="color:#66d9ef">return</span> sum
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_blank_row</span>(worksheet,row_num,max_col<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> max_col:
-        max_col <span style="color:#f92672">=</span> worksheet<span style="color:#f92672">.</span>max_column 
-    <span style="color:#66d9ef">for</span> cell <span style="color:#f92672">in</span> worksheet[row_num][:max_col]:
-        <span style="color:#66d9ef">if</span> cell<span style="color:#f92672">.</span>value:
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">total_amount</span>(worksheet):
-    <span style="color:#e6db74">&#34;&#34;&#34; 对某sheet的A、E列合并居中，并对E列求和 &#34;&#34;&#34;</span>
-    ws <span style="color:#f92672">=</span> worksheet
-    row, max_row <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, ws<span style="color:#f92672">.</span>max_row
-    <span style="color:#66d9ef">while</span> row <span style="color:#f92672">&lt;</span> ws<span style="color:#f92672">.</span>max_row:
-        sum_row_start, sum_row_end <span style="color:#f92672">=</span> row, row
-        <span style="color:#66d9ef">for</span> working_row <span style="color:#f92672">in</span> range(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,max_row <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>):
-            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">not</span> is_blank_row(worksheet, working_row<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 上一行有值</span>
-                  <span style="color:#f92672">and</span> (ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>working_row<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>value <span style="color:#f92672">or</span> is_blank_row(worksheet, working_row))): <span style="color:#75715e"># A列有值 或 当前为空行（最后一次合并）</span>
-                    <span style="color:#75715e"># 求和</span>
-                    sum_row_end <span style="color:#f92672">=</span> working_row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> range_sum(ws,<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;C</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;C</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-                    <span style="color:#75715e"># 合并居中</span>
-                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>alignment <span style="color:#f92672">=</span> Alignment(horizontal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, vertical<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)
-                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>alignment <span style="color:#f92672">=</span> Alignment(horizontal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, vertical<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)
-                    ws<span style="color:#f92672">.</span>merge_cells(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">:E</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-                    ws<span style="color:#f92672">.</span>merge_cells(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">:A</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-                    <span style="color:#66d9ef">break</span>
-        row <span style="color:#f92672">=</span> sum_row_end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-    <span style="color:#75715e"># 根据情况修改代码</span>
-    in_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;In.xlsx&#39;</span>
-    processing_sheet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sheet1&#39;</span>
-    path_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Temp&#39;</span>
-    out_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Out.xlsx&#39;</span>
-
-    wb <span style="color:#f92672">=</span> openpyxl<span style="color:#f92672">.</span>load_workbook(filename<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path_name,in_file_name))
-    total_amount(wb[processing_sheet])
-    wb<span style="color:#f92672">.</span>save(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path_name,out_file_name))
-
-<span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;__main__&#39;</span>:
-    main()
-</code></pre></div><h3 id="说明">说明</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> openpyxl
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> openpyxl.styles <span style="color:#f92672">import</span> Border, Side, PatternFill, Font, GradientFill, Alignment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">range_sum</span>(worksheet,start,end):
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> worksheet[start:end]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> cell <span style="color:#f92672">in</span> row:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> cell<span style="color:#f92672">.</span>value <span style="color:#f92672">!=</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">+=</span> cell<span style="color:#f92672">.</span>value
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_blank_row</span>(worksheet,row_num,max_col<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> max_col:
+</span></span><span style="display:flex;"><span>        max_col <span style="color:#f92672">=</span> worksheet<span style="color:#f92672">.</span>max_column 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> cell <span style="color:#f92672">in</span> worksheet[row_num][:max_col]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> cell<span style="color:#f92672">.</span>value:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">total_amount</span>(worksheet):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; 对某sheet的A、E列合并居中，并对E列求和 &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    ws <span style="color:#f92672">=</span> worksheet
+</span></span><span style="display:flex;"><span>    row, max_row <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, ws<span style="color:#f92672">.</span>max_row
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> row <span style="color:#f92672">&lt;</span> ws<span style="color:#f92672">.</span>max_row:
+</span></span><span style="display:flex;"><span>        sum_row_start, sum_row_end <span style="color:#f92672">=</span> row, row
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> working_row <span style="color:#f92672">in</span> range(row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,max_row <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">not</span> is_blank_row(worksheet, working_row<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e"># 上一行有值</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">and</span> (ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>working_row<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>value <span style="color:#f92672">or</span> is_blank_row(worksheet, working_row))): <span style="color:#75715e"># A列有值 或 当前为空行（最后一次合并）</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 求和</span>
+</span></span><span style="display:flex;"><span>                    sum_row_end <span style="color:#f92672">=</span> working_row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> range_sum(ws,<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;C</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;C</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 合并居中</span>
+</span></span><span style="display:flex;"><span>                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>alignment <span style="color:#f92672">=</span> Alignment(horizontal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, vertical<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)
+</span></span><span style="display:flex;"><span>                    ws[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>alignment <span style="color:#f92672">=</span> Alignment(horizontal<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, vertical<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)
+</span></span><span style="display:flex;"><span>                    ws<span style="color:#f92672">.</span>merge_cells(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;E</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">:E</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>                    ws<span style="color:#f92672">.</span>merge_cells(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;A</span><span style="color:#e6db74">{</span>sum_row_start<span style="color:#e6db74">}</span><span style="color:#e6db74">:A</span><span style="color:#e6db74">{</span>sum_row_end<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        row <span style="color:#f92672">=</span> sum_row_end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 根据情况修改代码</span>
+</span></span><span style="display:flex;"><span>    in_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;In.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>    processing_sheet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sheet1&#39;</span>
+</span></span><span style="display:flex;"><span>    path_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Temp&#39;</span>
+</span></span><span style="display:flex;"><span>    out_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Out.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    wb <span style="color:#f92672">=</span> openpyxl<span style="color:#f92672">.</span>load_workbook(filename<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path_name,in_file_name))
+</span></span><span style="display:flex;"><span>    total_amount(wb[processing_sheet])
+</span></span><span style="display:flex;"><span>    wb<span style="color:#f92672">.</span>save(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path_name,out_file_name))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><h3 id="说明">说明</h3>
 <ul>
 <li>本功能用到了openpyxl模块，更多Excel操作请见<a href="https://openpyxl.readthedocs.io">官网</a></li>
 <li>本代码不支持Excel中间有空行的情况，最后有空行无影响</li>

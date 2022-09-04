@@ -112,10 +112,10 @@
 <p>用Python实现之前<a href="https://vincent-233.github.io/blog/2019/07/16/95868267/"><strong>文章中用SQL实现</strong></a>的转换，交叉表转为长宽表。<br>
 <img src="/blog/img/20190714113324753.png" alt=""></p>
 <h3 id="数据准备">数据准备</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\CategoryConfig.csv&#39;</span>)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df
-</code></pre></div><div>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\CategoryConfig.csv&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df
+</span></span></code></pre></div><div>  
 <style scoped>  
     .dataframe tbody tr th:only-of-type {  
         vertical-align: middle;  
@@ -200,11 +200,11 @@ df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>re
 </table>  
 </div>  
 <h3 id="方法一先列转行unpivot拼接后再行转列pivot">方法一，先列转行（UnPivot），拼接后再行转列（Pivot）</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># melt方法列转行，然后拼接新列</span>
-df_melt <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>melt(id_vars <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Category&#39;</span>,<span style="color:#e6db74">&#39;Level&#39;</span>],value_vars<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;B&#39;</span>,<span style="color:#e6db74">&#39;C&#39;</span>,<span style="color:#e6db74">&#39;D&#39;</span>],var_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Type&#39;</span>)
-df_melt[<span style="color:#e6db74">&#39;xType&#39;</span>] <span style="color:#f92672">=</span> df_melt[<span style="color:#e6db74">&#39;Type&#39;</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> df_melt[<span style="color:#e6db74">&#39;Level&#39;</span>]<span style="color:#f92672">.</span>astype(str)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_melt<span style="color:#f92672">.</span>head()
-</code></pre></div><div>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># melt方法列转行，然后拼接新列</span>
+</span></span><span style="display:flex;"><span>df_melt <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>melt(id_vars <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Category&#39;</span>,<span style="color:#e6db74">&#39;Level&#39;</span>],value_vars<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;B&#39;</span>,<span style="color:#e6db74">&#39;C&#39;</span>,<span style="color:#e6db74">&#39;D&#39;</span>],var_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Type&#39;</span>)
+</span></span><span style="display:flex;"><span>df_melt[<span style="color:#e6db74">&#39;xType&#39;</span>] <span style="color:#f92672">=</span> df_melt[<span style="color:#e6db74">&#39;Type&#39;</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> df_melt[<span style="color:#e6db74">&#39;Level&#39;</span>]<span style="color:#f92672">.</span>astype(str)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_melt<span style="color:#f92672">.</span>head()
+</span></span></code></pre></div><div>  
 <style scoped>  
     .dataframe tbody tr th:only-of-type {  
         vertical-align: middle;  
@@ -273,15 +273,15 @@ df_melt[<span style="color:#e6db74">&#39;xType&#39;</span>] <span style="color:#
   </tbody>  
 </table>  
 </div>  
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 数据透视</span>
-df_result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>pivot_table(df_melt[[<span style="color:#e6db74">&#39;Category&#39;</span>,<span style="color:#e6db74">&#39;xType&#39;</span>,<span style="color:#e6db74">&#39;value&#39;</span>]],
-                           index<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Category&#39;</span>,
-                           columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xType&#39;</span>,
-                           values <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;value&#39;</span>,
-                           aggfunc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;max&#39;</span>)
-df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_result
-</code></pre></div><div>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 数据透视</span>
+</span></span><span style="display:flex;"><span>df_result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>pivot_table(df_melt[[<span style="color:#e6db74">&#39;Category&#39;</span>,<span style="color:#e6db74">&#39;xType&#39;</span>,<span style="color:#e6db74">&#39;value&#39;</span>]],
+</span></span><span style="display:flex;"><span>                           index<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Category&#39;</span>,
+</span></span><span style="display:flex;"><span>                           columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xType&#39;</span>,
+</span></span><span style="display:flex;"><span>                           values <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;value&#39;</span>,
+</span></span><span style="display:flex;"><span>                           aggfunc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;max&#39;</span>)
+</span></span><span style="display:flex;"><span>df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_result
+</span></span></code></pre></div><div>  
 <style scoped>  
     .dataframe tbody tr th:only-of-type {  
         vertical-align: middle;  
@@ -351,9 +351,9 @@ df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="col
 </table>  
 </div>  
 <h3 id="方法二先透视再重命名列名">方法二，先透视，再重命名列名</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>pivot_table(df,index<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Category&#39;</span>,columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Level&#39;</span>)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_result
-</code></pre></div><div>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>pivot_table(df,index<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Category&#39;</span>,columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Level&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_result
+</span></span></code></pre></div><div>  
 <style scoped>  
     .dataframe tbody tr th:only-of-type {  
         vertical-align: middle;  
@@ -446,10 +446,10 @@ df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="col
 </table>  
 </div>  
 <p>如上所示，列名为双层索引结构，下一步将其压平为一层结构</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_result<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">.</span>join(map(str,c)) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> df_result<span style="color:#f92672">.</span>columns]
-df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_result
-</code></pre></div><div>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_result<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">.</span>join(map(str,c)) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> df_result<span style="color:#f92672">.</span>columns]
+</span></span><span style="display:flex;"><span>df_result<span style="color:#f92672">.</span>reset_index(inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_result
+</span></span></code></pre></div><div>  
 <style scoped>  
     .dataframe tbody tr th:only-of-type {  
         vertical-align: middle;  

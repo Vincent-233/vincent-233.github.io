@@ -118,14 +118,14 @@
 <p>相关例子见另一篇博文<a href="https://vincent-233.github.io/blog/2019/09/26/101398064/">深刻理解python变量</a></p>
 <h2 id="浅拷贝说明与举例">浅拷贝说明与举例</h2>
 <h3 id="无拷贝">无拷贝</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)]
-b <span style="color:#f92672">=</span> a
-b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
-print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
-print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
-print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
-print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
-</code></pre></div><pre><code>结果：  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)]
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> a
+</span></span><span style="display:flex;"><span>b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</span></span></code></pre></div><pre><code>结果：  
 	id(a) = 2848475391240  
 	id(b) = 2848475391240  
 	a = [4, 2, (3, 4)]  
@@ -134,14 +134,14 @@ print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
 <p>直接赋值，相当于取了别名，其地址是一样的，所以对b元素的修改，也影响了a。</p>
 <h3 id="浅拷贝shallow-copy">浅拷贝（Shallow Copy）</h3>
 <p>使用构造函数<code>list</code>，切片或copy.copy()函数可浅拷贝列表</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
-b <span style="color:#f92672">=</span> list(a) <span style="color:#75715e"># 拷贝列表a值，而不是引用</span>
-b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
-print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
-print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
-print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
-print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
-</code></pre></div><pre><code>结果：  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> list(a) <span style="color:#75715e"># 拷贝列表a值，而不是引用</span>
+</span></span><span style="display:flex;"><span>b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</span></span></code></pre></div><pre><code>结果：  
 	id(a) = 2848460025992  
 	id(b) = 2848475458632  
 	a = [1, 2, [3, 4]]  
@@ -149,12 +149,12 @@ print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
 </code></pre>
 <p>发现a和b的地址不同，对b的改变不会影响a，==但这仅对不可变元素成立==，因为对不可变元素的修改，会生成新的对象，从而指向新的地址，而原来a列表中的元素还是指向老地址。<br>
 由于b[2]是一个List，为可变类型，若对b[2]元素的进行修改，a也会一起变：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
-print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
-print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
-print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
-print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
-</code></pre></div><pre><code>结果:  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</span></span></code></pre></div><pre><code>结果:  
 	id(a) = 2848481489096  
 	id(b) = 2848477955016  
 	a = [1, 2, [100, 4]]  
@@ -164,15 +164,15 @@ print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
 所以浅拷贝只是拷贝了<strong>第一层</strong>地址，如果列表中含<strong>可变类型元素</strong>，则对副本的修改也可能会影响原来的值。</p>
 <h3 id="深拷贝deep-copy">深拷贝（Deep Copy）</h3>
 <p>为了解决以上问题，python有一个copy模块可以实现深拷贝，deepcopy为深拷贝，copy为浅拷贝。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> copy
-a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
-b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
-b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
-print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
-print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
-print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
-print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
-</code></pre></div><pre><code>结果：  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> copy
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
+</span></span><span style="display:flex;"><span>b[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(a) =&#39;</span>,id(a))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;id(b) =&#39;</span>,id(b))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a =&#39;</span>,a)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
+</span></span></code></pre></div><pre><code>结果：  
 	id(a) = 2848487131400  
 	id(b) = 2848487129480  
 	a = [1, 2, [3, 4]]  
@@ -182,14 +182,14 @@ print(<span style="color:#e6db74">&#39;b =&#39;</span>,b)
 深拷贝不仅复制列表第一层的地址，==若列表中含有可变类型元素==，则其对应元素也一起复制，依此类推，有多少层可变类型引用，就复制多少层。</p>
 <h3 id="可变与不可变元素深拷贝的区别">可变与不可变元素深拷贝的区别</h3>
 <p>同样是深拷贝，当所拷贝对象可变或不可变属性不一样时，情况是不一样的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> copy
-a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]]
-b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
-print(<span style="color:#e6db74">&#39;a = &#39;</span>,id(a))
-<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
-print(<span style="color:#e6db74">&#39;b = &#39;</span>,id(b))
-<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> b: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
-</code></pre></div><pre><code>结果：  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> copy
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),[<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]]
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(a)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a = &#39;</span>,id(a))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b = &#39;</span>,id(b))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> b: print(<span style="color:#e6db74">&#39; &#39;</span>,id(x))
+</span></span></code></pre></div><pre><code>结果：  
 	a =  2848483339784  
 	  140711207018896  
 	  2848488706632  

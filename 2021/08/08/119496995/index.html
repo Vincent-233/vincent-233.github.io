@@ -106,12 +106,12 @@
             test_1.py
             test_2.py
 </code></pre><p>在module_2.py中引用module_1.py</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> module_1 <span style="color:#f92672">import</span> class_a
-</code></pre></div><p>然后直接通过python.exe运行module_1.py，一切正常。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> module_1 <span style="color:#f92672">import</span> class_a
+</span></span></code></pre></div><p>然后直接通过python.exe运行module_1.py，一切正常。<br>
 但在app_1.py中引用module_1.py后执行app_1.py却会提示找不到模块module_1。<br>
 后改为</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
-</code></pre></div><p>app_1.py运行正常，但运行module_1.py提到找不到模块common。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
+</span></span></code></pre></div><p>app_1.py运行正常，但运行module_1.py提到找不到模块common。<br>
 还真是按下葫芦浮起瓢呢，让人感觉相当困惑，更加让人震惊的是以上两种情况在vscode下会再现，但通过pycharm运行则一切正常。<br>
 <strong>这是因为pycharm默认将要运行的py文件所在目录以及项目根目录加入到sys.path中了</strong>。</p>
 <p>后查询了相关资料后，发现相对引用容易出错，所以为自己定下一个规则，尽量用从Package根目录开始的绝对引用，就当前例子而言就是从common开始。</p>
@@ -119,15 +119,15 @@
 <ul>
 <li>方式一： 新建一个py文件然后对其进行引用后执行，若py文件不在项目目录下，可在import前加上:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
-sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;your_project_path&#39;</span>)
-<span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
-</code></pre></div><p>若担心模块名称同名，希望保证引用的是正确的模块，可将append操作改为insert: <code>sys.path.insert(0, 'your_project_path')</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;your_project_path&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
+</span></span></code></pre></div><p>若担心模块名称同名，希望保证引用的是正确的模块，可将append操作改为insert: <code>sys.path.insert(0, 'your_project_path')</code></p>
 <ul>
 <li>方式二：在Project目录下用执行模块的方式运行：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python -m common.module_1
-</code></pre></div><p>注意不要加.py后缀名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m common.module_1
+</span></span></code></pre></div><p>注意不要加.py后缀名</p>
 		</div>
 		<footer class="post__footer">
 			

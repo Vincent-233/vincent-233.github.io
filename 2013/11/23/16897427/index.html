@@ -105,63 +105,63 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>先为大家准备点数据：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TA(Acol INT);
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TA
-<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">2</span>;
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TB(Bcol1 INT,Bcol2 VARCHAR(<span style="color:#ae81ff">10</span>));
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TB
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;c&#39;</span>;
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h2 id="1-cross-join">1. Cross Join</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TA(Acol INT);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TA
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TB(Bcol1 INT,Bcol2 VARCHAR(<span style="color:#ae81ff">10</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TB
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>  <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;c&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h2 id="1-cross-join">1. Cross Join</h2>
 <p>Cross Join，交叉联接，其实就是笛卡尔积。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> TB
-<span style="color:#960050;background-color:#1e0010">或</span>
-<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,TB
-</code></pre></div><p>的结果是一样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> TB
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,TB
+</span></span></code></pre></div><p>的结果是一样的：</p>
 <p><img src="/blog/img/20131123102018328" alt=""></p>
 <h2 id="2-cross--outer-apply">2. Cross / Outer Apply</h2>
 <p>请看下面这条语句：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">cross</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
-</code></pre></div><p>结果是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">cross</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
+</span></span></code></pre></div><p>结果是：</p>
 <p>是不是觉得很眼熟，是的，上面的语句和</p>
 <p>select * from TA a inner join TB b on a .Acol = b .Bcol1</p>
 <p>是一样的，甚至执行计划都是一样的，上面的语句完全按照inner join的思路去执行。</p>
 <p>再看用outer apply:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">outer</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
-</code></pre></div><p>结果是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">outer</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b
+</span></span></code></pre></div><p>结果是：</p>
 <p>是不是依然很眼熟，没错，它和</p>
 <p>select * from TA a left join TBb on a .ACol = b .BCol1</p>
 <p>是一样的。执行计划依然一样，上面的语句按left join的思路去执行。</p>
 <p>既然这样，为什么还要多出一个Cross/Outer Apply呢？</p>
 <h2 id="3-cross--outer-apply的专属功能">3. Cross / Outer Apply的专属功能</h2>
 <p>测试数据：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tmp([str] VARCHAR(<span style="color:#ae81ff">100</span>))
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tmp
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;I@@Love@@Coding&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;This@@is@@it&#39;</span>
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><p>假设现在有一个需求，将tmp中每一行都以@@作为分隔符拆分为列表，然后与拆分前的那一行作交叉联接（笛卡尔积）。</p>
-<p>拆分函数网上有很多，为了节省篇幅就不放代码了，可以到我<a href="https://vincent-233.github.io/blog/2013/10/20/12889707/">另一篇博文</a>中看。假设此拆分函数为dbo.f_Split(@str varchar(1000),@delimiter varchar(100) = '' )，@str为源字符串，@delimiter为分隔符。先用常量作为函数参数来理解一下上面所说的需求：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
-<span style="color:#960050;background-color:#1e0010">或</span>
-<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
-</code></pre></div><p>结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tmp([str] VARCHAR(<span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tmp
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;I@@Love@@Coding&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;This@@is@@it&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><p>假设现在有一个需求，将tmp中每一行都以@@作为分隔符拆分为列表，然后与拆分前的那一行作交叉联接（笛卡尔积）。</p>
+<p>拆分函数网上有很多，为了节省篇幅就不放代码了，可以到我<a href="https://vincent-233.github.io/blog/2013/10/20/12889707/">另一篇博文</a>中看。假设此拆分函数为dbo.f_Split(@str varchar(1000),@delimiter varchar(100) = &rsquo;&rsquo; )，@str为源字符串，@delimiter为分隔符。先用常量作为函数参数来理解一下上面所说的需求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">join</span> dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,dbo.f_Split(<span style="color:#e6db74">&#39;Xiao;;Ming&#39;</span>,<span style="color:#e6db74">&#39;;;&#39;</span>)
+</span></span></code></pre></div><p>结果：</p>
 <p>可以看到TA中的行和表值函数返回的表作了联接。上面的cross join就可以做到。再看一下用表中的列作函数参数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">Join</span> dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>)b
-</code></pre></div><p>结果是报错：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> <span style="color:#66d9ef">Join</span> dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>)b
+</span></span></code></pre></div><p>结果是报错：</p>
 <p>现在Cross Apply 的作用就真正体现出来了：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> apply dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>) b
-</code></pre></div><p>结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tmp a <span style="color:#66d9ef">cross</span> apply dbo.f_Split(a.[str],<span style="color:#e6db74">&#39;@@&#39;</span>) b
+</span></span></code></pre></div><p>结果：</p>
 <h2 id="4-小结">4. 小结</h2>
 <ol>
 <li>

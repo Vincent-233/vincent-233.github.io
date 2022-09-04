@@ -115,40 +115,40 @@
 <ul>
 <li>在CREATE TABLE 中：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test
-(
-	ID INT <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>),  <span style="color:#75715e">--(seed = 1,increment = 1) 从1开始,每次递增1
-</span><span style="color:#75715e"></span>	Content NVARCHAR(<span style="color:#ae81ff">200</span>)
-)
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	ID INT <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>),  <span style="color:#75715e">--(seed = 1,increment = 1) 从1开始,每次递增1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	Content NVARCHAR(<span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><ul>
 <li>在SELECT INTO 中：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
-	<span style="color:#66d9ef">IDENTITY</span>(INT,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">1</span>) ID,
-	ColName
-<span style="color:#66d9ef">INTO</span> <span style="color:#f92672">#</span>temp 
-<span style="color:#66d9ef">FROM</span> TableName
-</code></pre></div><h3 id="二自增列属性函数">二、自增列属性函数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">IDENTITY</span>(INT,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">1</span>) ID,
+</span></span><span style="display:flex;"><span>	ColName
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INTO</span> <span style="color:#f92672">#</span>temp 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> TableName
+</span></span></code></pre></div><h3 id="二自增列属性函数">二、自增列属性函数</h3>
 <p>一个表最多只能有一个自增列。</p>
 <p>下面的三个函数，可以很方便地查看表中identity列的情况</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
-    IDENT_SEED(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_SEED]        <span style="color:#75715e">-- 表中自增列的种子值
-</span><span style="color:#75715e"></span>   ,IDENT_INCR(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_INCR]        <span style="color:#75715e">-- 表中自增列的的增量
-</span><span style="color:#75715e"></span>   ,IDENT_CURRENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_CURRENT]  <span style="color:#75715e">-- 表中自增列的当前值
-</span></code></pre></div><p>表中的自增列一旦创建就不能更改种子值和增量值了，只能更改当前值。要修改只有先删除再重建了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>    IDENT_SEED(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_SEED]        <span style="color:#75715e">-- 表中自增列的种子值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   ,IDENT_INCR(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_INCR]        <span style="color:#75715e">-- 表中自增列的的增量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   ,IDENT_CURRENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_CURRENT]  <span style="color:#75715e">-- 表中自增列的当前值
+</span></span></span></code></pre></div><p>表中的自增列一旦创建就不能更改种子值和增量值了，只能更改当前值。要修改只有先删除再重建了</p>
 <p>使用上面三个函数的一例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Identity_test(Content) <span style="color:#75715e">-- 不写出ID列，它自动增加
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str1&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str2&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str3&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str4&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str5&#39;</span>
-
-<span style="color:#66d9ef">SELECT</span>
-    IDENT_SEED(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_SEED]	<span style="color:#75715e">-- 1
-</span><span style="color:#75715e"></span>   ,IDENT_INCR(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_INCR]	<span style="color:#75715e">-- 1
-</span><span style="color:#75715e"></span>   ,IDENT_CURRENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_CURRENT]	<span style="color:#75715e">-- 5
-</span></code></pre></div><p>DELETE 不会让ID断流，下次的ID值是ID列的增量+上次的ID值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Identity_test(Content) <span style="color:#75715e">-- 不写出ID列，它自动增加
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str1&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str2&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str3&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str4&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Str5&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>    IDENT_SEED(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_SEED]	<span style="color:#75715e">-- 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   ,IDENT_INCR(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_INCR]	<span style="color:#75715e">-- 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   ,IDENT_CURRENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>) [IDENT_CURRENT]	<span style="color:#75715e">-- 5
+</span></span></span></code></pre></div><p>DELETE 不会让ID断流，下次的ID值是ID列的增量+上次的ID值。</p>
 <p>Truncate 会让ID列重新开始。</p>
 <h3 id="三全局变量identity">三、全局变量@@Identity</h3>
 <p>@@Identity可以获取最近产生的一个ID值，一般是Insert 之后产生的。不区分具体表。</p>
@@ -156,35 +156,35 @@
 <h3 id="四显式插入id列">四、显式插入ID列</h3>
 <p>这个需要先开启 SET IDENTITY_INSERT TableName ON，而且不能省略Insert后面括号里的列名列表。</p>
 <p>例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> IDENTITY_INSERT dbo.Identity_test <span style="color:#66d9ef">ON</span>
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Identity_test(ID,Content) <span style="color:#75715e">-- 显式写出列表，至少ID列表不能少
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">11</span>,<span style="color:#e6db74">&#39;Repeat&#39;</span>
-
-<span style="color:#66d9ef">SET</span> IDENTITY_INSERT dbo.Identity_test <span style="color:#66d9ef">OFF</span>
-</code></pre></div><p>注意：<strong>只要ID列不是主键，没有设唯一索引，它的值是可以重复的</strong>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> IDENTITY_INSERT dbo.Identity_test <span style="color:#66d9ef">ON</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Identity_test(ID,Content) <span style="color:#75715e">-- 显式写出列表，至少ID列表不能少
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">11</span>,<span style="color:#e6db74">&#39;Repeat&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> IDENTITY_INSERT dbo.Identity_test <span style="color:#66d9ef">OFF</span>
+</span></span></code></pre></div><p>注意：<strong>只要ID列不是主键，没有设唯一索引，它的值是可以重复的</strong>。</p>
 <h3 id="五重置当前列表值">五、重置当前列表值</h3>
 <p>在必要的时候，可以用DBCC CHECKIDENT命令来重置表中自增列的当前ID值。</p>
 <p>如下示例将表的重置为10：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">DBCC CHECKIDENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>,RESEED,<span style="color:#ae81ff">10</span>) <span style="color:#75715e">--下次从11开始
-</span></code></pre></div><h3 id="六将identity11改为identity100001">六、将Identity(1,1)改为Identity(10000,1)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>DBCC CHECKIDENT(<span style="color:#e6db74">&#39;dbo.Identity_test&#39;</span>,RESEED,<span style="color:#ae81ff">10</span>) <span style="color:#75715e">--下次从11开始
+</span></span></span></code></pre></div><h3 id="六将identity11改为identity100001">六、将Identity(1,1)改为Identity(10000,1)</h3>
 <p>这个没有直接的办法，只能绕道而行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span> ID
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">ADD</span> ID INT <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">10000</span>,<span style="color:#ae81ff">1</span>)
-<span style="color:#66d9ef">Go</span>
-</code></pre></div><p>执行后，表中所有记录的ID会自动按新的种子和递增赋值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">COLUMN</span> ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> dbo.Identity_test <span style="color:#66d9ef">ADD</span> ID INT <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">10000</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Go</span>
+</span></span></code></pre></div><p>执行后，表中所有记录的ID会自动按新的种子和递增赋值。</p>
 <p>查询数据库中所有含自增列的：表名，表中自增列列表，种子值，增量，当前ID值</p>
 <h3 id="七查询数据库的所有自增列identity列的情况">七、查询数据库的所有自增列（Identity列）的情况</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
-	 b.name TableName
-	,a.name ColumnName
-	,a.seed_value
-	,a.increment_value
-	,a.last_value
-<span style="color:#66d9ef">FROM</span>  sys.identity_columns a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.tables b <span style="color:#66d9ef">ON</span> a.object_id <span style="color:#f92672">=</span> b.object_id
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>	 b.name TableName
+</span></span><span style="display:flex;"><span>	,a.name ColumnName
+</span></span><span style="display:flex;"><span>	,a.seed_value
+</span></span><span style="display:flex;"><span>	,a.increment_value
+</span></span><span style="display:flex;"><span>	,a.last_value
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>  sys.identity_columns a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.tables b <span style="color:#66d9ef">ON</span> a.object_id <span style="color:#f92672">=</span> b.object_id
+</span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">
 			

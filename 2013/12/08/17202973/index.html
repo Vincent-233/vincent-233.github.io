@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SQL 行转列 与 列转行 - 诗和远方</title>
+	<title>SQL行转列与列转行 - 诗和远方</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,7 +83,7 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">SQL 行转列 与 列转行</h1>
+			<h1 class="post__title">SQL行转列与列转行</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-12-08T10:44:16Z">2013-12-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
@@ -105,84 +105,84 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>先准备点数据：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Sell
-(
-  [<span style="color:#66d9ef">Year</span>] INT,
-  [Quarter] NVARCHAR(<span style="color:#ae81ff">10</span>),
-  Quantity INT
-)
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Sell
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">20</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">15</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">12</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q4&#39;</span>, <span style="color:#ae81ff">18</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2007</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2007</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">7</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q4&#39;</span>, <span style="color:#ae81ff">9</span>
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h2 id="1-何为行列互换">1. 何为行列互换</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Sell
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>  [<span style="color:#66d9ef">Year</span>] INT,
+</span></span><span style="display:flex;"><span>  [Quarter] NVARCHAR(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>  Quantity INT
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Sell
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">20</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">15</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">12</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2006</span>, <span style="color:#e6db74">&#39;Q4&#39;</span>, <span style="color:#ae81ff">18</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2007</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2007</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q1&#39;</span>, <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q2&#39;</span>, <span style="color:#ae81ff">7</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q3&#39;</span>, <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2008</span>, <span style="color:#e6db74">&#39;Q4&#39;</span>, <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h2 id="1-何为行列互换">1. 何为行列互换</h2>
 <p>简单地说，就是实现如下形式的相互转换</p>
 <p>行转列是将某行中的值作为了标题，而列转行就是将标题变为了列中的值。</p>
 <h2 id="2-行转列">2. 行转列</h2>
 <p>1） 静态<br>
 静态适合于要转换为行的列值是确定的一些值，或值不是很多的情况</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- MSSQL 2005+ Pivot 静态（行转列）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
-<span style="color:#66d9ef">FROM</span>   sell PIVOT( <span style="color:#66d9ef">SUM</span>(quantity) <span style="color:#66d9ef">FOR</span> [quarter] <span style="color:#66d9ef">IN</span> ( Q1, Q2, Q3, Q4 ) ) p
-
-<span style="color:#75715e">-- MSSQL 2000+ 静态（行转列）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>
-	[<span style="color:#66d9ef">Year</span>],
-	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q1,
-	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q2,
-	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q3,
-	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q4
-<span style="color:#66d9ef">FROM</span> Sell
-<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Year</span>]
-</code></pre></div><p>2） 动态<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- MSSQL 2005+ Pivot 静态（行转列）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>   sell PIVOT( <span style="color:#66d9ef">SUM</span>(quantity) <span style="color:#66d9ef">FOR</span> [quarter] <span style="color:#66d9ef">IN</span> ( Q1, Q2, Q3, Q4 ) ) p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- MSSQL 2000+ 静态（行转列）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>	[<span style="color:#66d9ef">Year</span>],
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q1,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q2,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q3,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> [Quarter] <span style="color:#66d9ef">WHEN</span> N<span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">THEN</span> Quantity <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>) Q4
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sell
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Year</span>]
+</span></span></code></pre></div><p>2） 动态<br>
 当要转换为行的列值不确定或非常多的时候，可以用动态 SQL</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- MSSQL 2005+ Pivot 动态（行转列）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR(<span style="color:#ae81ff">1000</span>), <span style="color:#f92672">@</span>distinct_val VARCHAR(<span style="color:#ae81ff">500</span>) ;
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT * FROM sell PIVOT(SUM(quantity) FOR [quarter] IN (&#39;</span> ;
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>distinct_val <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> STUFF(( <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> <span style="color:#e6db74">&#39;,&#39;</span> <span style="color:#f92672">+</span> [quarter] <span style="color:#66d9ef">FROM</span> sell <span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;&#39;</span>)), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;&#39;</span>)) ;
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>distinct_val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;))&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; p&#39;</span>
-<span style="color:#66d9ef">EXEC</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>)
-
-<span style="color:#75715e">-- MSSQL 2000+ 动态（行转列）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR(<span style="color:#ae81ff">2000</span>)
-
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT [Year]&#39;</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;,SUM(CASE [Quarter] WHEN &#39;&#39;&#39;</span> <span style="color:#f92672">+</span> [Quarter] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#39;&#39; THEN [Quantity] ELSE 0 END) &#39;</span> <span style="color:#f92672">+</span> [Quarter]
-<span style="color:#66d9ef">FROM</span> sell
-<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> [Quarter]
-
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; FROM Sell GROUP BY [Year]&#39;</span>
-
-<span style="color:#66d9ef">EXEC</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>)
-</code></pre></div><h2 id="3-列转行">3. 列转行</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- MSSQL 2005+ Pivot 动态（行转列）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR(<span style="color:#ae81ff">1000</span>), <span style="color:#f92672">@</span>distinct_val VARCHAR(<span style="color:#ae81ff">500</span>) ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT * FROM sell PIVOT(SUM(quantity) FOR [quarter] IN (&#39;</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>distinct_val <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> STUFF(( <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> <span style="color:#e6db74">&#39;,&#39;</span> <span style="color:#f92672">+</span> [quarter] <span style="color:#66d9ef">FROM</span> sell <span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;&#39;</span>)), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;&#39;</span>)) ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>distinct_val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;))&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; p&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- MSSQL 2000+ 动态（行转列）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR(<span style="color:#ae81ff">2000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT [Year]&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;,SUM(CASE [Quarter] WHEN &#39;&#39;&#39;</span> <span style="color:#f92672">+</span> [Quarter] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#39;&#39; THEN [Quantity] ELSE 0 END) &#39;</span> <span style="color:#f92672">+</span> [Quarter]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sell
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> [Quarter]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; FROM Sell GROUP BY [Year]&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span>)
+</span></span></code></pre></div><h2 id="3-列转行">3. 列转行</h2>
 <p>列转行用动态比较麻烦，而且不好把控新的标题，其实实现的思路和上面行转列一样，就是找规律构造SQL。这里仅给出静态（假设上面语句的结果已保存在表 Sell_2 中）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 用 unpovit
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],[Quarter],[Quantity]
-<span style="color:#66d9ef">from</span> sell_2 unpivot(Quantity <span style="color:#66d9ef">for</span> [Quarter] <span style="color:#66d9ef">in</span>(Q1,Q2,Q3,Q4)) b
-
-<span style="color:#75715e">-- 不用 unpivot（静态）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q1&#39;</span> [Quarter], Q1 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
-<span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q2&#39;</span> [Quarter], Q2 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
-<span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q3&#39;</span> [Quarter], Q3 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
-<span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q4&#39;</span> [Quarter], Q4 [Quantity] <span style="color:#66d9ef">from</span> Sell_2
-<span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>
-</code></pre></div><h2 id="4-小结">4. 小结</h2>
-<p>2） Pivot 大致的执行过程：先按未出现在Pivot表达时中的列进行分组，再按in中的枚举项分别聚合。其实和select case when 类似。</p>
-<p>3） 当列值不确认时，可以构造动态SQL实现；</p>
-<p>4） 列转行Pivot和select .. Case&hellip;的性能差不多，但行转列，用<a href="http://technet.microsoft.com/zh-cn/library/ms177410%28v=sql.105%29.aspx">unPivot</a> 相比union [all]性能优势非常明显，毕竟后者要多次访问表，而且unPivot还更简洁。</p>
-<p>5） Pivot 和 unPiovt 并非完全可逆，因为Pivot的时候，行已经被聚合过了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 用 unpovit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],[Quarter],[Quantity]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> sell_2 unpivot(Quantity <span style="color:#66d9ef">for</span> [Quarter] <span style="color:#66d9ef">in</span>(Q1,Q2,Q3,Q4)) b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 不用 unpivot（静态）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q1&#39;</span> [Quarter], Q1 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q2&#39;</span> [Quarter], Q2 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q3&#39;</span> [Quarter], Q3 [Quantity] <span style="color:#66d9ef">from</span> Sell_2 <span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q4&#39;</span> [Quarter], Q4 [Quantity] <span style="color:#66d9ef">from</span> Sell_2
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h2 id="4-小结">4. 小结</h2>
+<p>1） Pivot 大致的执行过程：先按未出现在Pivot表达时中的列进行分组，再按in中的枚举项分别聚合。其实和select case when 类似。</p>
+<p>2） 当列值不确认时，可以构造动态SQL实现；</p>
+<p>3） 列转行Pivot和select .. Case&hellip;的性能差不多，但行转列，用<a href="http://technet.microsoft.com/zh-cn/library/ms177410%28v=sql.105%29.aspx">unPivot</a> 相比union [all]性能优势非常明显，毕竟后者要多次访问表，而且unPivot还更简洁。</p>
+<p>4） Pivot 和 unPiovt 并非完全可逆，因为Pivot的时候，行已经被聚合过了。</p>
 		</div>
 		<footer class="post__footer">
 			

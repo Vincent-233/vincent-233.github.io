@@ -113,41 +113,41 @@
 <p>操作步骤：<br>
 1、在MSSQL实例服务上右键属性，在FileStream面板上将相关选项打上勾；<br>
 2、在SSMS上运行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 0表示关闭FileStream访问，1表示只允许T-SQL访问，2表示允许T-SQL和Win32访问
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> sp_configure filestream_access_level, <span style="color:#ae81ff">2</span>
-RECONFIGURE
-</code></pre></div><p>3、重启SQL服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 0表示关闭FileStream访问，1表示只允许T-SQL访问，2表示允许T-SQL和Win32访问
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> sp_configure filestream_access_level, <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>RECONFIGURE
+</span></span></code></pre></div><p>3、重启SQL服务。</p>
 <h3 id="创建支持filestream的文件组和表">创建支持FileStream的文件组和表</h3>
 <p>为TestDB增加支持FileStream的文件组：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILEGROUP TestDBFG <span style="color:#66d9ef">CONTAINS</span> FILESTREAM
-</code></pre></div><p>为文件组添加文件，作为存储文件的路径，注意下面代码中的路径不要已经存在，否则会报错</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILE (
-NAME <span style="color:#f92672">=</span> FileStrmFile,
-FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\MyTest\FileStreamPath&#39;</span>)
-<span style="color:#66d9ef">TO</span> FILEGROUP TestDBFG
-</code></pre></div><p>创建带FileStream列的表：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.Records
-(
-	[Id] [uniqueidentifier] ROWGUIDCOL <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">UNIQUE</span>, 
-	[SerialNumber] INTEGER <span style="color:#66d9ef">UNIQUE</span>,
-	[Chart] VARBINARY(<span style="color:#66d9ef">MAX</span>) FILESTREAM <span style="color:#66d9ef">NULL</span>
-)
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><p>执行上面代码后，发现FileStream文件夹已自动创建：<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILEGROUP TestDBFG <span style="color:#66d9ef">CONTAINS</span> FILESTREAM
+</span></span></code></pre></div><p>为文件组添加文件，作为存储文件的路径，注意下面代码中的路径不要已经存在，否则会报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> TestDB <span style="color:#66d9ef">ADD</span> FILE (
+</span></span><span style="display:flex;"><span>NAME <span style="color:#f92672">=</span> FileStrmFile,
+</span></span><span style="display:flex;"><span>FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\MyTest\FileStreamPath&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TO</span> FILEGROUP TestDBFG
+</span></span></code></pre></div><p>创建带FileStream列的表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.Records
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	[Id] [uniqueidentifier] ROWGUIDCOL <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">UNIQUE</span>, 
+</span></span><span style="display:flex;"><span>	[SerialNumber] INTEGER <span style="color:#66d9ef">UNIQUE</span>,
+</span></span><span style="display:flex;"><span>	[Chart] VARBINARY(<span style="color:#66d9ef">MAX</span>) FILESTREAM <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><p>执行上面代码后，发现FileStream文件夹已自动创建：<br>
 <img src="/blog/img/2018060307301298" alt=""></p>
 <h3 id="插入文件数据体验效果">插入文件数据体验效果</h3>
 <p>下面的代码将一图片插入到表中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>img <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>)
-
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>img <span style="color:#f92672">=</span> <span style="color:#66d9ef">CAST</span>(bulkcolumn <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>))
-      <span style="color:#66d9ef">FROM</span> OPENROWSET(
-            BULK
-            <span style="color:#e6db74">&#39;C:\MyTest\TestPic.png&#39;</span>,
-            SINGLE_BLOB ) <span style="color:#66d9ef">AS</span> x
-            
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Records(Id,SerialNumber,Chart) 
-<span style="color:#66d9ef">SELECT</span> NEWID(), <span style="color:#ae81ff">1</span>,<span style="color:#f92672">@</span>img
-</code></pre></div><p>用sp_spaceused查看表的占用空间，远比图片本身的空间少。说明表中的二进制列存储的并不是文件本身，而是一个类似文件指针的属性数据。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>img <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>img <span style="color:#f92672">=</span> <span style="color:#66d9ef">CAST</span>(bulkcolumn <span style="color:#66d9ef">AS</span> VARBINARY(<span style="color:#66d9ef">MAX</span>))
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">FROM</span> OPENROWSET(
+</span></span><span style="display:flex;"><span>            BULK
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;C:\MyTest\TestPic.png&#39;</span>,
+</span></span><span style="display:flex;"><span>            SINGLE_BLOB ) <span style="color:#66d9ef">AS</span> x
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Records(Id,SerialNumber,Chart) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> NEWID(), <span style="color:#ae81ff">1</span>,<span style="color:#f92672">@</span>img
+</span></span></code></pre></div><p>用sp_spaceused查看表的占用空间，远比图片本身的空间少。说明表中的二进制列存储的并不是文件本身，而是一个类似文件指针的属性数据。</p>
 <h3 id="关于filestream文件的删除">关于FileStream文件的删除</h3>
 <p>如果直接运行Delete语句FileStream并不会马上被删除，这是因为SQL并不会实时对它进行维护，而是有一个垃圾回收后台进程在异步处理，当到达一个<a href="https://docs.microsoft.com/en-us/sql/relational-databases/logs/database-checkpoints-sql-server?view=sql-server-2017">checkpoint</a>时，才会回收不需要的数据。如果想手动触发，可以直接运行CheckPoint命令达到效果，若数据库的恢复模式是Full，还要先备份事务日志才可以。</p>
 		</div>

@@ -114,38 +114,38 @@
 <img src="/blog/img/20170320160621950" alt=""><br>
 架构就是一个命名空间，标识一系统对象的集合，与用户名是完全独立的，一个架构可被任何用户拥有，并且是可转移的。</p>
 <h3 id="相关示例脚本">相关示例脚本</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--创建登陆名（首次登陆必须改密码）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> LOGIN [Jay] <span style="color:#66d9ef">WITH</span> PASSWORD<span style="color:#f92672">=</span>N<span style="color:#e6db74">&#39;1234&#39;</span> MUST_CHANGE, DEFAULT_DATABASE<span style="color:#f92672">=</span>[master], CHECK_EXPIRATION<span style="color:#f92672">=</span><span style="color:#66d9ef">ON</span>, CHECK_POLICY<span style="color:#f92672">=</span><span style="color:#66d9ef">ON</span>;
-
-<span style="color:#75715e">--登陆名映射数据库用户名
-</span><span style="color:#75715e"></span>USE [TestDB];
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> [Jay] <span style="color:#66d9ef">FOR</span> LOGIN [Jay];
-
-<span style="color:#75715e">--为登陆名添加sysdamin服务器角色
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> master..sp_addsrvrolemember <span style="color:#f92672">@</span>loginame <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;Jay&#39;</span>, <span style="color:#f92672">@</span>rolename <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;sysadmin&#39;</span>
-
-<span style="color:#75715e">--为用户添加db_owner数据库角色
-</span><span style="color:#75715e"></span>USE [TestDB];
-<span style="color:#66d9ef">EXEC</span> sp_addrolemember N<span style="color:#e6db74">&#39;db_owneer&#39;</span>, N<span style="color:#e6db74">&#39;Jay&#39;</span>;
-
-<span style="color:#75715e">-- 更改用户dbo对应的登陆名
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> sp_changedbowner <span style="color:#e6db74">&#39;Jay&#39;</span>;
-
-<span style="color:#75715e">--更改登陆名密码
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> LOGIN [Jay] <span style="color:#66d9ef">WITH</span> PASSWORD<span style="color:#f92672">=</span>N<span style="color:#e6db74">&#39;`1234&#39;</span>;
-
-<span style="color:#75715e">--赋予用户对表的select权限（其他对象和权限类似）
-</span><span style="color:#75715e"></span>USE [TestDB];
-<span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> dual <span style="color:#66d9ef">TO</span> Jay;
-
-<span style="color:#75715e">--赋予用户数据库对象的select权限（其他权限类似）
-</span><span style="color:#75715e"></span>USE [TestDB];
-<span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">TO</span> Jay;
-
-<span style="color:#75715e">--收回用户对表的select权限
-</span><span style="color:#75715e"></span>USE [TestDB];
-<span style="color:#66d9ef">REVOKE</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> dual <span style="color:#66d9ef">TO</span> Jay;
-</code></pre></div><p>###<strong>参考文档</strong>###<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">--创建登陆名（首次登陆必须改密码）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> LOGIN [Jay] <span style="color:#66d9ef">WITH</span> PASSWORD<span style="color:#f92672">=</span>N<span style="color:#e6db74">&#39;1234&#39;</span> MUST_CHANGE, DEFAULT_DATABASE<span style="color:#f92672">=</span>[master], CHECK_EXPIRATION<span style="color:#f92672">=</span><span style="color:#66d9ef">ON</span>, CHECK_POLICY<span style="color:#f92672">=</span><span style="color:#66d9ef">ON</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--登陆名映射数据库用户名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [TestDB];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> [Jay] <span style="color:#66d9ef">FOR</span> LOGIN [Jay];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--为登陆名添加sysdamin服务器角色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> master..sp_addsrvrolemember <span style="color:#f92672">@</span>loginame <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;Jay&#39;</span>, <span style="color:#f92672">@</span>rolename <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;sysadmin&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--为用户添加db_owner数据库角色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [TestDB];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> sp_addrolemember N<span style="color:#e6db74">&#39;db_owneer&#39;</span>, N<span style="color:#e6db74">&#39;Jay&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 更改用户dbo对应的登陆名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> sp_changedbowner <span style="color:#e6db74">&#39;Jay&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--更改登陆名密码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> LOGIN [Jay] <span style="color:#66d9ef">WITH</span> PASSWORD<span style="color:#f92672">=</span>N<span style="color:#e6db74">&#39;`1234&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--赋予用户对表的select权限（其他对象和权限类似）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [TestDB];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> dual <span style="color:#66d9ef">TO</span> Jay;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--赋予用户数据库对象的select权限（其他权限类似）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [TestDB];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">TO</span> Jay;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--收回用户对表的select权限
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [TestDB];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">REVOKE</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> dual <span style="color:#66d9ef">TO</span> Jay;
+</span></span></code></pre></div><p>###<strong>参考文档</strong>###<br>
 <a href="https://technet.microsoft.com/en-us/library/bb510589(v=sql.105).aspx">安全性与保护，总目录</a><br>
 <a href="https://technet.microsoft.com/en-us/library/ff848791(v=sql.105).aspx">安全性操作语句</a></p>
 		</div>

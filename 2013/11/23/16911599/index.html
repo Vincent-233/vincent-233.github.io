@@ -109,74 +109,74 @@
 <p>%[吖-咗]%: 所有汉字</p>
 <h2 id="1-去除汉字字母数字">1. 去除汉字(字母、数字)：</h2>
 <p>举出一例，其他类似：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_RemoveChinese
-(
-    <span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
-)
-<span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
-<span style="color:#66d9ef">AS</span>
-<span style="color:#66d9ef">BEGIN</span>
- <span style="color:#75715e">--  &#39;%[0-9]%&#39;            所有数字
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[A-Za-z]%&#39;         所有字母
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[A-Za-z0-9]%&#39;      所有数字与字母
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--   ....                组合使用，依此类推
-</span><span style="color:#75715e"></span>    WHILE PATINDEX(<span style="color:#e6db74">&#39;%[吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
-
-    <span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
-<span style="color:#66d9ef">END</span>
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">SELECT</span> dbo.f_RemoveChinese(<span style="color:#e6db74">&#39;爱@@情123骗子我问@@你&#39;</span>)  <span style="color:#75715e">-- @@123@@
-</span></code></pre></div><h2 id="2-提取汉字字母数字">2. 提取汉字(字母、数字)：</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_RemoveChinese
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">--  &#39;%[0-9]%&#39;            所有数字
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[A-Za-z]%&#39;         所有字母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[A-Za-z0-9]%&#39;      所有数字与字母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--   ....                组合使用，依此类推
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    WHILE PATINDEX(<span style="color:#e6db74">&#39;%[吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> dbo.f_RemoveChinese(<span style="color:#e6db74">&#39;爱@@情123骗子我问@@你&#39;</span>)  <span style="color:#75715e">-- @@123@@
+</span></span></span></code></pre></div><h2 id="2-提取汉字字母数字">2. 提取汉字(字母、数字)：</h2>
 <p>提取XX可转化为去除非XX。举出一例，其他类似</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_getChinese
-(
-   <span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
-)
-<span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
-<span style="color:#66d9ef">AS</span>
-<span style="color:#66d9ef">BEGIN</span>
- <span style="color:#75715e">--  &#39;%[^0-9]%&#39;            所有数字
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[^A-Za-z]%&#39;         所有字母
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[^A-Za-z0-9]%&#39;      所有数字与字母
-</span><span style="color:#75715e"></span> <span style="color:#75715e">--   ....                组合使用，依此类推
-</span><span style="color:#75715e"></span>    WHILE PATINDEX(<span style="color:#e6db74">&#39;%[^吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[^吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
-
-    <span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
-<span style="color:#66d9ef">END</span>
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">SELECT</span> dbo.f_getChinese(<span style="color:#e6db74">&#39;爱@@情123骗子我问@@你&#39;</span>)  <span style="color:#75715e">-- 爱情骗子我问你
-</span></code></pre></div><h2 id="3-提取数字支持小数点">3. 提取数字（支持小数点）：</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_getChinese
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">--  &#39;%[^0-9]%&#39;            所有数字
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[^A-Za-z]%&#39;         所有字母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--  &#39;%[^A-Za-z0-9]%&#39;      所有数字与字母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#75715e">--   ....                组合使用，依此类推
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    WHILE PATINDEX(<span style="color:#e6db74">&#39;%[^吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[^吖-咗]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> dbo.f_getChinese(<span style="color:#e6db74">&#39;爱@@情123骗子我问@@你&#39;</span>)  <span style="color:#75715e">-- 爱情骗子我问你
+</span></span></span></code></pre></div><h2 id="3-提取数字支持小数点">3. 提取数字（支持小数点）：</h2>
 <p>上面的代码将模式直接换成 &lsquo;%[^0-9]%&lsquo;的话，不支持带小数点的数字，下面给出一个修正的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 提取所有汉字（字母、数字）
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_GetNum
-(
-	<span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
-)
-<span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
-<span style="color:#66d9ef">AS</span>
-<span style="color:#66d9ef">BEGIN</span>
-	<span style="color:#75715e">-- get num and dot
-</span><span style="color:#75715e"></span>	WHILE (PATINDEX(<span style="color:#e6db74">&#39;%[^0-9.]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
-		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[^1-9.]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
-
-	<span style="color:#75715e">-- remove left dot
-</span><span style="color:#75715e"></span>	WHILE(<span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>)
-		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str,LEN(<span style="color:#f92672">@</span>str)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-
-	<span style="color:#75715e">-- remove right dot
-</span><span style="color:#75715e"></span>	WHILE(<span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>)
-		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>str,LEN(<span style="color:#f92672">@</span>str)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-
-	<span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
-<span style="color:#66d9ef">END</span>
-<span style="color:#66d9ef">GO</span>
-
-<span style="color:#66d9ef">SELECT</span> dbo.f_GetNum(<span style="color:#e6db74">&#39;爱@@..情1.23骗子我问...@@你&#39;</span>)  <span style="color:#75715e">-- 1.23
-</span></code></pre></div><p>其他更加复杂的需求，也是在上面基础上再做一些调整与优化，总之核心思想不变。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 提取所有汉字（字母、数字）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> f_GetNum
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">@</span>str VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> VARCHAR(<span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- get num and dot
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	WHILE (PATINDEX(<span style="color:#e6db74">&#39;%[^0-9.]%&#39;</span>,<span style="color:#f92672">@</span>str) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> STUFF(<span style="color:#f92672">@</span>str,PATINDEX(<span style="color:#e6db74">&#39;%[^1-9.]%&#39;</span>,<span style="color:#f92672">@</span>str),<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- remove left dot
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	WHILE(<span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str,LEN(<span style="color:#f92672">@</span>str)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- remove right dot
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	WHILE(<span style="color:#66d9ef">RIGHT</span>(<span style="color:#f92672">@</span>str,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>str <span style="color:#f92672">=</span> <span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>str,LEN(<span style="color:#f92672">@</span>str)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>str
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> dbo.f_GetNum(<span style="color:#e6db74">&#39;爱@@..情1.23骗子我问...@@你&#39;</span>)  <span style="color:#75715e">-- 1.23
+</span></span></span></code></pre></div><p>其他更加复杂的需求，也是在上面基础上再做一些调整与优化，总之核心思想不变。</p>
 		</div>
 		<footer class="post__footer">
 			
@@ -203,7 +203,7 @@
 	<div class="pager__item pager__item--next">
 		<a class="pager__link" href="/blog/2013/12/08/17202973/" rel="next">
 			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">SQL 行转列 与 列转行</p>
+			<p class="pager__title">SQL行转列与列转行</p>
 		</a>
 	</div>
 </nav>

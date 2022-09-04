@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DBA眼中的CLR - 诗和远方</title>
+	<title>DBA眼中的CLR (译) - 诗和远方</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,7 +83,7 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">DBA眼中的CLR</h1>
+			<h1 class="post__title">DBA眼中的CLR (译)</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-03-04T16:13:25Z">2017-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
@@ -132,42 +132,45 @@ CLR作为一个强有力的工具，开发者可在数据库中利用它调用�
 <p><strong>UNSAFE</strong>。在将程序集设为UNSAFE时请三思，此级别的程序集在SQL Server内外都拥有不受约束的访问权限。在UNSAFE程序集里的代码也可能是不受管理的代码，意味著它有让服务器不稳定的可能。仅sysadmins用户组的用户可以登陆UNSAFE的程序集。</p>
 <p>默认的，CLR代码都是在SQL SERVER服务帐号的安全上下文运行，如果你要访问SQL Server之外的资源，这就会有问题，最好的做法是不超过服务帐号的权限。但是CLR代码可以通过模拟其他Windows帐号来运行。UNSAFE和EXTERNAL ACCESS安全级别的程序集有这种能力。可以创建这种程序集的人必须是深受公司信任的。</p>
 <h2 id="理解clr元数据"><strong>理解CLR元数据</strong></h2>
-<p>在一个启用了CLR选项的环境中，DBA应该对如下5个包含了元数据信息的系统视图非常熟悉：<br>
-<strong>sys.assembiles.</strong> 此视图每行记录对应一个程序集。它包含了程序集的一些属性，比如名称、安全级别和创建日期。<br>
-<strong>sys.assembly_files.</strong> 对数据库中每一个程序集，这个视图都包含了一行信息说明其源文件、DLL文件。<br>
-**sys.assembly_modules. ** 一个程序集可能包含多个类，比如存储过程和函数。程序集里的类可能包含多个实现不同功能的代码模块。这个视图将各自独立的代码模块ID与引用它们的数据库对象ID关联在一起了。如下查询可以查出每个CLR数据库对象引用的程序集的类和方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(m.object_id) <span style="color:#66d9ef">AS</span> db_object
-      ,a.name <span style="color:#66d9ef">AS</span> assembly
-      ,m.assembly_class
-      ,m.assembly_method
-<span style="color:#66d9ef">FROM</span> sys.assembly_modules m
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> m.assembly_id
-</code></pre></div><p>**sys.assembly_references.**程序集之间的相互引用依赖关系。<br>
-<strong>sys.module_assembly_usages</strong>将程序集的ID与引用它们的数据库对象ID，关系起来了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> db_object
-      ,a.name <span style="color:#66d9ef">AS</span> assembly
-<span style="color:#66d9ef">FROM</span> sys.module_assembly_usages u 
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> u.assembly_id
-</code></pre></div><h2 id="移除clr程序集"><strong>移除CLR程序集</strong></h2>
+<p>在一个启用了CLR选项的环境中，DBA应该对如下5个包含了元数据信息的系统视图非常熟悉：</p>
+<ul>
+<li><strong>sys.assembiles</strong>：此视图每行记录对应一个程序集。它包含了程序集的一些属性，比如名称、安全级别和创建日期。</li>
+<li><strong>sys.assembly_files</strong>：对数据库中每一个程序集，这个视图都包含了一行信息说明其源文件、DLL文件。</li>
+<li><strong>sys.assembly_modules</strong>： 一个程序集可能包含多个类，比如存储过程和函数。程序集里的类可能包含多个实现不同功能的代码模块。这个视图将各自独立的代码模块ID与引用它们的数据库对象ID关联在一起了。如下查询可以查出每个CLR数据库对象引用的程序集的类和方法：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(m.object_id) <span style="color:#66d9ef">AS</span> db_object
+</span></span><span style="display:flex;"><span>      ,a.name <span style="color:#66d9ef">AS</span> assembly
+</span></span><span style="display:flex;"><span>      ,m.assembly_class
+</span></span><span style="display:flex;"><span>      ,m.assembly_method
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.assembly_modules m
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> m.assembly_id
+</span></span></code></pre></div><ul>
+<li><strong>sys.assembly_references</strong>：程序集之间的相互引用依赖关系。</li>
+<li><strong>sys.module_assembly_usages</strong>：将程序集的ID与引用它们的数据库对象ID，关系起来了。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> db_object
+</span></span><span style="display:flex;"><span>      ,a.name <span style="color:#66d9ef">AS</span> assembly
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.module_assembly_usages u 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies a <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> u.assembly_id
+</span></span></code></pre></div><h2 id="移除clr程序集"><strong>移除CLR程序集</strong></h2>
 <p>VS可以很方便创建和部署CLR程序集到SQL Server中，但并没有同样方便的工具去卸载它们。你必须有顺序地手动将它们移动。<br>
 在移除某程序集之前可以通过查看依赖项先移动那些引用此程序集的T-Sql对象，可以Sp_Depends或在对象资源管理器中右键查看。</p>
 <h2 id="更好的改变"><strong>更好的改变</strong></h2>
 <p>纯T-SQL的数据库编程时代正在发生变化，CLR正是这一迹象的例子。尽管有人会有点排斥，但正是变化让DBA生涯变得有趣。CLR真正突破了T-SQL在某些方面的限制。两种模式的混合编程能力是一个强大的工具，DBA和开发者都应该掌握它们。</p>
-<p><a href="http://sqlmag.com/database-development/common-language-runtime-dba-point-view">原文链接</a></p>
 <h2 id="附常用查询"><strong>附常用查询</strong></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Assembly Query 
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_modules;
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assemblies;
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_files;
-
-<span style="color:#75715e">-- CLR Object In Database
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.objects <span style="color:#66d9ef">WHERE</span> type_desc <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;CLR%&#39;</span>;
-
-<span style="color:#75715e">-- 哪些系统对象引用了CLR程序集
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> [Object_Name],b.Name <span style="color:#66d9ef">AS</span> Assembly_Name
-<span style="color:#66d9ef">FROM</span> sys.module_assembly_usages a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies b <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> b.assembly_id;
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- Assembly Query 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_modules;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assemblies;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.assembly_files;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- CLR Object In Database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.objects <span style="color:#66d9ef">WHERE</span> type_desc <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;CLR%&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 哪些系统对象引用了CLR程序集
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> OBJECT_NAME(object_id) <span style="color:#66d9ef">AS</span> [Object_Name],b.Name <span style="color:#66d9ef">AS</span> Assembly_Name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.module_assembly_usages a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> sys.assemblies b <span style="color:#66d9ef">ON</span> a.assembly_id <span style="color:#f92672">=</span> b.assembly_id;
+</span></span></code></pre></div><p>原文链接：https://www.itprotoday.com/sql-server/common-language-runtime-dba-point-view</p>
 		</div>
 		<footer class="post__footer">
 			

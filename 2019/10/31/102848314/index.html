@@ -121,21 +121,21 @@
 </code></pre>
 <p>现用python进行文件遍历与过滤</p>
 <h3 id="显示当前层级文件夹">显示当前层级文件夹</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-work_folder <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other&#39;</span>
-os<span style="color:#f92672">.</span>listdir(work_folder)
-</code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>work_folder <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other&#39;</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>listdir(work_folder)
+</span></span></code></pre></div><p>结果如下：</p>
 <pre><code>['input', 'temp', 'input-archive', 'git']  
 </code></pre>
 <h3 id="遍历所有文件和文件夹含子文件夹">遍历所有文件和文件夹（含子文件夹）</h3>
 <p>如下代码中root是基准文件夹，dirs是基准文件夹下的文件夹，files为基准文件夹下的文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">exclude  <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;git&#39;</span>,<span style="color:#e6db74">&#39;temp&#39;</span>]    <span style="color:#75715e"># 遍历时希望排除的文件夹</span>
-<span style="color:#66d9ef">for</span> root, dirs, files <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>walk(work_folder):
-    <span style="color:#66d9ef">for</span> ex <span style="color:#f92672">in</span> exclude:
-        <span style="color:#66d9ef">if</span> ex <span style="color:#f92672">in</span> dirs:
-            dirs<span style="color:#f92672">.</span>remove(ex)  <span style="color:#75715e"># 移除 dirs 中不想继续遍历的文件夹</span>
-    print(root,dirs,files)
-</code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>exclude  <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;git&#39;</span>,<span style="color:#e6db74">&#39;temp&#39;</span>]    <span style="color:#75715e"># 遍历时希望排除的文件夹</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> root, dirs, files <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>walk(work_folder):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> ex <span style="color:#f92672">in</span> exclude:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ex <span style="color:#f92672">in</span> dirs:
+</span></span><span style="display:flex;"><span>            dirs<span style="color:#f92672">.</span>remove(ex)  <span style="color:#75715e"># 移除 dirs 中不想继续遍历的文件夹</span>
+</span></span><span style="display:flex;"><span>    print(root,dirs,files)
+</span></span></code></pre></div><p>结果如下：</p>
 <pre><code>/home/ghost/workspace/Other ['input', 'input-archive', 'git'] []  
 /home/ghost/workspace/Other/input ['csv'] ['test_file_1.txt', 'test_file_2.txt', 'test.csv']  
 /home/ghost/workspace/Other/input/csv [] ['test_file_2.csv', 'test_file_1.csv']  
@@ -143,11 +143,11 @@ os<span style="color:#f92672">.</span>listdir(work_folder)
 </code></pre>
 <h3 id="模式匹配过滤文件">模式匹配过滤文件</h3>
 <p>找出目录下所有csv文件（含子目录），这里用到<a href="https://docs.python.org/3.7/library/glob.html">glob</a>模块，recursive为True配合 ** 符号代表递归向下搜索。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> glob
-pat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other/input/**/*.csv&#39;</span>
-<span style="color:#66d9ef">for</span> csv <span style="color:#f92672">in</span> glob<span style="color:#f92672">.</span>glob(pat,recursive <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>):
-    print(csv)
-</code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> glob
+</span></span><span style="display:flex;"><span>pat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workspace/Other/input/**/*.csv&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> csv <span style="color:#f92672">in</span> glob<span style="color:#f92672">.</span>glob(pat,recursive <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>    print(csv)
+</span></span></code></pre></div><p>结果如下：</p>
 <pre><code>/home/ghost/workspace/Other/input/test.csv  
 /home/ghost/workspace/Other/input/csv/test_file_2.csv  
 /home/ghost/workspace/Other/input/csv/test_file_1.csv  

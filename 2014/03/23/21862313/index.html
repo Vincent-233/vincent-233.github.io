@@ -112,37 +112,37 @@
 <p>有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。</p>
 <p>很多人第一次遇到此情况时，会非常惊讶，是不是SQL Server有Bug，其实其他数据库管理系统照样需要刷新，这可能涉及到数据库的底层实现逻辑，我们End User就不用太关心了，只要知道视图只是存储定义的Select语句和所依赖表的MegaData就可以了。</p>
 <h3 id="2问题再现">2.问题再现</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 创建基础表
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">IF</span> OBJECT_ID(<span style="color:#e6db74">&#39;Mytable&#39;</span>,<span style="color:#e6db74">&#39;U&#39;</span>) <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
-	<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> MyTable
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> MyTable
-(
-colA CHAR(<span style="color:#ae81ff">3</span>),
-colB CHAR(<span style="color:#ae81ff">4</span>),
-colC CHAR(<span style="color:#ae81ff">5</span>),
-colD CHAR(<span style="color:#ae81ff">6</span>)
-)
-<span style="color:#66d9ef">GO</span>
-<span style="color:#75715e">-- 插入测试数据
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> MyTable
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#e6db74">&#39;4&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#e6db74">&#39;d&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;w&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;y&#39;</span>,<span style="color:#e6db74">&#39;z&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;one&#39;</span>,<span style="color:#e6db74">&#39;two&#39;</span>,<span style="color:#e6db74">&#39;three&#39;</span>,<span style="color:#e6db74">&#39;four&#39;</span>
-<span style="color:#66d9ef">GO</span>
-<span style="color:#75715e">-- 创建视图
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">IF</span> OBJECT_ID(<span style="color:#e6db74">&#39;MyView&#39;</span>,<span style="color:#e6db74">&#39;V&#39;</span>) <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
-	<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">VIEW</span> MyVIew
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> MyVIew <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><p>运行 SELECT * FROM MyVIew ，一切正常：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 创建基础表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">IF</span> OBJECT_ID(<span style="color:#e6db74">&#39;Mytable&#39;</span>,<span style="color:#e6db74">&#39;U&#39;</span>) <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> MyTable
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> MyTable
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>colA CHAR(<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>colB CHAR(<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>colC CHAR(<span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>colD CHAR(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 插入测试数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> MyTable
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#e6db74">&#39;4&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#e6db74">&#39;d&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;w&#39;</span>,<span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;y&#39;</span>,<span style="color:#e6db74">&#39;z&#39;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;one&#39;</span>,<span style="color:#e6db74">&#39;two&#39;</span>,<span style="color:#e6db74">&#39;three&#39;</span>,<span style="color:#e6db74">&#39;four&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 创建视图
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">IF</span> OBJECT_ID(<span style="color:#e6db74">&#39;MyView&#39;</span>,<span style="color:#e6db74">&#39;V&#39;</span>) <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">VIEW</span> MyVIew
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> MyVIew <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><p>运行 SELECT * FROM MyVIew ，一切正常：</p>
 <p><img src="/blog/img/20140323112214593" alt=""></p>
 <p>更改MyTable的结构信息：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> colA varchar(<span style="color:#ae81ff">3</span>)
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ADD</span> ColE varchar(<span style="color:#ae81ff">10</span>)
-</code></pre></div><p>再运行 SELECT *FROM MyVIew ，结果居然还是老样子！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> colA varchar(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ADD</span> ColE varchar(<span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><p>再运行 SELECT *FROM MyVIew ，结果居然还是老样子！</p>
 <p>而运行视图的定义：SELECT * FROM MyTable ，结果是预期中的：</p>
 <p><img src="/blog/img/20140323112503484" alt=""></p>
 <p>对比一下MyTable 和 MyView的结构信息(sp_help &lsquo;MyTable&rsquo; 、 sp_help &lsquo;MyView&rsquo;)，会发现MyViews仍保持原样：</p>
@@ -150,10 +150,10 @@ colD CHAR(<span style="color:#ae81ff">6</span>)
 <p>而Table已更新：</p>
 <h3 id="3问题解决">3.问题解决</h3>
 <p>用原来的定义重新ALTER一下，或刷新视图</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">VIEW</span> MyVIew <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable
-</code></pre></div><p>或</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">sp_refreshview <span style="color:#e6db74">&#39;MyView&#39;</span>
-</code></pre></div><h3 id="4小结">4.小结</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">VIEW</span> MyVIew <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable
+</span></span></code></pre></div><p>或</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_refreshview <span style="color:#e6db74">&#39;MyView&#39;</span>
+</span></span></code></pre></div><h3 id="4小结">4.小结</h3>
 <ul>
 <li>
 <p>当更改视图所依赖的对象时，应刷新视图，否则查询视图时，可能会生成意外的结果；</p>
@@ -166,12 +166,12 @@ colD CHAR(<span style="color:#ae81ff">6</span>)
 </li>
 </ul>
 <p>附：刷新所有视图的代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR( <span style="color:#66d9ef">max</span>),<span style="color:#f92672">@</span>quote VARCHAR( <span style="color:#ae81ff">10</span>)
-<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;&#39;</span>;
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">ISNULL</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> ,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;exec sp_refreshview &#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">+</span> [name] <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)
-<span style="color:#66d9ef">FROM</span> sys .views
-<span style="color:#66d9ef">EXEC</span> (<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> )
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> VARCHAR( <span style="color:#66d9ef">max</span>),<span style="color:#f92672">@</span>quote VARCHAR( <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">ISNULL</span>(<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> ,<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;exec sp_refreshview &#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">+</span> [name] <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>quote <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys .views
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> (<span style="color:#f92672">@</span><span style="color:#66d9ef">sql</span> )
+</span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">
 			

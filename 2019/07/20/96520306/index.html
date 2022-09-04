@@ -110,51 +110,51 @@
 			<p>今天介绍4种列转行（又称宽表转长表、逆透视等）写法。<br>
 <img src="/blog/img/20190817151945576.png" alt=""></p>
 <h3 id="数据准备">数据准备</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Sales([<span style="color:#66d9ef">Year</span>] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT);
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Sales([<span style="color:#66d9ef">Year</span>],Q1,Q2,Q3,Q4)
-    <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">2017</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">123</span>,<span style="color:#ae81ff">324</span>,<span style="color:#ae81ff">123</span>)
-          ,(<span style="color:#ae81ff">2018</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">455</span>,<span style="color:#ae81ff">324</span>,<span style="color:#ae81ff">878</span>)
-          ,(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">29</span>,<span style="color:#ae81ff">786</span>,<span style="color:#ae81ff">473</span>,<span style="color:#ae81ff">633</span>);
-</code></pre></div><h3 id="sql写法">SQL写法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Sales([<span style="color:#66d9ef">Year</span>] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> Sales([<span style="color:#66d9ef">Year</span>],Q1,Q2,Q3,Q4)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">2017</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">123</span>,<span style="color:#ae81ff">324</span>,<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>          ,(<span style="color:#ae81ff">2018</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">455</span>,<span style="color:#ae81ff">324</span>,<span style="color:#ae81ff">878</span>)
+</span></span><span style="display:flex;"><span>          ,(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">29</span>,<span style="color:#ae81ff">786</span>,<span style="color:#ae81ff">473</span>,<span style="color:#ae81ff">633</span>);
+</span></span></code></pre></div><h3 id="sql写法">SQL写法</h3>
 <h5 id="union">UNION</h5>
 <p>最传统最通用写法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q1 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q2 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q3 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-<span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q4 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales; 
-</code></pre></div><h5 id="unpivot">UNPIVOT</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q1 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q2 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q3 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],<span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],Q4 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">FROM</span> Sales; 
+</span></span></code></pre></div><h5 id="unpivot">UNPIVOT</h5>
 <p>unpivot 的独特语法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],[Quarter],[Amount]
-<span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">AS</span> a
-UNPIVOT(Amount <span style="color:#66d9ef">FOR</span> [Quarter] <span style="color:#66d9ef">IN</span> (Q1,Q2,Q3,Q4)) <span style="color:#66d9ef">AS</span> b;
-</code></pre></div><h5 id="cross--join">CROSS  JOIN</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> [<span style="color:#66d9ef">Year</span>],[Quarter],[Amount]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales <span style="color:#66d9ef">AS</span> a
+</span></span><span style="display:flex;"><span>UNPIVOT(Amount <span style="color:#66d9ef">FOR</span> [Quarter] <span style="color:#66d9ef">IN</span> (Q1,Q2,Q3,Q4)) <span style="color:#66d9ef">AS</span> b;
+</span></span></code></pre></div><h5 id="cross--join">CROSS  JOIN</h5>
 <p>其实就是笛卡尔积，用CROSS JOIN是MSSQL的推荐写法，其它数据库若不支持此语法，可以将CROSS JOIN替换为逗号，或用Join On 1 = 1</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>],b.[Quarter]
-      ,<span style="color:#66d9ef">CASE</span> b.[Quarter] 
-           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">THEN</span> Q1
-           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">THEN</span> Q2
-           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">THEN</span> Q3
-           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">THEN</span> Q4
-       <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> Amout
-<span style="color:#66d9ef">FROM</span> Sales a
-<span style="color:#66d9ef">CROSS</span> <span style="color:#66d9ef">JOIN</span> (<span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Q1&#39;</span>),(<span style="color:#e6db74">&#39;Q2&#39;</span>),(<span style="color:#e6db74">&#39;Q3&#39;</span>),(<span style="color:#e6db74">&#39;Q4&#39;</span>)) <span style="color:#66d9ef">AS</span> b([Quarter]);
-</code></pre></div><h5 id="cross-apply">CROSS APPLY</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>],b.[Quarter]
+</span></span><span style="display:flex;"><span>      ,<span style="color:#66d9ef">CASE</span> b.[Quarter] 
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">THEN</span> Q1
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q2&#39;</span> <span style="color:#66d9ef">THEN</span> Q2
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q3&#39;</span> <span style="color:#66d9ef">THEN</span> Q3
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">WHEN</span> <span style="color:#e6db74">&#39;Q4&#39;</span> <span style="color:#66d9ef">THEN</span> Q4
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> Amout
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> <span style="color:#66d9ef">JOIN</span> (<span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Q1&#39;</span>),(<span style="color:#e6db74">&#39;Q2&#39;</span>),(<span style="color:#e6db74">&#39;Q3&#39;</span>),(<span style="color:#e6db74">&#39;Q4&#39;</span>)) <span style="color:#66d9ef">AS</span> b([Quarter]);
+</span></span></code></pre></div><h5 id="cross-apply">CROSS APPLY</h5>
 <p>CROSS APPLY是个强大的操作符，也可以用来实现unpivot：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>], b.[Quarter],b.Amount
-<span style="color:#66d9ef">FROM</span> Sales a
-<span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],a.Q1 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
-             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q2&#39;</span>,a.Q2 <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
-             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q3&#39;</span>,a.Q3 <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
-             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q4&#39;</span>,a.Q4) <span style="color:#66d9ef">AS</span> b;
-<span style="color:#75715e">-- 或
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>], b.[Quarter],b.Amount
-<span style="color:#66d9ef">FROM</span> Sales a
-<span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Q1&#39;</span>,a.Q1)
-                   ,(<span style="color:#e6db74">&#39;Q2&#39;</span>,a.Q2)
-                   ,(<span style="color:#e6db74">&#39;Q3&#39;</span>,a.Q3)
-                   ,(<span style="color:#e6db74">&#39;Q4&#39;</span>,a.Q4)) <span style="color:#66d9ef">AS</span> b([Quarter],Amount);
-</code></pre></div><h3 id="总结与说明">总结与说明</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>], b.[Quarter],b.Amount
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q1&#39;</span> <span style="color:#66d9ef">AS</span> [Quarter],a.Q1 <span style="color:#66d9ef">AS</span> Amount <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q2&#39;</span>,a.Q2 <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q3&#39;</span>,a.Q3 <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span> 
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;Q4&#39;</span>,a.Q4) <span style="color:#66d9ef">AS</span> b;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 或
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> a.[<span style="color:#66d9ef">Year</span>], b.[Quarter],b.Amount
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Q1&#39;</span>,a.Q1)
+</span></span><span style="display:flex;"><span>                   ,(<span style="color:#e6db74">&#39;Q2&#39;</span>,a.Q2)
+</span></span><span style="display:flex;"><span>                   ,(<span style="color:#e6db74">&#39;Q3&#39;</span>,a.Q3)
+</span></span><span style="display:flex;"><span>                   ,(<span style="color:#e6db74">&#39;Q4&#39;</span>,a.Q4)) <span style="color:#66d9ef">AS</span> b([Quarter],Amount);
+</span></span></code></pre></div><h3 id="总结与说明">总结与说明</h3>
 <ul>
 <li>传统的Union写法需要扫描多次基表，效率最差</li>
 <li>UNPIVOT写法最简洁，而且执行效率高，但语法有点晦涩，不是SQL的典型风格</li>

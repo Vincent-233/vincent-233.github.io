@@ -109,102 +109,101 @@
 <h4 id="新建文件组filegroups">新建文件组（FileGroups）</h4>
 <p>新建用于承载具体分区的文件组，数据库默认有只有一个Primary文件组。<br>
 也可以在单个文件中建立多个分区。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">USE [master]
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_1]
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_2]
-<span style="color:#66d9ef">GO</span>
-<span style="color:#75715e">-- 增加文件组-物理文件
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
-<span style="color:#66d9ef">ADD</span> FILE   
-(  
-    NAME <span style="color:#f92672">=</span> TestDB_FG_1,  
-    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_1.ndf&#39;</span>,  
-    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
-    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
-)  
-<span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_1]; 
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
-<span style="color:#66d9ef">ADD</span> FILE   
-(  
-    NAME <span style="color:#f92672">=</span> TestDB_FG_2,  
-    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_2.ndf&#39;</span>,  
-    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
-    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
-)  
-<span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_2]; 
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h4 id="创建-分区函数partition-function">创建 分区函数（Partition Function）</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE [master]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_1]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705] <span style="color:#66d9ef">ADD</span> FILEGROUP [TestDB_FG_2]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 增加文件组-物理文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> FILE   
+</span></span><span style="display:flex;"><span>(  
+</span></span><span style="display:flex;"><span>    NAME <span style="color:#f92672">=</span> TestDB_FG_1,  
+</span></span><span style="display:flex;"><span>    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_1.ndf&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
+</span></span><span style="display:flex;"><span>    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
+</span></span><span style="display:flex;"><span>)  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_1]; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> [TestDB_20170705]   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> FILE   
+</span></span><span style="display:flex;"><span>(  
+</span></span><span style="display:flex;"><span>    NAME <span style="color:#f92672">=</span> TestDB_FG_2,  
+</span></span><span style="display:flex;"><span>    FILENAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;E:\DB-File\TestDB_FG_2.ndf&#39;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SIZE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB,  
+</span></span><span style="display:flex;"><span>    FILEGROWTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>MB  
+</span></span><span style="display:flex;"><span>)  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TO</span> FILEGROUP [TestDB_FG_2]; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h4 id="创建-分区函数partition-function">创建 分区函数（Partition Function）</h4>
 <p>分区函数用于决定分区表中数据如何对应到具体的分区</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 代表以20000为分界点，实际也可以声明多个分界点
-</span><span style="color:#75715e">-- Left表示 &lt;= 20000,即20000存储在分界点左边分区
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION <span style="color:#66d9ef">FUNCTION</span> MyPF_Test(INT)
-<span style="color:#66d9ef">AS</span> RANGE <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">20000</span>)
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h4 id="创建-分区方案partition-scheme">创建 分区方案（Partition Scheme）</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 代表以20000为分界点，实际也可以声明多个分界点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- Left表示 &lt;= 20000,即20000存储在分界点左边分区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION <span style="color:#66d9ef">FUNCTION</span> MyPF_Test(INT)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span> RANGE <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">20000</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h4 id="创建-分区方案partition-scheme">创建 分区方案（Partition Scheme）</h4>
 <p>根据分区函数将表中数据Map到具体的文件组</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 分区函数有N个分界点，则引用它的分区方案有N+1个文件组
-</span><span style="color:#75715e">-- 分区列&lt;=20000的数据放在默认的Primary文件组，其余的放在TestDB_FG_1文件组
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test
-<span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>],TestDB_FG_1)
-<span style="color:#66d9ef">GO</span> 
-
-<span style="color:#75715e">-- 若为单文件多个分区
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test2
-<span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">All</span> <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>])
-<span style="color:#66d9ef">GO</span>
-
-</code></pre></div><h4 id="创建-分区表partition-table">创建 分区表（Partition Table）</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 分区函数有N个分界点，则引用它的分区方案有N+1个文件组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 分区列&lt;=20000的数据放在默认的Primary文件组，其余的放在TestDB_FG_1文件组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>],TestDB_FG_1)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 若为单文件多个分区
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> PARTITION SCHEME myPS_Test2
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span> PARTITION MyPF_Test <span style="color:#66d9ef">All</span> <span style="color:#66d9ef">TO</span> ([<span style="color:#66d9ef">PRIMARY</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h4 id="创建-分区表partition-table">创建 分区表（Partition Table）</h4>
 <ul>
 <li><strong>新建分区表</strong></li>
 </ul>
 <p>在创建表时定义分区方案，这个根据EID的值进行分区</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TestEmp
-(
-EID INT,
-Name NVARCHAR(<span style="color:#ae81ff">200</span>),
-JoinDate DATETIME
-) 
-<span style="color:#66d9ef">ON</span> MyPS_Test(EID)
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TestEmp
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>EID INT,
+</span></span><span style="display:flex;"><span>Name NVARCHAR(<span style="color:#ae81ff">200</span>),
+</span></span><span style="display:flex;"><span>JoinDate DATETIME
+</span></span><span style="display:flex;"><span>) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> MyPS_Test(EID)
+</span></span></code></pre></div><ul>
 <li><strong>将非分区表转换为分区表</strong><br>
 可以先备份原表数据，Drop原表，再将数据插回来。<br>
 若不想这么麻烦，可以直接重建索引来实现。<br>
 若表存在聚集索引，则分区列必须为聚焦索引的一部分。<br>
 下面将Employee（以EID为主键）表转换为分区表：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 移除主键约束(SQL会同步移除聚焦索引)
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] 
-<span style="color:#66d9ef">GO</span>
-<span style="color:#75715e">-- 重新创建分区索引
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> CLUSTERED ([EID]) <span style="color:#66d9ef">ON</span> myPS_Test(EID)
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h4 id="分区表元数据查询">分区表元数据查询</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 分区表数据分布情况
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  OBJECT_NAME(i.object_id) <span style="color:#66d9ef">AS</span> ObjectName
-       ,<span style="color:#66d9ef">c</span>.name <span style="color:#66d9ef">AS</span> PartitioningColumn
-       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">50</span>), ps.name) <span style="color:#66d9ef">AS</span> partition_scheme
-       ,p.partition_number
-       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">10</span>), ds2.name) <span style="color:#66d9ef">AS</span> filegroup
-       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">19</span>), <span style="color:#66d9ef">ISNULL</span>(v.value, <span style="color:#e6db74">&#39;&#39;</span>), <span style="color:#ae81ff">120</span>) <span style="color:#66d9ef">AS</span> range_boundary
-       ,p.<span style="color:#66d9ef">rows</span>
-       ,df.physical_name <span style="color:#66d9ef">AS</span> DatabaseFileName
-<span style="color:#66d9ef">FROM</span>    sys.indexes i
-        <span style="color:#66d9ef">JOIN</span> sys.partition_schemes ps <span style="color:#66d9ef">ON</span> i.data_space_id <span style="color:#f92672">=</span> ps.data_space_id
-        <span style="color:#66d9ef">JOIN</span> sys.destination_data_spaces dds <span style="color:#66d9ef">ON</span> ps.data_space_id <span style="color:#f92672">=</span> dds.partition_scheme_id
-        <span style="color:#66d9ef">JOIN</span> sys.data_spaces ds2 <span style="color:#66d9ef">ON</span> dds.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
-        <span style="color:#66d9ef">JOIN</span> sys.partitions p <span style="color:#66d9ef">ON</span> dds.destination_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#66d9ef">AND</span> p.object_id <span style="color:#f92672">=</span> i.object_id <span style="color:#66d9ef">AND</span> p.index_id <span style="color:#f92672">=</span> i.index_id
-        <span style="color:#66d9ef">JOIN</span> sys.partition_functions pf <span style="color:#66d9ef">ON</span> ps.function_id <span style="color:#f92672">=</span> pf.function_id
-        <span style="color:#66d9ef">JOIN</span> sys.database_files df <span style="color:#66d9ef">ON</span> df.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
-        <span style="color:#66d9ef">JOIN</span> sys.index_columns <span style="color:#66d9ef">AS</span> ic <span style="color:#66d9ef">ON</span> ic.[object_id] <span style="color:#f92672">=</span> i.[object_id] <span style="color:#66d9ef">AND</span> ic.index_id <span style="color:#f92672">=</span> i.index_id <span style="color:#66d9ef">AND</span> ic.partition_ordinal <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span> 
-        <span style="color:#66d9ef">JOIN</span> sys.columns <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> i.[object_id] <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.[object_id] <span style="color:#66d9ef">AND</span> ic.column_id <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.column_id
-        <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">JOIN</span> sys.partition_range_values v <span style="color:#66d9ef">ON</span> pf.function_id <span style="color:#f92672">=</span> v.function_id <span style="color:#66d9ef">AND</span> v.boundary_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#f92672">-</span> pf.boundary_value_on_right
-<span style="color:#66d9ef">WHERE</span>   i.index_id <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
-<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> ObjectName
-       ,partition_number
-</code></pre></div><p><img src="/blog/img/20180521093138798" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 移除主键约束(SQL会同步移除聚焦索引)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 重新创建分区索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> [dbo].[Employee] <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">CONSTRAINT</span> [PK_Employee] <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> CLUSTERED ([EID]) <span style="color:#66d9ef">ON</span> myPS_Test(EID)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h4 id="分区表元数据查询">分区表元数据查询</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 分区表数据分布情况
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  OBJECT_NAME(i.object_id) <span style="color:#66d9ef">AS</span> ObjectName
+</span></span><span style="display:flex;"><span>       ,<span style="color:#66d9ef">c</span>.name <span style="color:#66d9ef">AS</span> PartitioningColumn
+</span></span><span style="display:flex;"><span>       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">50</span>), ps.name) <span style="color:#66d9ef">AS</span> partition_scheme
+</span></span><span style="display:flex;"><span>       ,p.partition_number
+</span></span><span style="display:flex;"><span>       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">10</span>), ds2.name) <span style="color:#66d9ef">AS</span> filegroup
+</span></span><span style="display:flex;"><span>       ,<span style="color:#66d9ef">CONVERT</span>(VARCHAR(<span style="color:#ae81ff">19</span>), <span style="color:#66d9ef">ISNULL</span>(v.value, <span style="color:#e6db74">&#39;&#39;</span>), <span style="color:#ae81ff">120</span>) <span style="color:#66d9ef">AS</span> range_boundary
+</span></span><span style="display:flex;"><span>       ,p.<span style="color:#66d9ef">rows</span>
+</span></span><span style="display:flex;"><span>       ,df.physical_name <span style="color:#66d9ef">AS</span> DatabaseFileName
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>    sys.indexes i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.partition_schemes ps <span style="color:#66d9ef">ON</span> i.data_space_id <span style="color:#f92672">=</span> ps.data_space_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.destination_data_spaces dds <span style="color:#66d9ef">ON</span> ps.data_space_id <span style="color:#f92672">=</span> dds.partition_scheme_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.data_spaces ds2 <span style="color:#66d9ef">ON</span> dds.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.partitions p <span style="color:#66d9ef">ON</span> dds.destination_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#66d9ef">AND</span> p.object_id <span style="color:#f92672">=</span> i.object_id <span style="color:#66d9ef">AND</span> p.index_id <span style="color:#f92672">=</span> i.index_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.partition_functions pf <span style="color:#66d9ef">ON</span> ps.function_id <span style="color:#f92672">=</span> pf.function_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.database_files df <span style="color:#66d9ef">ON</span> df.data_space_id <span style="color:#f92672">=</span> ds2.data_space_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.index_columns <span style="color:#66d9ef">AS</span> ic <span style="color:#66d9ef">ON</span> ic.[object_id] <span style="color:#f92672">=</span> i.[object_id] <span style="color:#66d9ef">AND</span> ic.index_id <span style="color:#f92672">=</span> i.index_id <span style="color:#66d9ef">AND</span> ic.partition_ordinal <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">JOIN</span> sys.columns <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> i.[object_id] <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.[object_id] <span style="color:#66d9ef">AND</span> ic.column_id <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.column_id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">JOIN</span> sys.partition_range_values v <span style="color:#66d9ef">ON</span> pf.function_id <span style="color:#f92672">=</span> v.function_id <span style="color:#66d9ef">AND</span> v.boundary_id <span style="color:#f92672">=</span> p.partition_number <span style="color:#f92672">-</span> pf.boundary_value_on_right
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span>   i.index_id <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> ObjectName
+</span></span><span style="display:flex;"><span>       ,partition_number
+</span></span></code></pre></div><p><img src="/blog/img/20180521093138798" alt=""></p>
 		</div>
 		<footer class="post__footer">
 			

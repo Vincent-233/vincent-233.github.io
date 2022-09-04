@@ -133,38 +133,38 @@ SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用�
 分别右键选择启动即可（图略）</li>
 </ol>
 <h3 id="对应-t-sql-命令">对应 T-SQL 命令</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 1、创建 Server Audit 
-</span><span style="color:#75715e"></span>USE [master]
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">CREATE</span> SERVER AUDIT [TestAudit_Temp_Bank]
-<span style="color:#66d9ef">TO</span> FILE 
-(	FILEPATH <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;D:\DB-File&#39;</span>
-	,MAXSIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> GB
-	,MAX_ROLLOVER_FILES <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
-	,RESERVE_DISK_SPACE <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>
-)
-<span style="color:#66d9ef">WITH</span>
-(	QUEUE_DELAY <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
-	,ON_FAILURE <span style="color:#f92672">=</span> <span style="color:#66d9ef">CONTINUE</span>
-)
-<span style="color:#66d9ef">GO</span>
-<span style="color:#75715e">-- 2、创建 Database Audit Specification
-</span><span style="color:#75715e"></span>USE [MyDB]
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB]
-<span style="color:#66d9ef">FOR</span> SERVER AUDIT [TestAudit_Temp_Bank]
-<span style="color:#66d9ef">ADD</span> (<span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">OBJECT</span>::[dbo].[temp_bank] <span style="color:#66d9ef">BY</span> [dbo])
-<span style="color:#75715e">-- 3、分别启用
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> SERVER AUDIT [TestAudit_Temp_Bank] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h3 id="效果">效果</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 1、创建 Server Audit 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [master]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> SERVER AUDIT [TestAudit_Temp_Bank]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TO</span> FILE 
+</span></span><span style="display:flex;"><span>(	FILEPATH <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;D:\DB-File&#39;</span>
+</span></span><span style="display:flex;"><span>	,MAXSIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> GB
+</span></span><span style="display:flex;"><span>	,MAX_ROLLOVER_FILES <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>	,RESERVE_DISK_SPACE <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span>
+</span></span><span style="display:flex;"><span>(	QUEUE_DELAY <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>	,ON_FAILURE <span style="color:#f92672">=</span> <span style="color:#66d9ef">CONTINUE</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2、创建 Database Audit Specification
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USE [MyDB]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> SERVER AUDIT [TestAudit_Temp_Bank]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> (<span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">OBJECT</span>::[dbo].[temp_bank] <span style="color:#66d9ef">BY</span> [dbo])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3、分别启用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> SERVER AUDIT [TestAudit_Temp_Bank] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> AUDIT SPECIFICATION [TestAudit_Temp_Bank_MyDB] <span style="color:#66d9ef">WITH</span> (STATUS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h3 id="效果">效果</h3>
 <p>用数据库拥有者账号（会映射到用户dbo）运行对表temp_bank的Delete语句之后，用<a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-2017">sys.fn_get_audit_file</a>函数查看审计日志：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> DATEADD(mi,DATEDIFF(mi,GETUTCDATE(),GETDATE()),event_time) <span style="color:#66d9ef">AS</span> RealEventTime,<span style="color:#f92672">*</span> 
-<span style="color:#66d9ef">FROM</span> sys.fn_get_audit_file (<span style="color:#e6db74">&#39;D:\DB-File\TestAudit_Temp_Bank_AC916F20-A23F-4244-8509-5E3B3ED51445_0_131822638146730000.sqlaudit&#39;</span>
-,<span style="color:#66d9ef">default</span>,<span style="color:#66d9ef">default</span>);
-</code></pre></div><p>结果：<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> DATEADD(mi,DATEDIFF(mi,GETUTCDATE(),GETDATE()),event_time) <span style="color:#66d9ef">AS</span> RealEventTime,<span style="color:#f92672">*</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.fn_get_audit_file (<span style="color:#e6db74">&#39;D:\DB-File\TestAudit_Temp_Bank_AC916F20-A23F-4244-8509-5E3B3ED51445_0_131822638146730000.sqlaudit&#39;</span>
+</span></span><span style="display:flex;"><span>,<span style="color:#66d9ef">default</span>,<span style="color:#66d9ef">default</span>);
+</span></span></code></pre></div><p>结果：<br>
 <img src="/blog/img/20180924214350282" alt=""><br>
 <img src="/blog/img/20180924214129441" alt=""></p>
 <blockquote>

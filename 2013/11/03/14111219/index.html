@@ -107,100 +107,100 @@
 <p><img src="/blog/img/20131103231231390" alt=""></p>
 <h2 id="分析">分析：</h2>
 <p>员工的下属也可能是其他员工的上司，即下属也有下属，这样一直找，直到某员工没有下属为止。SQL SERVER 从 2005 起，开始支持 CTE 表达式，可以帮助我们更好的处理这样的一类递归问题。为了体现出递归的简洁，我们先给出非递归即迭代解法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.findEmp&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
-	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.findEmp
-<span style="color:#66d9ef">go</span>
-<span style="color:#75715e">/*寻找直接或间接下属*/</span>
-<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> findEmp
-(
-<span style="color:#f92672">@</span>mgr varchar(<span style="color:#ae81ff">20</span>)
-)
-<span style="color:#66d9ef">returns</span> <span style="color:#f92672">@</span>empl <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>))
-<span style="color:#66d9ef">as</span>
-<span style="color:#66d9ef">begin</span>
-	<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>newemp <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>)) <span style="color:#75715e">-- 新产生的结果
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>temp <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>))   <span style="color:#75715e">-- 临时性
-</span><span style="color:#75715e"></span>
-	<span style="color:#75715e">-- 第一级
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>newemp
-		<span style="color:#66d9ef">select</span> employee_name <span style="color:#66d9ef">from</span> manager
-		<span style="color:#66d9ef">where</span> manager_name <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>mgr
-
-	while <span style="color:#66d9ef">exists</span>(<span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp)
-		<span style="color:#66d9ef">begin</span>
-			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>empl
-				<span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp
-			<span style="color:#75715e">--第N级（第N次迭代时）
-</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>temp
-				<span style="color:#66d9ef">select</span> a.employee_name
-				<span style="color:#66d9ef">from</span> manager a <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> <span style="color:#f92672">@</span>newemp b
-				<span style="color:#66d9ef">on</span> a.manager_name <span style="color:#f92672">=</span> b.name
-			<span style="color:#66d9ef">except</span>  <span style="color:#75715e">-- 管理关系存在的循环时（非正常情况）也能正常工作
-</span><span style="color:#75715e"></span>				<span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>empl
-
-			<span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp
-			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>newemp <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>temp
-			<span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>temp
-		<span style="color:#66d9ef">end</span>
-	<span style="color:#66d9ef">return</span>
-<span style="color:#66d9ef">end</span>
-
-<span style="color:#75715e">/*
-</span><span style="color:#75715e">-- 测试
-</span><span style="color:#75715e">select * from dbo.FindEmp(&#39;Jones&#39;)
-</span><span style="color:#75715e">
-</span><span style="color:#75715e">name
-</span><span style="color:#75715e">--------------------
-</span><span style="color:#75715e">Duarte
-</span><span style="color:#75715e">Estovar
-</span><span style="color:#75715e">Basinsky
-</span><span style="color:#75715e">Corbin
-</span><span style="color:#75715e">Alon
-</span><span style="color:#75715e">
-</span><span style="color:#75715e">(5 行受影响)
-</span><span style="color:#75715e">*/</span>
-</code></pre></div><p>再看看sql递归查询是如何实现的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.findEmp_Plus&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
-	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.findEmp_Plus
-<span style="color:#66d9ef">go</span>
-
-<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> findEmp_Plus
-(
-	<span style="color:#f92672">@</span>mgr varchar(<span style="color:#ae81ff">20</span>)
-)
-<span style="color:#66d9ef">returns</span> <span style="color:#66d9ef">table</span>
-<span style="color:#66d9ef">as</span>
-<span style="color:#66d9ef">return</span>
-(
-	<span style="color:#66d9ef">with</span> emp <span style="color:#66d9ef">as</span>
-	(
-		<span style="color:#66d9ef">select</span> employee_name
-		<span style="color:#66d9ef">from</span> manager
-		<span style="color:#66d9ef">where</span> manager_name <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>mgr
-	<span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
-		<span style="color:#66d9ef">select</span> b.employee_name
-		<span style="color:#66d9ef">from</span> emp a <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> manager b
-		<span style="color:#66d9ef">on</span> a.employee_name <span style="color:#f92672">=</span> b.manager_name
-	)
-	<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp
-)
-<span style="color:#66d9ef">go</span>
-
-<span style="color:#75715e">/*
-</span><span style="color:#75715e">-- 测试
-</span><span style="color:#75715e">select * from dbo.FindEmp_plus(&#39;Jones&#39;)
-</span><span style="color:#75715e">
-</span><span style="color:#75715e">name
-</span><span style="color:#75715e">--------------------
-</span><span style="color:#75715e">Duarte
-</span><span style="color:#75715e">Estovar
-</span><span style="color:#75715e">Basinsky
-</span><span style="color:#75715e">Corbin
-</span><span style="color:#75715e">Alon
-</span><span style="color:#75715e">
-</span><span style="color:#75715e">(5 行受影响)
-</span><span style="color:#75715e">*/</span>
-</code></pre></div><p>是不是直觉递归简洁巧妙多了！！！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.findEmp&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.findEmp
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*寻找直接或间接下属*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> findEmp
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span><span style="color:#f92672">@</span>mgr varchar(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">returns</span> <span style="color:#f92672">@</span>empl <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>newemp <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>)) <span style="color:#75715e">-- 新产生的结果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">declare</span> <span style="color:#f92672">@</span>temp <span style="color:#66d9ef">table</span>(name varchar(<span style="color:#ae81ff">20</span>))   <span style="color:#75715e">-- 临时性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- 第一级
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>newemp
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">select</span> employee_name <span style="color:#66d9ef">from</span> manager
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">where</span> manager_name <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>mgr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	while <span style="color:#66d9ef">exists</span>(<span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>empl
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">--第N级（第N次迭代时）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>temp
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">select</span> a.employee_name
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">from</span> manager a <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> <span style="color:#f92672">@</span>newemp b
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">on</span> a.manager_name <span style="color:#f92672">=</span> b.name
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">except</span>  <span style="color:#75715e">-- 管理关系存在的循环时（非正常情况）也能正常工作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>				<span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>empl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>newemp
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#f92672">@</span>newemp <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>temp
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>temp
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 测试
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">select * from dbo.FindEmp(&#39;Jones&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">--------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Duarte
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Estovar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Basinsky
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Corbin
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Alon
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">(5 行受影响)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><p>再看看sql递归查询是如何实现的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.findEmp_Plus&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">function</span> dbo.findEmp_Plus
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">function</span> findEmp_Plus
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">@</span>mgr varchar(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">returns</span> <span style="color:#66d9ef">table</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> emp <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span>	(
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">select</span> employee_name
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">from</span> manager
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">where</span> manager_name <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>mgr
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">union</span> <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">select</span> b.employee_name
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">from</span> emp a <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> manager b
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">on</span> a.employee_name <span style="color:#f92672">=</span> b.manager_name
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 测试
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">select * from dbo.FindEmp_plus(&#39;Jones&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">--------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Duarte
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Estovar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Basinsky
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Corbin
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Alon
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">(5 行受影响)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><p>是不是直觉递归简洁巧妙多了！！！</p>
 <p>递归查询是很简洁，但不太好理解，其实可以借助上面的迭代来理解，就本例求Jones的所有下属而言：</p>
 <p>第一步生成cte中的原始数据，即Jones的直接下属，Duarte 和 Estovar；</p>
 <p>第二步生成 Duarte 和 Estovar 的直接下属，Basinsky 和 Corbin；</p>

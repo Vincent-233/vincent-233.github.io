@@ -95,11 +95,11 @@
 <p>从而也可以像ORACLE一样在一条SQL语句中同时进行Update、Insert、Delete操作。</p>
 <p>下面来一个简单的例子,直接上代码了，</p>
 <p>数据准备：</p>
-<pre tabindex="0"><code class="language-delphi" data-lang="delphi">IF OBJECT_ID('TestA','U') IS NOT NULL
+<pre tabindex="0"><code class="language-delphi" data-lang="delphi">IF OBJECT_ID(&#39;TestA&#39;,&#39;U&#39;) IS NOT NULL
 	DROP TABLE TestA
 GO
 
-IF OBJECT_ID('TestB','U') IS NOT NULL
+IF OBJECT_ID(&#39;TestB&#39;,&#39;U&#39;) IS NOT NULL
 	DROP TABLE TestB
 GO
 
@@ -109,31 +109,31 @@ GO
 CREATE TABLE TestB(ID INT,Title NVARCHAR(200))
 GO
 
-INSERT INTO TestA(ID,Title) VALUES (1,N'A'),(2,N'B'),(3,N'C'),(4,N'D'),(5,N'E')
+INSERT INTO TestA(ID,Title) VALUES (1,N&#39;A&#39;),(2,N&#39;B&#39;),(3,N&#39;C&#39;),(4,N&#39;D&#39;),(5,N&#39;E&#39;)
 GO
 
-INSERT INTO TestB(ID,Title) VALUES (1,N'一'),(3,N'三'),(5,N'五'),(7,N'七'),(9,N'九')
+INSERT INTO TestB(ID,Title) VALUES (1,N&#39;一&#39;),(3,N&#39;三&#39;),(5,N&#39;五&#39;),(7,N&#39;七&#39;),(9,N&#39;九&#39;)
 GO
 </code></pre><p>现在的需求是，用TestB去更新TestA，ID相同的Update，ID不同的进行Insert</p>
 <p>常规的实现方法是分两步走：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> a
-<span style="color:#66d9ef">SET</span> a.Title <span style="color:#f92672">=</span> b.Title
-<span style="color:#66d9ef">FROM</span> TestA a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> TestB b <span style="color:#66d9ef">ON</span> a.ID <span style="color:#f92672">=</span> b.ID;
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TestA(ID,Title)
-<span style="color:#66d9ef">SELECT</span> a.ID,a.Title
-<span style="color:#66d9ef">FROM</span> TestB a
-<span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span>(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> TestA <span style="color:#66d9ef">WHERE</span> ID <span style="color:#f92672">=</span> a.ID);
-</code></pre></div><p>有了Merge，则可以一句话搞定，而且效率还很高：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">MERGE <span style="color:#66d9ef">INTO</span> TestA <span style="color:#66d9ef">AS</span> a
-<span style="color:#66d9ef">USING</span> TestB <span style="color:#66d9ef">AS</span> b
-<span style="color:#66d9ef">ON</span> (a.ID <span style="color:#f92672">=</span> b.ID)
-<span style="color:#66d9ef">WHEN</span> MATCHED
-	<span style="color:#66d9ef">THEN</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">SET</span> a.Title <span style="color:#f92672">=</span> b.Title
-<span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">NOT</span> MATCHED <span style="color:#66d9ef">BY</span> TARGET
-	<span style="color:#66d9ef">THEN</span> <span style="color:#66d9ef">INSERT</span>(ID,Title) <span style="color:#66d9ef">VALUES</span>(b.ID,b.Title);
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> a.Title <span style="color:#f92672">=</span> b.Title
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> TestA a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> TestB b <span style="color:#66d9ef">ON</span> a.ID <span style="color:#f92672">=</span> b.ID;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TestA(ID,Title)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.ID,a.Title
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> TestB a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span>(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> TestA <span style="color:#66d9ef">WHERE</span> ID <span style="color:#f92672">=</span> a.ID);
+</span></span></code></pre></div><p>有了Merge，则可以一句话搞定，而且效率还很高：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>MERGE <span style="color:#66d9ef">INTO</span> TestA <span style="color:#66d9ef">AS</span> a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">USING</span> TestB <span style="color:#66d9ef">AS</span> b
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> (a.ID <span style="color:#f92672">=</span> b.ID)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHEN</span> MATCHED
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">THEN</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">SET</span> a.Title <span style="color:#f92672">=</span> b.Title
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHEN</span> <span style="color:#66d9ef">NOT</span> MATCHED <span style="color:#66d9ef">BY</span> TARGET
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">THEN</span> <span style="color:#66d9ef">INSERT</span>(ID,Title) <span style="color:#66d9ef">VALUES</span>(b.ID,b.Title);
+</span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">
 			

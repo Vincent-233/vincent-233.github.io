@@ -105,22 +105,22 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>SQL语句：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP (<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
-<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
-</code></pre></div><p>结果：<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> TOP (<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</span></span></code></pre></div><p>结果：<br>
 <img src="/blog/img/20180429203241889" alt=""></p>
 <h2 id="for-xml-raw">For XML Raw</h2>
 <ul>
 <li>sql</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
-<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
-<span style="color:#66d9ef">FOR</span> XML RAW
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML RAW
+</span></span></code></pre></div><ul>
 <li>结果<br>
 <img src="/blog/img/20180429204049811" alt=""></li>
 <li>说明<br>
@@ -130,12 +130,12 @@
 <ul>
 <li>sql</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
-<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
-<span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;MyOrders&#39;</span>),ROOT(<span style="color:#e6db74">&#39;Root&#39;</span>)
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;MyOrders&#39;</span>),ROOT(<span style="color:#e6db74">&#39;Root&#39;</span>)
+</span></span></code></pre></div><ul>
 <li>结果<br>
 <img src="/blog/img/20180429203704748" alt=""></li>
 <li>说明<br>
@@ -145,12 +145,12 @@ Root（可选）参数的值作为第一层，Path参数的值作为第二层，
 <ul>
 <li>sql</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
-<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
-<span style="color:#66d9ef">FOR</span> XML Auto
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML Auto
+</span></span></code></pre></div><ul>
 <li>结果<br>
 <img src="/blog/img/20180429204609562" alt=""></li>
 <li>说明<br>
@@ -160,12 +160,12 @@ Root（可选）参数的值作为第一层，Path参数的值作为第二层，
 <ul>
 <li>sql</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
-<span style="color:#66d9ef">FROM</span> Sales.MyOrders a
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
-<span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
-<span style="color:#66d9ef">FOR</span> XML Auto<span style="color:#960050;background-color:#1e0010">，</span>Element
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> TOP(<span style="color:#ae81ff">3</span>) a.orderid,b.companyname,<span style="color:#66d9ef">c</span>.firstname
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.MyOrders a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML Auto<span style="color:#960050;background-color:#1e0010">，</span>Element
+</span></span></code></pre></div><ul>
 <li>结果<br>
 <img src="/blog/img/20180429205052660" alt=""></li>
 <li>说明<br>

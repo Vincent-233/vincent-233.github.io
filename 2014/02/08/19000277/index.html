@@ -112,11 +112,11 @@
 <p>a) 若Office与MSSQL位数不一致，重新安装与SQL Server位数相同的Office，同为32bit或64bit；<br>
 b) 若不准备安装Office，可以单独安装Microsoft.ACE.OLEDB.12.0：<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine.exe">32bit</a>下载或<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine_X64.exe">64bit</a>下载。</p>
 <p>若安装时出现点击后闪退，可以先用WINRAR将exe安装包解压，再运行里面的setup</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 读取D盘目录下的Test.xlsx文件Sheet1中的内容
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  ID,Content
-<span style="color:#66d9ef">FROM</span>    OPENDATASOURCE (<span style="color:#e6db74">&#39;Microsoft.ACE.OLEDB.12.0&#39;</span>,
-                       <span style="color:#e6db74">&#39;Excel 12.0;HDR=Yes;IMEX=1;Database=D:\Test.xlsx&#39;</span>)... [sheet1$]
-</code></pre></div><h2 id="3常见问题">3.常见问题</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 读取D盘目录下的Test.xlsx文件Sheet1中的内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  ID,Content
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>    OPENDATASOURCE (<span style="color:#e6db74">&#39;Microsoft.ACE.OLEDB.12.0&#39;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#39;Excel 12.0;HDR=Yes;IMEX=1;Database=D:\Test.xlsx&#39;</span>)... [sheet1$]
+</span></span></code></pre></div><h2 id="3常见问题">3.常见问题</h2>
 <ul>
 <li>
 <p><strong>消息 7403&hellip;&hellip;尚未注册 OLE DB 访问接口 &ldquo;Microsoft.ACE.OLEDB.12.0&rdquo;</strong></p>
@@ -130,16 +130,16 @@ b) 若不准备安装Office，可以单独安装Microsoft.ACE.OLEDB.12.0：<a hr
 <ul>
 <li>可能原因：未开启 Ad Hoc Distributed Queries（即席分布式查询）</li>
 <li>参考解决方案：用代码开启 Ad Hoc Distributed Queries
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>, <span style="color:#ae81ff">1</span>;
-<span style="color:#66d9ef">GO</span>
-RECONFIGURE;
-<span style="color:#66d9ef">GO</span>
-
-sp_configure <span style="color:#e6db74">&#39;Ad Hoc Distributed Queries&#39;</span>, <span style="color:#ae81ff">1</span>;
-<span style="color:#66d9ef">GO</span>
-RECONFIGURE;
-<span style="color:#66d9ef">GO</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>, <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>RECONFIGURE;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sp_configure <span style="color:#e6db74">&#39;Ad Hoc Distributed Queries&#39;</span>, <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>RECONFIGURE;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div></li>
 </ul>
 </li>
 <li>

@@ -116,78 +116,78 @@
 </ul>
 <p>下面分情况举例说明，重点看注释说明。</p>
 <h3 id="不可变类型">不可变类型</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-print(id(a))
-b <span style="color:#f92672">=</span> a
-print(id(b))   <span style="color:#75715e"># 仅仅是别名，id(a)与id(b) 是一样的</span>
-</code></pre></div><pre><code>140717113381696  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>print(id(a))
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> a
+</span></span><span style="display:flex;"><span>print(id(b))   <span style="color:#75715e"># 仅仅是别名，id(a)与id(b) 是一样的</span>
+</span></span></code></pre></div><pre><code>140717113381696  
 140717113381696  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
-print(a)
-print(id(a))   <span style="color:#75715e"># a+4会产生新实例，a指向了新的内容，id已变</span>
-</code></pre></div><pre><code>13  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>print(a)
+</span></span><span style="display:flex;"><span>print(id(a))   <span style="color:#75715e"># a+4会产生新实例，a指向了新的内容，id已变</span>
+</span></span></code></pre></div><pre><code>13  
 140717113382080  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(b)       
-print(id(b))   <span style="color:#75715e"># b指向的还是原来的内容，id不变</span>
-</code></pre></div><pre><code>1  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(b)       
+</span></span><span style="display:flex;"><span>print(id(b))   <span style="color:#75715e"># b指向的还是原来的内容，id不变</span>
+</span></span></code></pre></div><pre><code>1  
 140717113381696  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b <span style="color:#f92672">=</span> b <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
-print(b)
-print(id(b))   <span style="color:#75715e"># b的值变为与a一样，此时可能是为了节约内存，指向的是同一个实例，id不变 </span>
-</code></pre></div><pre><code>5  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> b <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>print(b)
+</span></span><span style="display:flex;"><span>print(id(b))   <span style="color:#75715e"># b的值变为与a一样，此时可能是为了节约内存，指向的是同一个实例，id不变 </span>
+</span></span></code></pre></div><pre><code>5  
 140717113381824  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>      
-print(id(a))   <span style="color:#75715e"># a的值与b不等，指向不同实例，id已变</span>
-</code></pre></div><pre><code>140717113382144  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>      
+</span></span><span style="display:flex;"><span>print(id(a))   <span style="color:#75715e"># a的值与b不等，指向不同实例，id已变</span>
+</span></span></code></pre></div><pre><code>140717113382144  
 </code></pre>
 <h3 id="可变类型">可变类型</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
-print(id(ls))
-
-lt <span style="color:#f92672">=</span> ls
-print(id(lt))  <span style="color:#75715e"># 仅仅是别名，id(a) 与 id(b) 是一样的</span>
-</code></pre></div><pre><code>2606652175432  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>print(id(ls))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lt <span style="color:#f92672">=</span> ls
+</span></span><span style="display:flex;"><span>print(id(lt))  <span style="color:#75715e"># 仅仅是别名，id(a) 与 id(b) 是一样的</span>
+</span></span></code></pre></div><pre><code>2606652175432  
 2606652175432  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
-print(ls)
-print(id(ls))  <span style="color:#75715e"># 此操作改变了 ls 的值，由于 list 是可变类型，支持就地更新，故地址不变，即 id 不变</span>
-</code></pre></div><pre><code>[1, 9, 3]  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ls[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>print(ls)
+</span></span><span style="display:flex;"><span>print(id(ls))  <span style="color:#75715e"># 此操作改变了 ls 的值，由于 list 是可变类型，支持就地更新，故地址不变，即 id 不变</span>
+</span></span></code></pre></div><pre><code>[1, 9, 3]  
 2606652175432  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(id(lt))  <span style="color:#75715e"># lt也是指向相同地址，故ls的修改，就是lt的修改，id不变，内容已变</span>
-print(lt)
-</code></pre></div><pre><code>2606652175432  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(id(lt))  <span style="color:#75715e"># lt也是指向相同地址，故ls的修改，就是lt的修改，id不变，内容已变</span>
+</span></span><span style="display:flex;"><span>print(lt)
+</span></span></code></pre></div><pre><code>2606652175432  
 [1, 9, 3]  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">5</span>)) 
-print(id(ls))  <span style="color:#75715e"># ls 指向新的 list 实例，id已变</span>
-</code></pre></div><pre><code>2606658295816  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ls <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">5</span>)) 
+</span></span><span style="display:flex;"><span>print(id(ls))  <span style="color:#75715e"># ls 指向新的 list 实例，id已变</span>
+</span></span></code></pre></div><pre><code>2606658295816  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(id(lt))
-print(lt)      <span style="color:#75715e"># lt仍维持原样</span>
-</code></pre></div><pre><code>2606652175432  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(id(lt))
+</span></span><span style="display:flex;"><span>print(lt)      <span style="color:#75715e"># lt仍维持原样</span>
+</span></span></code></pre></div><pre><code>2606652175432  
 [1, 9, 3]  
 </code></pre>
 <h3 id="函数传参为引用">函数传参为引用</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">punctuation_remove</span>(my_str):
-    print(<span style="color:#e6db74">&#39;【inside function】&#39;</span>,id(my_str))  <span style="color:#75715e"># my_str未改变时的id值，与所传参数id值一致</span>
-    <span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> punctuation
-    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> punctuation:
-        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">in</span> my_str:
-            my_str <span style="color:#f92672">=</span> my_str<span style="color:#f92672">.</span>replace(p,<span style="color:#e6db74">&#39;&#39;</span>)    <span style="color:#75715e"># str不可变类型，my_str每次指向新的实例</span>
-            print(<span style="color:#e6db74">&#39;【inside function】After Change:&#39;</span>,id(my_str))
-    <span style="color:#66d9ef">return</span> my_str
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;let&#39;s play a game?&#34;</span>
-print(<span style="color:#e6db74">&#39;【outside functoin】&#39;</span>,id(x))
-</code></pre></div><pre><code>【outside functoin】 2606657730720  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">punctuation_remove</span>(my_str):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;【inside function】&#39;</span>,id(my_str))  <span style="color:#75715e"># my_str未改变时的id值，与所传参数id值一致</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> punctuation
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> punctuation:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">in</span> my_str:
+</span></span><span style="display:flex;"><span>            my_str <span style="color:#f92672">=</span> my_str<span style="color:#f92672">.</span>replace(p,<span style="color:#e6db74">&#39;&#39;</span>)    <span style="color:#75715e"># str不可变类型，my_str每次指向新的实例</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;【inside function】After Change:&#39;</span>,id(my_str))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> my_str
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;let&#39;s play a game?&#34;</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;【outside functoin】&#39;</span>,id(x))
+</span></span></code></pre></div><pre><code>【outside functoin】 2606657730720  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">punctuation_remove(x)
-</code></pre></div><pre><code>【inside function】 2606657730720  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>punctuation_remove(x)
+</span></span></code></pre></div><pre><code>【inside function】 2606657730720  
 【inside function】After Change: 2606657728848  
 【inside function】After Change: 2606657728704  
 'lets play a game'  

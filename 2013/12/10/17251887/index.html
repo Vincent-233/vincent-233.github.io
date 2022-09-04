@@ -108,36 +108,36 @@
 			<p>假设某公司的人员组织结构如下图：</p>
 <p><img src="/blog/img/20131210222929796" alt=""></p>
 <p>数据库表：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ORG
-(
-	EMPID INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
-	EMPNAME VARCHAR(<span style="color:#ae81ff">128</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
-	MGRID INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
- );
-<span style="color:#66d9ef">GO</span>
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;Jack&#39;</span>, <span style="color:#ae81ff">0</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;Mary&#39;</span>, <span style="color:#ae81ff">1</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;Tom&#39;</span>, <span style="color:#ae81ff">1</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;Ben&#39;</span>, <span style="color:#ae81ff">2</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;John&#39;</span>, <span style="color:#ae81ff">3</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#39;Emily&#39;</span>, <span style="color:#ae81ff">3</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">7</span>, <span style="color:#e6db74">&#39;Kate&#39;</span>, <span style="color:#ae81ff">3</span>);
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;Mark&#39;</span>, <span style="color:#ae81ff">6</span>);
-<span style="color:#66d9ef">GO</span>
-</code></pre></div><h2 id="需求一-查询tom管理的所有员工的名字">需求一： 查询TOM管理的所有员工的名字</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ORG
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	EMPID INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>	EMPNAME VARCHAR(<span style="color:#ae81ff">128</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>	MGRID INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
+</span></span><span style="display:flex;"><span> );
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;Jack&#39;</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;Mary&#39;</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;Tom&#39;</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;Ben&#39;</span>, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;John&#39;</span>, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#39;Emily&#39;</span>, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">7</span>, <span style="color:#e6db74">&#39;Kate&#39;</span>, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;Mark&#39;</span>, <span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><h2 id="需求一-查询tom管理的所有员工的名字">需求一： 查询TOM管理的所有员工的名字</h2>
 <p><img src="/blog/img/20131210222936750" alt=""></p>
 <p>查询代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
-(
-	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
-	<span style="color:#66d9ef">FROM</span> org
-	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Empid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tom&#39;</span>)
-<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
-	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
-)
-<span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</code></pre></div><p>结果：  </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> org
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Empid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tom&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -162,17 +162,17 @@
 <h2 id="需求二从下往上查询mark报告链">需求二：从下往上，查询Mark报告链</h2>
 <p><img src="/blog/img/20131210222950390" alt=""></p>
 <p>查询代码:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
-(
-	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
-	<span style="color:#66d9ef">FROM</span> org
-	<span style="color:#66d9ef">WHERE</span> Empid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Mgrid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Mark&#39;</span>)
-<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
-	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
-)
-<span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</code></pre></div><p>结果：  </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> org
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span> Empid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Mgrid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Mark&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -194,18 +194,18 @@
 <h2 id="需求三查询各人员所在层次">需求三：查询各人员所在层次</h2>
 <p>如Jack为1层，Tom为第二层，Mark为第四层</p>
 <p>查询代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
-(
-	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid, <span style="color:#ae81ff">1</span> [<span style="color:#66d9ef">Level</span>]
-	<span style="color:#66d9ef">FROM</span> org
-	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid,[<span style="color:#66d9ef">Level</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
-)
-<span style="color:#66d9ef">SELECT</span> Empname,[<span style="color:#66d9ef">Level</span>] <span style="color:#66d9ef">FROM</span> cte
-<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Level</span>]
-</code></pre></div><p>结果：  </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid, <span style="color:#ae81ff">1</span> [<span style="color:#66d9ef">Level</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> org
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid,[<span style="color:#66d9ef">Level</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname,[<span style="color:#66d9ef">Level</span>] <span style="color:#66d9ef">FROM</span> cte
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Level</span>]
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -250,32 +250,32 @@
 </table>
 <h2 id="需求四查询tom管理-的人数">需求四：查询TOM管理 的人数</h2>
 <p>实际上就是在需求一的基础上求一个count(*):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
-(
-	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
-	<span style="color:#66d9ef">FROM</span> org
-	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Empid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tom&#39;</span>)
-<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
-	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
-)
-<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">FROM</span> cte;
-</code></pre></div><h2 id="需求五求每个人的管理人数">需求五：求每个人的管理人数</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 查询所有人的管理人数
-</span><span style="color:#75715e"></span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
-(
-	<span style="color:#75715e">--选择 org 表中所有的行，即所有的员工
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
-	<span style="color:#66d9ef">FROM</span> org
-<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-	<span style="color:#75715e">-- 对应前一次结果集的每一行，在新的结果集中为其经理插入一行
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
-	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
-)
-<span style="color:#75715e">-- 因为初始查询中每个员工都有初始行，所以最后结果要减去 1
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> Empname,<span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> [Mrg_Count]
-<span style="color:#66d9ef">FROM</span> cte <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> Empname
-</code></pre></div><p>结果：  </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> org
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">WHERE</span> Mgrid <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> Empid <span style="color:#66d9ef">FROM</span> org <span style="color:#66d9ef">WHERE</span> Empname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Tom&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">FROM</span> cte;
+</span></span></code></pre></div><h2 id="需求五求每个人的管理人数">需求五：求每个人的管理人数</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 查询所有人的管理人数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">--选择 org 表中所有的行，即所有的员工
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SELECT</span> Empid,Empname,Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> org
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- 对应前一次结果集的每一行，在新的结果集中为其经理插入一行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SELECT</span> b.Empid,b.Empname,b.Mgrid
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 因为初始查询中每个员工都有初始行，所以最后结果要减去 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> Empname,<span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> [Mrg_Count]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cte <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> Empname
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>

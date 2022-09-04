@@ -93,9 +93,9 @@
 		<div class="content post__content clearfix">
 			<p>Excel中的 find 或 search 函数均只能寻找到第一个匹配字符的位置，如A2单位格&quot;I have a dream&quot;, find(&quot; &ldquo;,A2)返回2，如果要找最后一个空格的位置，可组合利用 len 、 find 、substitue 函数。</p>
 <p>思路是这样的：将最后一次出现的空格替换为其他某一特殊字符，然后再用 find 查找这一特殊字符的位置即可。</p>
-<p>空格出现的次数：len(A2)-len(substitute(A2,&rdquo; &ldquo;,&quot;&quot;))</p>
-<p>将最后一个空格的替换为@：substitute(A2,&rdquo; &ldquo;,&quot;@&quot;,len(A2)-len(substitute(A2,&rdquo; &ldquo;,&quot;&quot;)))</p>
-<p>查找@所在位置：find(&quot;@&quot;,substitute(A2,&rdquo; &ldquo;,&quot;@&quot;,len(A2)-len(substitute(A2,&rdquo; &ldquo;,&quot;&quot;))))</p>
+<p>空格出现的次数：len(A2)-len(substitute(A2,&rdquo; &ldquo;,&rdquo;&quot;))</p>
+<p>将最后一个空格的替换为@：substitute(A2,&quot; &ldquo;,&rdquo;@&quot;,len(A2)-len(substitute(A2,&quot; &ldquo;,&rdquo;&quot;)))</p>
+<p>查找@所在位置：find(&quot;@&quot;,substitute(A2,&quot; &ldquo;,&rdquo;@&quot;,len(A2)-len(substitute(A2,&quot; &ldquo;,&rdquo;&quot;))))</p>
 <p>系统没有提供想要的，那我们只有组合使用已有的。</p>
 		</div>
 		<footer class="post__footer">

@@ -99,36 +99,36 @@
 <ul>
 <li>触发器之外，SET NOCOUNT ON 对 @@ROWCOUNT 无影响</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">Table</span> <span style="color:#66d9ef">TABLE</span>(col1 INT)
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">Table</span>(col1) <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">2932</span>),(<span style="color:#ae81ff">142</span>)
-
-<span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">table</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>ROWCOUNT
-</code></pre></div><p><img src="/blog/img/20181218185840307.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">Table</span> <span style="color:#66d9ef">TABLE</span>(col1 INT)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">Table</span>(col1) <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">2932</span>),(<span style="color:#ae81ff">142</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">table</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>ROWCOUNT
+</span></span></code></pre></div><p><img src="/blog/img/20181218185840307.png" alt=""></p>
 <ul>
 <li>触发器之内，@@ROWCOUNT 被 SET NOCOUNT ON 清零</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 测试表和数据
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TestTable(col INT)
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> RowCNT(col INT)
-<span style="color:#66d9ef">INSERT</span> TestTable <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">1</span>)
-
-<span style="color:#75715e">-- 测试触发器，将@@RowCount记在表中
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TRIGGER</span> TestTable_Upt 
-<span style="color:#66d9ef">ON</span> TestTable <span style="color:#66d9ef">AFTER</span> <span style="color:#66d9ef">UPDATE</span>
-<span style="color:#66d9ef">AS</span>
-<span style="color:#66d9ef">BEGIN</span>
-	<span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>;
-	<span style="color:#66d9ef">INSERT</span> RowCNT <span style="color:#66d9ef">VALUES</span>(<span style="color:#f92672">@@</span>ROWCOUNT);
-<span style="color:#66d9ef">END</span>
-
-<span style="color:#75715e">-- 触发触发器
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> TestTable <span style="color:#66d9ef">SET</span> col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-
-<span style="color:#75715e">-- 查看@@ROWCOUNT
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> RowCNT
-</code></pre></div><p>结果如下：<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 测试表和数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> TestTable(col INT)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> RowCNT(col INT)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> TestTable <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 测试触发器，将@@RowCount记在表中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TRIGGER</span> TestTable_Upt 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> TestTable <span style="color:#66d9ef">AFTER</span> <span style="color:#66d9ef">UPDATE</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">INSERT</span> RowCNT <span style="color:#66d9ef">VALUES</span>(<span style="color:#f92672">@@</span>ROWCOUNT);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 触发触发器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> TestTable <span style="color:#66d9ef">SET</span> col <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查看@@ROWCOUNT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> RowCNT
+</span></span></code></pre></div><p>结果如下：<br>
 <img src="/blog/img/20181218190333531.png" alt=""><br>
 若将上述触发器中的Set NoCount On去掉，再次运行Update语句后，发现@@ROWCOUNT恢复正常。</p>
 		</div>
