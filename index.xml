@@ -6,7 +6,16 @@
     <description>Recent content on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Apr 2022 20:17:46 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Sep 2022 17:08:34 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL Server空表依然占用空间</title>
+      <link>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</link>
+      <pubDate>Sun, 04 Sep 2022 17:08:34 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</guid>
+      <description>&lt;p&gt;最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，百思不得其解，后面查资料发现堆表（Heap）可能会出现这样情况。对堆表而言，Delete时获取表级别的锁时才会释放空间。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>关于SQL Server LocalDB的使用</title>
       <link>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</link>
