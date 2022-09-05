@@ -13,7 +13,7 @@
       <pubDate>Fri, 11 Jun 2021 23:22:57 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/06/11/117827867/</guid>
-      <description></description>
+      <description>问题 数仓项目中有上游将SQL Server升级为Always On高可用集群，导致我们使用OLEDB连接方式的SSIS Package在运行时出现</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/23/106913549/</guid>
-      <description></description>
+      <description>概述 实现之前文章中用SQL实现的功能： 得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行： 代码 读</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Wed, 04 Dec 2019 23:54:10 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/12/04/103395928/</guid>
-      <description></description>
+      <description>SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考： 数据访问驱动问题 报错：Microsoft.</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Fri, 29 Nov 2019 00:29:45 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/29/103303254/</guid>
-      <description></description>
+      <description>问题描述 Package属性中开启了Logging功能，设置将Log写到SQL Server，在SSDT中运行时，一切正常，日志有写到所设置数据</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Tue, 26 Nov 2019 22:36:01 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/26/103266182/</guid>
-      <description></description>
+      <description>问题描述 今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&amp;quot;deploy_p</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
-      <description></description>
+      <description>概述 随着AWS的流行，越来越多的企业将数据存储在S3上构建数据湖，本文示例如何用PySpark读取S3上的数据，并用结构化API处理与展示，</description>
     </item>
     
   </channel>

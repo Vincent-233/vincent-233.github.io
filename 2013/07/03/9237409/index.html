@@ -282,6 +282,7 @@ C 3 4</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t a
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span>(<span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">from</span> <span style="color:#f92672">@</span>t <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">year</span><span style="color:#f92672">=</span>a.<span style="color:#66d9ef">year</span> <span style="color:#66d9ef">and</span> sales <span style="color:#f92672">&gt;</span> a.sales)
 </span></span></code></pre></div><p>上述四种方法，效率依次升高。</p>
+
 		</div>
 		<footer class="post__footer">
 			

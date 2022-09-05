@@ -183,6 +183,7 @@
 <p>2） 当列值不确认时，可以构造动态SQL实现；</p>
 <p>3） 列转行Pivot和select .. Case&hellip;的性能差不多，但行转列，用<a href="http://technet.microsoft.com/zh-cn/library/ms177410%28v=sql.105%29.aspx">unPivot</a> 相比union [all]性能优势非常明显，毕竟后者要多次访问表，而且unPivot还更简洁。</p>
 <p>4） Pivot 和 unPiovt 并非完全可逆，因为Pivot的时候，行已经被聚合过了。</p>
+
 		</div>
 		<footer class="post__footer">
 			

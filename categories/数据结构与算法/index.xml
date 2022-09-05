@@ -13,7 +13,7 @@
       <pubDate>Sat, 02 Jan 2021 00:34:32 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/01/02/112072915/</guid>
-      <description></description>
+      <description>关于Quick Sort的介绍网上资料非常多，本文仅是我重新学习此算法时的笔记，如有纰漏，还请网友指出。 快排算法利用分治法（divide and co</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sun, 03 May 2020 19:51:39 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105907225/</guid>
-      <description></description>
+      <description>本文主要用递归算法解决大家非常熟悉的排列组合问题。 组合 方法一 需求：求从含m个数据中取出n个数据的所有取法。 解析：设列表为a[m]，从m个数取</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 03 May 2020 15:27:11 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105901441/</guid>
-      <description></description>
+      <description>问题：求集合所有子集。 下面分别给出两种思路的递归和非递归解法，用python实现。 方法一 a的子集可以分为两部分： 不含a[0]的所有子集 含a[</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Fri, 08 Nov 2019 17:36:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/08/102962911/</guid>
-      <description></description>
+      <description>概述 本文由浅入深，由特殊到一般说明全排列的递归实现。 需求 编写程序，输出所有由a，b，c，d四个字母都出现一次所组成的字符串。 分析 这实际是全排</description>
     </item>
     
   </channel>

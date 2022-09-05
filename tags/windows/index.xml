@@ -13,7 +13,7 @@
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</guid>
-      <description>&lt;p&gt;在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。&lt;/p&gt;</description>
+      <description>在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。 cmd 任选一在PATH环境变量内</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 26 Sep 2015 20:36:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/09/26/48754333/</guid>
-      <description></description>
+      <description>下载与安装 1、在官网下载好系统安装工具，按工具提示，将安装包下载到本地或USB存储介质中; 2、第1步中我选择的是英文安装包，所以最后安装的是</description>
     </item>
     
   </channel>

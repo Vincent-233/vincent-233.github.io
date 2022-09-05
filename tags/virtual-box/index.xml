@@ -13,7 +13,7 @@
       <pubDate>Sat, 13 Apr 2019 13:56:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/13/89281652/</guid>
-      <description>&lt;p&gt;配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项：&lt;/p&gt;</description>
+      <description>配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项： 如果发现电脑上无此选项，可以如下操作： 找到virtua</description>
     </item>
     
   </channel>

@@ -211,6 +211,7 @@ Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMM
 <h3 id="关于set-xact_abort-on">关于Set xAct_Abort On</h3>
 <p>这是从SQL Server 2005开始出现的一个选项，默认为OFF，遇到异常时，根据异常的种类，可能只会回滚引发异常的那条语句（比如主键冲突），而继续执行后续语句，并提交事务。若为设为ON，则从异常语句开始回滚整个事务，不再继续执行后续语句。另外，如果错误非常严重，即便xAct_Abort选项为OFF，也可能会回滚整个事务。<br>
 如果加上set xAct_Abort on，即使try catch无法捕获异常，最终也会回滚事务。</p>
+
 		</div>
 		<footer class="post__footer">
 			

@@ -13,7 +13,7 @@
       <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99697500/</guid>
-      <description></description>
+      <description>Spark 2.0之前 需要显式地创建SparkConf实例，并用Conf实例初始化SparkContext，再用SparkContext创建SQLCo</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
-      <description></description>
+      <description>概述 随着AWS的流行，越来越多的企业将数据存储在S3上构建数据湖，本文示例如何用PySpark读取S3上的数据，并用结构化API处理与展示，</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sat, 17 Aug 2019 05:11:47 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99691830/</guid>
-      <description></description>
+      <description>本文列举一些pyspark文件读写的示例代码 # 创建或获取会话 import pyspark from pyspark.sql import SparkSession spark = SparkSession.builder.appName(&amp;#39;Python Spark SQL example&amp;#39;).getOrCreate() 读取单个文件 CSV csv_path = &amp;#39;/home/ghost/workdata/patients.csv&amp;#39; df_patient = spark.read.format(&amp;#39;csv&amp;#39;)\ .option(&amp;#39;header&amp;#39;, &amp;#39;true&amp;#39;)\ .option(&amp;#39;inferSchema&amp;#39;, &amp;#39;true&amp;#39;)\ .load(csv_path) # 打印 dataframe 架构 df_patient.printSchema() root |-- patient_id:</description>
     </item>
     
   </channel>

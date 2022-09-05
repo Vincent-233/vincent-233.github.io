@@ -13,7 +13,7 @@
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/13/106734253/</guid>
-      <description></description>
+      <description>需求 以上数据样例，需要转为： 实际业务数据可能不止以上两列，而且数据量比较大，实现时要考虑性能。 本文用SQL实现。 思路 看上去是简单的字符串拆分</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
-      <description></description>
+      <description>概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/01/104594475/</guid>
-      <description></description>
+      <description>需求 项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Fri, 10 Jan 2020 11:39:54 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/01/10/103895643/</guid>
-      <description></description>
+      <description>熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/20/96520306/</guid>
-      <description></description>
+      <description>今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&amp;#39;Q1&amp;#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/16/95868267/</guid>
-      <description></description>
+      <description>做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。 需求 千言万语抵不上一张图： 数据准备 CREATE TABLE dbo.CategoryConfig(Category VARCHAR(20),[Level]</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Tue, 18 Dec 2018 19:08:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/12/18/85074737/</guid>
-      <description></description>
+      <description>今天无意中发现SQL Server一个疑似Bug的特性，特此记录。 由于对表的DML操作无论有无数据被影响，Trigger都会被执行，所以为提升</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/12/08/84891624/</guid>
-      <description></description>
+      <description>字符串拆分函数 刚工作那会写了一篇关于字符串拆分的文章，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。 为了考</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Mon, 08 Oct 2018 10:49:11 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/10/08/82964958/</guid>
-      <description></description>
+      <description>经常会有报表需要动态查询MTD和YTD汇总。这里解释一下含义： MTD（Month To Date）：从月初到当前日期 YTD（Year To Date）：</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Sun, 29 Apr 2018 20:58:42 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/04/29/80145292/</guid>
-      <description></description>
+      <description>SQL语句： SELECT TOP (3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid 结果： For XML Raw sql SELECT TOP(3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid FOR XML RAW 结果 说明 每一条记录</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@
       <pubDate>Thu, 10 Aug 2017 11:14:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/08/10/77043631/</guid>
-      <description></description>
+      <description>-- 四舍五入，在小数点后1位舍入 SELECT ROUND(54.565,1) -- 54.600 -- 四舍五入，取整 SELECT ROUND(54.565,0) -- 55.000 -- 四舍五入，在小数点前1位舍入 SELECT ROUND(55.565,-1) -- 60.000 -- 向上取整 SELECT CEILING(34.634) -- 35 -- 向下取整 SELECT FLOOR(34.634) -- 34 -- 小</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
-      <description></description>
+      <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
-      <description></description>
+      <description>SQL Server 2005引入CLR之后，开发者们热情地接受了它。 CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@
       <pubDate>Wed, 20 May 2015 19:44:59 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/20/45874623/</guid>
-      <description></description>
+      <description>ID值记录行，即每一个数字一行的集合，有些时候在SQL中可以作为辅助表使用，从而用SQL的集合思维去高效解决问题，而不是用循环。 用自定义函数</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@
       <pubDate>Sun, 17 May 2015 00:19:12 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/17/45775271/</guid>
-      <description></description>
+      <description>为了保证数据的一致性，事务在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。 T-SQL中三种事务写法 SQL Sever 2000时代的写</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Fri, 15 May 2015 11:32:20 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/15/45741533/</guid>
-      <description></description>
+      <description>###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Tue, 30 Dec 2014 15:00:04 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/12/30/42275987/</guid>
-      <description></description>
+      <description>很多人都知道ORACLE中有Merge关键字，其实SQL Server从2008版本开始也支持Merge了。 从而也可以像ORACLE一样在一条</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Sun, 18 May 2014 16:06:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/05/18/26179859/</guid>
-      <description></description>
+      <description>需求：找出某列断流的ID号. 例如：1，2，7，8，9. 断流的ID是 3 至 6. 直接上代码算了： 不分组，单列： IF object_ID(&amp;#39;tempdb..#Tab&amp;#39;) IS NOT NULL DROP TABLE #Tab CREATE TABLE #Tab(ID INT) GO INSERT #Tab(ID) SELECT 1 UNION ALL</description>
     </item>
     
     <item>
@@ -175,7 +175,7 @@
       <pubDate>Sun, 13 Apr 2014 06:13:58 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/04/13/23562967/</guid>
-      <description></description>
+      <description>一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@
       <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/03/23/21862313/</guid>
-      <description></description>
+      <description>1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶</description>
     </item>
     
     <item>
@@ -193,7 +193,7 @@
       <pubDate>Tue, 10 Dec 2013 16:12:08 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/10/17251887/</guid>
-      <description></description>
+      <description>假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT</description>
     </item>
     
     <item>
@@ -202,7 +202,7 @@
       <pubDate>Mon, 09 Dec 2013 15:18:18 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/09/17231863/</guid>
-      <description></description>
+      <description>生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&amp;#39;a&amp;#39;,&amp;#39;杨静,马丽萍&amp;#39;, &amp;#39;美容师,美体师&amp;</description>
     </item>
     
     <item>
@@ -211,7 +211,7 @@
       <pubDate>Sun, 08 Dec 2013 10:44:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/08/17202973/</guid>
-      <description></description>
+      <description>先准备点数据： CREATE TABLE Sell ( [Year] INT, [Quarter] NVARCHAR(10), Quantity INT ) GO INSERT INTO Sell SELECT 2006, &amp;#39;Q1&amp;#39;, 20 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 15 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 4 UNION ALL SELECT 2006, &amp;#39;Q3&amp;#39;, 12 UNION ALL SELECT 2006, &amp;#39;Q4&amp;#39;, 18 UNION ALL SELECT 2007, &amp;#39;Q1&amp;#39;, 10 UNION ALL SELECT 2007, &amp;#39;Q2&amp;#39;, 10 UNION ALL SELECT 2008, &amp;#39;Q1&amp;#39;, 8 UNION ALL</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@
       <pubDate>Sat, 23 Nov 2013 16:37:54 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/23/16911599/</guid>
-      <description></description>
+      <description>核心思想在于下面几个模式的组合使用： %[0-9]%： 所有数字 %[A-Za-z]%: 所有字母 %[吖-咗]%: 所有汉字 1. 去除汉字(字母、数字)： 举出一例，其他类似：</description>
     </item>
     
     <item>
@@ -229,7 +229,7 @@
       <pubDate>Sat, 23 Nov 2013 02:22:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/23/16897427/</guid>
-      <description></description>
+      <description>先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &amp;#39;a&amp;#39; UNION ALL SELECT 1, &amp;#39;b&amp;#39; UNION ALL SELECT 3, &amp;#39;c&amp;#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积</description>
     </item>
     
     <item>
@@ -238,7 +238,7 @@
       <pubDate>Sun, 03 Nov 2013 16:00:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/03/14111219/</guid>
-      <description></description>
+      <description>需求： 有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。 分析： 员工的下属也可能是其他员工的上司，即下</description>
     </item>
     
     <item>
@@ -247,7 +247,7 @@
       <pubDate>Sat, 27 Jul 2013 14:43:45 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/27/9532985/</guid>
-      <description></description>
+      <description>设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称</description>
     </item>
     
     <item>
@@ -256,7 +256,7 @@
       <pubDate>Wed, 03 Jul 2013 14:28:57 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/03/9237409/</guid>
-      <description></description>
+      <description>1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询</description>
     </item>
     
   </channel>

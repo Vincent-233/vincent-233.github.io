@@ -127,6 +127,7 @@ c.NotebookApp.ip = &lsquo;0.0.0.0&rsquo;<br>
 <h3 id="网络相关配置">网络相关配置</h3>
 <p>以上只是jupyter notebook本身的配置，要让Host机能访问VM机，需要在操作系统网络层面再做相关设置，比如防火墙，端口（jupyter默认8888端口）等等。具体配置方法可参考类比<a href="https://vincent-233.github.io/blog/2019/04/13/89282667/">另外一篇文章</a>。若不想太麻烦，安全也允许，可直接用<code>systemctl disable firewalld</code>命令关闭linux防火墙，然后用桥接模式或NAT加端口转发。</p>
 <p>以上条件均具备后，在Host的浏览器中输入地址即可，例如作NAT配置了端口转发之后，127.0.0.1:8888即可访问。</p>
+
 		</div>
 		<footer class="post__footer">
 			

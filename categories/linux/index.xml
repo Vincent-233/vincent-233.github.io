@@ -13,7 +13,7 @@
       <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/05/26/90581596/</guid>
-      <description></description>
+      <description>vim 选择文本，删除，复制，粘贴 文本的选择，对于编辑器来说，是很基本的东西，也经常被用到，总结如下： v 从光标当前位置开始，光标所经过的地方会被选</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/13/89282667/</guid>
-      <description></description>
+      <description>前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置</description>
     </item>
     
   </channel>

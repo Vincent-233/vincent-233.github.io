@@ -150,6 +150,7 @@
 </span></span></code></pre></div><p>用sp_spaceused查看表的占用空间，远比图片本身的空间少。说明表中的二进制列存储的并不是文件本身，而是一个类似文件指针的属性数据。</p>
 <h3 id="关于filestream文件的删除">关于FileStream文件的删除</h3>
 <p>如果直接运行Delete语句FileStream并不会马上被删除，这是因为SQL并不会实时对它进行维护，而是有一个垃圾回收后台进程在异步处理，当到达一个<a href="https://docs.microsoft.com/en-us/sql/relational-databases/logs/database-checkpoints-sql-server?view=sql-server-2017">checkpoint</a>时，才会回收不需要的数据。如果想手动触发，可以直接运行CheckPoint命令达到效果，若数据库的恢复模式是Full，还要先备份事务日志才可以。</p>
+
 		</div>
 		<footer class="post__footer">
 			

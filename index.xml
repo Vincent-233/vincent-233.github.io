@@ -13,8 +13,7 @@
       <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
-      <description>&lt;p&gt;很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Git在线代码管理仓库，若在Branch Name/Pull Request Title/Commit Message中包含JIRA中的Issue号，会自动出现对应JIRA页面的超链接，非常方便追踪问题。&lt;br&gt;
-在commit message中添加JIRA号可作为一个开发规范，但每次提交时都去写一遍Issue Number总感觉很费事，能否让其自动添加呢？&lt;/p&gt;</description>
+      <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
     </item>
     
     <item>
@@ -23,7 +22,7 @@
       <pubDate>Sun, 04 Sep 2022 17:08:34 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</guid>
-      <description>&lt;p&gt;最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，对database进行Shrink也不会释放，百思不得其解，后面查资料发现堆表（Heap）可能会出现这样情况。对堆表而言，Delete时获取表级别的锁时才会释放空间。&lt;/p&gt;</description>
+      <description>最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，对database进行Shrink也不会释放，百思不得其解，后面查资料发</description>
     </item>
     
     <item>
@@ -32,7 +31,7 @@
       <pubDate>Sat, 23 Apr 2022 20:17:46 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</guid>
-      <description>&lt;p&gt;日常工作电脑不方便自行安装SQL Server实例，服务器又是多人共享开发，权限也管理得很严格，不方便个人测试和临时数据存储，好在安装的SSDT附带一个叫LocalDB的功能，可以很方便地进行T-SQL的开发与测试工作。&lt;/p&gt;</description>
+      <description>日常工作电脑不方便自行安装SQL Server实例，服务器又是多人共享开发，权限也管理得很严格，不方便个人测试和临时数据存储，好在安装的SSD</description>
     </item>
     
     <item>
@@ -41,7 +40,7 @@
       <pubDate>Sat, 26 Mar 2022 19:17:46 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy&#34;&gt;robocopy&lt;/a&gt;是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大&lt;/p&gt;</description>
+      <description>robocopy是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大 比如： 多线程模式。/MT选项 镜像模式，copy时</description>
     </item>
     
     <item>
@@ -50,7 +49,7 @@
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</guid>
-      <description>&lt;p&gt;在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。&lt;/p&gt;</description>
+      <description>在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。 cmd 任选一在PATH环境变量内</description>
     </item>
     
     <item>
@@ -59,7 +58,7 @@
       <pubDate>Sun, 08 Aug 2021 13:39:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/08/08/119496995/</guid>
-      <description></description>
+      <description>模块（python module）就是一个python文件，包（package）就是一个带__init__.py文件的文件夹，可以理解为模块的</description>
     </item>
     
     <item>
@@ -68,7 +67,7 @@
       <pubDate>Fri, 11 Jun 2021 23:22:57 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/06/11/117827867/</guid>
-      <description></description>
+      <description>问题 数仓项目中有上游将SQL Server升级为Always On高可用集群，导致我们使用OLEDB连接方式的SSIS Package在运行时出现</description>
     </item>
     
     <item>
@@ -77,7 +76,7 @@
       <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
-      <description></description>
+      <description>需求：将当前目录下所有文本文件合并成一个新文件。 CMD实现 copy *.txt cmd_new.txt 以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的</description>
     </item>
     
     <item>
@@ -86,7 +85,7 @@
       <pubDate>Sat, 02 Jan 2021 00:34:32 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/01/02/112072915/</guid>
-      <description></description>
+      <description>关于Quick Sort的介绍网上资料非常多，本文仅是我重新学习此算法时的笔记，如有纰漏，还请网友指出。 快排算法利用分治法（divide and co</description>
     </item>
     
     <item>
@@ -95,7 +94,7 @@
       <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/23/106913549/</guid>
-      <description></description>
+      <description>概述 实现之前文章中用SQL实现的功能： 得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行： 代码 读</description>
     </item>
     
     <item>
@@ -104,7 +103,7 @@
       <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/21/106893478/</guid>
-      <description></description>
+      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3</description>
     </item>
     
     <item>
@@ -113,7 +112,7 @@
       <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
-      <description></description>
+      <description>为何要用SQLCMD 平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常</description>
     </item>
     
     <item>
@@ -122,7 +121,7 @@
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/13/106734253/</guid>
-      <description></description>
+      <description>需求 以上数据样例，需要转为： 实际业务数据可能不止以上两列，而且数据量比较大，实现时要考虑性能。 本文用SQL实现。 思路 看上去是简单的字符串拆分</description>
     </item>
     
     <item>
@@ -131,7 +130,7 @@
       <pubDate>Sat, 16 May 2020 09:23:58 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/16/106153966/</guid>
-      <description></description>
+      <description>场景 公司电脑无管理员权限，无法自行安装软件，经申请安装上了everything（通过域管理自动安装），但启动时提示需要管理员权限，让输入账号</description>
     </item>
     
     <item>
@@ -140,7 +139,7 @@
       <pubDate>Sun, 03 May 2020 19:51:39 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105907225/</guid>
-      <description></description>
+      <description>本文主要用递归算法解决大家非常熟悉的排列组合问题。 组合 方法一 需求：求从含m个数据中取出n个数据的所有取法。 解析：设列表为a[m]，从m个数取</description>
     </item>
     
     <item>
@@ -149,7 +148,7 @@
       <pubDate>Sun, 03 May 2020 15:27:11 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105901441/</guid>
-      <description></description>
+      <description>问题：求集合所有子集。 下面分别给出两种思路的递归和非递归解法，用python实现。 方法一 a的子集可以分为两部分： 不含a[0]的所有子集 含a[</description>
     </item>
     
     <item>
@@ -158,7 +157,7 @@
       <pubDate>Sat, 02 May 2020 12:08:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/02/105887338/</guid>
-      <description></description>
+      <description>知识准备 可变类型(mutable)：list、set、dict可变类型，支持原地址直接改变元素（item）的值 不可变类型(immutable</description>
     </item>
     
     <item>
@@ -167,7 +166,7 @@
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
-      <description></description>
+      <description>概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字</description>
     </item>
     
     <item>
@@ -176,7 +175,7 @@
       <pubDate>Sun, 01 Mar 2020 19:42:31 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/01/104597650/</guid>
-      <description></description>
+      <description>上一篇介绍了如何用纯SQL生成测试数据，但SQL功能有限，本篇介绍python faker库的使用。 需求 生成5000条记录，字段如下： fake</description>
     </item>
     
     <item>
@@ -185,7 +184,7 @@
       <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/01/104594475/</guid>
-      <description></description>
+      <description>需求 项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000</description>
     </item>
     
     <item>
@@ -194,7 +193,7 @@
       <pubDate>Thu, 06 Feb 2020 12:20:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/02/06/104168699/</guid>
-      <description></description>
+      <description>在进入并发编程的世界之前，先看一个对比的例子： 举例 串行执行 import time def count(task_name): print(task_name,time.strftime(&amp;#34;%X&amp;#34;),&amp;#34;One&amp;#34;) time.sleep(1) # 模拟一个需要堵塞一秒的任务 print(task_name,time.strftime(&amp;#34;%X&amp;#34;),&amp;#34;Two&amp;#34;) def main(): count(&amp;#39;Task-A&amp;#39;) count(&amp;#39;Task-B&amp;#39;) count(&amp;#39;Task-C&amp;#39;) if __name__ == &amp;#34;__main__&amp;#34;: s = time.time() main() elapsed = time.time() - s print(f&amp;#34;Total Run</description>
     </item>
     
     <item>
@@ -203,7 +202,7 @@
       <pubDate>Sun, 02 Feb 2020 20:41:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/02/02/104148685/</guid>
-      <description></description>
+      <description>装饰器（decorator）是python特有的语法特性，通过函数封装扩展原函数的功能。 下面一步步通过例子说明它的作用和用法。 函数中定义函数</description>
     </item>
     
     <item>
@@ -212,7 +211,7 @@
       <pubDate>Fri, 10 Jan 2020 11:39:54 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/01/10/103895643/</guid>
-      <description></description>
+      <description>熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的</description>
     </item>
     
     <item>
@@ -221,7 +220,7 @@
       <pubDate>Mon, 30 Dec 2019 14:59:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/12/30/103766391/</guid>
-      <description></description>
+      <description>PowerShell调用外部程序或脚本的方式非常多，下面总结几种调用方式和常规用法。 1. 直接调用 优点：简单易用，但可能不够稳定 说明：直接用程序</description>
     </item>
     
     <item>
@@ -230,7 +229,7 @@
       <pubDate>Wed, 04 Dec 2019 23:54:10 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/12/04/103395928/</guid>
-      <description></description>
+      <description>SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考： 数据访问驱动问题 报错：Microsoft.</description>
     </item>
     
     <item>
@@ -239,7 +238,7 @@
       <pubDate>Fri, 29 Nov 2019 00:29:45 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/29/103303254/</guid>
-      <description></description>
+      <description>问题描述 Package属性中开启了Logging功能，设置将Log写到SQL Server，在SSDT中运行时，一切正常，日志有写到所设置数据</description>
     </item>
     
     <item>
@@ -248,7 +247,7 @@
       <pubDate>Tue, 26 Nov 2019 22:36:01 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/26/103266182/</guid>
-      <description></description>
+      <description>问题描述 今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&amp;quot;deploy_p</description>
     </item>
     
     <item>
@@ -257,7 +256,7 @@
       <pubDate>Sat, 16 Nov 2019 23:31:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/16/103103791/</guid>
-      <description></description>
+      <description>概述 面向对象三大特性：封装、继承、多态，本文通过类继承和方法覆盖的例子来说明python的面向对象编程。 功能说明 实现“数列”基类，然后通过继</description>
     </item>
     
     <item>
@@ -266,7 +265,7 @@
       <pubDate>Sat, 16 Nov 2019 22:58:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/16/103104203/</guid>
-      <description></description>
+      <description>如下表，python类只要实现了右边所示特殊名称的方法，就实现了操作符重载，可使用左边的操作符语法： Common Syntax Special Method Form a + b a._add_(b); alternatively b._radd_(a) a − b a._sub_(b); alternatively b._rsub_(a) a b a._mul_(b);</description>
     </item>
     
     <item>
@@ -275,7 +274,7 @@
       <pubDate>Fri, 08 Nov 2019 17:36:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/08/102962911/</guid>
-      <description></description>
+      <description>概述 本文由浅入深，由特殊到一般说明全排列的递归实现。 需求 编写程序，输出所有由a，b，c，d四个字母都出现一次所组成的字符串。 分析 这实际是全排</description>
     </item>
     
     <item>
@@ -284,7 +283,7 @@
       <pubDate>Thu, 31 Oct 2019 23:49:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/10/31/102848314/</guid>
-      <description></description>
+      <description>路径/home/ghost/workspace/Other/结构如下 ├── git ├── input │ ├── csv │ │ ├── test_file_1.csv │ │ └── test_file_2.csv │ ├── test.csv │ ├── test_file_1.txt │</description>
     </item>
     
     <item>
@@ -293,7 +292,7 @@
       <pubDate>Thu, 26 Sep 2019 00:17:56 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/09/26/101398064/</guid>
-      <description></description>
+      <description>概述 python的标识符更像C++中的指针或JAVA中的引用变量，每个标识符与其所指向的内存地址相关联 像 b = a 这样赋值语句，就是为 a 起了一个</description>
     </item>
     
     <item>
@@ -302,7 +301,7 @@
       <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
-      <description></description>
+      <description>概述 本文以pyodbc和sqlalchemy操作SQL Server为例说明python的数据库编程。 pyodbc pyodbc只是众多python database dr</description>
     </item>
     
     <item>
@@ -311,7 +310,7 @@
       <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99697500/</guid>
-      <description></description>
+      <description>Spark 2.0之前 需要显式地创建SparkConf实例，并用Conf实例初始化SparkContext，再用SparkContext创建SQLCo</description>
     </item>
     
     <item>
@@ -320,7 +319,7 @@
       <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
-      <description></description>
+      <description>概述 随着AWS的流行，越来越多的企业将数据存储在S3上构建数据湖，本文示例如何用PySpark读取S3上的数据，并用结构化API处理与展示，</description>
     </item>
     
     <item>
@@ -329,7 +328,7 @@
       <pubDate>Sat, 17 Aug 2019 05:11:47 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/17/99691830/</guid>
-      <description></description>
+      <description>本文列举一些pyspark文件读写的示例代码 # 创建或获取会话 import pyspark from pyspark.sql import SparkSession spark = SparkSession.builder.appName(&amp;#39;Python Spark SQL example&amp;#39;).getOrCreate() 读取单个文件 CSV csv_path = &amp;#39;/home/ghost/workdata/patients.csv&amp;#39; df_patient = spark.read.format(&amp;#39;csv&amp;#39;)\ .option(&amp;#39;header&amp;#39;, &amp;#39;true&amp;#39;)\ .option(&amp;#39;inferSchema&amp;#39;, &amp;#39;true&amp;#39;)\ .load(csv_path) # 打印 dataframe 架构 df_patient.printSchema() root |-- patient_id:</description>
     </item>
     
     <item>
@@ -338,7 +337,7 @@
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
-      <description></description>
+      <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     
     <item>
@@ -347,7 +346,7 @@
       <pubDate>Fri, 26 Jul 2019 21:38:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/26/97418483/</guid>
-      <description></description>
+      <description>背景 虚拟机中安装了spark，想要在windows中直接练习pyspark的操作，但又不想在windows中再安装一次spark，于是想到了</description>
     </item>
     
     <item>
@@ -356,7 +355,7 @@
       <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/20/96520306/</guid>
-      <description></description>
+      <description>今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&amp;#39;Q1&amp;#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL</description>
     </item>
     
     <item>
@@ -365,7 +364,7 @@
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/16/95868267/</guid>
-      <description></description>
+      <description>做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。 需求 千言万语抵不上一张图： 数据准备 CREATE TABLE dbo.CategoryConfig(Category VARCHAR(20),[Level]</description>
     </item>
     
     <item>
@@ -374,7 +373,7 @@
       <pubDate>Tue, 09 Jul 2019 10:15:53 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/09/95170415/</guid>
-      <description></description>
+      <description>everything已经成为我windows平台下的重度依赖软件，其对本地文件的搜索高效快速准确，但默认是不支持网络路径文件夹内文件搜索的：</description>
     </item>
     
     <item>
@@ -383,7 +382,7 @@
       <pubDate>Mon, 17 Jun 2019 22:18:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/06/17/92729385/</guid>
-      <description></description>
+      <description>玩了一段时间Ubuntu之后发现很多操作还是用命令行更方便，GUI显得没太多作用，毕竟Ubuntu只在VM中，GUI有Windows或Mac</description>
     </item>
     
     <item>
@@ -392,7 +391,7 @@
       <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/06/15/92030849/</guid>
-      <description></description>
+      <description>需求背景 需要将从数据库提取的数据交给用户，由于数据量较大（好几十万行），若导出为有固定分隔符的文本文件给用户，一来体验上不太好，二来若文本字</description>
     </item>
     
     <item>
@@ -401,7 +400,7 @@
       <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/05/26/90581596/</guid>
-      <description></description>
+      <description>vim 选择文本，删除，复制，粘贴 文本的选择，对于编辑器来说，是很基本的东西，也经常被用到，总结如下： v 从光标当前位置开始，光标所经过的地方会被选</description>
     </item>
     
     <item>
@@ -410,7 +409,7 @@
       <pubDate>Tue, 14 May 2019 23:41:55 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/05/14/90217603/</guid>
-      <description></description>
+      <description>安装PostgreSQL 运行如下命令进行安装： sudo apt-get install postgresql Linux本地登陆并修改密码 安装完成之后，Linux会自动创建postgres同名账户</description>
     </item>
     
     <item>
@@ -419,7 +418,7 @@
       <pubDate>Sat, 27 Apr 2019 23:37:19 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/27/89609806/</guid>
-      <description></description>
+      <description>场景 希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖</description>
     </item>
     
     <item>
@@ -428,7 +427,7 @@
       <pubDate>Thu, 18 Apr 2019 23:32:36 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/18/89390714/</guid>
-      <description></description>
+      <description>场景描述 客户提供的Excel文件，需要进行简单清洗之后导入数据库。 代码实现 import pandas as pd import numpy as np import os from sqlalchemy import create_engine from sqlalchemy import text from sqlalchemy.types import Integer from sqlalchemy.types import NVARCHAR # Excel文</description>
     </item>
     
     <item>
@@ -437,7 +436,7 @@
       <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
-      <description></description>
+      <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     
     <item>
@@ -446,7 +445,7 @@
       <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/13/89282667/</guid>
-      <description></description>
+      <description>前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置</description>
     </item>
     
     <item>
@@ -455,7 +454,7 @@
       <pubDate>Sat, 13 Apr 2019 13:56:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/13/89281652/</guid>
-      <description>&lt;p&gt;配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项：&lt;/p&gt;</description>
+      <description>配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项： 如果发现电脑上无此选项，可以如下操作： 找到virtua</description>
     </item>
     
     <item>
@@ -464,7 +463,7 @@
       <pubDate>Tue, 09 Apr 2019 20:26:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/09/89160917/</guid>
-      <description></description>
+      <description>使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585</description>
     </item>
     
     <item>
@@ -473,7 +472,7 @@
       <pubDate>Mon, 08 Apr 2019 10:22:22 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/08/89082770/</guid>
-      <description></description>
+      <description>概述 客户端通过密钥SSh登陆Linux的条件： 服务器端登陆账户home目录下的.ssh文件夹存在公钥，命名authorized_keys 客户</description>
     </item>
     
     <item>
@@ -482,7 +481,7 @@
       <pubDate>Sat, 06 Apr 2019 11:10:57 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/06/89053253/</guid>
-      <description></description>
+      <description>学习Uda的Linux免费入门课时知道了Vagrant，发现用它来安装Ubuntu非常方便快捷，特记录之。 安装virtual box vagrant</description>
     </item>
     
     <item>
@@ -491,7 +490,7 @@
       <pubDate>Mon, 01 Apr 2019 12:58:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/01/88945745/</guid>
-      <description></description>
+      <description>需求 原始表格： 想在Total列中对每日的Amount进行汇总，然后对Date和Total进行合并居中，效果如下： 思路 遍历Excel行，从第一</description>
     </item>
     
     <item>
@@ -500,7 +499,7 @@
       <pubDate>Tue, 18 Dec 2018 19:08:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/12/18/85074737/</guid>
-      <description></description>
+      <description>今天无意中发现SQL Server一个疑似Bug的特性，特此记录。 由于对表的DML操作无论有无数据被影响，Trigger都会被执行，所以为提升</description>
     </item>
     
     <item>
@@ -509,7 +508,7 @@
       <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/12/08/84891624/</guid>
-      <description></description>
+      <description>字符串拆分函数 刚工作那会写了一篇关于字符串拆分的文章，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。 为了考</description>
     </item>
     
     <item>
@@ -518,7 +517,7 @@
       <pubDate>Mon, 08 Oct 2018 10:49:11 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/10/08/82964958/</guid>
-      <description></description>
+      <description>经常会有报表需要动态查询MTD和YTD汇总。这里解释一下含义： MTD（Month To Date）：从月初到当前日期 YTD（Year To Date）：</description>
     </item>
     
     <item>
@@ -527,7 +526,7 @@
       <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/09/24/82832350/</guid>
-      <description></description>
+      <description>@[TOC](SQL Server Audit 功能体验 ) SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法还请自行翻阅联机</description>
     </item>
     
     <item>
@@ -536,7 +535,7 @@
       <pubDate>Tue, 07 Aug 2018 15:07:49 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/08/07/81481585/</guid>
-      <description></description>
+      <description>SQL Server有自带的邮件服务，可以用它来做一些自动通知提醒的邮件，如警报和通知。下面总结一下它的配置与使用。 配置Database Mail 配置入口</description>
     </item>
     
     <item>
@@ -545,7 +544,7 @@
       <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/06/18/80724609/</guid>
-      <description></description>
+      <description>关于SQL复制的具体操作步骤网上有很多教程我就不说明了，这里主要记录下我的实践，以及过程中遇到的问题与解决方法： 本机不同数据库间复制 本机配置</description>
     </item>
     
     <item>
@@ -554,7 +553,7 @@
       <pubDate>Tue, 05 Jun 2018 17:02:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/06/05/80583991/</guid>
-      <description></description>
+      <description>今天利用数据库复制向导（Copy Database Wizard）将2012版本的数据库复制到2014时，遇到了一些错误，并最终解决，特此记录： 数据库兼容级别</description>
     </item>
     
     <item>
@@ -563,7 +562,7 @@
       <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/06/03/80553895/</guid>
-      <description></description>
+      <description>FileStream是SQL Server 2008提供的新特性，之前附件在SQL的存储一种是直接放数据库，一种是存储一个路径，附件单独放在磁盘上。前一种</description>
     </item>
     
     <item>
@@ -572,7 +571,7 @@
       <pubDate>Tue, 22 May 2018 14:19:56 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/05/22/80404769/</guid>
-      <description></description>
+      <description>透明数据加密（Transparent Data Encryption）主要用于防止数据库文件被未经授权地拷贝或服务器被盗后通过附加/还原等操作访问数据</description>
     </item>
     
     <item>
@@ -581,7 +580,7 @@
       <pubDate>Mon, 21 May 2018 00:38:33 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/05/21/80387148/</guid>
-      <description></description>
+      <description>建立分区表的步骤： 新建文件组（FileGroups） 新建用于承载具体分区的文件组，数据库默认有只有一个Primary文件组。 也可以在单个文件</description>
     </item>
     
     <item>
@@ -590,7 +589,7 @@
       <pubDate>Tue, 01 May 2018 10:10:04 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/05/01/80154338/</guid>
-      <description></description>
+      <description>在事务中将隔离级别设为SnapShot，可提升读写并发性能，防止脏读，这里简单介绍下设置使用方法 在单独事务中启用SNAPSHOT 不开启默认选</description>
     </item>
     
     <item>
@@ -599,7 +598,7 @@
       <pubDate>Sun, 29 Apr 2018 20:58:42 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2018/04/29/80145292/</guid>
-      <description></description>
+      <description>SQL语句： SELECT TOP (3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid 结果： For XML Raw sql SELECT TOP(3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid FOR XML RAW 结果 说明 每一条记录</description>
     </item>
     
     <item>
@@ -608,7 +607,7 @@
       <pubDate>Thu, 10 Aug 2017 11:14:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/08/10/77043631/</guid>
-      <description></description>
+      <description>-- 四舍五入，在小数点后1位舍入 SELECT ROUND(54.565,1) -- 54.600 -- 四舍五入，取整 SELECT ROUND(54.565,0) -- 55.000 -- 四舍五入，在小数点前1位舍入 SELECT ROUND(55.565,-1) -- 60.000 -- 向上取整 SELECT CEILING(34.634) -- 35 -- 向下取整 SELECT FLOOR(34.634) -- 34 -- 小</description>
     </item>
     
     <item>
@@ -617,7 +616,7 @@
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
-      <description></description>
+      <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
     </item>
     
     <item>
@@ -626,7 +625,7 @@
       <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
-      <description></description>
+      <description>SQL Server 2005引入CLR之后，开发者们热情地接受了它。 CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</description>
     </item>
     
     <item>
@@ -635,7 +634,7 @@
       <pubDate>Sat, 26 Sep 2015 20:36:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/09/26/48754333/</guid>
-      <description></description>
+      <description>下载与安装 1、在官网下载好系统安装工具，按工具提示，将安装包下载到本地或USB存储介质中; 2、第1步中我选择的是英文安装包，所以最后安装的是</description>
     </item>
     
     <item>
@@ -644,7 +643,7 @@
       <pubDate>Sun, 31 May 2015 14:17:04 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/31/46288335/</guid>
-      <description></description>
+      <description>概述 登陆名的作用域是SQL Server数据库引擎，要连接到具体的数据库并进行相应操作，登陆名还需要映射到数据库用户名，并为用户名指定数据库角</description>
     </item>
     
     <item>
@@ -653,7 +652,7 @@
       <pubDate>Wed, 20 May 2015 19:44:59 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/20/45874623/</guid>
-      <description></description>
+      <description>ID值记录行，即每一个数字一行的集合，有些时候在SQL中可以作为辅助表使用，从而用SQL的集合思维去高效解决问题，而不是用循环。 用自定义函数</description>
     </item>
     
     <item>
@@ -662,7 +661,7 @@
       <pubDate>Sun, 17 May 2015 00:19:12 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/17/45775271/</guid>
-      <description></description>
+      <description>为了保证数据的一致性，事务在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。 T-SQL中三种事务写法 SQL Sever 2000时代的写</description>
     </item>
     
     <item>
@@ -671,7 +670,7 @@
       <pubDate>Fri, 15 May 2015 11:32:20 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/15/45741533/</guid>
-      <description></description>
+      <description>###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并</description>
     </item>
     
     <item>
@@ -680,7 +679,7 @@
       <pubDate>Mon, 04 May 2015 05:17:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/04/45478729/</guid>
-      <description></description>
+      <description>PL/SQL Developer是用得比较多的ORACLE开发工具，一般人在使用时都会对此软件进行个性化配置，比如快捷键、代码提示与自动补全等，但是每次</description>
     </item>
     
     <item>
@@ -689,7 +688,7 @@
       <pubDate>Sun, 08 Feb 2015 08:25:19 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/02/08/43637581/</guid>
-      <description></description>
+      <description>需求：将D盘For PS文件夹下的A.txt文件重命名为aa.txt rename-Item &amp;#39;D:\For PS\A.txt&amp;#39; -NewName &amp;#39;aa.txt&amp;#39; 需求：将D盘For PS文件夹下的所有的txt文件改为html文件</description>
     </item>
     
     <item>
@@ -698,7 +697,7 @@
       <pubDate>Tue, 30 Dec 2014 15:00:04 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/12/30/42275987/</guid>
-      <description></description>
+      <description>很多人都知道ORACLE中有Merge关键字，其实SQL Server从2008版本开始也支持Merge了。 从而也可以像ORACLE一样在一条</description>
     </item>
     
     <item>
@@ -707,7 +706,7 @@
       <pubDate>Sat, 26 Jul 2014 08:36:10 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38146339/</guid>
-      <description></description>
+      <description>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。 这里通过一个简单的例子来介绍</description>
     </item>
     
     <item>
@@ -716,7 +715,7 @@
       <pubDate>Sat, 26 Jul 2014 07:46:40 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38145329/</guid>
-      <description></description>
+      <description>合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&amp;#39;北京&amp;#39; FROM dual UNION ALL SELECT</description>
     </item>
     
     <item>
@@ -725,7 +724,7 @@
       <pubDate>Sat, 26 Jul 2014 01:24:56 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38139137/</guid>
-      <description></description>
+      <description>ORACLE不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。 -- Nested Table CREATE OR REPLACE TYPE</description>
     </item>
     
     <item>
@@ -734,7 +733,7 @@
       <pubDate>Fri, 11 Jul 2014 18:41:45 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/11/37717375/</guid>
-      <description></description>
+      <description>思路：先删除与此数据库连接的进程，再删除数据库 直接上脚本： -- 删除与此数据库相关的连接 DECLARE @sql VARCHAR(4000) SELECT @sql = ISNULL(@sql,&amp;#39;&amp;#39;) + &amp;#39;kill &amp;#39; + LTRIM(spid) + CHAR(13) from sysprocesses WHERE dbid = DB_ID(&amp;#39;DB_Name&amp;#39;) EXEC(@sql) -- 删除与此数据</description>
     </item>
     
     <item>
@@ -743,7 +742,7 @@
       <pubDate>Sun, 18 May 2014 16:06:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/05/18/26179859/</guid>
-      <description></description>
+      <description>需求：找出某列断流的ID号. 例如：1，2，7，8，9. 断流的ID是 3 至 6. 直接上代码算了： 不分组，单列： IF object_ID(&amp;#39;tempdb..#Tab&amp;#39;) IS NOT NULL DROP TABLE #Tab CREATE TABLE #Tab(ID INT) GO INSERT #Tab(ID) SELECT 1 UNION ALL</description>
     </item>
     
     <item>
@@ -752,7 +751,7 @@
       <pubDate>Sun, 13 Apr 2014 06:13:58 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/04/13/23562967/</guid>
-      <description></description>
+      <description>一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最</description>
     </item>
     
     <item>
@@ -761,7 +760,7 @@
       <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/03/23/21862313/</guid>
-      <description></description>
+      <description>1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶</description>
     </item>
     
     <item>
@@ -770,7 +769,7 @@
       <pubDate>Sat, 08 Feb 2014 18:47:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/02/08/19000277/</guid>
-      <description></description>
+      <description>1.Microsoft.ACE.OLEDB.12.0 简介 实施上就是一个数据访问接口，用于在office文件和非office应用程序间传输数据。例如Microsoft Office Access 2010（.mdb和.</description>
     </item>
     
     <item>
@@ -779,7 +778,7 @@
       <pubDate>Thu, 16 Jan 2014 15:29:59 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/01/16/18375543/</guid>
-      <description></description>
+      <description>初次接触Oracle，第一印象就是安装完之后系统明显变慢了，打开任务管理器一看，原来它的服务吃了太多内存。也许正如别人说的：&amp;ldquo;要</description>
     </item>
     
     <item>
@@ -788,7 +787,7 @@
       <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/27/17620647/</guid>
-      <description></description>
+      <description>虽然目前本人用的是2008R2，但很多客户仍然还是2005版本的，所以还是将这篇文章转过来，以备不时之需。在2008下附加2005的mdf应</description>
     </item>
     
     <item>
@@ -797,7 +796,7 @@
       <pubDate>Tue, 10 Dec 2013 16:12:08 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/10/17251887/</guid>
-      <description></description>
+      <description>假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT</description>
     </item>
     
     <item>
@@ -806,7 +805,7 @@
       <pubDate>Mon, 09 Dec 2013 15:18:18 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/09/17231863/</guid>
-      <description></description>
+      <description>生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&amp;#39;a&amp;#39;,&amp;#39;杨静,马丽萍&amp;#39;, &amp;#39;美容师,美体师&amp;</description>
     </item>
     
     <item>
@@ -815,7 +814,7 @@
       <pubDate>Sun, 08 Dec 2013 10:44:16 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/12/08/17202973/</guid>
-      <description></description>
+      <description>先准备点数据： CREATE TABLE Sell ( [Year] INT, [Quarter] NVARCHAR(10), Quantity INT ) GO INSERT INTO Sell SELECT 2006, &amp;#39;Q1&amp;#39;, 20 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 15 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 4 UNION ALL SELECT 2006, &amp;#39;Q3&amp;#39;, 12 UNION ALL SELECT 2006, &amp;#39;Q4&amp;#39;, 18 UNION ALL SELECT 2007, &amp;#39;Q1&amp;#39;, 10 UNION ALL SELECT 2007, &amp;#39;Q2&amp;#39;, 10 UNION ALL SELECT 2008, &amp;#39;Q1&amp;#39;, 8 UNION ALL</description>
     </item>
     
     <item>
@@ -824,7 +823,7 @@
       <pubDate>Sat, 23 Nov 2013 16:37:54 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/23/16911599/</guid>
-      <description></description>
+      <description>核心思想在于下面几个模式的组合使用： %[0-9]%： 所有数字 %[A-Za-z]%: 所有字母 %[吖-咗]%: 所有汉字 1. 去除汉字(字母、数字)： 举出一例，其他类似：</description>
     </item>
     
     <item>
@@ -833,7 +832,7 @@
       <pubDate>Sat, 23 Nov 2013 02:22:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/23/16897427/</guid>
-      <description></description>
+      <description>先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &amp;#39;a&amp;#39; UNION ALL SELECT 1, &amp;#39;b&amp;#39; UNION ALL SELECT 3, &amp;#39;c&amp;#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积</description>
     </item>
     
     <item>
@@ -842,7 +841,7 @@
       <pubDate>Sun, 17 Nov 2013 14:18:46 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/17/16645847/</guid>
-      <description></description>
+      <description>今天写一SQL语句时，被提示&amp;quot; 无法解决 equal to操作中 &amp;ldquo;SQL_Latin1_General_CP1_CI_AS&amp;quot</description>
     </item>
     
     <item>
@@ -851,7 +850,7 @@
       <pubDate>Sun, 03 Nov 2013 16:00:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/11/03/14111219/</guid>
-      <description></description>
+      <description>需求： 有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。 分析： 员工的下属也可能是其他员工的上司，即下</description>
     </item>
     
     <item>
@@ -860,7 +859,7 @@
       <pubDate>Sun, 20 Oct 2013 13:56:03 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/10/20/12889707/</guid>
-      <description></description>
+      <description>今天试著自己实现了将字符串拆分为列表的功能，中间也有找一些资料，但我知道光看是没有用的，必须要自己试著实现印象才会深刻，必须要在实现过程中遇</description>
     </item>
     
     <item>
@@ -869,7 +868,7 @@
       <pubDate>Mon, 05 Aug 2013 03:26:24 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/08/05/9763867/</guid>
-      <description></description>
+      <description>Excel中的 find 或 search 函数均只能寻找到第一个匹配字符的位置，如A2单位格&amp;quot;I have a dream&amp;quot;, find(&amp;quot; &amp;ldquo;,A2)返回2，如果要找最后一个空</description>
     </item>
     
     <item>
@@ -878,7 +877,7 @@
       <pubDate>Sat, 27 Jul 2013 14:43:45 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/27/9532985/</guid>
-      <description></description>
+      <description>设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称</description>
     </item>
     
     <item>
@@ -887,7 +886,7 @@
       <pubDate>Sun, 07 Jul 2013 08:13:43 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/07/9263455/</guid>
-      <description></description>
+      <description>1. 工人工作7天，给工人的回报是一根金条，金条平分成相连的7段，必须在每天结束时给他们一段金条，如果只允许两次把金条弄断，如何给工人付费？ 答：</description>
     </item>
     
     <item>
@@ -896,7 +895,7 @@
       <pubDate>Wed, 03 Jul 2013 14:28:57 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/03/9237409/</guid>
-      <description></description>
+      <description>1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询</description>
     </item>
     
     <item>

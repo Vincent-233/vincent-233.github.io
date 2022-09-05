@@ -12,7 +12,7 @@
       <pubDate>Mon, 04 May 2015 05:17:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/05/04/45478729/</guid>
-      <description></description>
+      <description>PL/SQL Developer是用得比较多的ORACLE开发工具，一般人在使用时都会对此软件进行个性化配置，比如快捷键、代码提示与自动补全等，但是每次</description>
     </item>
     
     <item>
@@ -21,7 +21,7 @@
       <pubDate>Sat, 26 Jul 2014 08:36:10 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38146339/</guid>
-      <description></description>
+      <description>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。 这里通过一个简单的例子来介绍</description>
     </item>
     
     <item>
@@ -30,7 +30,7 @@
       <pubDate>Sat, 26 Jul 2014 07:46:40 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38145329/</guid>
-      <description></description>
+      <description>合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&amp;#39;北京&amp;#39; FROM dual UNION ALL SELECT</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@
       <pubDate>Sat, 26 Jul 2014 01:24:56 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2014/07/26/38139137/</guid>
-      <description></description>
+      <description>ORACLE不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。 -- Nested Table CREATE OR REPLACE TYPE</description>
     </item>
     
   </channel>

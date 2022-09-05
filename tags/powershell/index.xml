@@ -13,7 +13,7 @@
       <pubDate>Sat, 26 Mar 2022 19:17:46 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy&#34;&gt;robocopy&lt;/a&gt;是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大&lt;/p&gt;</description>
+      <description>robocopy是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大 比如： 多线程模式。/MT选项 镜像模式，copy时</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
-      <description></description>
+      <description>需求：将当前目录下所有文本文件合并成一个新文件。 CMD实现 copy *.txt cmd_new.txt 以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Mon, 30 Dec 2019 14:59:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/12/30/103766391/</guid>
-      <description></description>
+      <description>PowerShell调用外部程序或脚本的方式非常多，下面总结几种调用方式和常规用法。 1. 直接调用 优点：简单易用，但可能不够稳定 说明：直接用程序</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
-      <description></description>
+      <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Sat, 27 Apr 2019 23:37:19 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/27/89609806/</guid>
-      <description></description>
+      <description>场景 希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Sun, 08 Feb 2015 08:25:19 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2015/02/08/43637581/</guid>
-      <description></description>
+      <description>需求：将D盘For PS文件夹下的A.txt文件重命名为aa.txt rename-Item &amp;#39;D:\For PS\A.txt&amp;#39; -NewName &amp;#39;aa.txt&amp;#39; 需求：将D盘For PS文件夹下的所有的txt文件改为html文件</description>
     </item>
     
   </channel>

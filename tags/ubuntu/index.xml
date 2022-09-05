@@ -13,7 +13,7 @@
       <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/13/89282667/</guid>
-      <description></description>
+      <description>前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置</description>
     </item>
     
   </channel>

@@ -13,7 +13,7 @@
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</guid>
-      <description>&lt;p&gt;在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。&lt;/p&gt;</description>
+      <description>在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。 cmd 任选一在PATH环境变量内</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sun, 08 Aug 2021 13:39:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/08/08/119496995/</guid>
-      <description></description>
+      <description>模块（python module）就是一个python文件，包（package）就是一个带__init__.py文件的文件夹，可以理解为模块的</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/23/106913549/</guid>
-      <description></description>
+      <description>概述 实现之前文章中用SQL实现的功能： 得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行： 代码 读</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/06/21/106893478/</guid>
-      <description></description>
+      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Sun, 03 May 2020 19:51:39 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105907225/</guid>
-      <description></description>
+      <description>本文主要用递归算法解决大家非常熟悉的排列组合问题。 组合 方法一 需求：求从含m个数据中取出n个数据的所有取法。 解析：设列表为a[m]，从m个数取</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Sun, 03 May 2020 15:27:11 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/03/105901441/</guid>
-      <description></description>
+      <description>问题：求集合所有子集。 下面分别给出两种思路的递归和非递归解法，用python实现。 方法一 a的子集可以分为两部分： 不含a[0]的所有子集 含a[</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Sat, 02 May 2020 12:08:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/02/105887338/</guid>
-      <description></description>
+      <description>知识准备 可变类型(mutable)：list、set、dict可变类型，支持原地址直接改变元素（item）的值 不可变类型(immutable</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Sun, 01 Mar 2020 19:42:31 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/01/104597650/</guid>
-      <description></description>
+      <description>上一篇介绍了如何用纯SQL生成测试数据，但SQL功能有限，本篇介绍python faker库的使用。 需求 生成5000条记录，字段如下： fake</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Thu, 06 Feb 2020 12:20:25 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/02/06/104168699/</guid>
-      <description></description>
+      <description>在进入并发编程的世界之前，先看一个对比的例子： 举例 串行执行 import time def count(task_name): print(task_name,time.strftime(&amp;#34;%X&amp;#34;),&amp;#34;One&amp;#34;) time.sleep(1) # 模拟一个需要堵塞一秒的任务 print(task_name,time.strftime(&amp;#34;%X&amp;#34;),&amp;#34;Two&amp;#34;) def main(): count(&amp;#39;Task-A&amp;#39;) count(&amp;#39;Task-B&amp;#39;) count(&amp;#39;Task-C&amp;#39;) if __name__ == &amp;#34;__main__&amp;#34;: s = time.time() main() elapsed = time.time() - s print(f&amp;#34;Total Run</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Sun, 02 Feb 2020 20:41:35 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/02/02/104148685/</guid>
-      <description></description>
+      <description>装饰器（decorator）是python特有的语法特性，通过函数封装扩展原函数的功能。 下面一步步通过例子说明它的作用和用法。 函数中定义函数</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@
       <pubDate>Sat, 16 Nov 2019 23:31:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/16/103103791/</guid>
-      <description></description>
+      <description>概述 面向对象三大特性：封装、继承、多态，本文通过类继承和方法覆盖的例子来说明python的面向对象编程。 功能说明 实现“数列”基类，然后通过继</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Sat, 16 Nov 2019 22:58:07 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/16/103104203/</guid>
-      <description></description>
+      <description>如下表，python类只要实现了右边所示特殊名称的方法，就实现了操作符重载，可使用左边的操作符语法： Common Syntax Special Method Form a + b a._add_(b); alternatively b._radd_(a) a − b a._sub_(b); alternatively b._rsub_(a) a b a._mul_(b);</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Fri, 08 Nov 2019 17:36:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/11/08/102962911/</guid>
-      <description></description>
+      <description>概述 本文由浅入深，由特殊到一般说明全排列的递归实现。 需求 编写程序，输出所有由a，b，c，d四个字母都出现一次所组成的字符串。 分析 这实际是全排</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@
       <pubDate>Thu, 31 Oct 2019 23:49:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/10/31/102848314/</guid>
-      <description></description>
+      <description>路径/home/ghost/workspace/Other/结构如下 ├── git ├── input │ ├── csv │ │ ├── test_file_1.csv │ │ └── test_file_2.csv │ ├── test.csv │ ├── test_file_1.txt │</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@
       <pubDate>Thu, 26 Sep 2019 00:17:56 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/09/26/101398064/</guid>
-      <description></description>
+      <description>概述 python的标识符更像C++中的指针或JAVA中的引用变量，每个标识符与其所指向的内存地址相关联 像 b = a 这样赋值语句，就是为 a 起了一个</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
-      <description></description>
+      <description>概述 本文以pyodbc和sqlalchemy操作SQL Server为例说明python的数据库编程。 pyodbc pyodbc只是众多python database dr</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
-      <description></description>
+      <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Fri, 26 Jul 2019 21:38:21 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/26/97418483/</guid>
-      <description></description>
+      <description>背景 虚拟机中安装了spark，想要在windows中直接练习pyspark的操作，但又不想在windows中再安装一次spark，于是想到了</description>
     </item>
     
   </channel>

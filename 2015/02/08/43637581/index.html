@@ -109,6 +109,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>get-childItem  &#39;D:\For PS&#39; -r  *.txt | foreach-Object -Begin {$count = 1}  -Process{
 </span></span><span style="display:flex;"><span>rename-Item $_.fullname -NewName &#34;Note$count.txt&#34;;$count++}
 </span></span></code></pre></div><p>用PowerShell以编程的思想去操作文件，还可以实现更多更复杂的需求。</p>
+
 		</div>
 		<footer class="post__footer">
 			

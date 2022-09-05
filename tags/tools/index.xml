@@ -13,7 +13,7 @@
       <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
-      <description></description>
+      <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     
   </channel>

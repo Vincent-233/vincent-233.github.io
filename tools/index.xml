@@ -13,7 +13,7 @@
       <pubDate>Sat, 16 May 2020 09:23:58 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/05/16/106153966/</guid>
-      <description></description>
+      <description>场景 公司电脑无管理员权限，无法自行安装软件，经申请安装上了everything（通过域管理自动安装），但启动时提示需要管理员权限，让输入账号</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 09 Jul 2019 10:15:53 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/07/09/95170415/</guid>
-      <description></description>
+      <description>everything已经成为我windows平台下的重度依赖软件，其对本地文件的搜索高效快速准确，但默认是不支持网络路径文件夹内文件搜索的：</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
-      <description></description>
+      <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     
     <item>

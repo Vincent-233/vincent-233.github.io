@@ -13,7 +13,7 @@
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
-      <description></description>
+      <description>概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字</description>
     </item>
     
   </channel>

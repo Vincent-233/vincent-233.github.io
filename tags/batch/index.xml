@@ -13,7 +13,7 @@
       <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
-      <description></description>
+      <description>需求：将当前目录下所有文本文件合并成一个新文件。 CMD实现 copy *.txt cmd_new.txt 以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
-      <description></description>
+      <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     
   </channel>

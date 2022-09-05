@@ -13,8 +13,7 @@
       <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
-      <description>&lt;p&gt;很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Git在线代码管理仓库，若在Branch Name/Pull Request Title/Commit Message中包含JIRA中的Issue号，会自动出现对应JIRA页面的超链接，非常方便追踪问题。&lt;br&gt;
-在commit message中添加JIRA号可作为一个开发规范，但每次提交时都去写一遍Issue Number总感觉很费事，能否让其自动添加呢？&lt;/p&gt;</description>
+      <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
     </item>
     
     <item>
@@ -23,7 +22,7 @@
       <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2019/06/15/92030849/</guid>
-      <description></description>
+      <description>需求背景 需要将从数据库提取的数据交给用户，由于数据量较大（好几十万行），若导出为有固定分隔符的文本文件给用户，一来体验上不太好，二来若文本字</description>
     </item>
     
     <item>
@@ -32,7 +31,7 @@
       <pubDate>Sun, 07 Jul 2013 08:13:43 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2013/07/07/9263455/</guid>
-      <description></description>
+      <description>1. 工人工作7天，给工人的回报是一根金条，金条平分成相连的7段，必须在每天结束时给他们一段金条，如果只允许两次把金条弄断，如何给工人付费？ 答：</description>
     </item>
     
   </channel>
