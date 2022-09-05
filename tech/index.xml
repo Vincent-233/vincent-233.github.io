@@ -23,7 +23,7 @@
       <pubDate>Sun, 04 Sep 2022 17:08:34 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</guid>
-      <description>&lt;p&gt;最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，百思不得其解，后面查资料发现堆表（Heap）可能会出现这样情况。对堆表而言，Delete时获取表级别的锁时才会释放空间。&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，对database进行Shrink也不会释放，百思不得其解，后面查资料发现堆表（Heap）可能会出现这样情况。对堆表而言，Delete时获取表级别的锁时才会释放空间。&lt;/p&gt;</description>
     </item>
     
     <item>
