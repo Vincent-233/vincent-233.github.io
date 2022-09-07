@@ -94,7 +94,7 @@
 			<p>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Git在线代码管理仓库，若在Branch Name/Pull Request Title/Commit Message中包含JIRA中的Issue号，会自动出现对应JIRA页面的超链接，非常方便追踪问题。<br>
 在commit message中添加JIRA号可作为一个开发规范，但每次提交时都去写一遍Issue Number总感觉很费事，能否让其自动添加呢？</p>
 <p><a href="https://www.atlassian.com/git/tutorials/git-hooks#server-side-hooks">Git Hooks</a>可实现以上需求。Hooks相当于一些系列基于Git事件的触发器，对于本需求而言，要实现的功能是提交前自动在commit message前面加上Issue号，不过前提是当前Branch Name以Issue Number开头。</p>
-<p>以下代码仅供参考，且假定满足如下条件：</p>
+<p>需求对应的hook是<code>prepare-commit-msg</code>，放在<code>.git/hooks</code>目录下，以下代码仅供参考，且假定满足如下条件：</p>
 <ul>
 <li>Branch Name以Issue Nubmer开头</li>
 <li>Issue Number格式为GroupID-SerieNumber，比如G1234-98734，G1234对开发者而言固定</li>
