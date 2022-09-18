@@ -6,7 +6,16 @@
     <description>Recent content in Teches on 诗和远方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Sep 2022 18:59:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Sep 2022 23:32:21 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用selenium批量删除CSDN博客</title>
+      <link>https://vincent-233.github.io/blog/2022/09/18/delete_csdn_via_py_selenium/</link>
+      <pubDate>Sun, 18 Sep 2022 23:32:21 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/18/delete_csdn_via_py_selenium/</guid>
+      <description>需求与背景 本人早年在CSDN写博客，当时CSDN还是很不错的，论坛活跃，广告不多，也没有各种卖课引流的软文，内容上也无先审后发机制。后来发现</description>
+    </item>
+    
     <item>
       <title>自动为git commit message添加JIRA号</title>
       <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>

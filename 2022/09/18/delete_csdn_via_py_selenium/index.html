@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>用selenium批量删除CSDN博客 - 诗和远方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="诗和远方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">诗和远方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">用selenium批量删除CSDN博客</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-09-18T23:32:21&#43;08:00">2022-09-18</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#需求与背景">需求与背景</a></li>
+    <li><a href="#浏览器驱动下载">浏览器驱动下载</a></li>
+    <li><a href="#selenium模拟登陆csdn">selenium模拟登陆CSDN</a></li>
+    <li><a href="#让chrome重用已有session">让Chrome重用已有Session</a></li>
+    <li><a href="#最终代码">最终代码</a></li>
+    <li><a href="#代码说明">代码说明</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="需求与背景">需求与背景</h2>
+<p>本人早年在CSDN写博客，当时CSDN还是很不错的，论坛活跃，广告不多，也没有各种卖课引流的软文，内容上也无先审后发机制。后来发现它经常弹出扫码登陆的对话框，这些我都忍了，直到有一天不登陆连代码都不能复制，这实在违背分享精神，于是决定抛弃CSDN，自建Blog，如今Blog已经迁移到本Hugo平台，想将原有Blog删除，但CSDN无法批量删除，只能一个一个点，我有近170篇文章，一个个手动点太费劲，于是研究了<a href="https://www.selenium.dev/documentation/webdriver/getting_started/">selenium</a>，用python控制浏览器自动删除。
+另外我还有一个特殊要求，保留最后发的一篇文章，那是一则对CSDN失望后决定停更的声明。</p>
+<h2 id="浏览器驱动下载">浏览器驱动下载</h2>
+<p>可在<a href="https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers">此页面</a>找到对应浏览器驱动的下载指引，需要下载和当前使用浏览器匹配的版本。<br>
+下载好之后将driver解压放到任一PATH环境变量包含的路径下。当然也可以放任意路径，然后在代码中指定路径。</p>
+<h2 id="selenium模拟登陆csdn">selenium模拟登陆CSDN</h2>
+<p>selenium的基本操作实际上就是在网页上查找Web元素，然后输入内容(send_key)或点击(click)各种按钮。<br>
+以下是我用firefox登陆csdn的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>usr_name <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;username: &#39;</span>)
+</span></span><span style="display:flex;"><span>pwd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;password: &#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Firefox()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># open website and wait for loading</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
+</span></span><span style="display:flex;"><span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use xpath to locate login by user &amp; pwd</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;/html/body/div[2]/div/div[2]/div[2]/div[1]/div[1]/div[1]/span[4]&#34;</span>)<span style="color:#f92672">.</span>click()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># send username &amp; pwd to login</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_css_selector(<span style="color:#e6db74">&#39;[autocomplete=&#34;username&#34;]&#39;</span>)<span style="color:#f92672">.</span>send_keys(usr_name)
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_css_selector(<span style="color:#e6db74">&#39;[autocomplete=&#34;current-password&#34;]&#39;</span>)<span style="color:#f92672">.</span>send_keys(pwd)
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_class_name(<span style="color:#e6db74">&#39;base-button&#39;</span>)<span style="color:#f92672">.</span>click()
+</span></span></code></pre></div><p>代码执行后会弹出新的窗口进行登陆。由于第一次用selenium，在不断尝试的过程中会重复以上登陆过程，次数多了会出现拖滑块的验证码操作，于是想到能否先手动登陆，然后让selenium连接已有Session。
+经研究，Chrome的<a href="https://chromedevtools.github.io/devtools-protocol/">DevTools Protocol</a>可以轻松实现。</p>
+<h2 id="让chrome重用已有session">让Chrome重用已有Session</h2>
+<p>根据DevTools Protocol的操作指引，在CMD命令行下CD到chrome.exe路径后，执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chrome.exe --remote-debugging-port<span style="color:#f92672">=</span><span style="color:#ae81ff">9222</span>  --user-data-dir<span style="color:#f92672">=</span>C:<span style="color:#ae81ff">\t</span>emp-chrome-data
+</span></span></code></pre></div><p>执行后会弹出新的Chrome窗口，先在这里面手动完成CSDN的登陆，然后可用如下代码连接这个已打开的会话：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>chrome_opts <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>ChromeOptions()
+</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#f92672">.</span>add_experimental_option(<span style="color:#e6db74">&#34;debuggerAddress&#34;</span>, <span style="color:#e6db74">&#34;127.0.0.1:9222&#34;</span>)
+</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome(options<span style="color:#f92672">=</span>chrome_opts)
+</span></span></code></pre></div><p>不用担心登陆操作之后，就可以专心定位删除按钮进行点击。</p>
+<h2 id="最终代码">最终代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium.webdriver <span style="color:#f92672">import</span> ActionChains
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chrome_opts <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>ChromeOptions()
+</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#f92672">.</span>add_experimental_option(<span style="color:#e6db74">&#34;debuggerAddress&#34;</span>, <span style="color:#e6db74">&#34;127.0.0.1:9222&#34;</span>)
+</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome(options<span style="color:#f92672">=</span>chrome_opts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
+</span></span><span style="display:flex;"><span>sleep(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># delete all the articles except first one ( my customized requirement )</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    dots_elements <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span>find_elements_by_class_name(<span style="color:#e6db74">&#39;el-dropdown-selfdefine&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(dots_elements) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># get article title to be deleted</span>
+</span></span><span style="display:flex;"><span>    title <span style="color:#f92672">=</span> dots_elements[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#39;../../../..//div[1]/p[1]/a&#39;</span>)<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># delete second one</span>
+</span></span><span style="display:flex;"><span>    ActionChains(driver)<span style="color:#f92672">.</span>move_to_element(dots_elements[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">.</span>perform()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># delete and confirm</span>
+</span></span><span style="display:flex;"><span>    driver<span style="color:#f92672">.</span>find_element_by_link_text(<span style="color:#e6db74">&#34;删除&#34;</span>)<span style="color:#f92672">.</span>click()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    driver<span style="color:#f92672">.</span>find_element_by_class_name(<span style="color:#e6db74">&#39;el-button--primary&#39;</span>)<span style="color:#f92672">.</span>click()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Deleted: </span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><h2 id="代码说明">代码说明</h2>
+<ul>
+<li>以上代码会持续寻找所有删除按钮，然后删除第二篇文章直到剩下最后一篇，除了删除动作，还打印出了被删除文章的标题</li>
+<li>代码逻辑很简单，主要的难点在于如何定位要操作的元素，需要一些前端知识</li>
+<li>随着csdn的维护更新，代码中的css selector和xpath代码可能会失效</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/selenium/" rel="tag">selenium</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2022/09/04/auto_add_jira_commit_msg/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">自动为git commit message添加JIRA号</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 诗和远方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>
