@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Teches on 诗和远方</title>
+    <title>Teches on 詩和遠方</title>
     <link>https://vincent-233.github.io/blog/tech/</link>
-    <description>Recent content in Teches on 诗和远方</description>
+    <description>Recent content in Teches on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Sep 2022 23:32:21 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Sep 2022 00:56:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL Server无法删除快照</title>
+      <link>https://vincent-233.github.io/blog/2022/09/20/mssql_can_not_drop_snapshot/</link>
+      <pubDate>Tue, 20 Sep 2022 00:56:10 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/20/mssql_can_not_drop_snapshot/</guid>
+      <description>最近在服务器上发现了一个很早前建的snapshot，处于suspect状态，删除时会报错： Warning: Fatal error 615 occurred at xxxx. Note the error and time, and contact your system administrator. 网上搜索了发现资</description>
+    </item>
+    
     <item>
       <title>用selenium批量删除CSDN博客</title>
       <link>https://vincent-233.github.io/blog/2022/09/18/delete_csdn_via_py_selenium/</link>

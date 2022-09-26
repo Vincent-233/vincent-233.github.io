@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://vincent-233.github.io/blog/2022/09/20/mssql_can_not_drop_snapshot/</loc>
+    <lastmod>2022-09-20T00:56:10+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2022-09-20T00:56:10+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2022-09-20T00:56:10+08:00</lastmod>
+  </url><url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
     <lastmod>2022-09-18T23:32:21+08:00</lastmod>
   </url><url>
@@ -17,13 +26,7 @@
     <loc>https://vincent-233.github.io/blog/tags/</loc>
     <lastmod>2022-09-18T23:32:21+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2022-09-18T23:32:21+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/2022/09/18/delete_csdn_via_py_selenium/</loc>
-    <lastmod>2022-09-18T23:32:21+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2022-09-18T23:32:21+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/git/</loc>

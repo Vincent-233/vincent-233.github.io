@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MSSQL on 诗和远方</title>
+    <title>MSSQL on 詩和遠方</title>
     <link>https://vincent-233.github.io/blog/tags/mssql/</link>
-    <description>Recent content in MSSQL on 诗和远方</description>
+    <description>Recent content in MSSQL on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Sep 2022 17:08:34 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
