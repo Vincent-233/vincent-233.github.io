@@ -99,7 +99,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并
+		###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2015/05/15/45741533/">Read more…</a>
@@ -119,7 +119,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		很多人都知道ORACLE中有Merge关键字，其实SQL Server从2008版本开始也支持Merge了。 从而也可以像ORACLE一样在一条
+		很多人都知道ORACLE中有Merge关键字，其实SQL Server从2008版本开始也支持Merge了。 从而也可以像ORACLE一样在一条...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2014/12/30/42275987/">Read more…</a>
@@ -139,7 +139,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		需求：找出某列断流的ID号. 例如：1，2，7，8，9. 断流的ID是 3 至 6. 直接上代码算了： 不分组，单列： IF object_ID(&#39;tempdb..#Tab&#39;) IS NOT NULL DROP TABLE #Tab CREATE TABLE #Tab(ID INT) GO INSERT #Tab(ID) SELECT 1 UNION ALL
+		需求：找出某列断流的ID号. 例如：1，2，7，8，9. 断流的ID是 3 至 6. 直接上代码算了： 不分组，单列： IF object_ID(&#39;tempdb..#Tab&#39;) IS NOT NULL DROP TABLE #Tab CREATE TABLE #Tab(ID INT) GO INSERT #Tab(ID) SELECT 1 UNION ALL...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2014/05/18/26179859/">Read more…</a>
@@ -159,7 +159,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最
+		一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2014/04/13/23562967/">Read more…</a>
@@ -179,7 +179,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶
+		1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2014/03/23/21862313/">Read more…</a>
@@ -199,7 +199,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &#39;Jack&#39;, 0); INSERT INTO ORG VALUES(2, &#39;Mary&#39;, 1); INSERT INTO ORG VALUES(3, &#39;Tom&#39;, 1); INSERT INTO ORG VALUES(4, &#39;Ben&#39;, 2); INSERT INTO ORG VALUES(5, &#39;John&#39;, 3); INSERT
+		假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &#39;Jack&#39;, 0); INSERT INTO ORG VALUES(2, &#39;Mary&#39;, 1); INSERT INTO ORG VALUES(3, &#39;Tom&#39;, 1); INSERT INTO ORG VALUES(4, &#39;Ben&#39;, 2); INSERT INTO ORG VALUES(5, &#39;John&#39;, 3); INSERT...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/12/10/17251887/">Read more…</a>
@@ -219,7 +219,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&#39;a&#39;,&#39;杨静,马丽萍&#39;, &#39;美容师,美体师&
+		生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&#39;a&#39;,&#39;杨静,马丽萍&#39;, &#39;美容师,美体师&...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/12/09/17231863/">Read more…</a>
@@ -239,7 +239,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		先准备点数据： CREATE TABLE Sell ( [Year] INT, [Quarter] NVARCHAR(10), Quantity INT ) GO INSERT INTO Sell SELECT 2006, &#39;Q1&#39;, 20 UNION ALL SELECT 2006, &#39;Q2&#39;, 15 UNION ALL SELECT 2006, &#39;Q2&#39;, 4 UNION ALL SELECT 2006, &#39;Q3&#39;, 12 UNION ALL SELECT 2006, &#39;Q4&#39;, 18 UNION ALL SELECT 2007, &#39;Q1&#39;, 10 UNION ALL SELECT 2007, &#39;Q2&#39;, 10 UNION ALL SELECT 2008, &#39;Q1&#39;, 8 UNION ALL
+		先准备点数据： CREATE TABLE Sell ( [Year] INT, [Quarter] NVARCHAR(10), Quantity INT ) GO INSERT INTO Sell SELECT 2006, &#39;Q1&#39;, 20 UNION ALL SELECT 2006, &#39;Q2&#39;, 15 UNION ALL SELECT 2006, &#39;Q2&#39;, 4 UNION ALL SELECT 2006, &#39;Q3&#39;, 12 UNION ALL SELECT 2006, &#39;Q4&#39;, 18 UNION ALL SELECT 2007, &#39;Q1&#39;, 10 UNION ALL SELECT 2007, &#39;Q2&#39;, 10 UNION ALL SELECT 2008, &#39;Q1&#39;, 8 UNION ALL...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/12/08/17202973/">Read more…</a>
@@ -259,7 +259,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		核心思想在于下面几个模式的组合使用： %[0-9]%： 所有数字 %[A-Za-z]%: 所有字母 %[吖-咗]%: 所有汉字 1. 去除汉字(字母、数字)： 举出一例，其他类似：
+		核心思想在于下面几个模式的组合使用： %[0-9]%： 所有数字 %[A-Za-z]%: 所有字母 %[吖-咗]%: 所有汉字 1. 去除汉字(字母、数字)： 举出一例，其他类似：...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/11/23/16911599/">Read more…</a>
@@ -279,7 +279,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &#39;a&#39; UNION ALL SELECT 1, &#39;b&#39; UNION ALL SELECT 3, &#39;c&#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积
+		先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &#39;a&#39; UNION ALL SELECT 1, &#39;b&#39; UNION ALL SELECT 3, &#39;c&#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/11/23/16897427/">Read more…</a>
@@ -299,7 +299,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		需求： 有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。 分析： 员工的下属也可能是其他员工的上司，即下
+		需求： 有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。 分析： 员工的下属也可能是其他员工的上司，即下...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/11/03/14111219/">Read more…</a>
@@ -319,7 +319,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称
+		设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/07/27/9532985/">Read more…</a>
@@ -339,7 +339,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询
+		1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/07/03/9237409/">Read more…</a>

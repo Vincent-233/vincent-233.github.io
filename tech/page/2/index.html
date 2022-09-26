@@ -99,7 +99,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		本文主要用递归算法解决大家非常熟悉的排列组合问题。 组合 方法一 需求：求从含m个数据中取出n个数据的所有取法。 解析：设列表为a[m]，从m个数取
+		本文主要用递归算法解决大家非常熟悉的排列组合问题。 组合 方法一 需求：求从含m个数据中取出n个数据的所有取法。 解析：设列表为a[m]，从m个数取...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/05/03/105907225/">Read more…</a>
@@ -119,7 +119,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题：求集合所有子集。 下面分别给出两种思路的递归和非递归解法，用python实现。 方法一 a的子集可以分为两部分： 不含a[0]的所有子集 含a[
+		问题：求集合所有子集。 下面分别给出两种思路的递归和非递归解法，用python实现。 方法一 a的子集可以分为两部分： 不含a[0]的所有子集 含a[...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/05/03/105901441/">Read more…</a>
@@ -139,7 +139,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		知识准备 可变类型(mutable)：list、set、dict可变类型，支持原地址直接改变元素（item）的值 不可变类型(immutable
+		知识准备 可变类型(mutable)：list、set、dict可变类型，支持原地址直接改变元素（item）的值 不可变类型(immutable...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/05/02/105887338/">Read more…</a>
@@ -159,7 +159,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字
+		概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/03/20/104987643/">Read more…</a>
@@ -179,7 +179,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		上一篇介绍了如何用纯SQL生成测试数据，但SQL功能有限，本篇介绍python faker库的使用。 需求 生成5000条记录，字段如下： fake
+		上一篇介绍了如何用纯SQL生成测试数据，但SQL功能有限，本篇介绍python faker库的使用。 需求 生成5000条记录，字段如下： fake...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/03/01/104597650/">Read more…</a>
@@ -199,7 +199,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		需求 项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000
+		需求 项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/03/01/104594475/">Read more…</a>
@@ -219,7 +219,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		在进入并发编程的世界之前，先看一个对比的例子： 举例 串行执行 import time def count(task_name): print(task_name,time.strftime(&#34;%X&#34;),&#34;One&#34;) time.sleep(1) # 模拟一个需要堵塞一秒的任务 print(task_name,time.strftime(&#34;%X&#34;),&#34;Two&#34;) def main(): count(&#39;Task-A&#39;) count(&#39;Task-B&#39;) count(&#39;Task-C&#39;) if __name__ == &#34;__main__&#34;: s = time.time() main() elapsed = time.time() - s print(f&#34;Total Run
+		在进入并发编程的世界之前，先看一个对比的例子： 举例 串行执行 import time def count(task_name): print(task_name,time.strftime(&#34;%X&#34;),&#34;One&#34;) time.sleep(1) # 模拟一个需要堵塞一秒的任务 print(task_name,time.strftime(&#34;%X&#34;),&#34;Two&#34;) def main(): count(&#39;Task-A&#39;) count(&#39;Task-B&#39;) count(&#39;Task-C&#39;) if __name__ == &#34;__main__&#34;: s = time.time() main() elapsed = time.time() - s print(f&#34;Total Run...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/02/06/104168699/">Read more…</a>
@@ -239,7 +239,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		装饰器（decorator）是python特有的语法特性，通过函数封装扩展原函数的功能。 下面一步步通过例子说明它的作用和用法。 函数中定义函数
+		装饰器（decorator）是python特有的语法特性，通过函数封装扩展原函数的功能。 下面一步步通过例子说明它的作用和用法。 函数中定义函数...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/02/02/104148685/">Read more…</a>
@@ -259,7 +259,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的
+		熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/01/10/103895643/">Read more…</a>
@@ -279,7 +279,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		PowerShell调用外部程序或脚本的方式非常多，下面总结几种调用方式和常规用法。 1. 直接调用 优点：简单易用，但可能不够稳定 说明：直接用程序
+		PowerShell调用外部程序或脚本的方式非常多，下面总结几种调用方式和常规用法。 1. 直接调用 优点：简单易用，但可能不够稳定 说明：直接用程序...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/12/30/103766391/">Read more…</a>
@@ -299,7 +299,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考： 数据访问驱动问题 报错：Microsoft.
+		SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考： 数据访问驱动问题 报错：Microsoft....
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/12/04/103395928/">Read more…</a>
@@ -319,7 +319,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题描述 Package属性中开启了Logging功能，设置将Log写到SQL Server，在SSDT中运行时，一切正常，日志有写到所设置数据
+		问题描述 Package属性中开启了Logging功能，设置将Log写到SQL Server，在SSDT中运行时，一切正常，日志有写到所设置数据...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/11/29/103303254/">Read more…</a>
@@ -339,7 +339,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		问题描述 今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&quot;deploy_p
+		问题描述 今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&quot;deploy_p...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/11/26/103266182/">Read more…</a>
@@ -359,7 +359,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		概述 面向对象三大特性：封装、继承、多态，本文通过类继承和方法覆盖的例子来说明python的面向对象编程。 功能说明 实现“数列”基类，然后通过继
+		概述 面向对象三大特性：封装、继承、多态，本文通过类继承和方法覆盖的例子来说明python的面向对象编程。 功能说明 实现“数列”基类，然后通过继...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/11/16/103103791/">Read more…</a>
@@ -379,7 +379,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		如下表，python类只要实现了右边所示特殊名称的方法，就实现了操作符重载，可使用左边的操作符语法： Common Syntax Special Method Form a + b a._add_(b); alternatively b._radd_(a) a − b a._sub_(b); alternatively b._rsub_(a) a b a._mul_(b);
+		如下表，python类只要实现了右边所示特殊名称的方法，就实现了操作符重载，可使用左边的操作符语法： Common Syntax Special Method Form a + b a._add_(b); alternatively b._radd_(a) a − b a._sub_(b); alternatively b._rsub_(a) a b a._mul_(b);...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/11/16/103104203/">Read more…</a>
