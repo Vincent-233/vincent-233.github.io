@@ -88,6 +88,26 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/blog/2014/07/26/38145329/" rel="bookmark">
+			ORACLE列值合并
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-07-26T07:46:40Z">2014-07-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&#39;北京&#39; FROM dual UNION ALL SELECT...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2014/07/26/38145329/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/blog/2014/07/26/38139137/" rel="bookmark">
 			ORACLE字符串拆分
 			</a>
@@ -364,32 +384,13 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/07/27/9532985/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2013/07/03/9237409/" rel="bookmark">
-			SQL练习题（1）
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-07-03T14:28:57Z">2013-07-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2013/07/03/9237409/">Read more…</a>
-	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/page/2/">«</a>
-	<span class="pagination__item pagination__item--current">3/3</span>
+	<span class="pagination__item pagination__item--current">3/4</span>
+	<a class="pagination__item pagination__item--next btn" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/page/4/">»</a>
 </div>
 
 			</div>
@@ -407,11 +408,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2022/12/04/agg_select_string_concat_unreliable/">T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/20/mssql_can_not_drop_snapshot/">SQL Server无法删除快照</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/18/delete_csdn_via_py_selenium/">用selenium批量删除CSDN博客</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/04/auto_add_jira_commit_msg/">自动为git commit message添加JIRA号</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/04/mssql_delete_no_space_release/">SQL Server空表依然占用空间</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2022/04/23/about-mssql-local-db/">关于SQL Server LocalDB的使用</a></li>
 		</ul>
 	</div>
 </div>

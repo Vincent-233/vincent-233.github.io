@@ -112,8 +112,9 @@
 <p>当时的软件环境：SSDT 2015，SQL Server 2016（之前先装了2012，后又卸载装2016），SSIS包的输出版本设置为2012。</p>
 <h3 id="解决方案">解决方案</h3>
 <p>经观察发现随手敲的dtExec默认版本是11.0，代表2012版本，切换到2016版本的dtExec目录后，执行相同命令，日志已按预期写到数据库。</p>
-<p>所以结论是：<strong>执行命令的dtExec.exe版本，一定要和所在机器上SQL Server实例的版本一致</strong>，才能保证执行完全正常，否则可能会出现意想不到的Bug。</p>
-<p>另外，dtExec的版本可以高于SSIS包对应的输出版本，但不能低于它，否则会报<em>The version number in the package is not valid. The version number cannot be greater than current version number</em>.</p>
+<p>所以结论是：<strong>执行命令的dtExec.exe版本，要和所在机器上SQL Server实例的版本一致，才能保证执行完全正常</strong>，否则可能会出现意想不到的Bug。</p>
+<p>另外，dtExec的版本可以高于SSIS包对应的输出版本，但不能低于它，否则会报<em>The version number in the package is not valid. The version number cannot be greater than current version number</em>.<br>
+若dtExec的版本高于SSIS包版本，dtExec会临时将包版本升级后再执行，但谁也说不准会有啥Bug，特别是对于像Script Task这样的任务。</p>
 <p>最后附SQL Server版本号与兼容性级别对应关系：</p>
 <h3 id="sql-server兼容性级别与版本号">SQL Server兼容性级别与版本号</h3>
 <p>80 = SQL Server 2000 = 8.00.xxxx<br>
@@ -172,11 +173,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2022/12/04/agg_select_string_concat_unreliable/">T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/20/mssql_can_not_drop_snapshot/">SQL Server无法删除快照</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/18/delete_csdn_via_py_selenium/">用selenium批量删除CSDN博客</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/04/auto_add_jira_commit_msg/">自动为git commit message添加JIRA号</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/04/mssql_delete_no_space_release/">SQL Server空表依然占用空间</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2022/04/23/about-mssql-local-db/">关于SQL Server LocalDB的使用</a></li>
 		</ul>
 	</div>
 </div>

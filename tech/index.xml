@@ -6,7 +6,16 @@
     <description>Recent content in Teches on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 00:56:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 11:00:05 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</title>
+      <link>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</link>
+      <pubDate>Sun, 04 Dec 2022 11:00:05 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</guid>
+      <description>背景 写T-SQL的人经常会看到通过如下方式进行字符串拼接或求和： DECLARE @x_str VARCHAR(100) = &amp;#39;&amp;#39;, @x_sum INT = 0; -- 字符串拼接 SELECT @x_str = @x_str + col_str FROM Table_x; PRINT @x_str; -- 数值求和 SELECT @x_sum = @x_sum + col_int FROM Table_x;</description>
+    </item>
+    
     <item>
       <title>SQL Server无法删除快照</title>
       <link>https://vincent-233.github.io/blog/2022/09/20/mssql_can_not_drop_snapshot/</link>
