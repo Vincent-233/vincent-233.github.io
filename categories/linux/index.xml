@@ -25,5 +25,14 @@
       <description>前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置</description>
     </item>
     
+    <item>
+      <title>ls -l命令结果解析</title>
+      <link>https://vincent-233.github.io/blog/2019/04/09/89160917/</link>
+      <pubDate>Tue, 09 Apr 2019 20:26:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/09/89160917/</guid>
+      <description>使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585</description>
+    </item>
+    
   </channel>
 </rss>

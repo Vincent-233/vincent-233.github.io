@@ -124,6 +124,9 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性</span>
 </span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性（ 设置failover选项，always on group listener ）</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password;MultiSubnetFailover=Yes&#39;</span>)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 用 ODBC的 DSN (data source name)</span>
 </span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DSN=DSN_Name;UID=sa;PWD=password&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Windows认证方式</span>
@@ -201,7 +204,7 @@ dialect指具体的SQL方言，比如mssql、mysql、postgresql等</p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># DSN</span>
 </span></span><span style="display:flex;"><span>con_string_dsn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://sa:password@DSN_Name&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性</span>
-</span></span><span style="display:flex;"><span>con_string_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://sa:password@localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&#34;</span>
+</span></span><span style="display:flex;"><span>con_string_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://sa:password@localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&amp;MultiSubnetFailover=Yes&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 忽略用户名和密码，则为 windows 验证</span>
 </span></span><span style="display:flex;"><span>con_string_2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&#34;</span>
 </span></span></code></pre></div><h3 id="查询与客户端获取">查询与客户端获取</h3>
@@ -340,7 +343,7 @@ dialect指具体的SQL方言，比如mssql、mysql、postgresql等</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2022 詩和遠方.
+			&copy; 2023 詩和遠方.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
