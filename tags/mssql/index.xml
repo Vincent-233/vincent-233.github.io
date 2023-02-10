@@ -6,7 +6,16 @@
     <description>Recent content in MSSQL on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 11:00:05 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 00:07:56 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/mssql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bcp导入导出报错，字段名含空格</title>
+      <link>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>
+      <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</guid>
+      <description>问题描述 用SQL Server的bcp工具通过导入导出在不同server之间同步表数据，有使用format file，若表字段名称中含有空白字符</description>
+    </item>
+    
     <item>
       <title>T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</title>
       <link>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</link>
