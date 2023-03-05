@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSH on 詩和遠方</title>
+    <link>https://vincent-233.github.io/blog/tags/ssh/</link>
+    <description>Recent content in SSH on 詩和遠方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Feb 2023 13:34:13 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为何公司的OpenSSH无法免密登陆</title>
+      <link>https://vincent-233.github.io/blog/2023/02/11/why_openssh_pubkey_login_not_work/</link>
+      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/02/11/why_openssh_pubkey_login_not_work/</guid>
+      <description>问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id</description>
+    </item>
+    
+    <item>
+      <title>Windows通过密钥SSH登陆Linux</title>
+      <link>https://vincent-233.github.io/blog/2019/04/08/89082770/</link>
+      <pubDate>Mon, 08 Apr 2019 10:22:22 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2019/04/08/89082770/</guid>
+      <description>概述 客户端通过密钥SSh登陆Linux的条件： 服务器端登陆账户home目录下的.ssh文件夹存在公钥，命名authorized_keys 客户</description>
+    </item>
+    
+  </channel>
+</rss>

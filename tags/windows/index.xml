@@ -6,7 +6,16 @@
     <description>Recent content in windows on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows batch script小结</title>
+      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>windows conda环境在cmd/powershell/git-bash下的配置</title>
       <link>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</link>

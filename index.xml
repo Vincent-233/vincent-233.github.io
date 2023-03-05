@@ -6,7 +6,25 @@
     <description>Recent content on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 00:07:56 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows batch script小结</title>
+      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为何公司的OpenSSH无法免密登陆</title>
+      <link>https://vincent-233.github.io/blog/2023/02/11/why_openssh_pubkey_login_not_work/</link>
+      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/02/11/why_openssh_pubkey_login_not_work/</guid>
+      <description>问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id</description>
+    </item>
+    
     <item>
       <title>bcp导入导出报错，字段名含空格</title>
       <link>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>
@@ -959,6 +977,18 @@
       
       <guid>https://vincent-233.github.io/blog/1/01/01/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://vincent-233.github.io/blog/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/readme/</guid>
+      <description>Run all commands below under powershell or git-bash windows
+Install Hugo ( Windows ) Step 1, Install choco Step 2, Install Hugo choco install hugo-extended -confirm May need administrator mode to run above command. To verify installation: hugo version
+Set environment variable Add an environment variable hugo_site_path with the value of the path of current repo, add it to PATH as well.
+Hugo local server mode cd $env:hugo_site_path hugo server Folder structure I isolate the markdown contents and the output website files for the sake of easier maintenance.</description>
     </item>
     
   </channel>

@@ -6,7 +6,16 @@
     <description>Recent content in 命令行脚本 on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Mar 2022 19:17:46 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows batch script小结</title>
+      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>windows下robocopy的使用</title>
       <link>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</link>

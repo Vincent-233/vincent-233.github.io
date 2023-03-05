@@ -88,6 +88,46 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/blog/2015/05/17/45775271/" rel="bookmark">
+			SQL Server事务性编程总结
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2015-05-17T00:19:12Z">2015-05-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		为了保证数据的一致性，事务在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。 T-SQL中三种事务写法 SQL Sever 2000时代的写...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2015/05/17/45775271/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/blog/2015/05/15/45741533/" rel="bookmark">
+			SQL Server返回随机记录
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2015-05-15T11:32:20Z">2015-05-15</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2015/05/15/45741533/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/blog/2015/05/04/45478729/" rel="bookmark">
 			关于PL/SQL Developer的配置与快速迁移
 			</a>
@@ -344,46 +384,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2013/12/27/17620647/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2013/12/10/17251887/" rel="bookmark">
-			SQL递归查询实战
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-12-10T16:12:08Z">2013-12-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &#39;Jack&#39;, 0); INSERT INTO ORG VALUES(2, &#39;Mary&#39;, 1); INSERT INTO ORG VALUES(3, &#39;Tom&#39;, 1); INSERT INTO ORG VALUES(4, &#39;Ben&#39;, 2); INSERT INTO ORG VALUES(5, &#39;John&#39;, 3); INSERT...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2013/12/10/17251887/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2013/12/09/17231863/" rel="bookmark">
-			奇葩的需求
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-12-09T15:18:18Z">2013-12-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&#39;a&#39;,&#39;杨静,马丽萍&#39;, &#39;美容师,美体师&...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2013/12/09/17231863/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -408,11 +408,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/03/05/windows-batch-script-quick-reference/">windows batch script小结</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/02/11/why_openssh_pubkey_login_not_work/">为何公司的OpenSSH无法免密登陆</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/">bcp导入导出报错，字段名含空格</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/12/04/agg_select_string_concat_unreliable/">T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/20/mssql_can_not_drop_snapshot/">SQL Server无法删除快照</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/18/delete_csdn_via_py_selenium/">用selenium批量删除CSDN博客</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2022/09/04/auto_add_jira_commit_msg/">自动为git commit message添加JIRA号</a></li>
 		</ul>
 	</div>
 </div>
@@ -444,7 +444,7 @@
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="batch">batch</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
@@ -459,6 +459,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/python/" title="python">python</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/selenium/" title="selenium">selenium</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/spark/" title="spark">spark</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssh/" title="SSH">SSH</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssis/" title="SSIS">SSIS</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/t-sql/" title="T-SQL">T-SQL</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/tools/" title="Tools">Tools</a>
