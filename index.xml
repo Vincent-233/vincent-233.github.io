@@ -955,19 +955,10 @@
     <item>
       <title></title>
       <link>https://vincent-233.github.io/blog/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 01 Jan 2013 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/about/</guid>
       <description>About Me Hello, I&amp;rsquo;m Vincent</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/1/01/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/1/01/01/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -989,6 +980,15 @@
 Install Hugo ( Windows ) Step 1, Install choco Step 2, Install Hugo choco install hugo-extended -confirm May need administrator mode to run above command. To verify installation: hugo version
 Set environment variable Add an environment variable hugo_site_path with the value of the path of current repo, add it to PATH as well.
 Hugo local server mode cd $env:hugo_site_path hugo server Folder structure I isolate the markdown contents and the output website files for the sake of easier maintenance.</description>
+    </item>
+    
+    <item>
+      <title>Archives</title>
+      <link>https://vincent-233.github.io/blog/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/archive/</guid>
+      <description>历史文章按照年月归档</description>
     </item>
     
   </channel>

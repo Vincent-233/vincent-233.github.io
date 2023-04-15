@@ -429,13 +429,14 @@
     <lastmod>2013-07-03T14:28:57+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/about/</loc>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/1/01/01/</loc>
+    <lastmod>2013-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/1/01/01/</loc>
   </url><url>
     <loc>https://vincent-233.github.io/blog/readme/</loc>
     <priority>0</priority>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/archive/</loc>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/pl/sql/</loc>
   </url><url>

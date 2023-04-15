@@ -34,14 +34,5 @@
       <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/1/01/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/1/01/01/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

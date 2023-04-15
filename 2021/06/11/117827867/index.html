@@ -66,6 +66,13 @@
 			</a>
 		</li>
 		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
 			<a class="menu__link" href="/blog/about">
 				
 				<span class="menu__text">关于</span>
@@ -121,11 +128,12 @@
 <ul>
 <li>新建SSIS包尽量用ADO.NET，这是微软推荐的连接方式</li>
 <li>若工作量和时间允许，将旧包也升级为ADO.NET连接，并作其它相关修改</li>
-<li>若追求最小的工作量，可直接更新SSIS的OLEDB的<a href="https://www.connectionstrings.com/ole-db-driver-for-sql-server/">连接字符串</a>，将Provider从SQLNCLI11、sqloledb改为MSOLEDBSQL，并加上MultiSubnetFailover=True，最好再加上Connect Timeout=30</li>
-<li>过渡期间可暂时直接连接物理服务器名(Primary Replica)</li>
+<li>若追求最小工作量，可直接更新SSIS的OLEDB的<a href="https://www.connectionstrings.com/ole-db-driver-for-sql-server/">连接字符串</a>，将Provider从SQLNCLI11、sqloledb改为MSOLEDBSQL，并加上MultiSubnetFailover=True，最好再加上Connect Timeout=30</li>
+<li>过渡期间可仅在旧OLEDB的连接字符串上加上Connect Timeout=30，或暂时直接连接物理服务器名(Primary Replica)</li>
 </ul>
 <h3 id="其它说明">其它说明</h3>
 <ul>
+<li>若SSIS用旧的包部署模式，开启了数据库方式的包配置选项，Connect Manager只能用OLEDB，这种就只能用新的OLEDB Driver</li>
 <li>增加<code>Connect Timeout</code>会进一步提升连接的成功率,对老的OLEDB版本也有效</li>
 <li>仔细阅读说明，不同的Driver或程序在MultiSubnetFailover的赋值上存在不同，有的是True，有的是Yes，如果Yes不行就换成True试试</li>
 <li>使用ODBC连接故障转移集群时，需要加上<code>MultiSubnetFailover=Yes</code>选项，<a href="https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/odbc-driver-on-linux-support-for-high-availability-disaster-recovery?view=sql-server-ver15">相关文档</a></li>
