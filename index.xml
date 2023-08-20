@@ -6,7 +6,16 @@
     <description>Recent content on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Aug 2023 00:02:42 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python运行MSSQL存储过程采坑记</title>
+      <link>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</link>
+      <pubDate>Mon, 21 Aug 2023 00:02:42 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</guid>
+      <description>虽然入门Python已近4年，但由于日常工作中，特别是生产环境上没有Python项目，对Python一直不算非常熟练，基本上只是偶尔用它在本</description>
+    </item>
+    
     <item>
       <title>windows batch script小结</title>
       <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
@@ -959,6 +968,15 @@
       
       <guid>https://vincent-233.github.io/blog/about/</guid>
       <description>About Me Hello, I&amp;rsquo;m Vincent</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://vincent-233.github.io/blog/fail/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/fail/</guid>
+      <description></description>
     </item>
     
     <item>

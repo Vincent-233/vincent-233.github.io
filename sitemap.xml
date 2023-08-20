@@ -2,16 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vincent-233.github.io/blog/tags/batch/</loc>
-    <lastmod>2023-03-05T12:45:47+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2023-03-05T12:45:47+08:00</lastmod>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/python/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/python/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2023-03-05T12:45:47+08:00</lastmod>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2023-08-21T00:02:42+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/batch/</loc>
     <lastmod>2023-03-05T12:45:47+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/windows/</loc>
@@ -21,9 +39,6 @@
     <lastmod>2023-03-05T12:45:47+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2023-03-05T12:45:47+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2023-03-05T12:45:47+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/linux/</loc>
@@ -41,26 +56,14 @@
     <loc>https://vincent-233.github.io/blog/categories/etl/</loc>
     <lastmod>2023-02-10T00:07:56+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
-    <lastmod>2023-02-10T00:07:56+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tags/t-sql/</loc>
     <lastmod>2022-12-04T11:00:05+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</loc>
     <lastmod>2022-12-04T11:00:05+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-12-04T11:00:05+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/2022/09/20/mssql_can_not_drop_snapshot/</loc>
     <lastmod>2022-09-20T00:56:10+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/python/</loc>
-    <lastmod>2022-09-18T23:32:21+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/python/</loc>
-    <lastmod>2022-09-18T23:32:21+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/selenium/</loc>
     <lastmod>2022-09-18T23:32:21+08:00</lastmod>
@@ -430,6 +433,9 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/about/</loc>
     <lastmod>2013-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/fail/</loc>
+    <priority>0</priority>
   </url><url>
     <loc>https://vincent-233.github.io/blog/1/01/01/</loc>
   </url><url>

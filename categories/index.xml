@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Aug 2023 00:02:42 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python</title>
+      <link>https://vincent-233.github.io/blog/categories/python/</link>
+      <pubDate>Mon, 21 Aug 2023 00:02:42 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库开发</title>
+      <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 21 Aug 2023 00:02:42 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>命令行脚本</title>
       <link>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</link>
@@ -31,24 +49,6 @@
       <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/etl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>数据库开发</title>
-      <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Sun, 04 Dec 2022 11:00:05 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://vincent-233.github.io/blog/categories/python/</link>
-      <pubDate>Sun, 18 Sep 2022 23:32:21 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/python/</guid>
       <description></description>
     </item>
     

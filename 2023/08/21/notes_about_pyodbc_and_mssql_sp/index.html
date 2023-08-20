@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Python运行MSSQL存储过程采坑记 - 詩和遠方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="詩和遠方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">詩和遠方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Python运行MSSQL存储过程采坑记</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-08-21T00:02:42&#43;08:00">2023-08-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>, <a class="meta__link" href="/blog/categories/python/" rel="category">python</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题描述">问题描述</a></li>
+    <li><a href="#原因">原因</a></li>
+    <li><a href="#问题再现">问题再现</a>
+      <ul>
+        <li><a href="#cant-capture-exception">Can&rsquo;t capture exception</a></li>
+        <li><a href="#code-exit-before-sp-complete">Code exit before SP complete</a></li>
+      </ul>
+    </li>
+    <li><a href="#解决方案">解决方案</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>虽然入门Python已近4年，但由于日常工作中，特别是生产环境上没有Python项目，对Python一直不算非常熟练，基本上只是偶尔用它在本地写一些工具性脚本。最近又用它造轮子，核心功能就是按配置去自动执行一些SQL和SP。遇到了一些问题，特此记录之。</p>
+<h2 id="问题描述">问题描述</h2>
+<p>pyodbc执行单条SQL时非常顺利，但在执行某些SP时出现了奇怪的现象：</p>
+<ul>
+<li>SP才执行一半就自动退出</li>
+<li>SP报错了，Python却没捕获到</li>
+</ul>
+<p>同样的SET选项和SQL语句，若换成pymssql库去执行，SP不会有执行一半退出的情况，但仍然捕获不到异常</p>
+<h2 id="原因">原因</h2>
+<p>在使用pyodbc时，一切输出都被视为结果集，无论是来自SELECT的结果集，还是通过<code>print</code>或<code>raiserror</code>打印出的信息，甚至包括SET NOCOUNT OFF的情况下执行DML语句后出现的&quot;xxx rows affected&quot;信息。默认情况下，游标（cursor）会指向第一个结果集。如果SQL返回多个结果集，需要执行<code>cur.nextset()</code>切换到下一个结果集，否则在第一个结果集之后出现的错误信息将无法被客户端捕获。</p>
+<p>为了获取所有的结果集，需要使用<code>nextset</code>方法。如果不这样做，可能会出现批处理执行了部分SQL后就提前结束的情况。微软有相关的<a href="https://learn.microsoft.com/en-US/troubleshoot/sql/connect/fail-run-large-batch-sql-statements">文档</a>介绍了这个特性，具体执行多少条SQL后会结束，取决于内部缓冲区大小。据我观察，若存储过程中使用了raiserror打印消息的情况，这种情况会更加频繁。</p>
+<p>pymssql（测试版本2.2.7）可能是使用的协议不同（似乎只能使用TCP协议而不支持Named pipes和Shared memory）它会ignore message性质的结果，而且出现运行一部分sql就停下来等client获取result set的情况会少一些，可能是因为TCP协议的buffer size比较大？</p>
+<p>但pyodbc和pymssql都有无法捕获在正常selelct结果集之后出现的error的情况，必需将出现error的那句sql之前的所有结果集都fetch完或调用<code>nextset</code>才会报错。</p>
+<h2 id="问题再现">问题再现</h2>
+<h3 id="cant-capture-exception">Can&rsquo;t capture exception</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;your_connection_string&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> conn<span style="color:#f92672">.</span>cursor() <span style="color:#66d9ef">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;set nocount on&#39;</span>) 
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        insert into dbo.test_table values (&#39;A&#39;),(&#39;B&#39;),(&#39;C&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        select count(*) as cnt from dbo.test_table;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        select 1/0;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(cur<span style="color:#f92672">.</span>fetchall())
+</span></span></code></pre></div><p>以上代码可正常输出表test_table的行数，但却不报错</p>
+<h3 id="code-exit-before-sp-complete">Code exit before SP complete</h3>
+<ul>
+<li>测试SP</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE TSQLV3
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> [dbo].[test_table]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> [dbo].[test_table]
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>[id] [int] <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">IDENTITY</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>[title] [nvarchar] (<span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> TSQLV3.dbo.test_table(title) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> name
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> master.sys.columns
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">ALTER</span> PROC dbo.sp_test <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SET</span> XACT_ABORT <span style="color:#66d9ef">ON</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">BEGIN</span> TRY
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">400</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;2&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;3&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;4&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;5&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;6&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">800</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>i INT <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,<span style="color:#f92672">@</span>msg VARCHAR(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        WHILE <span style="color:#f92672">@</span>i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;msg -- &#39;</span> <span style="color:#f92672">+</span> LTRIM(<span style="color:#f92672">@</span>i);
+</span></span><span style="display:flex;"><span>            RAISERROR(<span style="color:#f92672">@</span>msg,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)  <span style="color:#66d9ef">WITH</span> NOWAIT;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;8&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SELECT</span> TOP <span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> TSQLV3.dbo.test_table;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">UPDATE</span> TSQLV3.dbo.test_table <span style="color:#66d9ef">SET</span> title <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;88&#39;</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">END</span> TRY
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">BEGIN</span> CATCH
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">SELECT</span> ERROR_MESSAGE();
+</span></span><span style="display:flex;"><span>        THROW;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">END</span> CATCH
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><ul>
+<li>Python执行SP</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;your_connection_string&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> conn<span style="color:#f92672">.</span>cursor() <span style="color:#66d9ef">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;set nocount on&#39;</span>) 
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        exec TSQLV3.dbo.sp_test
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(cur<span style="color:#f92672">.</span>fetchall())
+</span></span><span style="display:flex;"><span>    print(cur<span style="color:#f92672">.</span>fetchall())
+</span></span></code></pre></div><pre tabindex="0"><code>###############  输出：
+[(400, )]
+[]
+</code></pre><p>上面SP中有多个结果集输出和打印性质的message返回，但python代码的fetchall方法只获取了第一个结果集，再次调用此方法输出只有空集合。
+用xEvent或profiler的TSQL_SPs模板跟踪SQL执行情况，发现最后两句SQL没执行SP就退出了
+<img src="https://s2.loli.net/2023/08/21/JuBbj9ZYwCMhDpX.png" alt="Pasted image 20230821010929.png"></p>
+<h2 id="解决方案">解决方案</h2>
+<p>前面已经说过了，解决方案当然是考虑多结果集，采用类似下面的代码</p>
+<ul>
+<li>示例代码 1 - 获取scalar结果和返回message</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;your_connection_string&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> conn<span style="color:#f92672">.</span>cursor() <span style="color:#66d9ef">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;set nocount on&#39;</span>) 
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;exec TSQLV3.dbo.sp_test&#34;</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            print(cur<span style="color:#f92672">.</span>fetchval())
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>            print(cur<span style="color:#f92672">.</span>messages) <span style="color:#75715e"># messages 属于需要 4.0.31+ 版本才支持</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> cur<span style="color:#f92672">.</span>nextset():
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><ul>
+<li>获取最后一个select结果集</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_last_result</span>(cusor):
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    error_msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            result <span style="color:#f92672">=</span> cusor<span style="color:#f92672">.</span>fetchall()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> pyodbc<span style="color:#f92672">.</span>ProgrammingError <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> str(e) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;No results.  Previous SQL was not a query.&#39;</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                error_msg <span style="color:#f92672">=</span> str(e)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> cusor<span style="color:#f92672">.</span>nextset():
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> error_msg:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(error_msg)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span></code></pre></div><p>其它相关Blog:  <a href="https://vincent-233.github.io/blog/2019/09/14/100814954/">Python数据库编程（以pyodbc和SQLAlchemy为例）</a></p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">Python</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2023/03/05/windows-batch-script-quick-reference/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">windows batch script小结</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 詩和遠方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>
