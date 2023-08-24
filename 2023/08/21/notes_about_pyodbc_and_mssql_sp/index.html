@@ -212,7 +212,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>)
 </span></span><span style="display:flex;"><span>    print(cur<span style="color:#f92672">.</span>fetchall())
 </span></span><span style="display:flex;"><span>    print(cur<span style="color:#f92672">.</span>fetchall())
-</span></span></code></pre></div><pre tabindex="0"><code>###############  输出：
+</span></span></code></pre></div><pre tabindex="0"><code>输出：
 [(400, )]
 []
 </code></pre><p>上面SP中有多个结果集输出和打印性质的message返回，但python代码的fetchall方法只获取了第一个结果集，再次调用此方法输出只有空集合。
@@ -221,7 +221,7 @@
 <h2 id="解决方案">解决方案</h2>
 <p>前面已经说过了，解决方案当然是考虑多结果集，采用类似下面的代码</p>
 <ul>
-<li>示例代码 1 - 获取scalar结果和返回message</li>
+<li>示例代码 1 - 获取scalar结果和返回message直至没有输出</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
@@ -238,7 +238,7 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> cur<span style="color:#f92672">.</span>nextset():
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
 </span></span></code></pre></div><ul>
-<li>获取最后一个select结果集</li>
+<li>示例代码 2 - 获取最后一个select结果集</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_last_result</span>(cusor):
 </span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
