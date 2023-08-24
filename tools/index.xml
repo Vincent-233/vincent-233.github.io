@@ -6,7 +6,16 @@
     <description>Recent content in Tools on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 May 2020 09:23:58 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2020 17:02:48 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sqlcmd使用体验</title>
+      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
+      <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
+      <description>为何要用SQLCMD 平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常</description>
+    </item>
+    
     <item>
       <title>无管理员权限如何运行Everything</title>
       <link>https://vincent-233.github.io/blog/2020/05/16/106153966/</link>

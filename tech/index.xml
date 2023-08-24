@@ -170,15 +170,6 @@
     </item>
     
     <item>
-      <title>sqlcmd使用体验</title>
-      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
-      <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
-      <description>为何要用SQLCMD 平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常</description>
-    </item>
-    
-    <item>
       <title>SQL数据处理，字符串先拆分后合并</title>
       <link>https://vincent-233.github.io/blog/2020/06/13/106734253/</link>
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
