@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Dec 2022 11:00:05 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/t-sql/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>T-SQL聚合拼接或求和，不可靠，SELECT @x = @x &#43; ...</title>
+      <title>T-SQL聚合拼接或求和，不可靠（SELECT @x = @x &#43; ...）</title>
       <link>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</link>
       <pubDate>Sun, 04 Dec 2022 11:00:05 +0800</pubDate>
       
