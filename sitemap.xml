@@ -2,25 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2023-09-15T22:32:38+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
+    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2023/09/20/about_column_alias_in_mssql/</loc>
+    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/</loc>
     <lastmod>2023-09-15T22:32:38+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/09/15/mssql_2016_to_2019_new_feature/</loc>
     <lastmod>2023-09-15T22:32:38+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2023-09-15T22:32:38+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2023-09-15T22:32:38+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2023-09-15T22:32:38+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2023-09-15T22:32:38+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/python/</loc>

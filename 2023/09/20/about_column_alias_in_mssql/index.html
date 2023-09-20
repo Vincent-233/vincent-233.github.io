@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Excel中查找最后一个匹配字符的位置 - 詩和遠方</title>
+	<title>关于SELECT语句的别名风格 - 詩和遠方</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,20 +90,44 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Excel中查找最后一个匹配字符的位置</h1>
+			<h1 class="post__title">关于SELECT语句的别名风格</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2013-08-05T03:26:24Z">2013-08-05</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/" rel="category">Categories</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-09-20T00:55:30&#43;08:00">2023-09-20</time></div></div>
 		</header>
-		<div class="content post__content clearfix">
-			<p>Excel中的 find 或 search 函数均只能寻找到第一个匹配字符的位置，如A2单位格&quot;I have a dream&quot;, find(&quot; &ldquo;,A2)返回2，如果要找最后一个空格的位置，可组合利用 len 、 find 、substitue 函数。</p>
-<p>思路是这样的：将最后一次出现的空格替换为其他某一特殊字符，然后再用 find 查找这一特殊字符的位置即可。</p>
-<p>空格出现的次数：len(A2)-len(substitute(A2,&rdquo; &ldquo;,&rdquo;&quot;))</p>
-<p>将最后一个空格的替换为@：substitute(A2,&quot; &ldquo;,&rdquo;@&quot;,len(A2)-len(substitute(A2,&quot; &ldquo;,&rdquo;&quot;)))</p>
-<p>查找@所在位置：find(&quot;@&quot;,substitute(A2,&quot; &ldquo;,&rdquo;@&quot;,len(A2)-len(substitute(A2,&quot; &ldquo;,&rdquo;&quot;))))</p>
-<p>系统没有提供想要的，那我们只有组合使用已有的。</p>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#用as风格的理由">用AS风格的理由</a></li>
+        <li><a href="#用风格的理由">用<code>=</code>风格的理由</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>注：每个人都有自己的偏好，本文仅为个人观点。</p>
+<p>公司现存的代码规范文档推荐在SELECT语句中用<code>column_alias = column_name</code>的形式。<br>
+在我看来，这个别名风格太过古老，众所周知，MSSQL最开始是从Sybase SQL Server分化出来的，那时就支持上述alias风格，微软应该是为了兼容旧版本才继续支持此风格，但并不代表它推荐此风格。</p>
+<p>在微软关于SQL Server的<a href="https://learn.microsoft.com/en-us/sql/t-sql/queries/select-transact-sql?view=sql-server-ver16#b-using-select-with-column-headings-and-calculations">官方文档</a>中，很少看到使用这种别名风格的示例代码。<br>
+本人更推荐用<code>column_name AS column_alias</code>风格。</p>
+<p>这里大致总结一下使用两种风格的理由：</p>
+<h3 id="用as风格的理由">用AS风格的理由</h3>
+<ul>
+<li>AS风格符合ANSI标准，几乎所有DBMS系统都支持此语法，但<code>=</code>基本只有MSSQL和Sybase支持，后面若有平台迁移的需求，用<code>=</code>会不兼容，将导致更大的工作量。相信大一点的公司不会只使用MSSQL，至少会有大数据平台，在不同平台写Query时，都用AS风格，保持习惯的统一，是一种非常自然的事情</li>
+<li>若用<code>=</code>风格，当列非常多SQL非常长，一屏显示不下的时候，阅读起来会和Update语句搞混</li>
+<li><code>=</code>风格容易和 <code>select @variable = column</code>这样的变量赋值语句搞混</li>
+<li>符合写SQL时的思考顺序，即先将原始列或表达式写出来，然后再起别名，顺着从左向右写</li>
+<li>若用<code>=</code>风格，别名长短不一时，后续的表达式将无法对齐，影响阅读，特别是很多列都是很长的表达式，而且彼此相似的时候，比如大量的<code>SUM(CASE WHEN ...)</code>语句</li>
+</ul>
+<h3 id="用风格的理由">用<code>=</code>风格的理由</h3>
+<p>恐怕唯一的好处就是在SQL格式规整，每个列一行的情况下，可读性会更好，基于从左向右的习惯，很快就可以知道有哪些列。</p>
+<p>但并不是所有人都会将SQL写得很规整，总会有人写意识流风格的面条式代码，在这样情况下，<code>=</code>风格就没任何优势了。</p>
 
 		</div>
 		<footer class="post__footer">
@@ -112,7 +136,7 @@
 	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
 		<li class="tags__item">
-			<a class="tags__link btn" href="/blog/tags/excel/" rel="tag">Excel</a>
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
 		</li>
 	</ul>
 </div>
@@ -123,15 +147,9 @@
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2013/07/27/9532985/" rel="prev">
+		<a class="pager__link" href="/blog/2023/09/15/mssql_2016_to_2019_new_feature/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">SQL练习题（2）</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2013/10/20/12889707/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">字符串拆分为列表（函数）</p>
+			<p class="pager__title">MSSQL 2016 - 2019，新功能</p>
 		</a>
 	</div>
 </nav>
