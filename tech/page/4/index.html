@@ -106,7 +106,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&#39;Q1&#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL
+		今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&#39;Q1&#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/07/20/96520306/">Read more…</a>
@@ -126,7 +126,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。 需求 千言万语抵不上一张图： 数据准备 CREATE TABLE dbo.CategoryConfig(Category VARCHAR(20),[Level]
+		做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。 需求 千言万语抵不上一张图： 数据准备 CREATE TABLE dbo.CategoryConfig(Category VARCHAR(20),[Level]...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/07/16/95868267/">Read more…</a>
@@ -146,7 +146,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		玩了一段时间Ubuntu之后发现很多操作还是用命令行更方便，GUI显得没太多作用，毕竟Ubuntu只在VM中，GUI有Windows或Mac
+		玩了一段时间Ubuntu之后发现很多操作还是用命令行更方便，GUI显得没太多作用，毕竟Ubuntu只在VM中，GUI有Windows或Mac...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/06/17/92729385/">Read more…</a>
@@ -166,7 +166,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		需求背景 需要将从数据库提取的数据交给用户，由于数据量较大（好几十万行），若导出为有固定分隔符的文本文件给用户，一来体验上不太好，二来若文本字
+		需求背景 需要将从数据库提取的数据交给用户，由于数据量较大（好几十万行），若导出为有固定分隔符的文本文件给用户，一来体验上不太好，二来若文本字...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/06/15/92030849/">Read more…</a>
@@ -186,7 +186,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		vim 选择文本，删除，复制，粘贴 文本的选择，对于编辑器来说，是很基本的东西，也经常被用到，总结如下： v 从光标当前位置开始，光标所经过的地方会被选
+		vim 选择文本，删除，复制，粘贴 文本的选择，对于编辑器来说，是很基本的东西，也经常被用到，总结如下： v 从光标当前位置开始，光标所经过的地方会被选...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/05/26/90581596/">Read more…</a>
@@ -206,7 +206,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		安装PostgreSQL 运行如下命令进行安装： sudo apt-get install postgresql Linux本地登陆并修改密码 安装完成之后，Linux会自动创建postgres同名账户
+		安装PostgreSQL 运行如下命令进行安装： sudo apt-get install postgresql Linux本地登陆并修改密码 安装完成之后，Linux会自动创建postgres同名账户...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/05/14/90217603/">Read more…</a>
@@ -226,7 +226,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		场景 希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖
+		场景 希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/27/89609806/">Read more…</a>
@@ -246,7 +246,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		场景描述 客户提供的Excel文件，需要进行简单清洗之后导入数据库。 代码实现 import pandas as pd import numpy as np import os from sqlalchemy import create_engine from sqlalchemy import text from sqlalchemy.types import Integer from sqlalchemy.types import NVARCHAR # Excel文
+		场景描述 客户提供的Excel文件，需要进行简单清洗之后导入数据库。 代码实现 import pandas as pd import numpy as np import os from sqlalchemy import create_engine from sqlalchemy import text from sqlalchemy.types import Integer from sqlalchemy.types import NVARCHAR # Excel文...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/18/89390714/">Read more…</a>
@@ -266,7 +266,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置
+		前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/13/89282667/">Read more…</a>
@@ -286,7 +286,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项： 如果发现电脑上无此选项，可以如下操作： 找到virtua
+		配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项： 如果发现电脑上无此选项，可以如下操作： 找到virtua...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/13/89281652/">Read more…</a>
@@ -306,7 +306,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585
+		使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/09/89160917/">Read more…</a>
@@ -326,7 +326,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		概述 客户端通过密钥SSh登陆Linux的条件： 服务器端登陆账户home目录下的.ssh文件夹存在公钥，命名authorized_keys 客户
+		概述 客户端通过密钥SSh登陆Linux的条件： 服务器端登陆账户home目录下的.ssh文件夹存在公钥，命名authorized_keys 客户...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/08/89082770/">Read more…</a>
@@ -346,7 +346,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		学习Uda的Linux免费入门课时知道了Vagrant，发现用它来安装Ubuntu非常方便快捷，特记录之。 安装virtual box vagrant
+		学习Uda的Linux免费入门课时知道了Vagrant，发现用它来安装Ubuntu非常方便快捷，特记录之。 安装virtual box vagrant...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/06/89053253/">Read more…</a>
@@ -366,7 +366,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		需求 原始表格： 想在Total列中对每日的Amount进行汇总，然后对Date和Total进行合并居中，效果如下： 思路 遍历Excel行，从第一
+		需求 原始表格： 想在Total列中对每日的Amount进行汇总，然后对Date和Total进行合并居中，效果如下： 思路 遍历Excel行，从第一...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2019/04/01/88945745/">Read more…</a>
@@ -386,7 +386,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		今天无意中发现SQL Server一个疑似Bug的特性，特此记录。 由于对表的DML操作无论有无数据被影响，Trigger都会被执行，所以为提升
+		今天无意中发现SQL Server一个疑似Bug的特性，特此记录。 由于对表的DML操作无论有无数据被影响，Trigger都会被执行，所以为提升...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2018/12/18/85074737/">Read more…</a>
@@ -408,11 +408,11 @@
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog">
+		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
 	</form>
 </div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">Recent Posts</h4>
+	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/about_column_alias_in_mssql/">关于SELECT语句的别名风格</a></li>
@@ -424,7 +424,7 @@
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">Categories</h4>
+	<h4 class="widget__title">分类</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
@@ -449,7 +449,7 @@
 	</div>
 </div>
 <div class="widget-taglist widget">
-	<h4 class="widget__title">Tags</h4>
+	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
