@@ -99,7 +99,7 @@
 		</header>
 		
 <div class="post__toc toc">
-	<div class="toc__title">目录</div>
+	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -128,41 +128,41 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 是否匹配
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
-</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlBoolean RegExpIsMatch(string input,string pattern)
+</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlBoolean <span style="color:#a6e22e">RegExpIsMatch</span>(string input,string pattern)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.IsMatch(input, pattern);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.<span style="color:#a6e22e">IsMatch</span>(input, pattern);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 第一个匹配的字符串
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
-</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlString RegExpMatch(string input, string pattern)
+</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlString <span style="color:#a6e22e">RegExpMatch</span>(string input, string pattern)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.Match(input, pattern).Value;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.<span style="color:#a6e22e">Match</span>(input, pattern).Value;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 所有匹配的字符串
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   [SqlFunction(FillRowMethodName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FillMatch&#34;</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   [<span style="color:#a6e22e">SqlFunction</span>(FillRowMethodName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FillMatch&#34;</span>
 </span></span><span style="display:flex;"><span>               ,TableDefinition <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[index] int, length int, value nvarchar(4000)&#34;</span>)
 </span></span><span style="display:flex;"><span>   ]
-</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> IEnumerable RegExpMatches(string input, string pattern)
+</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> IEnumerable <span style="color:#a6e22e">RegExpMatches</span>(string input, string pattern)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.Matches(input, pattern);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.<span style="color:#a6e22e">Matches</span>(input, pattern);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 与上面配套的填充函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    public <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> FillMatch(object obj, out <span style="color:#66d9ef">int</span> index,out <span style="color:#66d9ef">int</span> length, out SqlChars value)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    public <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FillMatch</span>(object obj, out <span style="color:#66d9ef">int</span> index,out <span style="color:#66d9ef">int</span> length, out SqlChars value)
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        Match match <span style="color:#f92672">=</span> (Match)obj;
 </span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> match.Index;
 </span></span><span style="display:flex;"><span>        length <span style="color:#f92672">=</span> match.Length;
-</span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> new SqlChars(match.Value);
+</span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> new <span style="color:#a6e22e">SqlChars</span>(match.Value);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 正则替换
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    [Microsoft.SqlServer.Server.SqlFunction]
-</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlString RegExpReplace(string input, string pattern, string replacement)
+</span></span><span style="display:flex;"><span>    public <span style="color:#66d9ef">static</span> SqlString <span style="color:#a6e22e">RegExpReplace</span>(string input, string pattern, string replacement)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.Replace(input, pattern, replacement);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Regex.<span style="color:#a6e22e">Replace</span>(input, pattern, replacement);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="部署clr函数">部署CLR函数</h3>
@@ -272,11 +272,11 @@
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
+		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog">
 	</form>
 </div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
+	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/about_column_alias_in_mssql/">关于SELECT语句的别名风格</a></li>
@@ -288,7 +288,7 @@
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
+	<h4 class="widget__title">Categories</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
@@ -313,7 +313,7 @@
 	</div>
 </div>
 <div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
+	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>

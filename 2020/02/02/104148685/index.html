@@ -99,7 +99,7 @@
 		</header>
 		
 <div class="post__toc toc">
-	<div class="toc__title">目录</div>
+	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -258,7 +258,7 @@ say_hello_to(name)
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_twice_parms</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_do_twice</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
 </span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
@@ -282,7 +282,7 @@ say_hello_to(name)
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_decorator</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Do something before</span>
 </span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
@@ -296,7 +296,7 @@ say_hello_to(name)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timer</span>(func):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;打印函数执行的时长&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_timer</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
 </span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
@@ -359,11 +359,11 @@ Finished do_some_loops in 1.234 seconds
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
+		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog">
 	</form>
 </div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
+	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/about_column_alias_in_mssql/">关于SELECT语句的别名风格</a></li>
@@ -375,7 +375,7 @@ Finished do_some_loops in 1.234 seconds
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
+	<h4 class="widget__title">Categories</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
@@ -400,7 +400,7 @@ Finished do_some_loops in 1.234 seconds
 	</div>
 </div>
 <div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
+	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
