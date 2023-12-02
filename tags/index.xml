@@ -6,7 +6,34 @@
     <description>Recent content in Tags on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2023 00:55:30 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Nov 2023 23:50:00 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GIT</title>
+      <link>https://vincent-233.github.io/blog/tags/git/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://vincent-233.github.io/blog/tags/mac/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://vincent-233.github.io/blog/tags/windows/</link>
+      <pubDate>Wed, 20 Sep 2023 23:55:42 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/windows/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>MSSQL</title>
       <link>https://vincent-233.github.io/blog/tags/mssql/</link>
@@ -35,15 +62,6 @@
     </item>
     
     <item>
-      <title>windows</title>
-      <link>https://vincent-233.github.io/blog/tags/windows/</link>
-      <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/tags/windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>SSH</title>
       <link>https://vincent-233.github.io/blog/tags/ssh/</link>
       <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
@@ -67,15 +85,6 @@
       <pubDate>Sun, 18 Sep 2022 23:32:21 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/tags/selenium/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>GIT</title>
-      <link>https://vincent-233.github.io/blog/tags/git/</link>
-      <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/tags/git/</guid>
       <description></description>
     </item>
     

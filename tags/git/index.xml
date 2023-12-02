@@ -6,7 +6,16 @@
     <description>Recent content in GIT on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Sep 2022 18:59:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Nov 2023 23:50:00 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置Mac/Linux命令行中的Git显示当前Branch名称</title>
+      <link>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</guid>
+      <description>问题 用过git for windows的都知道它可以在git repo目录下自动显示当前的branch名称，而且当前目录和命令缓冲区分两行显示： 在Ma</description>
+    </item>
+    
     <item>
       <title>自动为git commit message添加JIRA号</title>
       <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>

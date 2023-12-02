@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Sep 2023 22:32:38 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Nov 2023 23:50:00 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://vincent-233.github.io/blog/categories/linux/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>环境配置</title>
+      <link>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>数据库开发</title>
       <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</link>
@@ -35,15 +53,6 @@
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>https://vincent-233.github.io/blog/categories/linux/</link>
-      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>ETL</title>
       <link>https://vincent-233.github.io/blog/categories/etl/</link>
       <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
@@ -58,15 +67,6 @@
       <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>环境配置</title>
-      <link>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
       <description></description>
     </item>
     
