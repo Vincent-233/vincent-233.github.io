@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AD GROUP on 詩和遠方</title>
+    <link>https://vincent-233.github.io/blog/tags/ad-group/</link>
+    <description>Recent content in AD GROUP on 詩和遠方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Sep 2023 23:55:42 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/ad-group/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows使用小技巧搜集</title>
+      <link>https://vincent-233.github.io/blog/2023/09/20/windows_tips_collect_keep_updating/</link>
+      <pubDate>Wed, 20 Sep 2023 23:55:42 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/09/20/windows_tips_collect_keep_updating/</guid>
+      <description>日常使用中搜集一些有用的windows平台小技巧，持续更新。 复制文件路径 (copy as path) 选中文件，正常右键菜单里没有复制文件路径的选项，按住shfit</description>
+    </item>
+    
+  </channel>
+</rss>
