@@ -6,22 +6,31 @@
     <description>Recent content in Categories on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Nov 2023 23:50:00 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Dec 2023 21:40:52 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Linux</title>
-      <link>https://vincent-233.github.io/blog/categories/linux/</link>
-      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      <title>命令行脚本</title>
+      <link>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 17 Dec 2023 21:40:52 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/categories/linux/</guid>
+      <guid>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</guid>
       <description></description>
     </item>
     
     <item>
       <title>环境配置</title>
       <link>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      <pubDate>Sun, 17 Dec 2023 21:06:09 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://vincent-233.github.io/blog/categories/linux/</link>
+      <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/linux/</guid>
       <description></description>
     </item>
     
@@ -44,29 +53,11 @@
     </item>
     
     <item>
-      <title>命令行脚本</title>
-      <link>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</link>
-      <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>ETL</title>
       <link>https://vincent-233.github.io/blog/categories/etl/</link>
       <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/etl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>其它</title>
-      <link>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</link>
-      <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</guid>
       <description></description>
     </item>
     
@@ -85,6 +76,15 @@
       <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/bigdata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>其它</title>
+      <link>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</link>
+      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</guid>
       <description></description>
     </item>
     

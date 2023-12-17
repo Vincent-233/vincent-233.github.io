@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Git常见命令 - 詩和遠方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="詩和遠方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">詩和遠方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Git常见命令</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-12-17T21:40:52&#43;08:00">2023-12-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#branch">branch</a></li>
+    <li><a href="#diff">diff</a></li>
+    <li><a href="#pull-from-another-branch-to-local">Pull from another branch to local</a></li>
+    <li><a href="#show-specific-version-of-file">show specific version of file</a></li>
+    <li><a href="#commit">commit</a></li>
+    <li><a href="#show-history">show history</a></li>
+    <li><a href="#go-back-to-history">go back to history</a>
+      <ul>
+        <li><a href="#revertcheckoutreset">revert/checkout/reset</a></li>
+        <li><a href="#rebase">rebase</a></li>
+      </ul>
+    </li>
+    <li><a href="#fix-a-commit-via-rebase-useful">fix a commit via rebase (useful)</a></li>
+    <li><a href="#step-to-handle-conflict">step to handle conflict</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>简单罗列一下本人日常使用到的一些git命令</p>
+<h2 id="branch">branch</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git branch -l  <span style="color:#75715e"># 列出本地分支</span>
+</span></span><span style="display:flex;"><span>git branch —a  <span style="color:#75715e"># 列出分支（远程和本地）</span>
+</span></span><span style="display:flex;"><span>git branch &lt;new branch name&gt;  <span style="color:#75715e"># 从当前分支创建新分支</span>
+</span></span><span style="display:flex;"><span>git checkout —b &lt;new branch name&gt; <span style="color:#75715e"># 从当前分支创建新分支，并切换到新分支</span>
+</span></span><span style="display:flex;"><span>git branch &lt;new branch name&gt; &lt;commit_hash&gt; <span style="color:#75715e"># 从特定commit创建分支</span>
+</span></span><span style="display:flex;"><span>git branch --unset-upstream <span style="color:#75715e"># 移除本地分支和远程分支的关联</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 重命名本地branch然后push到远程（rename branch）</span>
+</span></span><span style="display:flex;"><span>git branch —m &lt;new name&gt; <span style="color:#75715e"># rename current branch to new name</span>
+</span></span><span style="display:flex;"><span>git push —u origin &lt;new name&gt; <span style="color:#75715e"># push local new branch to remote</span>
+</span></span><span style="display:flex;"><span>git push origin --delete &lt;old name&gt; <span style="color:#75715e"># delete remote old branch</span>
+</span></span></code></pre></div><h2 id="diff">diff</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git diff <span style="color:#75715e"># compare workplace with index</span>
+</span></span><span style="display:flex;"><span>git diff --staged <span style="color:#75715e"># same as --cached, compare index(staged) with HEAD(local repository)</span>
+</span></span><span style="display:flex;"><span>git diff HEAD <span style="color:#75715e"># compare workspace with repository</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff &lt;branch1&gt; &lt;branch2&gt; <span style="color:#75715e">## diff with two branch (index tree, not working directory)</span>
+</span></span><span style="display:flex;"><span>git diff &lt;branch1&gt;..&lt;branch2&gt; <span style="color:#75715e">## same as above</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff &lt;your merge base branch name&gt;...&lt;branch&gt; <span style="color:#75715e">## diff between two branch, merge base version (index tree, not working directory)</span>
+</span></span><span style="display:flex;"><span>git diff &lt;your merge base branch name&gt;... <span style="color:#75715e">## same with above, but with current branch (index tree, not working directory)</span>
+</span></span><span style="display:flex;"><span>git diff origin/master... --name-only
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff master <span style="color:#75715e">## diff with master (working tree)</span>
+</span></span><span style="display:flex;"><span>git diff master --staged <span style="color:#75715e">## diff with master ( index tree)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff master -- filename <span style="color:#75715e">## diff with file in another branch (specified file)</span>
+</span></span><span style="display:flex;"><span>git diff origin/mow -- filename <span style="color:#75715e">## diff with file in remote repo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff &lt;commit&gt; &lt;filename&gt; <span style="color:#75715e"># diff current file with file in commit</span>
+</span></span><span style="display:flex;"><span>git diff &lt;commit 1&gt; &lt;commit 2&gt; -- &lt;filename&gt; <span style="color:#75715e"># diff file in commit2 (new commit) to commit1 (old commit)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git diff --no—index &lt;file1 &gt; &lt;file2&gt;  <span style="color:#75715e"># 直接diff磁盘上的两个文件（repo之外，或当任一file不在Index中时，no-index可以忽略）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Useful diff option: —b ( ignore whitespace)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git show -1 filename.txt <span style="color:#75715e"># to compare against the last revision of file</span>
+</span></span><span style="display:flex;"><span>git show -2 filename.txt <span style="color:#75715e"># to compare against the 2nd last revision of file</span>
+</span></span></code></pre></div><p>&ndash;name-only只显示文件名 -—name-status 显示文件名和状态</p>
+<h2 id="pull-from-another-branch-to-local">Pull from another branch to local</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout master
+</span></span><span style="display:flex;"><span>git pull
+</span></span><span style="display:flex;"><span>或
+</span></span><span style="display:flex;"><span>git checkout master
+</span></span><span style="display:flex;"><span>git fetch <span style="color:#75715e"># 将远程仓库的最新提交下载到本地，以及后续进行其它操作</span>
+</span></span><span style="display:flex;"><span>git merge master
+</span></span></code></pre></div><h2 id="show-specific-version-of-file">show specific version of file</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git show &lt;commit_hash&gt; --name-only   <span style="color:#75715e"># see what files was modified in that commit, name only</span>
+</span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt; --name-status <span style="color:#75715e"># see what files was modified in that commit, name and their status</span>
+</span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt; &lt;file_path&gt;   <span style="color:#75715e"># see commit diff for the file in that commit</span>
+</span></span><span style="display:flex;"><span>git show HEAD~4:src/main.c <span style="color:#75715e"># show scr/main.c 4 commit ago</span>
+</span></span><span style="display:flex;"><span>git show &lt;other branch&gt;:&lt;file_path&gt; <span style="color:#75715e"># show file content in other branch</span>
+</span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt;:&lt;file_path&gt;  <span style="color:#75715e"># show file content in specified commit, can redirect to save content</span>
+</span></span></code></pre></div><h2 id="commit">commit</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#39;&lt;commit_msg&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>git commit -amend -m <span style="color:#e6db74">&#39;&lt;commit_msg&gt;&#39;</span> <span style="color:#75715e"># change last commit message</span>
+</span></span></code></pre></div><h2 id="show-history">show history</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log &lt;file_name&gt; <span style="color:#75715e"># show file history</span>
+</span></span><span style="display:flex;"><span>git log -- &lt;file_name&gt; <span style="color:#75715e"># show file history, even for deleted/moved files</span>
+</span></span><span style="display:flex;"><span>git log --follow &lt;file_path&gt;
+</span></span></code></pre></div><p>更多log相关的设置可以查看<a href="https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/">git alias</a>中的内容</p>
+<h2 id="go-back-to-history">go back to history</h2>
+<h3 id="revertcheckoutreset">revert/checkout/reset</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git revert &lt;commit hash&gt;  <span style="color:#75715e"># 创建一个进行相反操作的提交，不会覆盖修改历史</span>
+</span></span><span style="display:flex;"><span>git commit -amend -m<span style="color:#e6db74">&#39;xxx&#39;</span> <span style="color:#75715e"># 修改上一次的提交信息</span>
+</span></span><span style="display:flex;"><span>git reset &lt;commit hash&gt;   <span style="color:#75715e"># 将index回到指定的commit状态，指定commit之后的历史都将被丢弃，若加上--hard选项，working tree也会被修改</span>
+</span></span><span style="display:flex;"><span>git reset &lt;commit hash&gt; &lt;file path&gt; <span style="color:#75715e"># 和上面一样，但仅限于指定的文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git checkout &lt;commit hash&gt; <span style="color:#f92672">[</span>--<span style="color:#f92672">]</span> &lt;file name path&gt; <span style="color:#75715e"># update index with commit hash version</span>
+</span></span><span style="display:flex;"><span>git checkout &lt;branch name&gt; &lt;file name paths&gt; <span style="color:#75715e"># replace files from other branch</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git checkout &lt;commit hash&gt; <span style="color:#75715e"># checkout to a &#34;detached HEAD&#34; status, can inspect files and do any experiment, not effect previous working branch </span>
+</span></span><span style="display:flex;"><span>git checkout &lt;branch name&gt; <span style="color:#75715e"># checkout back to normal branch</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git checkout -- &lt;file name&gt; <span style="color:#75715e"># discard local change for file name </span>
+</span></span><span style="display:flex;"><span>git checkout. <span style="color:#75715e"># discard all local change</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git checkout *py <span style="color:#75715e"># discard all py files</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git clean -i / git clean -d -i <span style="color:#75715e"># delete all untracked files/folders ( be careful with option -D, it will delete branch even not fully merged to master )</span>
+</span></span></code></pre></div><p>Note：如果有和其它人共用branch，git reset慎用，最好仅在push到remote之前用</p>
+<h3 id="rebase">rebase</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git rebase -i &lt;commit hash&gt; ^ <span style="color:#75715e"># remember to backup your branch before re-base</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># interactively modify history from a specific commit hash (not include that commit), can remove/keep/merge commit message/..., selectively replay or discard all commit</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># if drop/d option can remove specific commit in middle of history, while reset is remove all commit after specific commit hash</span>
+</span></span><span style="display:flex;"><span>git rebase &lt;target branch name&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 将当前分支上新的提交移动到目标分支</span>
+</span></span></code></pre></div><h2 id="fix-a-commit-via-rebase-useful">fix a commit via rebase (useful)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git commit --fixup &lt;commit hash&gt;
+</span></span><span style="display:flex;"><span>git rebase -i --autosquash &lt;commit hash&gt; ^
+</span></span></code></pre></div><h2 id="step-to-handle-conflict">step to handle conflict</h2>
+<p>merge the release branch to current branch, in the temp merge branch modify as required, then commit and push again <br>
+Note: 处理冲突还是推荐用图形化工具</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/git/" rel="tag">GIT</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2023/12/17/git_alias_setup/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Git alias设置</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 詩和遠方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

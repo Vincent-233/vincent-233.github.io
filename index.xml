@@ -6,7 +6,25 @@
     <description>Recent content on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Nov 2023 23:50:00 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Dec 2023 21:40:52 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git常见命令</title>
+      <link>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</link>
+      <pubDate>Sun, 17 Dec 2023 21:40:52 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</guid>
+      <description>简单罗列一下本人日常使用到的一些git命令 branch git branch -l # 列出本地分支 git branch —a # 列出分支（远程和本地） git branch &amp;lt;new branch name&amp;gt; # 从当前分支创建新分支 git checkout —b &amp;lt;new branch</description>
+    </item>
+    
+    <item>
+      <title>Git alias设置</title>
+      <link>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</link>
+      <pubDate>Sun, 17 Dec 2023 21:06:09 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</guid>
+      <description>一些有用的git command通常非常冗长，alias可以将一些常用的命令简化，从而提高效率。 本文介绍一下我个人使用的alias配置。 step 1 -</description>
+    </item>
+    
     <item>
       <title>配置Mac/Linux命令行中的Git显示当前Branch名称</title>
       <link>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</link>
@@ -1003,7 +1021,7 @@
       <pubDate>Tue, 01 Jan 2013 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/about/</guid>
-      <description>About Me Hello, I&amp;rsquo;m Vincent</description>
+      <description>About Me 我是一名数据库开发工程师/ETL工程师/数据工程师。 本博客主要记录我日常工作中使用到的技术，做一些备忘性质的笔记和总结。 早年放在CSDN</description>
     </item>
     
     <item>

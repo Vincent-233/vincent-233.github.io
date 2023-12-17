@@ -6,7 +6,16 @@
     <description>Recent content in 命令行脚本 on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Dec 2023 21:40:52 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git常见命令</title>
+      <link>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</link>
+      <pubDate>Sun, 17 Dec 2023 21:40:52 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</guid>
+      <description>简单罗列一下本人日常使用到的一些git命令 branch git branch -l # 列出本地分支 git branch —a # 列出分支（远程和本地） git branch &amp;lt;new branch name&amp;gt; # 从当前分支创建新分支 git checkout —b &amp;lt;new branch</description>
+    </item>
+    
     <item>
       <title>windows batch script小结</title>
       <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
@@ -14,6 +23,15 @@
       
       <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
       <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>自动为git commit message添加JIRA号</title>
+      <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>
+      <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
+      <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
     </item>
     
     <item>

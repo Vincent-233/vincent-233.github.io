@@ -3,10 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/git/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</loc>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</loc>
+    <lastmod>2023-12-17T21:06:09+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2023-12-17T21:06:09+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/linux/</loc>
     <lastmod>2023-11-16T23:50:00+08:00</lastmod>
@@ -14,23 +35,8 @@
     <loc>https://vincent-233.github.io/blog/tags/mac/</loc>
     <lastmod>2023-11-16T23:50:00+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
-    <lastmod>2023-11-16T23:50:00+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</loc>
     <lastmod>2023-11-16T23:50:00+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/ad-group/</loc>
-    <lastmod>2023-09-20T23:55:42+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/windows/</loc>
     <lastmod>2023-09-20T23:55:42+08:00</lastmod>
@@ -65,9 +71,6 @@
     <loc>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</loc>
     <lastmod>2023-03-05T12:45:47+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2023-03-05T12:45:47+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tags/ssh/</loc>
     <lastmod>2023-02-11T13:34:13+08:00</lastmod>
   </url><url>
@@ -94,9 +97,6 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/2022/09/18/delete_csdn_via_py_selenium/</loc>
     <lastmod>2022-09-18T23:32:21+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</loc>
-    <lastmod>2022-09-04T18:59:49+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</loc>
     <lastmod>2022-09-04T18:59:49+08:00</lastmod>
@@ -255,6 +255,9 @@
     <lastmod>2019-06-15T01:46:26+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/vba/</loc>
+    <lastmod>2019-06-15T01:46:26+00:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</loc>
     <lastmod>2019-06-15T01:46:26+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2019/06/15/92030849/</loc>

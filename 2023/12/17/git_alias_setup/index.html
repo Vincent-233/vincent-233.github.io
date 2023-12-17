@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Git alias设置 - 詩和遠方</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="詩和遠方" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">詩和遠方</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Git alias设置</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-12-17T21:06:09&#43;08:00">2023-12-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#step-1---下载alias文件">step 1 - 下载alias文件</a></li>
+        <li><a href="#step-2---修改gitconfig文件">step 2 - 修改.gitconfig文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>一些有用的git command通常非常冗长，alias可以将一些常用的命令简化，从而提高效率。  <br>
+本文介绍一下我个人使用的alias配置。</p>
+<h3 id="step-1---下载alias文件">step 1 - 下载alias文件</h3>
+<p>网上有一个网友整理好的<a href="https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt">alias</a>文件，可以下载按需修改拿来使用。</p>
+<p>我一般会将log显示设置修改一下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#75715e"># Show log list with our preferred information, a.k.a. `ll`</span>
+</span></span><span style="display:flex;"><span>  log-list <span style="color:#f92672">=</span> log --graph --topo-order --date<span style="color:#f92672">=</span>iso --abbrev-commit --decorate --all --boundary --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %C(blue)[%cn]%Creset&#39;</span> --color<span style="color:#f92672">=</span>always
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Show log  list with our preferred information with long formats, a.k.a. `lll`</span>
+</span></span><span style="display:flex;"><span>  log-list-long <span style="color:#f92672">=</span> log --graph --topo-order --date<span style="color:#f92672">=</span>iso --no-abbrev-commit --decorate --all --boundary --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn &lt;%ce&gt;]%Creset&#39;</span> --color<span style="color:#f92672">=</span>always
+</span></span></code></pre></div><h3 id="step-2---修改gitconfig文件">step 2 - 修改.gitconfig文件</h3>
+<p>假设下载好路径为<code>/Users/xman/config/gitalias.txt</code></p>
+<p>在<code>～/.gitconfig</code>文件中加入</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>include<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    path <span style="color:#f92672">=</span> /Users/xman/config/gitalias.txt
+</span></span></code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/git/" rel="tag">GIT</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2023/11/16/git-mac-config-show-branch/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">配置Mac/Linux命令行中的Git显示当前Branch名称</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Git常见命令</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/11/16/git-mac-config-show-branch/">配置Mac/Linux命令行中的Git显示当前Branch名称</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/windows_tips_collect_keep_updating/">Windows使用小技巧搜集</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/about_column_alias_in_mssql/">关于SELECT语句的别名风格</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/bigdata/">BigData</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/etl/">ETL</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/linux/">Linux</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/python/">python</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/%E5%85%B6%E5%AE%83/">其它</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mac/" title="Mac">Mac</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mssql/" title="MSSQL">MSSQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/oracle/" title="ORACLE">ORACLE</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pandas/" title="pandas">pandas</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/postgresql/" title="PostgreSQL">PostgreSQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/powershell/" title="powershell">powershell</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/python/" title="python">python</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/selenium/" title="selenium">selenium</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/spark/" title="spark">spark</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssh/" title="SSH">SSH</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssis/" title="SSIS">SSIS</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/t-sql/" title="T-SQL">T-SQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/tools/" title="Tools">Tools</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ubuntu/" title="ubuntu">ubuntu</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vba/" title="VBA">VBA</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vim/" title="vim">vim</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/virtual-box/" title="virtual box">virtual box</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/windows/" title="windows">windows</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 詩和遠方.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>
