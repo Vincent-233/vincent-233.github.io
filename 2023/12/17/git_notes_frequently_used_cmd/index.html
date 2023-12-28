@@ -172,9 +172,9 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git show &lt;commit_hash&gt; --name-only   <span style="color:#75715e"># see what files was modified in that commit, name only</span>
 </span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt; --name-status <span style="color:#75715e"># see what files was modified in that commit, name and their status</span>
 </span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt; &lt;file_path&gt;   <span style="color:#75715e"># see commit diff for the file in that commit</span>
-</span></span><span style="display:flex;"><span>git show HEAD~4:src/main.c <span style="color:#75715e"># show scr/main.c 4 commit ago</span>
-</span></span><span style="display:flex;"><span>git show &lt;other branch&gt;:&lt;file_path&gt; <span style="color:#75715e"># show file content in other branch</span>
 </span></span><span style="display:flex;"><span>git show &lt;commit_hash&gt;:&lt;file_path&gt;  <span style="color:#75715e"># show file content in specified commit, can redirect to save content</span>
+</span></span><span style="display:flex;"><span>git show &lt;other branch&gt;:&lt;file_path&gt; <span style="color:#75715e"># show file content in other branch</span>
+</span></span><span style="display:flex;"><span>git show HEAD~4:src/main.c <span style="color:#75715e"># show scr/main.c 4 commit ago</span>
 </span></span></code></pre></div><h2 id="commit">commit</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#39;&lt;commit_msg&gt;&#39;</span>
 </span></span><span style="display:flex;"><span>git commit -amend -m <span style="color:#e6db74">&#39;&lt;commit_msg&gt;&#39;</span> <span style="color:#75715e"># change last commit message</span>
@@ -198,12 +198,12 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>git checkout -- &lt;file name&gt; <span style="color:#75715e"># discard local change for file name </span>
-</span></span><span style="display:flex;"><span>git checkout. <span style="color:#75715e"># discard all local change</span>
+</span></span><span style="display:flex;"><span>git checkout . <span style="color:#75715e"># discard all local change</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>git checkout *py <span style="color:#75715e"># discard all py files</span>
+</span></span><span style="display:flex;"><span>git checkout *.py <span style="color:#75715e"># discard all py files</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>git clean -i / git clean -d -i <span style="color:#75715e"># delete all untracked files/folders ( be careful with option -D, it will delete branch even not fully merged to master )</span>
-</span></span></code></pre></div><p>Note：如果有和其它人共用branch，git reset慎用，最好仅在push到remote之前用</p>
+</span></span></code></pre></div><p>Note：如果有和其他人共用branch，git reset慎用，最好仅在将新commit push到remote之前用</p>
 <h3 id="rebase">rebase</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git rebase -i &lt;commit hash&gt; ^ <span style="color:#75715e"># remember to backup your branch before re-base</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># interactively modify history from a specific commit hash (not include that commit), can remove/keep/merge commit message/..., selectively replay or discard all commit</span>
@@ -212,8 +212,9 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 将当前分支上新的提交移动到目标分支</span>
 </span></span></code></pre></div><h2 id="fix-a-commit-via-rebase-useful">fix a commit via rebase (useful)</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git commit --fixup &lt;commit hash&gt;
-</span></span><span style="display:flex;"><span>git rebase -i --autosquash &lt;commit hash&gt; ^
-</span></span></code></pre></div><h2 id="step-to-handle-conflict">step to handle conflict</h2>
+</span></span><span style="display:flex;"><span>git rebase -i --autosquash &lt;commit hash&gt;^
+</span></span></code></pre></div><p>以上命令适用场景：fix一个之前的comit，而不是再commit一次，让commit history更整洁</p>
+<h2 id="step-to-handle-conflict">step to handle conflict</h2>
 <p>merge the release branch to current branch, in the temp merge branch modify as required, then commit and push again <br>
 Note: 处理冲突还是推荐用图形化工具</p>
 

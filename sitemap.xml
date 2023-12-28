@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/ssms/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tools/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
+  </url><url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
     <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
@@ -11,16 +29,10 @@
     <loc>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</loc>
     <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tech/</loc>
     <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</loc>
@@ -43,9 +55,6 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/09/20/windows_tips_collect_keep_updating/</loc>
     <lastmod>2023-09-20T23:55:42+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
-    <lastmod>2023-09-20T00:55:30+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/09/20/about_column_alias_in_mssql/</loc>
     <lastmod>2023-09-20T00:55:30+08:00</lastmod>
@@ -144,9 +153,6 @@
     <lastmod>2020-06-21T23:55:02+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2020/06/14/106740950/</loc>
-    <lastmod>2020-06-14T17:02:48+00:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tools/</loc>
     <lastmod>2020-06-14T17:02:48+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2020/06/13/106734253/</loc>
