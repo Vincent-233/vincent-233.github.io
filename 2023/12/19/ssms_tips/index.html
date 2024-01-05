@@ -105,23 +105,23 @@
     <li><a href="#查询快捷键-query-shortcuts">查询快捷键 (Query Shortcuts)</a></li>
     <li><a href="#solution--project视图">Solution &amp; Project视图</a></li>
     <li><a href="#code-snippet-manager">Code Snippet Manager</a></li>
-    <li><a href="#search-in-files">search in files</a></li>
-    <li><a href="#bookmark">bookmark</a></li>
+    <li><a href="#search-in-files">Search in files</a></li>
+    <li><a href="#bookmark">Bookmark</a></li>
     <li><a href="#sqlcmd-mode">SQLCMD Mode</a></li>
-    <li><a href="#split-view">split view</a></li>
-    <li><a href="#external-tool">external tool</a></li>
+    <li><a href="#split-view">Split view</a></li>
+    <li><a href="#external-tool">External tool</a></li>
   </ul>
 </nav>
 	</div>
 </div><div class="content post__content clearfix">
-			<p>本人工作中最常用的数据库就是Microsoft SQL Server，SSMS这个软件自然也是使用了多年，如果能搭配SQL Prompt这个插件，效率将会大大提升，但如果有的公司权限管理严格，无法安装类似插件，那如何在原生态的情况下提升SSMS的使用效率呢？下面记录一下本人的使用经验以及一些可能大多数人都没用一的SSMS的功能。重点介绍存在一些功能，不会过度详细展开如何使用。</p>
+			<p>本人工作中最常用的数据库就是Microsoft SQL Server，SSMS这个软件自然也是使用了多年，如果能搭配SQL Prompt这个插件，效率将会大大提升，但如果工作环境权限管理严格，无法安装类似插件，那如何在原生态的情况下提升SSMS的使用效率呢？下面记录一下本人的使用经验以及一些可能大多数人都没用到的SSMS“隐藏”功能。重点介绍一些功能的存在性，不会过度详细展开如何使用。</p>
 <h2 id="选项设置-options">选项设置 (Options)</h2>
 <ul>
-<li>结果中显示查询语句
+<li>结果中显示查询语句<br>
 <img src="https://s2.loli.net/2023/12/25/9ZlS6yPECUoNJxT.png" alt=""></li>
-<li>显示行号
+<li>显示行号<br>
 <img src="https://s2.loli.net/2023/12/25/BhqUmEJ8d7knyQi.png" alt=""></li>
-<li>Tab用Space代替
+<li>Tab用Space代替<br>
 这样做的一个好处就是查询表数据时，文本结果中的表头都用逗号分隔，复制后可直接用在Select或Insert语句中。<br>
 <img src="https://s2.loli.net/2023/12/25/phnsGZgdH5FQN3k.png" alt=""></li>
 </ul>
@@ -139,13 +139,13 @@
 <img src="https://s2.loli.net/2023/12/25/yEUkqlDxXja6Vrw.png" alt=""></p>
 <p>我们可以根据实际工作再设置一些经常用到的Query，之前写了一个简单的<a href="https://github.com/Vincent-233/SSMS-SQLCodeSnippet/tree/master">python程序</a>用来快速生成Snippet用于导入配置。设置好了之后，在查询界面按CTRL+K,CTRL+V后会调出code snippet选择界面，然后按上下和Enter键进行选择 <br>
 <img src="https://s2.loli.net/2023/12/25/dVwkTo7RughXPcK.png" alt=""></p>
-<h2 id="search-in-files">search in files</h2>
-<p>在查询编辑界面，查找关键字默认限于当前窗口，其实有选项可以在多个文件中同时搜索，实现类似文件内容过滤的功能
-菜单入口： Edit - Find and Replaces, 也可以按 CTRL+SHIFT+H 调出，或按CTRL+F后进行范围选择<br>
+<h2 id="search-in-files">Search in files</h2>
+<p>在查询编辑界面，查找关键字默认限于当前窗口，其实有选项可以在多个文件中同时搜索，实现类似文件内容过滤的功能 <br>
+菜单入口： Edit - Find and Replaces, 也可按 CTRL+SHIFT+H 调出，或按CTRL+F后进行范围选择<br>
 <img src="https://s2.loli.net/2023/12/25/f71qVMXjgHbOz6w.png" alt=""></p>
-<h2 id="bookmark">bookmark</h2>
-<p>书签操作：Edit - Bookbooks&hellip;
-显示书签窗口： View - Bookmark Window
+<h2 id="bookmark">Bookmark</h2>
+<p>书签操作：Edit - Bookbooks&hellip;<br>
+显示书签窗口： View - Bookmark Window <br>
 这个就不展开了，知道有这个功能，并善加利用即可</p>
 <h2 id="sqlcmd-mode">SQLCMD Mode</h2>
 <p>之前写过<a href="https://vincent-233.github.io/blog/2020/06/14/106740950/">一篇文章</a>简单介绍过这个功能，这里再次推荐一下，sqlcmd非常强大，个人觉得很有用的一点是可以在一个SSMS的Tab里同时查询多个server的数据，结果会一起返回，方便快速对比不同环境的数据，比如：</p>
@@ -157,8 +157,13 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> Table_A
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
 </span></span></code></pre></div><p>还支持执行不需要交互的CMD命令行，临时设置结果输出保存到文本等等，更多功能还请参考<a href="https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-use-utility?view=sql-server-ver15&amp;source=recommendations">官方文档</a></p>
-<h2 id="split-view">split view</h2>
-<h2 id="external-tool">external tool</h2>
+<h2 id="split-view">Split view</h2>
+<p>SSMS可以通过拖拽将查询窗口进行左右拆分从而可以同时看到多个TAB，它还支持将同一个TAB进行上下拆分，非常方便对长SP进行调试，或者交替查看对比同一个TAB内相隔很远的两段代码。
+<img src="https://s2.loli.net/2024/01/01/SdFCUxQyp3zRLoO.gif" alt=""></p>
+<h2 id="external-tool">External tool</h2>
+<p>“外部工具”可以配置执行命令行，支持传入特定的上下文参数，比如将当前文件名或鼠标选中的字符串等传给命令行。<br>
+此工具能实现很多个性化的功能。比如我用它来快速通过模版去创建一个新的SQL Project，只要将project名写在查询窗口上，然后选中它后点击对应的菜单，创建好的project文件的路径就已经在剪切板中，我只要按路径添加到solution中。
+<img src="https://s2.loli.net/2024/01/06/Y9R7CeOSILAXGJq.png" alt=""></p>
 
 		</div>
 		<footer class="post__footer">
@@ -203,11 +208,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/11/16/git-mac-config-show-branch/">配置Mac/Linux命令行中的Git显示当前Branch名称</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/windows_tips_collect_keep_updating/">Windows使用小技巧搜集</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/about_column_alias_in_mssql/">关于SELECT语句的别名风格</a></li>
 		</ul>
 	</div>
 </div>
@@ -273,7 +278,7 @@
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2023 詩和遠方.
+			&copy; 2024 詩和遠方.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
