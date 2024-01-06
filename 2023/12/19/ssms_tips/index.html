@@ -109,7 +109,7 @@
     <li><a href="#bookmark">Bookmark</a></li>
     <li><a href="#sqlcmd-mode">SQLCMD Mode</a></li>
     <li><a href="#split-view">Split view</a></li>
-    <li><a href="#external-tool">External tool</a></li>
+    <li><a href="#external-tool">External Tool</a></li>
   </ul>
 </nav>
 	</div>
@@ -121,27 +121,23 @@
 <img src="https://s2.loli.net/2023/12/25/9ZlS6yPECUoNJxT.png" alt=""></li>
 <li>显示行号<br>
 <img src="https://s2.loli.net/2023/12/25/BhqUmEJ8d7knyQi.png" alt=""></li>
-<li>Tab用Space代替<br>
-这样做的一个好处就是查询表数据时，文本结果中的表头都用逗号分隔，复制后可直接用在Select或Insert语句中。<br>
+<li>文本结果用逗号分隔<br>
+设置入口见上面第一张图右上角，这样做的一个好处就是查询表数据时，文本结果中的表头都用逗号分隔，复制后可直接用在Select或Insert语句中。<br>
 <img src="https://s2.loli.net/2023/12/25/phnsGZgdH5FQN3k.png" alt=""></li>
 </ul>
 <h2 id="查询快捷键-query-shortcuts">查询快捷键 (Query Shortcuts)</h2>
-<p>设置了查询快捷键之后，按快捷键就会自动执行SQL语句，比如选中一个表名<code>table_a</code>，按<code>CTRL+3</code>就会自动执行<code>select top 1000 * from table_a</code>。 <br>
-以下我设置的查询快捷键，建议根据实际使用频率进行设置：
+<p>设置了查询快捷键之后，按快捷键就会自动执行SQL语句，比如选中一个表名<code>table_a</code>，按<code>CTRL+3</code>就会自动执行<code>select top 1000 * from table_a</code>。以下是我设置的查询快捷键，建议根据实际使用频率进行设置：<br>
 <img src="https://s2.loli.net/2023/12/25/4T7YZlu8NxLjOAr.png" alt=""></p>
 <h2 id="solution--project视图">Solution &amp; Project视图</h2>
-<p>不是只有写.Net/JAVA等才需要新建solution/project，写T-SQL也可以，这样可以更好地组织和保存代码，而不是每次都新建一个查询窗口，查完就关闭丢弃。<br>
-新建项目菜单路径： File - New - Project， 默认会创建一个包含一个Project的Solution，后续可以新加其它Project  <br>
+<p>不是只有写.Net/JAVA等才需要新建solution/project，写T-SQL也可以，这样可以更好地组织和保存代码，而不是每次都新建一个查询窗口，查完就关闭丢弃。新建项目菜单路径： File - New - Project， 默认会创建一个包含一个Project的Solution，后续可以新加其它Project  <br>
 <img src="https://s2.loli.net/2023/12/25/MGsLk9DYFtUClnN.png" alt=""></p>
 <h2 id="code-snippet-manager">Code Snippet Manager</h2>
-<p>SQL Prompt有个设置常用查询代码段的功能，比如输入ssf之后按TAB就会自动替换为<code>select * from</code>，其实SSMS也有一个类似的功能，只是设置会麻烦一些。<br>
-这个功能叫Code Snippets Manager，设置菜单入口：Tools - Code Snippet Manager，可以发现SSMS已经自带一些代码段： <br>
+<p>SQL Prompt有个设置常用查询代码段的功能，比如输入ssf之后按TAB就会自动替换为<code>select * from</code>，其实SSMS也有一个类似的功能，只是设置会麻烦一些。这个功能叫Code Snippets Manager，设置菜单入口：Tools - Code Snippet Manager，可以发现SSMS已经自带一些代码段： <br>
 <img src="https://s2.loli.net/2023/12/25/yEUkqlDxXja6Vrw.png" alt=""></p>
 <p>我们可以根据实际工作再设置一些经常用到的Query，之前写了一个简单的<a href="https://github.com/Vincent-233/SSMS-SQLCodeSnippet/tree/master">python程序</a>用来快速生成Snippet用于导入配置。设置好了之后，在查询界面按CTRL+K,CTRL+V后会调出code snippet选择界面，然后按上下和Enter键进行选择 <br>
 <img src="https://s2.loli.net/2023/12/25/dVwkTo7RughXPcK.png" alt=""></p>
 <h2 id="search-in-files">Search in files</h2>
-<p>在查询编辑界面，查找关键字默认限于当前窗口，其实有选项可以在多个文件中同时搜索，实现类似文件内容过滤的功能 <br>
-菜单入口： Edit - Find and Replaces, 也可按 CTRL+SHIFT+H 调出，或按CTRL+F后进行范围选择<br>
+<p>在查询编辑界面，查找关键字默认限于当前窗口，其实有选项可以在多个文件中同时搜索，实现类似文件内容过滤的功能。菜单入口： Edit - Find and Replaces, 也可按 CTRL+SHIFT+H 调出，或按CTRL+F后进行范围选择<br>
 <img src="https://s2.loli.net/2023/12/25/f71qVMXjgHbOz6w.png" alt=""></p>
 <h2 id="bookmark">Bookmark</h2>
 <p>书签操作：Edit - Bookbooks&hellip;<br>
@@ -160,10 +156,11 @@
 <h2 id="split-view">Split view</h2>
 <p>SSMS可以通过拖拽将查询窗口进行左右拆分从而可以同时看到多个TAB，它还支持将同一个TAB进行上下拆分，非常方便对长SP进行调试，或者交替查看对比同一个TAB内相隔很远的两段代码。
 <img src="https://s2.loli.net/2024/01/01/SdFCUxQyp3zRLoO.gif" alt=""></p>
-<h2 id="external-tool">External tool</h2>
-<p>“外部工具”可以配置执行命令行，支持传入特定的上下文参数，比如将当前文件名或鼠标选中的字符串等传给命令行。<br>
-此工具能实现很多个性化的功能。比如我用它来快速通过模版去创建一个新的SQL Project，只要将project名写在查询窗口上，然后选中它后点击对应的菜单，创建好的project文件的路径就已经在剪切板中，我只要按路径添加到solution中。
-<img src="https://s2.loli.net/2024/01/06/Y9R7CeOSILAXGJq.png" alt=""></p>
+<h2 id="external-tool">External Tool</h2>
+<p>设置入口：Tools &ndash; External Tool&hellip; <br>
+“外部工具”可以配置执行命令行，支持传入特定的上下文参数，比如将当前文件名或鼠标选中的字符串等传给命令行。用户可以编写自定义脚本和命令行工具，然后在这里配置快捷执行入口。
+此工具能实现很多个性化的功能。比如我用它来快速通过模版去创建一个新的SQL Project，只要将project名写在查询窗口上，然后选中它后点击对应的菜单，创建好的project文件的路径就已经在剪切板中，我只要按路径添加到solution中。<br>
+<img src="https://s2.loli.net/2024/01/06/NeVuGInlMPdqC9r.jpg" alt=""></p>
 
 		</div>
 		<footer class="post__footer">
@@ -195,84 +192,7 @@
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
-	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
-		<label>
-			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
-		</label>
-		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
-	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/11/16/git-mac-config-show-branch/">配置Mac/Linux命令行中的Git显示当前Branch名称</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/windows_tips_collect_keep_updating/">Windows使用小技巧搜集</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/bigdata/">BigData</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/etl/">ETL</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/linux/">Linux</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/python/">python</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E5%85%B6%E5%AE%83/">其它</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mac/" title="Mac">Mac</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mssql/" title="MSSQL">MSSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/oracle/" title="ORACLE">ORACLE</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pandas/" title="pandas">pandas</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/postgresql/" title="PostgreSQL">PostgreSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/powershell/" title="powershell">powershell</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/selenium/" title="selenium">selenium</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/spark/" title="spark">spark</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssh/" title="SSH">SSH</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssis/" title="SSIS">SSIS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssms/" title="SSMS">SSMS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/t-sql/" title="T-SQL">T-SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ubuntu/" title="ubuntu">ubuntu</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vba/" title="VBA">VBA</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vim/" title="vim">vim</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/virtual-box/" title="virtual box">virtual box</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/windows/" title="windows">windows</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
