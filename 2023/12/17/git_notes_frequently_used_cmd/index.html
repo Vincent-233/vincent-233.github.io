@@ -124,15 +124,15 @@
 			<p>简单罗列一下本人日常使用到的一些git命令</p>
 <h2 id="branch">branch</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git branch -l  <span style="color:#75715e"># 列出本地分支</span>
-</span></span><span style="display:flex;"><span>git branch —a  <span style="color:#75715e"># 列出分支（远程和本地）</span>
+</span></span><span style="display:flex;"><span>git branch -a  <span style="color:#75715e"># 列出分支（远程和本地）</span>
 </span></span><span style="display:flex;"><span>git branch &lt;new branch name&gt;  <span style="color:#75715e"># 从当前分支创建新分支</span>
-</span></span><span style="display:flex;"><span>git checkout —b &lt;new branch name&gt; <span style="color:#75715e"># 从当前分支创建新分支，并切换到新分支</span>
+</span></span><span style="display:flex;"><span>git checkout -b &lt;new branch name&gt; <span style="color:#75715e"># 从当前分支创建新分支，并切换到新分支</span>
 </span></span><span style="display:flex;"><span>git branch &lt;new branch name&gt; &lt;commit_hash&gt; <span style="color:#75715e"># 从特定commit创建分支</span>
 </span></span><span style="display:flex;"><span>git branch --unset-upstream <span style="color:#75715e"># 移除本地分支和远程分支的关联</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">### 重命名本地branch然后push到远程（rename branch）</span>
-</span></span><span style="display:flex;"><span>git branch —m &lt;new name&gt; <span style="color:#75715e"># rename current branch to new name</span>
-</span></span><span style="display:flex;"><span>git push —u origin &lt;new name&gt; <span style="color:#75715e"># push local new branch to remote</span>
+</span></span><span style="display:flex;"><span>git branch -m &lt;new name&gt; <span style="color:#75715e"># rename current branch to new name</span>
+</span></span><span style="display:flex;"><span>git push -u origin &lt;new name&gt; <span style="color:#75715e"># push local new branch to remote</span>
 </span></span><span style="display:flex;"><span>git push origin --delete &lt;old name&gt; <span style="color:#75715e"># delete remote old branch</span>
 </span></span></code></pre></div><h2 id="diff">diff</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git diff <span style="color:#75715e"># compare workplace with index</span>
@@ -155,12 +155,12 @@
 </span></span><span style="display:flex;"><span>git diff &lt;commit&gt; &lt;filename&gt; <span style="color:#75715e"># diff current file with file in commit</span>
 </span></span><span style="display:flex;"><span>git diff &lt;commit 1&gt; &lt;commit 2&gt; -- &lt;filename&gt; <span style="color:#75715e"># diff file in commit2 (new commit) to commit1 (old commit)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>git diff --no—index &lt;file1 &gt; &lt;file2&gt;  <span style="color:#75715e"># 直接diff磁盘上的两个文件（repo之外，或当任一file不在Index中时，no-index可以忽略）</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Useful diff option: —b ( ignore whitespace)</span>
+</span></span><span style="display:flex;"><span>git diff --no-index &lt;file1 &gt; &lt;file2&gt;  <span style="color:#75715e"># 直接diff磁盘上的两个文件（repo之外，或当任一file不在Index中时，no-index可以忽略）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Useful diff option: -b ( ignore whitespace)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>git show -1 filename.txt <span style="color:#75715e"># to compare against the last revision of file</span>
 </span></span><span style="display:flex;"><span>git show -2 filename.txt <span style="color:#75715e"># to compare against the 2nd last revision of file</span>
-</span></span></code></pre></div><p>&ndash;name-only只显示文件名 -—name-status 显示文件名和状态</p>
+</span></span></code></pre></div><p>&ndash;name-only只显示文件名 &ndash;name-status 显示文件名和状态</p>
 <h2 id="pull-from-another-branch-to-local">Pull from another branch to local</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git checkout master
 </span></span><span style="display:flex;"><span>git pull
