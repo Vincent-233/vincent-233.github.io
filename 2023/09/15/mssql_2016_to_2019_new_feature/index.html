@@ -144,7 +144,7 @@
 <li>string_split - 字符串拆分</li>
 <li>string_agg - 列值合并为字符串</li>
 <li>format - 返回格式化之后的字符串，支持.NET format string</li>
-<li>formatmessage -将C语言printf风格的字符串占位符替换为后续的参数</li>
+<li>formatmessage -将C语言printf风格的字符串占位符替换为后续的参数 ( 长字符串慎用，仅支持<strong>2047</strong>个字符 )</li>
 <li>translate - 按顺序将字符串1中出现的字符替换为字符串2中的字符，简化某些情况下的replace写法</li>
 <li>iif - case when 语法糖</li>
 <li>trim - 不用再ltrim((rtrim()))了</li>

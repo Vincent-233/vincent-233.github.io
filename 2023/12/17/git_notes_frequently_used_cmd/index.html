@@ -166,7 +166,7 @@
 </span></span><span style="display:flex;"><span>git pull
 </span></span><span style="display:flex;"><span>或
 </span></span><span style="display:flex;"><span>git checkout master
-</span></span><span style="display:flex;"><span>git fetch <span style="color:#75715e"># 将远程仓库的最新提交下载到本地，以及后续进行其它操作</span>
+</span></span><span style="display:flex;"><span>git fetch <span style="color:#75715e"># 将远程仓库的最新commit下载到本地，以及后续进行其它操作</span>
 </span></span><span style="display:flex;"><span>git merge master
 </span></span></code></pre></div><h2 id="show-specific-version-of-file">show specific version of file</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git show &lt;commit_hash&gt; --name-only   <span style="color:#75715e"># see what files was modified in that commit, name only</span>
@@ -181,7 +181,7 @@
 </span></span></code></pre></div><h2 id="show-history">show history</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log &lt;file_name&gt; <span style="color:#75715e"># show file history</span>
 </span></span><span style="display:flex;"><span>git log -- &lt;file_name&gt; <span style="color:#75715e"># show file history, even for deleted/moved files</span>
-</span></span><span style="display:flex;"><span>git log --follow &lt;file_path&gt;
+</span></span><span style="display:flex;"><span>git log --follow &lt;file_path&gt; <span style="color:#75715e"># include rename</span>
 </span></span></code></pre></div><p>更多log相关的设置可以查看<a href="https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/">git alias</a>中的内容</p>
 <h2 id="go-back-to-history">go back to history</h2>
 <h3 id="revertcheckoutreset">revert/checkout/reset</h3>
@@ -213,7 +213,7 @@
 </span></span></code></pre></div><h2 id="fix-a-commit-via-rebase-useful">fix a commit via rebase (useful)</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git commit --fixup &lt;commit hash&gt;
 </span></span><span style="display:flex;"><span>git rebase -i --autosquash &lt;commit hash&gt;^
-</span></span></code></pre></div><p>以上命令适用场景：fix一个之前的comit，而不是再commit一次，让commit history更整洁</p>
+</span></span></code></pre></div><p>以上命令适用场景：fix一个之前的commit，而不是再commit一次，让commit history更整洁</p>
 <h2 id="step-to-handle-conflict">step to handle conflict</h2>
 <p>merge the release branch to current branch, in the temp merge branch modify as required, then commit and push again <br>
 Note: 处理冲突还是推荐用图形化工具</p>
