@@ -95,6 +95,26 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/blog/2019/04/09/89160917/" rel="bookmark">
+			ls -l命令结果解析
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-04-09T20:26:25Z">2019-04-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/" rel="category">命令行脚本</a>, <a class="meta__link" href="/blog/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2019/04/09/89160917/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/blog/2019/04/08/89082770/" rel="bookmark">
 			Windows通过密钥SSH登陆Linux
 			</a>
@@ -371,26 +391,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2018/05/01/80154338/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2018/04/29/80145292/" rel="bookmark">
-			SQL Server 常见For XML语句比较
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-29T20:58:42Z">2018-04-29</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		SQL语句： SELECT TOP (3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid 结果： For XML Raw sql SELECT TOP(3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid FOR XML RAW 结果 说明 每一条记录...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2018/04/29/80145292/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -415,11 +415,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/13/duckdb_usage/">DuckDB功能点介绍</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/11/16/git-mac-config-show-branch/">配置Mac/Linux命令行中的Git显示当前Branch名称</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/09/20/windows_tips_collect_keep_updating/">Windows使用小技巧搜集</a></li>
 		</ul>
 	</div>
 </div>
@@ -454,6 +454,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/duckdb/" title="DuckDB">DuckDB</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>

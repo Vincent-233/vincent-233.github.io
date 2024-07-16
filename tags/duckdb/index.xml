@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DuckDB on 詩和遠方</title>
+    <link>https://vincent-233.github.io/blog/tags/duckdb/</link>
+    <description>Recent content in DuckDB on 詩和遠方</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 13 Jul 2024 17:26:11 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/duckdb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DuckDB功能点介绍</title>
+      <link>https://vincent-233.github.io/blog/2024/07/13/duckdb_usage/</link>
+      <pubDate>Sat, 13 Jul 2024 17:26:11 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/13/duckdb_usage/</guid>
+      <description>前阵子浏览技术文章不经意间看到DuckDB，文章将它描述成为OLAP版本的SQLite，或嵌入式的PgSQL，有众多现代化分析型数据库的高级</description>
+    </item>
+    
+  </channel>
+</rss>

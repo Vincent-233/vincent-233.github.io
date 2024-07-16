@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2023 00:11:23 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Jul 2024 17:26:11 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DuckDB</title>
+      <link>https://vincent-233.github.io/blog/tags/duckdb/</link>
+      <pubDate>Sat, 13 Jul 2024 17:26:11 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/duckdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://vincent-233.github.io/blog/tags/python/</link>
+      <pubDate>Sat, 13 Jul 2024 17:26:11 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>MSSQL</title>
       <link>https://vincent-233.github.io/blog/tags/mssql/</link>
@@ -49,15 +67,6 @@
       <pubDate>Wed, 20 Sep 2023 23:55:42 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/tags/windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://vincent-233.github.io/blog/tags/python/</link>
-      <pubDate>Mon, 21 Aug 2023 00:02:42 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/tags/python/</guid>
       <description></description>
     </item>
     
