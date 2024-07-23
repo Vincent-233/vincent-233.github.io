@@ -115,7 +115,7 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>前阵子浏览技术文章不经意间看到DuckDB，文章将它描述成为OLAP版本的SQLite，或嵌入式的PgSQL，有众多现代化分析型数据库的高级功能，支持众多API，在python API中还可以不用copy直接用SQL查询Pandas DataFrame。用了几天后发现惊喜有点多，特写此文章进行记录，方便日后查阅。</p>
-<p>本文主要介绍DuckDB对本人日常工作有用的功能点，不做太多展开，官方文档才是最全面和详情的。<br>
+<p>本文主要介绍DuckDB对本人日常工作有用的功能点，不做太多展开，官方文档才是最全面和详细的。<br>
 以后如果再写DuckDB相关的博客，将主要做具体应用案例分享。</p>
 <h2 id="安装与简单配置">安装与简单配置</h2>
 <p><code>pip install duckdb</code>之后就可直接在python中使用，也可以下载JDBC Driver然后配置在<a href="https://duckdb.org/docs/guides/sql_editors/dbeaver.html">DBeaver</a>等支持JDBC的数据库管理工具中使用。
@@ -131,7 +131,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;/file.parquet&#39;</span> 
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> read_parquet(<span style="color:#e6db74">&#39;file.parquet&#39;</span>,hive_partitioning<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>, ....) 
 </span></span></code></pre></div><p>csv不自带元数据信息，但duckdb支持以一定的算法推测/嗅探CSV元数据：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> sniff_csv(<span style="color:#e6db74">&#39;file.csv&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> sniff_csv(<span style="color:#e6db74">&#39;file.csv&#39;</span>)
 </span></span></code></pre></div><p>parquet一般自带<a href="https://duckdb.org/docs/data/parquet/metadata">元数据</a>，可直接读取:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- self contained metadata in parquet file
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> parquet_metadata(<span style="color:#e6db74">&#39;test.parquet&#39;</span>);
@@ -160,7 +160,7 @@
 <li>丰富的自带函数库</li>
 <li>支持复杂数据类型，比如list，struct, map，array，以及这些类型相关的函数
 <ul>
-<li>像python一样的range generate&hellip;，list slice，<a href="https://duckdb.org/docs/sql/functions/nested.html#list-comprehension">list comprehension</a>等，非常适合基于大宽表在同一row中的多个column之间进行数据处理和分析，比如基于某几列的值计算hash值</li>
+<li>像python一样的range generate&hellip;，list slice，<a href="https://duckdb.org/docs/sql/functions/nested.html#list-comprehension">list comprehension</a>等，非常适合基于大宽表在同一row中的多个column之间进行数据处理和分析，比如同一行基于某几列的值计算hash值，最大值，最小值等</li>
 </ul>
 </li>
 <li>支持用python写UDF</li>
@@ -190,11 +190,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a <span style="color:#66d9ef">as</span> _struct, a::text <span style="color:#66d9ef">as</span> str <span style="color:#66d9ef">from</span> table_test a;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">row</span>(id,title) <span style="color:#66d9ef">as</span> row_, row_::text <span style="color:#66d9ef">from</span> table_test a; 
 </span></span></code></pre></div><h2 id="其它相关有用库">其它相关有用库</h2>
-<p>其它数据分析与处理有用弹药库：</p>
+<p>其它数据分析与处理有关的弹药库：</p>
 <ul>
-<li><a href="https://docs.pola.rs/user-guide/misc/comparison/">polars</a>（在单机和有限内存情况下，更高性能的dataframe）</li>
+<li><a href="https://docs.pola.rs/user-guide/misc/comparison/">polars</a>（在单机有限内存的情况下，更高性能的dataframe）</li>
 <li><a href="https://ibis-project.org/why#scaling-up-and-out">ibis</a> ( 在dataframe和SQL之间统一API，一套代码多套backend，方便迁移 )</li>
-<li>sqlglot ( SQL解析，SQL方言转换&lt;比如T- SQL转为Hive SQL等&gt;，日常还可用来做血缘关系分析)</li>
+<li>sqlglot ( SQL解析，SQL方言转换&lt;比如T-SQL转为Hive SQL等&gt;，日常还可用来做血缘关系分析 )</li>
 </ul>
 
 		</div>
