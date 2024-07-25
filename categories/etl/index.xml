@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ETL on 詩和遠方</title>
+    <title>ETL on 人生短短几個秋</title>
     <link>https://vincent-233.github.io/blog/categories/etl/</link>
-    <description>Recent content in ETL on 詩和遠方</description>
+    <description>Recent content in ETL on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 00:07:56 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/etl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/etl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSIS脚本任务中动态引入外部dll</title>
+      <link>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</link>
+      <pubDate>Thu, 25 Jul 2024 16:40:10 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</guid>
+      <description>问题 SSIS Script Task中如果要引入第三方dll，通常可以将dll注册到GAC后引用，只要在本地和服务器上都注册，开发和部署都会比较方便，但注册GA</description>
+    </item>
+    
     <item>
       <title>bcp导入导出报错，字段名含空格</title>
       <link>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>

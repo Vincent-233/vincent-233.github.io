@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Teches on 詩和遠方</title>
+    <title>Teches on 人生短短几個秋</title>
     <link>https://vincent-233.github.io/blog/tech/</link>
-    <description>Recent content in Teches on 詩和遠方</description>
+    <description>Recent content in Teches on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jul 2024 17:26:11 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSIS脚本任务中动态引入外部dll</title>
+      <link>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</link>
+      <pubDate>Thu, 25 Jul 2024 16:40:10 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</guid>
+      <description>问题 SSIS Script Task中如果要引入第三方dll，通常可以将dll注册到GAC后引用，只要在本地和服务器上都注册，开发和部署都会比较方便，但注册GA</description>
+    </item>
+    
     <item>
       <title>DuckDB功能点介绍</title>
       <link>https://vincent-233.github.io/blog/2024/07/13/duckdb_usage/</link>

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckDB功能点介绍 - 詩和遠方</title>
+	<title>DuckDB功能点介绍 - 人生短短几個秋</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,9 +24,9 @@
 	<div class="container header__container">
 		
 	<div class="logo">
-		<a class="logo__link" href="/blog" title="詩和遠方" rel="home">
+		<a class="logo__link" href="/blog" title="人生短短几個秋" rel="home">
 			<div class="logo__item logo__text">
-					<div class="logo__title">詩和遠方</div>
+					<div class="logo__title">人生短短几個秋</div>
 					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
 				</div>
 		</a>
@@ -116,7 +116,7 @@
 </div><div class="content post__content clearfix">
 			<p>前阵子浏览技术文章不经意间看到DuckDB，文章将它描述成为OLAP版本的SQLite，或嵌入式的PgSQL，有众多现代化分析型数据库的高级功能，支持众多API，在python API中还可以不用copy直接用SQL查询Pandas DataFrame。用了几天后发现惊喜有点多，特写此文章进行记录，方便日后查阅。</p>
 <p>本文主要介绍DuckDB对本人日常工作有用的功能点，不做太多展开，官方文档才是最全面和详细的。<br>
-以后如果再写DuckDB相关的博客，将主要做具体应用案例分享。</p>
+以后如果再写DuckDB相关的博客，主题将为具体应用案例分享。</p>
 <h2 id="安装与简单配置">安装与简单配置</h2>
 <p><code>pip install duckdb</code>之后就可直接在python中使用，也可以下载JDBC Driver然后配置在<a href="https://duckdb.org/docs/guides/sql_editors/dbeaver.html">DBeaver</a>等支持JDBC的数据库管理工具中使用。
 既可以连接本地数据库（仅需提供一个path）后使用，也可直接在in memory模式下使用。</p>
@@ -188,9 +188,9 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;zzz&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a <span style="color:#66d9ef">as</span> _struct, a::text <span style="color:#66d9ef">as</span> str <span style="color:#66d9ef">from</span> table_test a;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">row</span>(id,title) <span style="color:#66d9ef">as</span> row_, row_::text <span style="color:#66d9ef">from</span> table_test a; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">row</span>(id,title) <span style="color:#66d9ef">as</span> xrow, xrow::text <span style="color:#66d9ef">from</span> table_test a; 
 </span></span></code></pre></div><h2 id="其它相关有用库">其它相关有用库</h2>
-<p>其它数据分析与处理有关的弹药库：</p>
+<p>其它数据分析与处理相关的弹药库：</p>
 <ul>
 <li><a href="https://docs.pola.rs/user-guide/misc/comparison/">polars</a>（在单机有限内存的情况下，更高性能的dataframe）</li>
 <li><a href="https://ibis-project.org/why#scaling-up-and-out">ibis</a> ( 在dataframe和SQL之间统一API，一套代码多套backend，方便迁移 )</li>
@@ -223,6 +223,12 @@
 			<p class="pager__title">Git常见命令</p>
 		</a>
 	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2024/07/25/ssis_script_task_external_dll/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">SSIS脚本任务中动态引入外部dll</p>
+		</a>
+	</div>
 </nav>
 
 
@@ -240,11 +246,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/25/ssis_script_task_external_dll/">SSIS脚本任务中动态引入外部dll</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/13/duckdb_usage/">DuckDB功能点介绍</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/11/16/git-mac-config-show-branch/">配置Mac/Linux命令行中的Git显示当前Branch名称</a></li>
 		</ul>
 	</div>
 </div>
@@ -259,9 +265,9 @@
 			<li class="widget__item">
 				<a class="widget__link" href="/blog/categories/linux/">Linux</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/python/">python</a></li>
+				<a class="widget__link" href="/blog/categories/misc/">Misc</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E5%85%B6%E5%AE%83/">其它</a></li>
+				<a class="widget__link" href="/blog/categories/python/">python</a></li>
 			<li class="widget__item">
 				<a class="widget__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
 			<li class="widget__item">
@@ -279,6 +285,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/dotnet/" title="dotnet">dotnet</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/duckdb/" title="DuckDB">DuckDB</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
@@ -311,7 +318,7 @@
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2024 詩和遠方.
+			&copy; 2024 人生短短几個秋.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

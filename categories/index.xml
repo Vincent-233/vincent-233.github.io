@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on 詩和遠方</title>
+    <title>Categories on 人生短短几個秋</title>
     <link>https://vincent-233.github.io/blog/categories/</link>
-    <description>Recent content in Categories on 詩和遠方</description>
+    <description>Recent content in Categories on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jul 2024 17:26:11 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ETL</title>
+      <link>https://vincent-233.github.io/blog/categories/etl/</link>
+      <pubDate>Thu, 25 Jul 2024 16:40:10 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/etl/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>python</title>
       <link>https://vincent-233.github.io/blog/categories/python/</link>
@@ -53,15 +62,6 @@
     </item>
     
     <item>
-      <title>ETL</title>
-      <link>https://vincent-233.github.io/blog/categories/etl/</link>
-      <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/etl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>数据结构与算法</title>
       <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 02 Jan 2021 00:34:32 +0000</pubDate>
@@ -80,11 +80,11 @@
     </item>
     
     <item>
-      <title>其它</title>
-      <link>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</link>
+      <title>Misc</title>
+      <link>https://vincent-233.github.io/blog/categories/misc/</link>
       <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/</guid>
+      <guid>https://vincent-233.github.io/blog/categories/misc/</guid>
       <description></description>
     </item>
     

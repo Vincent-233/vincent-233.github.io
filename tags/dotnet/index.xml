@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dotnet on 人生短短几個秋</title>
+    <link>https://vincent-233.github.io/blog/tags/dotnet/</link>
+    <description>Recent content in dotnet on 人生短短几個秋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSIS脚本任务中动态引入外部dll</title>
+      <link>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</link>
+      <pubDate>Thu, 25 Jul 2024 16:40:10 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</guid>
+      <description>问题 SSIS Script Task中如果要引入第三方dll，通常可以将dll注册到GAC后引用，只要在本地和服务器上都注册，开发和部署都会比较方便，但注册GA</description>
+    </item>
+    
+    <item>
+      <title>SQL CLR函数（以正则表达式为例）</title>
+      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
+      <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
+    </item>
+    
+  </channel>
+</rss>
