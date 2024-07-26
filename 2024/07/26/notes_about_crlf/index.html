@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>关于回车换行符 - 人生短短几個秋</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="人生短短几個秋" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">人生短短几個秋</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">关于回车换行符</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-07-26T00:07:19&#43;08:00">2024-07-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/misc/" rel="category">Misc</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#术语">术语</a></li>
+    <li><a href="#默认值">默认值</a></li>
+    <li><a href="#git中的显示与设置">git中的显示与设置</a></li>
+    <li><a href="#查询文件换行符">查询文件换行符</a>
+      <ul>
+        <li><a href="#file命令">file命令</a></li>
+        <li><a href="#od命令">od命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#python对文本换行符的处理">python对文本换行符的处理</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="术语">术语</h2>
+<p>回车（Carriage Return, CR, ASCII 13, 通常表示为<code>\r</code>)<br>
+换行（Line Feed, LF, ASCII 10，通常表示为<code>\n</code>)</p>
+<h2 id="默认值">默认值</h2>
+<p>对于文本文件，Windows默认换行符号为CRLF，类unix系统（Linux，Mac OS 10+）是LF</p>
+<h2 id="git中的显示与设置">git中的显示与设置</h2>
+<p>git diff 中出现的<code>^M</code>符号是回车，即Carriage Return, CR</p>
+<p><code>core.autocrlf</code>是git中的一个设置，支持在不同情况下对换行符自动做转换：</p>
+<ul>
+<li>Windows中的推荐设置为<code>true</code>，这样它会在add/commit时自动将CRLF转换为LF，checkout时自动将LF转为CRLF</li>
+<li>Linux/Mac中的推荐设置为<code>input</code>，这样它会在add/commit时自动将CRLF转换为LF，checkout时不做任何转换</li>
+<li>如果git repo的使用人开发部署都在同一种操作系统中，那可以设置为false，这样它不会做任何转换</li>
+</ul>
+<p>除了用<a href="https://git-scm.com/docs/git-config">git config</a>进行相对全局的设置，也可在Repo级别用<code>.gitattributes</code>文件来指定特定后缀文件的换行符。比如想在checkout时让<code>*.sh</code>文件的换行符号永远为LF，不管在Windows还是Linux/Mac，可以这样设置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Declare files that will always have LF line endings on checkout.</span>
+</span></span><span style="display:flex;"><span>*.sh text eol<span style="color:#f92672">=</span>lf
+</span></span></code></pre></div><h2 id="查询文件换行符">查询文件换行符</h2>
+<p>Windows上查看文件换行符的工具太多，我就不列举了，win11连自带的notepad都支持，更不用说NotePad++和VS Code。在只能SSH连接的Linux系统中，如何查看某文本文件的换行符呢？<br>
+目前知道的可以用以下工具：</p>
+<h3 id="file命令">file命令</h3>
+<p>如果file命令检测到文本不是以UNIX标准的LF符号为换行符，将会在命令结果中报告。例如：</p>
+<blockquote>
+<p>ReadMe.txt: ISO-8859 text, with CRLF line terminators</p>
+</blockquote>
+<h3 id="od命令">od命令</h3>
+<p>od -c 可打印文本中所有字符，包括隐藏字符，例如 <code>od -c my_file.py |head -50</code>
+结果为</p>
+<pre tabindex="0"><code>0000000    i   m   p   o   r   t       o   s  \r  \n   i   m   p   o   r
+0000020    t       d   a   t   e   t   i   m   e  \r  \n  \r  \n   #
+0000040   从  **  **  生  **  **  产  **  **  环  **  **  境  **  **  导
+0000060   **  **  出  **  **  数  **  **  据  **  **  到  **  **   S   3
+0000100   的  **  **  脚  **  **  本  **  **  \r  \n   d   e   f       g
+0000120    e   t   _   p   r   o   _   s   c   r   i   p   t   (   )   :
+0000140   \r  \n                   s   c   r   i   p   t       =       &#34;
+</code></pre><p>从以上结果中可以看到好几处<code>\r\n</code>，所以换行符号为CRLF。</p>
+<h2 id="python对文本换行符的处理">python对文本换行符的处理</h2>
+<p>python读写文本文件存在自动处理规则，依平台而不同，读文件到字符串时统一显示为<code>\n</code>，写文件时只需指定<code>\n</code>，python会自动将其转换为平台特定的换行符。文档原文：</p>
+<blockquote>
+<p>In text mode, the default when reading is to convert platform-specific line endings (\n on Unix, \r\n on Windows) to just \n. When writing in text mode, the default is to convert occurrences of \n back to platform-specific line endings. This behind-the-scenes modification to file data is fine for text files, but will corrupt binary data like that in JPEG or EXE files. Be very careful to use binary mode when reading and writing such files.</p>
+</blockquote>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/python/" rel="tag">python</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/git/" rel="tag">git</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2024/07/25/ssis_script_task_external_dll/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">SSIS脚本任务中动态引入外部dll</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2024 人生短短几個秋.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

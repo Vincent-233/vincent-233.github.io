@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Misc</title>
+      <link>https://vincent-233.github.io/blog/categories/misc/</link>
+      <pubDate>Fri, 26 Jul 2024 00:07:19 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/categories/misc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>ETL</title>
       <link>https://vincent-233.github.io/blog/categories/etl/</link>
@@ -76,15 +85,6 @@
       <pubDate>Sat, 17 Aug 2019 20:32:37 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/blog/categories/bigdata/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Misc</title>
-      <link>https://vincent-233.github.io/blog/categories/misc/</link>
-      <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/categories/misc/</guid>
       <description></description>
     </item>
     

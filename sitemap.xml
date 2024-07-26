@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2024-07-25T16:40:10+08:00</lastmod>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/git/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/misc/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/python/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</loc>
+    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/dotnet/</loc>
     <lastmod>2024-07-25T16:40:10+08:00</lastmod>
@@ -17,22 +38,10 @@
     <loc>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</loc>
     <lastmod>2024-07-25T16:40:10+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2024-07-25T16:40:10+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2024-07-25T16:40:10+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
-    <lastmod>2024-07-25T16:40:10+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tags/duckdb/</loc>
     <lastmod>2024-07-13T17:26:11+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2024/07/13/duckdb_usage/</loc>
-    <lastmod>2024-07-13T17:26:11+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/python/</loc>
     <lastmod>2024-07-13T17:26:11+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/python/</loc>
@@ -49,9 +58,6 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</loc>
     <lastmod>2023-12-19T00:11:23+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/git/</loc>
-    <lastmod>2023-12-17T21:40:52+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</loc>
     <lastmod>2023-12-17T21:40:52+08:00</lastmod>
@@ -270,9 +276,6 @@
     <lastmod>2019-06-17T22:18:02+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/excel/</loc>
-    <lastmod>2019-06-15T01:46:26+00:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/misc/</loc>
     <lastmod>2019-06-15T01:46:26+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/vba/</loc>

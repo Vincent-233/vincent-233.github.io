@@ -6,7 +6,16 @@
     <description>Recent content on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于回车换行符</title>
+      <link>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</link>
+      <pubDate>Fri, 26 Jul 2024 00:07:19 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</guid>
+      <description>术语 回车（Carriage Return, CR, ASCII 13, 通常表示为\r) 换行（Line Feed, LF, ASCII 10，通常表示为\n) 默认值 对于文本文件，Windows默认换行符号为</description>
+    </item>
+    
     <item>
       <title>SSIS脚本任务中动态引入外部dll</title>
       <link>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</link>

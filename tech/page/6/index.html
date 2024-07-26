@@ -95,6 +95,26 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/blog/2018/05/21/80387148/" rel="bookmark">
+			SQL Server分区表实践
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-05-21T00:38:33Z">2018-05-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		建立分区表的步骤： 新建文件组（FileGroups） 新建用于承载具体分区的文件组，数据库默认有只有一个Primary文件组。 也可以在单个文件...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2018/05/21/80387148/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/blog/2018/05/01/80154338/" rel="bookmark">
 			关于数据库隔离级别-快照(SnapShot)
 			</a>
@@ -371,26 +391,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2014/07/26/38146339/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2014/07/26/38145329/" rel="bookmark">
-			ORACLE列值合并
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-07-26T07:46:40Z">2014-07-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&#39;北京&#39; FROM dual UNION ALL SELECT...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2014/07/26/38145329/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -415,11 +415,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/26/notes_about_crlf/">关于回车换行符</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/25/ssis_script_task_external_dll/">SSIS脚本任务中动态引入外部dll</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/13/duckdb_usage/">DuckDB功能点介绍</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_alias_setup/">Git alias设置</a></li>
 		</ul>
 	</div>
 </div>
