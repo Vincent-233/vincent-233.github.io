@@ -102,7 +102,8 @@
 		<nav id="TableOfContents">
   <ul>
     <li><a href="#选项设置-options">选项设置 (Options)</a></li>
-    <li><a href="#查询快捷键-query-shortcuts">查询快捷键 (Query Shortcuts)</a></li>
+    <li><a href="#快捷键-查询-query-shortcuts">快捷键-查询 (Query Shortcuts)</a></li>
+    <li><a href="#快捷键---其它">快捷键 - 其它</a></li>
     <li><a href="#solution--project视图">Solution &amp; Project视图</a></li>
     <li><a href="#code-snippet-manager">Code Snippet Manager</a></li>
     <li><a href="#search-in-files">Search in files</a></li>
@@ -125,9 +126,17 @@
 设置入口见上面第一张图右上角，这样做的一个好处就是查询表数据时，文本结果中的表头都用逗号分隔，复制后可直接用在Select或Insert语句中。<br>
 <img src="https://s2.loli.net/2023/12/25/phnsGZgdH5FQN3k.png" alt=""></li>
 </ul>
-<h2 id="查询快捷键-query-shortcuts">查询快捷键 (Query Shortcuts)</h2>
+<h2 id="快捷键-查询-query-shortcuts">快捷键-查询 (Query Shortcuts)</h2>
 <p>设置了查询快捷键之后，按快捷键就会自动执行SQL语句，比如选中一个表名<code>table_a</code>，按<code>CTRL+3</code>就会自动执行<code>select top 1000 * from table_a</code>。以下是我设置的查询快捷键，建议根据实际使用频率进行设置：<br>
 <img src="https://s2.loli.net/2023/12/25/4T7YZlu8NxLjOAr.png" alt=""></p>
+<h2 id="快捷键---其它">快捷键 - 其它</h2>
+<p>和查询无关的，个人认为比较有用的快捷键:</p>
+<ul>
+<li>光标移动到匹配元素: <code>CTRL + ]</code> ( 比如移到匹配的括号, begin/end, begin try/end try )</li>
+<li>光标移动到上次编辑的位置: <code>CTRL + SHIFT + backspace</code></li>
+<li>注释: <code>CTRL + K, CTRL + C</code> ( comment )</li>
+<li>取消注释: <code>CTRL + K, CTRL + U</code> ( uncomment )</li>
+</ul>
 <h2 id="solution--project视图">Solution &amp; Project视图</h2>
 <p>不是只有写.Net/JAVA等才需要新建solution/project，写T-SQL也可以，这样可以更好地组织和保存代码，而不是每次都新建一个查询窗口，查完就关闭丢弃。新建项目菜单路径： File - New - Project， 默认会创建一个包含一个Project的Solution，后续可以新加其它Project  <br>
 <img src="https://s2.loli.net/2023/12/25/MGsLk9DYFtUClnN.png" alt=""></p>
