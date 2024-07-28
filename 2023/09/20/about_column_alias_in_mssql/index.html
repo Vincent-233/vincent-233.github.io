@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>关于SELECT语句的别名风格 - 人生短短几個秋</title>
+	<title>关于SQL Server SELECT语句列别名风格 - 人生短短几個秋</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +90,7 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">关于SELECT语句的别名风格</h1>
+			<h1 class="post__title">关于SQL Server SELECT语句列别名风格</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-09-20T00:55:30&#43;08:00">2023-09-20</time></div></div>
@@ -111,7 +111,7 @@
 </nav>
 	</div>
 </div><div class="content post__content clearfix">
-			<p>注：每个人都有自己的偏好，本文仅为个人观点。</p>
+			<p>注：每个人都有自己的偏好，本文仅为个人观点，且仅针对SQL Server。</p>
 <p>公司现存的代码规范文档推荐在SELECT语句中用<code>column_alias = column_name</code>的形式。<br>
 在我看来，这个别名风格太过古老，众所周知，MSSQL最开始是从Sybase SQL Server分化出来的，那时就支持上述alias风格，微软应该是为了兼容旧版本才继续支持此风格，但并不代表它推荐此风格。</p>
 <p>在微软关于SQL Server的<a href="https://learn.microsoft.com/en-us/sql/t-sql/queries/select-transact-sql?view=sql-server-ver16#b-using-select-with-column-headings-and-calculations">官方文档</a>中，很少看到使用这种别名风格的示例代码。<br>
