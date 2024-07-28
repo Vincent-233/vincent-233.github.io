@@ -108,6 +108,11 @@
     <li><a href="#需求三查询各人员所在层次">需求三：查询各人员所在层次</a></li>
     <li><a href="#需求四查询tom管理-的人数">需求四：查询TOM管理 的人数</a></li>
     <li><a href="#需求五求每个人的管理人数">需求五：求每个人的管理人数</a></li>
+    <li><a href="#reference">reference</a>
+      <ul>
+        <li><a href="#伪代码和语义">伪代码和语义</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 	</div>
@@ -144,7 +149,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</span></span></code></pre></div><p>结果：</p>
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -179,7 +184,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</span></span></code></pre></div><p>结果：</p>
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -212,7 +217,7 @@
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname,[<span style="color:#66d9ef">Level</span>] <span style="color:#66d9ef">FROM</span> cte
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Level</span>]
-</span></span></code></pre></div><p>结果：</p>
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -282,7 +287,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 因为初始查询中每个员工都有初始行，所以最后结果要减去 1
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> Empname,<span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> [Mrg_Count]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cte <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> Empname
-</span></span></code></pre></div><p>结果：</p>
+</span></span></code></pre></div><p>结果：  </p>
 <table>
 <thead>
 <tr>
@@ -325,6 +330,28 @@
 </tr>
 </tbody>
 </table>
+<h2 id="reference">reference</h2>
+<p>MSDN文档：<a href="https://learn.microsoft.com/zh-cn/previous-versions/sql/sql-server-2008-r2/ms186243(v=sql.105)?redirectedfrom=MSDN">使用公用表表达式的递归查询</a></p>
+<h3 id="伪代码和语义">伪代码和语义</h3>
+<p>递归 CTE 结构必须至少包含一个定位点成员和一个递归成员。以下伪代码显示了包含一个定位点成员和一个递归成员的简单递归 CTE 的组件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> cte_name ( <span style="color:#66d9ef">column_name</span> [,...n] )
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>	CTE_query_definition <span style="color:#960050;background-color:#1e0010">–</span><span style="color:#f92672">-</span> Anchor member <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">defined</span>.
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
+</span></span><span style="display:flex;"><span>	CTE_query_definition <span style="color:#960050;background-color:#1e0010">–</span><span style="color:#f92672">-</span> <span style="color:#66d9ef">Recursive</span> member <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">defined</span> <span style="color:#66d9ef">referencing</span> cte_name.
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Statement using the CTE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cte_name
+</span></span></code></pre></div><p>递归执行的语义如下：</p>
+<ol>
+<li>将 CTE 表达式拆分为定位点成员和递归成员。</li>
+<li>运行定位点成员，创建第一个调用或基准结果集 (T0)。</li>
+<li>运行递归成员，将 Ti 作为输入，将 Ti+1 作为输出。(注意输入只是Ti, 不是T0到Ti的合并结果，否则会有重复数据)</li>
+<li>重复步骤 3，直到返回空集。</li>
+<li>返回结果集。这是对 T0 到 Tn 执行 UNION ALL 的结果。</li>
+</ol>
 
 		</div>
 		<footer class="post__footer">
@@ -359,86 +386,7 @@
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
-	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
-		<label>
-			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
-		</label>
-		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
-	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/26/notes_about_crlf/">关于回车换行符</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/25/ssis_script_task_external_dll/">SSIS脚本任务中动态引入外部dll</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/13/duckdb_usage/">DuckDB功能点介绍</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/19/ssms_tips/">提升SSMS使用效率的一些Tips</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2023/12/17/git_notes_frequently_used_cmd/">Git常见命令</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/bigdata/">BigData</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/etl/">ETL</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/linux/">Linux</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/misc/">Misc</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/python/">python</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/dotnet/" title="dotnet">dotnet</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/duckdb/" title="DuckDB">DuckDB</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mac/" title="Mac">Mac</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mssql/" title="MSSQL">MSSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/oracle/" title="ORACLE">ORACLE</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pandas/" title="pandas">pandas</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/postgresql/" title="PostgreSQL">PostgreSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/powershell/" title="powershell">powershell</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/selenium/" title="selenium">selenium</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/spark/" title="spark">spark</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssh/" title="SSH">SSH</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssis/" title="SSIS">SSIS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssms/" title="SSMS">SSMS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/t-sql/" title="T-SQL">T-SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ubuntu/" title="ubuntu">ubuntu</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vba/" title="VBA">VBA</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vim/" title="vim">vim</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/virtual-box/" title="virtual box">virtual box</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/windows/" title="windows">windows</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">

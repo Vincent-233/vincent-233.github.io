@@ -6,7 +6,16 @@
     <description>Recent content in T-SQL on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 11:00:05 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/t-sql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Jul 2024 10:25:50 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/t-sql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一些有用的T-SQL功能点</title>
+      <link>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</link>
+      <pubDate>Sat, 27 Jul 2024 10:25:50 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</guid>
+      <description>不同的SQL引擎在一定程度上支持SQL标准之外，还有一些自己特有的语法，一般称之为SQL方言，这里记录一下我觉得比较有用却没发现被广泛使用的</description>
+    </item>
+    
     <item>
       <title>T-SQL聚合拼接或求和，不可靠（SELECT @x = @x &#43; ...）</title>
       <link>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</link>

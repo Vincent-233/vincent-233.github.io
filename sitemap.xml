@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/t-sql/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tech/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2024-07-27T10:25:50+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/git/</loc>
     <lastmod>2024-07-26T00:07:19+08:00</lastmod>
@@ -12,15 +33,6 @@
     <lastmod>2024-07-26T00:07:19+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/python/</loc>
-    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2024-07-26T00:07:19+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</loc>
@@ -46,9 +58,6 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/python/</loc>
     <lastmod>2024-07-13T17:26:11+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
-    <lastmod>2023-12-19T00:11:23+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/ssms/</loc>
     <lastmod>2023-12-19T00:11:23+08:00</lastmod>
@@ -92,9 +101,6 @@
     <loc>https://vincent-233.github.io/blog/2023/09/15/mssql_2016_to_2019_new_feature/</loc>
     <lastmod>2023-09-15T22:32:38+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2023-09-15T22:32:38+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</loc>
     <lastmod>2023-08-21T00:02:42+08:00</lastmod>
   </url><url>
@@ -112,9 +118,6 @@
   </url><url>
     <loc>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</loc>
     <lastmod>2023-02-10T00:07:56+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/t-sql/</loc>
-    <lastmod>2022-12-04T11:00:05+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</loc>
     <lastmod>2022-12-04T11:00:05+08:00</lastmod>
@@ -477,6 +480,9 @@
     <lastmod>2013-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/1/01/01/</loc>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/readme/</loc>
+    <priority>0</priority>
   </url><url>
     <loc>https://vincent-233.github.io/blog/archive/</loc>
   </url><url>

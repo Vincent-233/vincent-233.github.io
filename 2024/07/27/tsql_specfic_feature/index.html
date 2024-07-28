@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>一些有用的T-SQL功能点 - 人生短短几個秋</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/blog/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/blog/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/blog" title="人生短短几個秋" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">人生短短几個秋</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/blog/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">一些有用的T-SQL功能点</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2024-07-27T10:25:50&#43;08:00">2024-07-27</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#update语句中对变量赋值--update-variable-">Update语句中对变量赋值 ( update variable )</a>
+      <ul>
+        <li><a href="#应用案例1---从表中获取最新序列号">应用案例1 - 从表中获取最新序列号</a></li>
+        <li><a href="#应用案例2---running-total">应用案例2 - running total</a></li>
+      </ul>
+    </li>
+    <li><a href="#基于子查询的数据更新--updatedeletemerge-based-on-sub-query-">基于子查询的数据更新 ( update/delete/merge based on sub-query )</a></li>
+    <li><a href="#dmt-output子句">DMT Output子句</a></li>
+    <li><a href="#temp-sp">Temp SP</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>不同的SQL引擎在一定程度上支持SQL标准之外，还有一些自己特有的语法，一般称之为SQL方言，这里记录一下我觉得比较有用却没发现被广泛使用的SQL Server方言。</p>
+<p>开发者通常只会用他们熟悉的技术和功能点，而被大多数开发者所知道的功能点，基本都是比较基础和简单的功能点，如果在实现某些功能时只用最基础的功能点，代码将会显示非常冗长繁琐，下面介绍的这些语法特性，可以让开发者用更简洁的代码实现某些特定功能。</p>
+<h2 id="update语句中对变量赋值--update-variable-">Update语句中对变量赋值 ( update variable )</h2>
+<h3 id="应用案例1---从表中获取最新序列号">应用案例1 - 从表中获取最新序列号</h3>
+<p>低于SQL Server 2016的版本不支持[Sequence]类型(<a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-sequence-transact-sql?view=sql-server-ver15">https://learn.microsoft.com/en-us/sql/t-sql/statements/create-sequence-transact-sql?view=sql-server-ver15</a>)，那个年代想从数据库中获取自增序列号，通常的做法是将它们存在一张表中，每次Update之后获取。</p>
+<p>准备数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE TestDB
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> dbo.fact_key;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.fact_key(<span style="color:#66d9ef">key_type</span> VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>, key_value int );
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> dbo.fact_key(<span style="color:#66d9ef">key_type</span>,key_value) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Type-1&#39;</span>,<span style="color:#ae81ff">1</span>), (<span style="color:#e6db74">&#39;Type-2&#39;</span>,<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div><p>如果我想要获取Type-1的下个序列号，常规获取方法是先Update再Select：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- common method - two separated update and select
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">type</span> VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Type-1&#39;</span>, <span style="color:#f92672">@</span>next_key_value int;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> dbo.fact_key <span style="color:#66d9ef">SET</span> key_value <span style="color:#f92672">=</span> key_value <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">key_type</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">type</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>next_key_value <span style="color:#f92672">=</span> key_value <span style="color:#66d9ef">FROM</span> dbo.fact_key <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">key_type</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">type</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>next_key_value;
+</span></span></code></pre></div><p>其实可以Update之后直接获取值到变量:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- new method - update variable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">type</span> VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Type-1&#39;</span>, <span style="color:#f92672">@</span>next_key_value int;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> dbo.fact_key <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>next_key_value <span style="color:#f92672">=</span> key_value <span style="color:#f92672">=</span> key_value <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">key_type</span> <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">type</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>next_key_value;
+</span></span></code></pre></div><h3 id="应用案例2---running-total">应用案例2 - running total</h3>
+<p>running total通常用窗口函数<code>sum over(order by xxx)</code>或自连接等方法实现，其实还有一种特别取巧但不推荐在生产环境中使用的方法，要用到update variable语法。举这个例子只是为了说明这个语法的用法，本人也并不推荐在项目的生产环境中用它来实现running total。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- prapare data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> dbo.test_sum_total;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.test_sum_total(xvalue INT,running_total INT);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> dbo.test_sum_total(xvalue)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> TOP (<span style="color:#ae81ff">100</span>) <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> sys.all_columns;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- update running total
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>total INT <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> dbo.test_sum_total <span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>total <span style="color:#f92672">=</span> running_total <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>total <span style="color:#f92672">+</span> xvalue;
+</span></span></code></pre></div><p>注：结果的正确性非常依赖具体的物理执行计划，和我另外一个笔记中提到的一个语法点类似<a href="https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/">T-SQL聚合拼接或求和，不可靠（SELECT @x = @x + &hellip;）</a></p>
+<h2 id="基于子查询的数据更新--updatedeletemerge-based-on-sub-query-">基于子查询的数据更新 ( update/delete/merge based on sub-query )</h2>
+<p>这个功能点非常适合在update/delete/merge之前先用Select语句将更新前后的数据显示出来，检查之后直接将select语句作为子查询进行更新。支持以子查询窗口函数结果为条件进行过滤，典型应用场景为数据去重：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- prepare data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> dbo.test_remove_duplicate;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.test_remove_duplicate(xvalue VARCHAR(<span style="color:#ae81ff">200</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span>  dbo.test_remove_duplicate(xvalue) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;a&#39;</span>),(<span style="color:#e6db74">&#39;a&#39;</span>),(<span style="color:#e6db74">&#39;a&#39;</span>),(<span style="color:#e6db74">&#39;b&#39;</span>),(<span style="color:#e6db74">&#39;b&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- delete duplicated data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> xvalue,ROW_NUMBER() OVER(PARTITION <span style="color:#66d9ef">BY</span> xvalue <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">NULL</span>)) <span style="color:#66d9ef">AS</span> rn 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> dbo.test_remove_duplicate
+</span></span><span style="display:flex;"><span> )
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> cte <span style="color:#66d9ef">WHERE</span> rn <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h2 id="dmt-output子句">DMT Output子句</h2>
+<p>被delete/update/insert/merge语句删除或新增加的记录可通过Output关键字输出，通过inserted和deleted这两个固定的表别名分别选出被新增和删除的记录。非常适合审计、归档等应用场景。merge配合output可以很方便地实现<a href="https://www.sqlservercentral.com/articles/slowly-changing-dimensions-using-t-sql-merge">SCD</a>功能。</p>
+<h2 id="temp-sp">Temp SP</h2>
+<p>是的，SQL Server除了支持临时表，还支持临时存储过程，方便在权限受限无法新建SP时用临时SP实现代码复用。</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2024/07/26/notes_about_crlf/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">关于回车换行符</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2024 人生短短几個秋.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/blog/js/menu.js"></script>
+</body>
+</html>

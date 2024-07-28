@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Jul 2024 10:25:50 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MSSQL</title>
+      <link>https://vincent-233.github.io/blog/tags/mssql/</link>
+      <pubDate>Sat, 27 Jul 2024 10:25:50 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/mssql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>T-SQL</title>
+      <link>https://vincent-233.github.io/blog/tags/t-sql/</link>
+      <pubDate>Sat, 27 Jul 2024 10:25:50 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/tags/t-sql/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>GIT</title>
       <link>https://vincent-233.github.io/blog/tags/git/</link>
@@ -53,15 +71,6 @@
     </item>
     
     <item>
-      <title>MSSQL</title>
-      <link>https://vincent-233.github.io/blog/tags/mssql/</link>
-      <pubDate>Tue, 19 Dec 2023 00:11:23 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/tags/mssql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>SSMS</title>
       <link>https://vincent-233.github.io/blog/tags/ssms/</link>
       <pubDate>Tue, 19 Dec 2023 00:11:23 +0800</pubDate>
@@ -103,15 +112,6 @@
       <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
       
       <guid>https://vincent-233.github.io/blog/tags/ssh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>T-SQL</title>
-      <link>https://vincent-233.github.io/blog/tags/t-sql/</link>
-      <pubDate>Sun, 04 Dec 2022 11:00:05 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/tags/t-sql/</guid>
       <description></description>
     </item>
     

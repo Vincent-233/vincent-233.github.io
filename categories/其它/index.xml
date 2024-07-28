@@ -6,7 +6,16 @@
     <description>Recent content in 其它 on 詩和遠方</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Jun 2019 01:46:26 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Sep 2022 18:59:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%85%B6%E5%AE%83/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自动为git commit message添加JIRA号</title>
+      <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>
+      <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
+      <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
+    </item>
+    
     <item>
       <title>用VBA将xml格式的excel另存为xlsx</title>
       <link>https://vincent-233.github.io/blog/2019/06/15/92030849/</link>

@@ -6,7 +6,16 @@
     <description>Recent content on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Jul 2024 10:25:50 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一些有用的T-SQL功能点</title>
+      <link>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</link>
+      <pubDate>Sat, 27 Jul 2024 10:25:50 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</guid>
+      <description>不同的SQL引擎在一定程度上支持SQL标准之外，还有一些自己特有的语法，一般称之为SQL方言，这里记录一下我觉得比较有用却没发现被广泛使用的</description>
+    </item>
+    
     <item>
       <title>关于回车换行符</title>
       <link>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</link>
@@ -1067,6 +1076,18 @@
       
       <guid>https://vincent-233.github.io/blog/1/01/01/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://vincent-233.github.io/blog/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/readme/</guid>
+      <description>Run all commands below under powershell or git-bash windows
+Install Hugo ( Windows ) Step 1, Install choco Step 2, Install Hugo choco install hugo-extended -confirm May need administrator mode to run above command. To verify installation: hugo version
+Set environment variable Add an environment variable hugo_site_path with the value of the path of current repo, add it to PATH as well.
+Hugo local server mode cd $env:hugo_site_path ## if in powershell cd $hugo_site_path ## if in git hugo server Folder structure I isolate the markdown contents and the output website files for the sake of easier maintenance.</description>
     </item>
     
     <item>
