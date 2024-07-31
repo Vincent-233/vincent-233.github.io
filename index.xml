@@ -1079,18 +1079,6 @@
     </item>
     
     <item>
-      <title></title>
-      <link>https://vincent-233.github.io/blog/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/readme/</guid>
-      <description>Run all commands below under powershell or git-bash windows
-Install Hugo ( Windows ) Step 1, Install choco Step 2, Install Hugo choco install hugo-extended -confirm May need administrator mode to run above command. To verify installation: hugo version
-Set environment variable Add an environment variable hugo_site_path with the value of the path of current repo, add it to PATH as well.
-Hugo local server mode cd $env:hugo_site_path ## if in powershell cd $hugo_site_path ## if in git hugo server Folder structure I isolate the markdown contents and the output website files for the sake of easier maintenance.</description>
-    </item>
-    
-    <item>
       <title>Archives</title>
       <link>https://vincent-233.github.io/blog/archive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

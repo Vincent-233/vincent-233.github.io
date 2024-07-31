@@ -250,15 +250,15 @@ Hello, Susan
 </code></pre>
 <h3 id="被装饰函数的元数据更新">被装饰函数的元数据更新</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>help(say_hello_to)
-</span></span></code></pre></div><pre><code>Help on function say_hello_to in module __main__:  
-say_hello_to(name)  
+</span></span></code></pre></div><pre><code>Help on function wrapper_do_twice in module decorators:
+wrapper_do_twice(*args, **kwargs)
 </code></pre>
 <p>可以发现查看say_hello_to函数相关信息（元数据）时，指示为装饰器函数内的wrapper_do_twice，显然这不是我们想要的，如何改进呢？<br><br>
 本质上需要更新函数的<code>__name__、__doc__、__module__</code>属性，让其指向原函数，python有个惯用手法来解决此问题，那就是用functools模块的wrap方法：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_twice_parms</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_do_twice</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
 </span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
@@ -282,7 +282,7 @@ say_hello_to(name)
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_decorator</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Do something before</span>
 </span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
@@ -296,7 +296,7 @@ say_hello_to(name)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timer</span>(func):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;打印函数执行的时长&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_timer</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
 </span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
 </span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)

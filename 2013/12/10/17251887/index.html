@@ -149,7 +149,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Empid <span style="color:#f92672">=</span> b.Mgrid
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</span></span></code></pre></div><p>结果：  </p>
+</span></span></code></pre></div><p>结果：</p>
 <table>
 <thead>
 <tr>
@@ -184,7 +184,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">FROM</span> cte a <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> org b <span style="color:#66d9ef">ON</span> a.Mgrid <span style="color:#f92672">=</span> b.Empid
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname <span style="color:#66d9ef">FROM</span> cte;
-</span></span></code></pre></div><p>结果：  </p>
+</span></span></code></pre></div><p>结果：</p>
 <table>
 <thead>
 <tr>
@@ -217,7 +217,7 @@
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> Empname,[<span style="color:#66d9ef">Level</span>] <span style="color:#66d9ef">FROM</span> cte
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> [<span style="color:#66d9ef">Level</span>]
-</span></span></code></pre></div><p>结果：  </p>
+</span></span></code></pre></div><p>结果：</p>
 <table>
 <thead>
 <tr>
@@ -287,7 +287,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 因为初始查询中每个员工都有初始行，所以最后结果要减去 1
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> Empname,<span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> [Mrg_Count]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> cte <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> Empname
-</span></span></code></pre></div><p>结果：  </p>
+</span></span></code></pre></div><p>结果：</p>
 <table>
 <thead>
 <tr>

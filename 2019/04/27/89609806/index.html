@@ -128,7 +128,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件目录</span>
 </span></span><span style="display:flex;"><span>$path = <span style="color:#e6db74">&#39;D:\KS\2019-BP\KS-Code&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 获取文件名</span>
-</span></span><span style="display:flex;"><span>$dir = invoke-expression <span style="color:#e6db74">&#34;dir $path *.sql&#34;</span>
+</span></span><span style="display:flex;"><span>$dir = invoke-expression <span style="color:#e6db74">&#34;dir </span>$path<span style="color:#e6db74"> *.sql&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span>($_ <span style="color:#66d9ef">in</span> $dir)
 </span></span><span style="display:flex;"><span>{
@@ -139,7 +139,7 @@
 </span></span><span style="display:flex;"><span>		$newpath = <span style="color:#e6db74">&#39;&#34;&#39;</span> + $path + <span style="color:#e6db74">&#39;\增加字段\&#39;</span> + $_.Name + <span style="color:#e6db74">&#39;&#34;&#39;</span>
 </span></span><span style="display:flex;"><span>		
 </span></span><span style="display:flex;"><span>		<span style="color:#75715e"># svn重命名命令： svn rename CURR_PATH NEW_PATH</span>
-</span></span><span style="display:flex;"><span>		$cmd = <span style="color:#e6db74">&#34;svn rename $oldpath $newpath&#34;</span>
+</span></span><span style="display:flex;"><span>		$cmd = <span style="color:#e6db74">&#34;svn rename </span>$oldpath<span style="color:#e6db74"> </span>$newpath<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>		
 </span></span><span style="display:flex;"><span>		<span style="color:#75715e"># 调用命令</span>
 </span></span><span style="display:flex;"><span>		invoke-expression $cmd
