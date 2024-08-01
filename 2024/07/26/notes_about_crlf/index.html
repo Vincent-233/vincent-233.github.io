@@ -134,8 +134,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Declare files that will always have LF line endings on checkout.</span>
 </span></span><span style="display:flex;"><span>*.sh text eol<span style="color:#f92672">=</span>lf
 </span></span></code></pre></div><h2 id="查询文件换行符">查询文件换行符</h2>
-<p>Windows上查看文件换行符的工具太多，我就不列举了，win11连自带的notepad都支持，更不用说NotePad++和VS Code。在只能SSH连接的Linux系统中，如何查看某文本文件的换行符呢？<br>
-目前知道的可以用以下工具：</p>
+<p>Windows上查看文件换行符的工具太多，我就不列举了，win11连自带的notepad都支持，更不用说NotePad++和VS Code。在只能SSH连接的Linux系统中，如何查看某文本文件的换行符呢？目前知道的可以用以下工具：</p>
 <h3 id="file命令">file命令</h3>
 <p>如果file命令检测到文本不是以UNIX标准的LF符号为换行符，将会在命令结果中报告。例如：</p>
 <blockquote>
