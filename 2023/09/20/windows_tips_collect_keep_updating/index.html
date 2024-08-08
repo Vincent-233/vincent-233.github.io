@@ -160,9 +160,11 @@
 </span></span></code></pre></div><p>此命令显示所查用户的详细信息，比如账户状态，密码上次修改日期和过期日期等，顺便也有所在Group的信息，但如果group名太长可能会被截断。</p>
 <h3 id="查看组成员">查看组成员</h3>
 <p><strong>方法一： net group / net localgroup 命令</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net localgroup &lt;group_name&gt; /domain
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net localgroup &lt;group_name&gt;
+</span></span><span style="display:flex;"><span>net localgroup &lt;group_name&gt; /domain
 </span></span><span style="display:flex;"><span>net group &lt;group_name&gt; /domain
-</span></span></code></pre></div><p>注意：group_name不要加上domain，比如 xy\account123，只写account123即可</p>
+</span></span></code></pre></div><p>比如 <code>net localgroup administrators</code> 可显示本地管理员组成员。 <br>
+注意：group_name不要加上domain，比如 xy\account123，只写account123即可</p>
 <p><strong>方法二：Search Active Directory图片界面搜索</strong>   <br>
 打开“资源管理器”，选择“Network”菜单下的Search Active Directory后直接搜索： <br>
 <img src="https://s2.loli.net/2023/12/16/ozUOm93YhwHEk2X.png" alt=""></p>
