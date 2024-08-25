@@ -103,13 +103,20 @@
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
-    <li><a href="#update语句中对变量赋值--update-variable-">Update语句中对变量赋值 ( update variable )</a>
+    <li><a href="#在update语句中对变量赋值--update-variable-">在UPDATE语句中对变量赋值 ( update variable )</a>
       <ul>
         <li><a href="#应用案例1---从表中获取最新序列号">应用案例1 - 从表中获取最新序列号</a></li>
         <li><a href="#应用案例2---running-total">应用案例2 - running total</a></li>
       </ul>
     </li>
     <li><a href="#基于子查询的数据更新--updatedeletemerge-based-on-sub-query-">基于子查询的数据更新 ( update/delete/merge based on sub-query )</a></li>
+    <li><a href="#apply-操作符">APPLY 操作符</a>
+      <ul>
+        <li><a href="#应用举例1---top-n-per-group">应用举例1 - top N per group</a></li>
+        <li><a href="#应用举例2---unpivot-列转行逆透视">应用举例2 - unpivot (列转行/逆透视)</a></li>
+        <li><a href="#应用举例3---columnreuse-of-column-aliases-列别名复用">应用举例3 - column（reuse of column aliases, 列别名复用）</a></li>
+      </ul>
+    </li>
     <li><a href="#dml-output子句">DML Output子句</a></li>
     <li><a href="#temp-sp">Temp SP</a></li>
   </ul>
@@ -118,13 +125,12 @@
 </div><div class="content post__content clearfix">
 			<p>不同的SQL引擎在一定程度上支持SQL标准之外，还有一些自己的特有语法，一般称为SQL方言，本文主要记录我觉得比较有用的“冷门”SQL Server方言。</p>
 <p>开发者通常只会用他们熟悉的技术和功能点，而被大多数开发者所知道的功能点，基本都是比较基础和简单的功能点，如果在实现某些功能时只用最基础的功能点，代码将会显示非常冗长繁琐，下面介绍的这些语法特性，可以让开发者用更简洁的代码实现某些特定功能。</p>
-<h2 id="update语句中对变量赋值--update-variable-">Update语句中对变量赋值 ( update variable )</h2>
+<h2 id="在update语句中对变量赋值--update-variable-">在UPDATE语句中对变量赋值 ( update variable )</h2>
 <h3 id="应用案例1---从表中获取最新序列号">应用案例1 - 从表中获取最新序列号</h3>
 <p>低于SQL Server 2016的版本不支持<a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-sequence-transact-sql?view=sql-server-ver15">Sequence类型</a>，如果想从数据库中获取全局自增序列号，通常的做法是将它们存在一张表中，每次Update之后获取，典型代码如下：</p>
 <p>准备数据：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE TestDB
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> dbo.fact_key;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dbo.fact_key(<span style="color:#66d9ef">key_type</span> VARCHAR(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>, key_value int );
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
@@ -167,7 +173,45 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> dbo.test_remove_duplicate
 </span></span><span style="display:flex;"><span> )
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> cte <span style="color:#66d9ef">WHERE</span> rn <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><h2 id="dml-output子句">DML Output子句</h2>
+</span></span></code></pre></div><h2 id="apply-操作符">APPLY 操作符</h2>
+<p>cross apply以及相关的outer apply是T-SQL支持的强大功能，用它写的query一般用传统的join也可以实现，但在某些应用场景下across apply的写法可能会更好理解一些。</p>
+<p><code>(row_set) cross apply (sub_query_or_table_function)</code>可理解为：对输入集合中的每一行，进行子查询或表函数查询（可引用输入集合中的列），然后将结果集进行合并。类似于以下伪代码：</p>
+<pre tabindex="0"><code>result_set = []
+foreach row in row_set:
+    result_set.add(sub_query_or_table_function(row))
+</code></pre><p>其它数据库后来也支持这个功能，比如oracle为了兼容C#的LINQ，加入了对cross apply和outer apply的支持，Mysql，PgSQL，Spark SQL，DuckDB等有个LATERAL关键字也支持类似的处理逻辑。</p>
+<h3 id="应用举例1---top-n-per-group">应用举例1 - top N per group</h3>
+<p>假如有表 <br>
+sales.customers (custid int primary key, custname varchar(50), city varchar(20))
+sales.orders(orderid int primary key, custid int, orderdate date, shipname varchar(40))
+现要获取每个customer最新的一笔订单情况，除了用窗口函数之外，也可以用cross apply</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.custid, a.custname, b.orderid, b.orderdate, b.empid
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.Customers a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> apply (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> TOP (<span style="color:#ae81ff">1</span>) orderid, orderdate, empid
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> Sales.Orders
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">WHERE</span> custid <span style="color:#f92672">=</span> a.custid 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> orderdate <span style="color:#66d9ef">DESC</span>, orderid <span style="color:#66d9ef">DESC</span>
+</span></span><span style="display:flex;"><span>) b
+</span></span></code></pre></div><h3 id="应用举例2---unpivot-列转行逆透视">应用举例2 - unpivot (列转行/逆透视)</h3>
+<p>见另一篇笔记 <a href="https://vincent-233.github.io/blog/2019/07/20/96520306/">SQL Server用Cross Apply、Cross Join实现列转行</a></p>
+<h3 id="应用举例3---columnreuse-of-column-aliases-列别名复用">应用举例3 - column（reuse of column aliases, 列别名复用）</h3>
+<p>T-SQL无法像duckdb一样原生支持列别名复用，如果SQL的select列表中有一个长表达式A，另外一个表达式B需要引用A的结果，甚至是case when分支中的多次引用，通常做法是将A表达式copy后作为B表达式的一部分，或者通过嵌套子查询的方式去复用表达A的结果，这样的代码会看上去会非常冗长和晦涩。用cross apply可以让代码列更简洁一些:</p>
+<ul>
+<li>VALUE 形式<br>
+<code>FROM T1 APPLY ( VALUES(&lt;expressions_based_on_columns_in_T1&gt;) ) AS A(&lt;aliases&gt;)</code></li>
+<li>SELECT 形式<br>
+<code>FROM T1 APPLY ( SELECT &lt;expressions_based_on_columns_in_T1&gt; ) AS A(&lt;aliases&gt;)</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1 (c1 INT, c2 INT);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> t1 <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> c1, c2, a, b, <span style="color:#66d9ef">c</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> t1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#f92672">+</span> c2) <span style="color:#66d9ef">as</span> v1(a)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#f92672">-</span> c2) <span style="color:#66d9ef">as</span> v2(b)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> APPLY (<span style="color:#66d9ef">SELECT</span> a <span style="color:#f92672">*</span> b) <span style="color:#66d9ef">as</span> v3(<span style="color:#66d9ef">c</span>) <span style="color:#75715e">-- reuse alias a and b
+</span></span></span></code></pre></div><h2 id="dml-output子句">DML Output子句</h2>
 <p>被delete/update/insert/merge语句删除或新增的记录可通过Output关键字输出，通过inserted和deleted这两个固定的表别名分别选出新增和删除的记录。非常适合审计、归档等应用场景。merge配合output可以很方便地实现数仓维表的<a href="https://www.sqlservercentral.com/articles/slowly-changing-dimensions-using-t-sql-merge">SCD</a>功能。</p>
 <h2 id="temp-sp">Temp SP</h2>
 <p>是的，SQL Server除了支持临时表，还支持临时存储过程，方便在权限受限无法新建常规SP时用临时SP实现代码复用。</p>
