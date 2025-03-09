@@ -216,8 +216,7 @@ Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMM
 </span></span></code></pre></div><p>问题原因在于ROLLBACK默认是回滚所有事务，即直到最外面的事务。<br>
 可以通过在CATCH模块的RollBack前加一个IF @@TRANSCOUNT &gt; 0解决，或者开始事务前，设一个 <a href="https://msdn.microsoft.com/en-us/library/ms188378(v=sql.105).aspx">SAVE TRANSACTION</a>。</p>
 <h3 id="关于set-xact_abort-on">关于Set xAct_Abort On</h3>
-<p>这是从SQL Server 2005开始出现的一个选项，默认为OFF，遇到异常时，根据异常的种类，可能只会回滚引发异常的那条语句（比如主键冲突），而继续执行后续语句，并提交事务。若为设为ON，则从异常语句开始回滚整个事务，不再继续执行后续语句。另外，如果错误非常严重，即便xAct_Abort选项为OFF，也可能会回滚整个事务。<br>
-如果加上set xAct_Abort on，即使try catch无法捕获异常，最终也会回滚事务。</p>
+<p>这是从SQL Server 2005开始出现的一个选项，默认为OFF，遇到异常时，根据异常的种类，可能只会回滚引发异常的那条语句（比如主键冲突），而继续执行后续语句，并提交事务。若设为ON，则从异常语句开始回滚整个事务，不再继续执行后续语句（这点很重要，类似于shell脚本的<code>set -e</code>选择）。另外，如果错误非常严重，即便xAct_Abort选项为OFF，也可能会回滚整个事务。如果加上Set xAct_Abort on，即使try catch无法捕获异常，最终也会回滚事务。</p>
 
 		</div>
 		<footer class="post__footer">
@@ -337,7 +336,7 @@ Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMM
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2024 人生短短几個秋.
+			&copy; 2025 人生短短几個秋.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

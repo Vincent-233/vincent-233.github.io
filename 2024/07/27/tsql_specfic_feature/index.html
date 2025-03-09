@@ -174,17 +174,17 @@
 </span></span><span style="display:flex;"><span> )
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> cte <span style="color:#66d9ef">WHERE</span> rn <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;
 </span></span></code></pre></div><h2 id="apply-操作符">APPLY 操作符</h2>
-<p>cross apply以及相关的outer apply是T-SQL支持的强大功能，用它写的query一般用传统的join也可以实现，但在某些应用场景下across apply的写法可能会更好理解一些。</p>
-<p><code>(row_set) cross apply (sub_query_or_table_function)</code>可理解为：对输入集合中的每一行，进行子查询或表函数查询（可引用输入集合中的列），然后将结果集进行合并。类似于以下伪代码：</p>
+<p>cross apply以及相关的outer apply是T-SQL支持的强大功能，用它写的query一般用传统的join也可以实现，但在某些应用场景下across apply的写法可能会更好理解一些。
+<code>(row_set) cross apply (sub_query_or_table_function)</code>可理解为：对输入集合中的每一行，进行子查询或表函数查询（可引用输入集合中的列），然后将结果集进行合并。类似于以下伪代码：</p>
 <pre tabindex="0"><code>result_set = []
 foreach row in row_set:
     result_set.add(sub_query_or_table_function(row))
-</code></pre><p>其它数据库后来也支持这个功能，比如oracle为了兼容C#的LINQ，加入了对cross apply和outer apply的支持，Mysql，PgSQL，Spark SQL，DuckDB等有个LATERAL关键字也支持类似的处理逻辑。</p>
+</code></pre><p>其它数据库后来也支持这个功能，比如oracle为了兼容C#的LINQ，加入了对cross apply和outer apply的支持，Mysql，PgSQL，Spark SQL，DuckDB等有个LATERAL操作符也支持类似的处理逻辑。</p>
 <h3 id="应用举例1---top-n-per-group">应用举例1 - top N per group</h3>
-<p>假如有表 <br>
-sales.customers (custid int primary key, custname varchar(50), city varchar(20))
-sales.orders(orderid int primary key, custid int, orderdate date, shipname varchar(40))
-现要获取每个customer最新的一笔订单情况，除了用窗口函数之外，也可以用cross apply</p>
+<p>假如有表:</p>
+<pre tabindex="0"><code>sales.customers (custid int primary key, custname varchar(50), city varchar(20))
+sales.orders (orderid int primary key, custid int, orderdate date, shipname varchar(40))
+</code></pre><p>现要获取每个customer最新的一笔订单情况，除了用窗口函数之外，也可以用cross apply</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> a.custid, a.custname, b.orderid, b.orderdate, b.empid
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Sales.Customers a
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">CROSS</span> apply (
@@ -252,7 +252,7 @@ sales.orders(orderid int primary key, custid int, orderdate date, shipname varch
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2024 人生短短几個秋.
+			&copy; 2025 人生短短几個秋.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
