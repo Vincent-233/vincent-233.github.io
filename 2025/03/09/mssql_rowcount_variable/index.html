@@ -111,14 +111,14 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> TOP <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sys.tables
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>ROWCOUNT
-</span></span></code></pre></div><p>按正常想法，@@ROWCOUNT的值应该是满足条件时所执行的 SELECT 语句返回的行数，所以上述代码@@ROWCOUNT的值应为 1。可惜意发生了：
-<img src="https://s2.loli.net/2025/03/11/4epvykZhWTQnLgf.png" alt="">
-查 MSSQL 文档，有如下说明：</p>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>ROWCOUNT <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">row_count</span>
+</span></span></code></pre></div><p>按正常想法，@@ROWCOUNT的值应该是满足条件时所执行的 SELECT 语句返回的行数，所以上述代码@@ROWCOUNT的值应为 1。可惜意发生了：</p>
+<p><img src="https://s2.loli.net/2025/03/11/UmjLrgNnS93X6wq.png" alt="temp_upload_rowcount.png"></p>
+<p>查 MSSQL 文档，有如下说明：</p>
 <blockquote>
 <p>Statements such as <code>USE</code>, <code>SET &lt;option&gt;</code>, <code>DEALLOCATE CURSOR</code>, <code>CLOSE CURSOR</code>, <code>PRINT</code>, <code>RAISERROR</code>, <code>BEGIN TRANSACTION</code>, or <code>COMMIT TRANSACTION</code> reset the <code>ROWCOUNT</code> value to 0.</p>
 </blockquote>
-<p>并没提到 IF 语句也会将 @@ROWCOUNT 重置为 0，根据以上测试 IF 应该也属于这种情况。</p>
+<p>并没提到 IF 语句也会将 @@ROWCOUNT 重置为 0，但根据以上测试 IF 应该也属于这种情况。</p>
 <p>那如何改进以上脚本呢：</p>
 <ul>
 <li>将上述第二个 <code>IF</code> 改为 <code>ELSE IF</code>，这样@@ROWCOUNT 就不会被重置</li>
@@ -151,6 +151,12 @@
 			<p class="pager__title">一些有用的T-SQL功能点</p>
 		</a>
 	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2025/03/11/soft_router_usage/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">OpenWrt安装科学上网软件</p>
+		</a>
+	</div>
 </nav>
 
 
@@ -168,11 +174,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/11/soft_router_usage/">OpenWrt安装科学上网软件</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/09/mssql_rowcount_variable/">IF语句会将@@ROWCOUNT重置为0</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/27/tsql_specfic_feature/">一些有用的T-SQL功能点</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/26/notes_about_crlf/">关于回车换行符</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/25/ssis_script_task_external_dll/">SSIS脚本任务中动态引入外部dll</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/13/duckdb_usage/">DuckDB功能点介绍</a></li>
 		</ul>
 	</div>
 </div>
@@ -214,6 +220,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mac/" title="Mac">Mac</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mssql/" title="MSSQL">MSSQL</a>
+		<a class="widget-taglist__link widget__link btn" href="/blog/tags/openwrt/" title="OpenWrt">OpenWrt</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/oracle/" title="ORACLE">ORACLE</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pandas/" title="pandas">pandas</a>
 		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
