@@ -95,6 +95,26 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/blog/2023/02/11/why_openssh_pubkey_login_not_work/" rel="bookmark">
+			为何公司的OpenSSH无法免密登陆
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-02-11T13:34:13&#43;08:00">2023-02-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2023/02/11/why_openssh_pubkey_login_not_work/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/" rel="bookmark">
 			bcp导入导出报错，字段名含空格
 			</a>
@@ -369,26 +389,6 @@
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/blog/2020/06/23/106913549/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/blog/2020/06/21/106893478/" rel="bookmark">
-			pandas数据处理，行列转换
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-21T23:55:02Z">2020-06-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/python/" rel="category">python</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&#39;D:\CategoryConfig.csv&#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/21/106893478/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -413,11 +413,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/23/mssql_two_common_set_option/">SQL Server中几个重要的SET OPTION，非必要不建议修改</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/11/soft_router_usage/">OpenWrt安装科学上网软件</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/09/mssql_rowcount_variable/">IF语句会将@@ROWCOUNT重置为0</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/27/tsql_specfic_feature/">一些有用的T-SQL功能点</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/26/notes_about_crlf/">关于回车换行符</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/25/ssis_script_task_external_dll/">SSIS脚本任务中动态引入外部dll</a></li>
 		</ul>
 	</div>
 </div>

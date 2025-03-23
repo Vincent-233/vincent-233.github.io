@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>404 Page not found - 人生短短几個秋</title>
+	<title>SQL Server中几个重要的SET OPTION，非必要不建议修改 - 人生短短几個秋</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,15 +88,95 @@
 			<div class="primary">
 			
 <main class="main" role="main">
-	<div class="warning">
-		<h1 class="warning__headline">404. Page not found</h1>
-		<p class="warning__text">The page you were looking for appears to have been moved, deleted or does not exist. Please, use search or go to <a href="/blog">main page</a>.</p>
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">SQL Server中几个重要的SET OPTION，非必要不建议修改</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2025-03-23T23:20:36&#43;08:00">2025-03-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#set-ansi_padding-on">SET ANSI_PADDING ON</a></li>
+    <li><a href="#set-quoted_identifier-on">SET QUOTED_IDENTIFIER ON</a></li>
+    <li><a href="#其它参考">其它参考</a>
+      <ul>
+        <li><a href="#set-ansi_defaults-on">SET ANSI_DEFAULTS ON</a></li>
+        <li><a href="#查看当前session-options">查看当前session options</a></li>
+        <li><a href="#本人常用的另外两个set-option">本人常用的另外两个set option</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 	</div>
+</div><div class="content post__content clearfix">
+			<p>SQL Server 中以下两个 SET OPTION 在非必要的情况下均设为ON，可以避免很多意外</p>
+<h2 id="set-ansi_padding-on">SET ANSI_PADDING ON</h2>
+<p>微软文档中推荐此选项应一直为 ON，且新版本将不支持设为 OFF.<br>
+若设置为 OFF，会影响新建表的 varchar 等可变长度类型，新增数据时会自动将结尾的空格或0去掉，出现想插入的值和实际存储的值不一致的现象，而这是不合理的。</p>
+<p>在 compute index，filter index 等情况下，此 optiion 要为 ON。</p>
+<h2 id="set-quoted_identifier-on">SET QUOTED_IDENTIFIER ON</h2>
+<p>在创建 filtered index 或 使用XML相关方法(xQuery等)时此选项必须为 ON。</p>
+<blockquote>
+<p>注： Windows 上的SQLCMD此选项默认为 OFF，而 SSMS默认为 ON</p>
+</blockquote>
+<h2 id="其它参考">其它参考</h2>
+<h3 id="set-ansi_defaults-on">SET ANSI_DEFAULTS ON</h3>
+<p>为了方便保持一致，一些常见的ISO选项可用 <code>SET ANSI_DEFAULTS ON</code> 统一设置，相当于以下选项均设置为 ON：</p>
+<pre tabindex="0"><code>SET ANSI_NULLS    
+SET ANSI_WARNINGS    
+SET ANSI_NULL_DFLT_ON    
+SET CURSOR_CLOSE_ON_COMMIT    
+SET ANSI_PADDING    
+SET IMPLICIT_TRANSACTIONS    
+</code></pre><h3 id="查看当前session-options">查看当前session options</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>DBCC USEROPTIONS
+</span></span></code></pre></div><h3 id="本人常用的另外两个set-option">本人常用的另外两个set option</h3>
+<ul>
+<li>不发送 <code>xxx rows affected</code> 给客户端</li>
+<li>出错后马上停止执行</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> XACT_ABORT <span style="color:#66d9ef">ON</span>;
+</span></span></code></pre></div><p>以上仅为推荐的常用做法，SET option可根据实际情况进行设置，更多关于SET OPTION 的说明可查看<a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/set-statements-transact-sql?view=sql-server-ver16#considerations-when-you-use-the-set-statements">官方文档</a></p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/t-sql/" rel="tag">T-SQL</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/blog/tags/mssql/" rel="tag">MSSQL</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
 </main>
 
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2025/03/11/soft_router_usage/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">OpenWrt安装科学上网软件</p>
+		</a>
+	</div>
+</nav>
+
+
 			</div>
-			
-<aside class="sidebar"><div class="widget-search widget">
+			<aside class="sidebar"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">

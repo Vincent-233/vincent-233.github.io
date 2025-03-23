@@ -6,7 +6,16 @@
     <description>Recent content in 数据库开发 on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Mar 2025 17:14:40 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 23:20:36 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL Server中几个重要的SET OPTION，非必要不建议修改</title>
+      <link>https://vincent-233.github.io/blog/2025/03/23/mssql_two_common_set_option/</link>
+      <pubDate>Sun, 23 Mar 2025 23:20:36 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2025/03/23/mssql_two_common_set_option/</guid>
+      <description>SQL Server 中以下两个 SET OPTION 在非必要的情况下均设为ON，可以避免很多意外 SET ANSI_PADDING ON 微软文档中推荐此选项应一直为 ON，且新版本将不支持设为 OFF. 若设置为 OFF，</description>
+    </item>
+    
     <item>
       <title>IF语句会将@@ROWCOUNT重置为0</title>
       <link>https://vincent-233.github.io/blog/2025/03/09/mssql_rowcount_variable/</link>
