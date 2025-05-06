@@ -3,7 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://vincent-233.github.io/blog/categories/</loc>
-    <lastmod>2025-03-23T23:20:36+08:00</lastmod>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/categories/misc/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/reading/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/tags/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/thinking/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/blog/2025/05/01/how_to_read/</loc>
+    <lastmod>2025-05-01T21:36:12+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/mssql/</loc>
     <lastmod>2025-03-23T23:20:36+08:00</lastmod>
@@ -14,13 +32,7 @@
     <loc>https://vincent-233.github.io/blog/tags/t-sql/</loc>
     <lastmod>2025-03-23T23:20:36+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/blog/tags/</loc>
-    <lastmod>2025-03-23T23:20:36+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/blog/tech/</loc>
-    <lastmod>2025-03-23T23:20:36+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/</loc>
     <lastmod>2025-03-23T23:20:36+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</loc>
@@ -42,9 +54,6 @@
     <lastmod>2024-07-27T10:25:50+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/git/</loc>
-    <lastmod>2024-07-26T00:07:19+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/categories/misc/</loc>
     <lastmod>2024-07-26T00:07:19+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/python/</loc>
@@ -496,7 +505,5 @@
     <loc>https://vincent-233.github.io/blog/archive/</loc>
   </url><url>
     <loc>https://vincent-233.github.io/blog/tags/pl/sql/</loc>
-  </url><url>
-    <loc>https://vincent-233.github.io/blog/thinking/</loc>
   </url>
 </urlset>
