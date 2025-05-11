@@ -103,24 +103,24 @@
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
-    <li><a href="#0-更新软件源-可选">0-更新软件源 （可选）</a></li>
-    <li><a href="#1-安装istore">1-安装istore</a></li>
-    <li><a href="#2-安装openclash">2-安装openclash</a></li>
+    <li><a href="#1-更新软件源-可选">1-更新软件源 （可选）</a></li>
+    <li><a href="#2-安装istore-可选">2-安装istore （可选）</a></li>
+    <li><a href="#3-安装openclash">3-安装openclash</a></li>
     <li><a href="#其它软件可选">其它软件（可选）</a>
       <ul>
         <li><a href="#istorex">istorex</a></li>
         <li><a href="#argon皮肤">argon皮肤</a></li>
+        <li><a href="#ttyd">ttyd</a></li>
       </ul>
     </li>
   </ul>
 </nav>
 	</div>
 </div><div class="content post__content clearfix">
-			<p>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装科学上网软件openclash。<br>
-在网页版管理界面上进行完最基本的设置后，可以用SSH连接到路由器系统。</p>
-<p>先确认下系统版本信息，如果在路由器网页管理界面无法查看，可以 SSH 上去之后用命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># login </span>
-</span></span><span style="display:flex;"><span>ssh root@192.168.8.1
+			<p>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装科学上网软件openclash，建议路由器的 RAM 至少 256MB ，不然带上了也可能带不动。</p>
+<p>在网页版管理界面上进行完最基本的设置后，可以用SSH连接到路由器系统。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># login with your router ip address</span>
+</span></span><span style="display:flex;"><span>ssh root@192.168.x.x
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># check system info</span>
 </span></span><span style="display:flex;"><span>cat /etc/openwrt_release
 </span></span></code></pre></div><p>类似结果如下：</p>
@@ -131,28 +131,46 @@ DISTRIB_TARGET=&#39;mediatek/mt7981&#39;
 DISTRIB_ARCH=&#39;aarch64_cortex-a53&#39;
 DISTRIB_DESCRIPTION=&#39;OpenWrt 21.02-SNAPSHOT r15812+908-46b6ee7ffc&#39;
 DISTRIB_TAINTS=&#39;busybox override&#39;
-</code></pre><h2 id="0-更新软件源-可选">0-更新软件源 （可选）</h2>
+</code></pre><p>上述结果中的<code>DISTRIB_ARCH</code>非常重要，因为这直接影响软件源的设置，名称以aarch开头的arm架构的包比较多，一般软件都会适配， 后面要安装的 istore 就只支持 arm 和 x86架构的 CPU。</p>
+<h2 id="1-更新软件源-可选">1-更新软件源 （可选）</h2>
 <p>如果更新速度太慢或太多缺失的软件，可更新一下安装源。<br>
 在路由器的 OpenWrt 网页管理界面或ssh远程均可更新，一般改 <code>/etc/opkg/customfeeds.conf</code> 这个配置文件</p>
 <p>例如：</p>
 <pre tabindex="0"><code>src/gz supes https://op.dllkids.xyz/packages/aarch64_cortex-a53/
-</code></pre><p>更多关于软件源可以查看这位<a href="https://deeprouter.org/article/Compilation-of-OpenWRT-Software-Sources">大神的博文</a></p>
-<h2 id="1-安装istore">1-安装istore</h2>
-<p>安装方法见<a href="https://github.com/linkease/istore?tab=readme-ov-file#%E5%AE%89%E8%A3%85-istore-%E5%88%B0-openwrt-%E5%AE%98%E6%96%B9%E5%9B%BA%E4%BB%B6">Github官方说明</a>，里面的安装命令需要 ssh 到 OpenWrt 后执行。</p>
-<p>也可以先下载ipk软件包然后在网页管理界面上传安装：</p>
+</code></pre><p>再如mips_24kc架构的：</p>
+<pre tabindex="0"><code>src/gz openwrt_base https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/base
+src/gz openwrt_luci https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/luci
+src/gz openwrt_packages https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/packages
+src/gz openwrt_routing https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/routing
+src/gz openwrt_telephony https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/telephony
+</code></pre><p>更多关于软件源的设置可以查看这位<a href="https://deeprouter.org/article/Compilation-of-OpenWRT-Software-Sources">大神的博文</a></p>
+<h2 id="2-安装istore-可选">2-安装istore （可选）</h2>
+<p>安装方法见<a href="https://github.com/linkease/istore?tab=readme-ov-file#%E5%AE%89%E8%A3%85-istore-%E5%88%B0-openwrt-%E5%AE%98%E6%96%B9%E5%9B%BA%E4%BB%B6">Github官方说明</a>，里面的安装命令需要 ssh 到 OpenWrt 执行。</p>
+<p>或先下载ipk软件包后在网页管理界面上传安装：</p>
 <ul>
 <li>访问官网安装包文件地址： <a href="https://istore.linkease.com/repo/all/store">https://istore.linkease.com/repo/all/store</a></li>
-<li>然后按顺序安装（注意先安装依赖，再安装 istore）</li>
+<li>按顺序安装（注意先安装依赖，再安装 istore）</li>
 </ul>
 <p><img src="https://s2.loli.net/2025/03/13/yvEUrgTdO3ohukn.png" alt=""></p>
-<h2 id="2-安装openclash">2-安装openclash</h2>
-<p>安装好 istotre 后访问 <a href="https://github.com/AUK9527/Are-u-ok/tree/main/apps">https://github.com/AUK9527/Are-u-ok/tree/main/apps</a>, 点击Openclash下载 run 格式的软件包，在 istore 界面点击手动安装, 选择文件后安装即可</p>
-<p>如果不放心这种方式，可以按 <a href="https://github.com/vernesong/OpenClash/wiki/%E5%AE%89%E8%A3%85">https://github.com/vernesong/OpenClash/wiki/%E5%AE%89%E8%A3%85</a> 说明先安装依赖，再安装 openclash</p>
+<h2 id="3-安装openclash">3-安装openclash</h2>
+<ul>
+<li>
+<p>方法一: 安装好 istotre 后访问 <a href="https://github.com/AUK9527/Are-u-ok/tree/main/apps">https://github.com/AUK9527/Are-u-ok/tree/main/apps</a>, 点击Openclash下载 run 格式的软件包，在 istore 界面点击手动安装, 选择文件上传后安装</p>
+</li>
+<li>
+<p>方法二：按 <a href="https://github.com/vernesong/OpenClash/wiki/%E5%AE%89%E8%A3%85">https://github.com/vernesong/OpenClash/wiki/%E5%AE%89%E8%A3%85</a> 手动安装，建议先安装依赖，再安装 openclash</p>
+</li>
+</ul>
+<blockquote>
+<p>注：openclash只是OpenWrt上clash系软件之一，还有很多其它名称的clash系软件，它们大多用相同格式的yaml配置文件，建议用 Mihomo/neko/OpenWrt-nikki/shellcrash等关键字去github上搜索</p>
+</blockquote>
 <h2 id="其它软件可选">其它软件（可选）</h2>
 <h3 id="istorex">istorex</h3>
 <p>直接在 iStore 界面点击安装，成功后会出现一个炫酷的首页</p>
 <h3 id="argon皮肤">argon皮肤</h3>
 <p>路由器自带的皮肤比较简单，但功能上并不缺失，如果想安装更好看的argon主题，可安装<code>luci-theme-argon</code>包, 若找不到包含此主题的软件源，可网上下载 ipk 文件后在网页管理界面上传安装，我当时在 <a href="https://github.com/jerrykuku/luci-theme-argon/releases">github主页</a>上下载的luci-theme-argon_2.3.2-r20250207_all.ipk, 安装时可能出现一些依赖问题，看情况解决或放弃之，皮肤不影响功能。</p>
+<h3 id="ttyd">ttyd</h3>
+<p>安装<code>luci-app-ttyd</code>之后可在Web管理界面运行SSH，合适没有SSH客户端或手机上临时运行命令的场景</p>
 <p>其它篇：(备忘)</p>
 <ul>
 <li>clash 配置文件（基本用法，proxy-provider用法）</li>
@@ -194,88 +212,7 @@ DISTRIB_TAINTS=&#39;busybox override&#39;
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
-	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
-		<label>
-			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
-		</label>
-		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io/blog" />
-	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2025/05/01/how_to_read/">如何阅读一本书</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/23/mssql_two_common_set_option/">SQL Server中几个重要的SET OPTION，非必要不建议修改</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/11/soft_router_usage/">OpenWrt安装科学上网软件</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2025/03/09/mssql_rowcount_variable/">IF语句会将@@ROWCOUNT重置为0</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2024/07/27/tsql_specfic_feature/">一些有用的T-SQL功能点</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/bigdata/">BigData</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/etl/">ETL</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/linux/">Linux</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/misc/">Misc</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/python/">python</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/batch/" title="Batch">Batch</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/db-api/" title="DB-API">DB-API</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/dotnet/" title="dotnet">dotnet</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/duckdb/" title="DuckDB">DuckDB</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/excel/" title="Excel">Excel</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/git/" title="GIT">GIT</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mac/" title="Mac">Mac</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/mssql/" title="MSSQL">MSSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/openwrt/" title="OpenWrt">OpenWrt</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/oracle/" title="ORACLE">ORACLE</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pandas/" title="pandas">pandas</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/postgresql/" title="PostgreSQL">PostgreSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/powershell/" title="powershell">powershell</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/reading/" title="Reading">Reading</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/selenium/" title="selenium">selenium</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/spark/" title="spark">spark</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssh/" title="SSH">SSH</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssis/" title="SSIS">SSIS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ssms/" title="SSMS">SSMS</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/t-sql/" title="T-SQL">T-SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/ubuntu/" title="ubuntu">ubuntu</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vba/" title="VBA">VBA</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/vim/" title="vim">vim</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/virtual-box/" title="virtual box">virtual box</a>
-		<a class="widget-taglist__link widget__link btn" href="/blog/tags/windows/" title="windows">windows</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
