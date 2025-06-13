@@ -6,16 +6,7 @@
     <description>Recent content in 环境配置 on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Mar 2025 21:18:39 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>OpenWrt安装科学上网软件</title>
-      <link>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</link>
-      <pubDate>Tue, 11 Mar 2025 21:18:39 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</guid>
-      <description>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装科学上网软件openclash，建议路由器的 RAM 至少 256MB ，不然就算装上了也可能带不动。</description>
-    </item>
-    
+    <lastBuildDate>Sun, 17 Dec 2023 21:06:09 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git alias设置</title>
       <link>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</link>

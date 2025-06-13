@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>OpenWrt安装科学上网软件</title>
-      <link>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</link>
-      <pubDate>Tue, 11 Mar 2025 21:18:39 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</guid>
-      <description>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装科学上网软件openclash，建议路由器的 RAM 至少 256MB ，不然就算装上了也可能带不动。</description>
-    </item>
-    
-    <item>
       <title>IF语句会将@@ROWCOUNT重置为0</title>
       <link>https://vincent-233.github.io/blog/2025/03/09/mssql_rowcount_variable/</link>
       <pubDate>Sun, 09 Mar 2025 17:14:40 +0800</pubDate>
