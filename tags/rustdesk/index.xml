@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RustDesk on 人生短短几個秋</title>
+    <link>https://vincent-233.github.io/blog/tags/rustdesk/</link>
+    <description>Recent content in RustDesk on 人生短短几個秋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 11 Jul 2025 23:38:28 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/rustdesk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RustDesk自建Server搭建</title>
+      <link>https://vincent-233.github.io/blog/2025/07/11/rustdesk-setup/</link>
+      <pubDate>Fri, 11 Jul 2025 23:38:28 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2025/07/11/rustdesk-setup/</guid>
+      <description>在没有公网IP的情况下想远程访问家里的电脑，网上有很多方法，之前也用过TeamViewer和向日葵，均需要注册账号，免费版会有更多限制，而且</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,25 @@
     <description>Recent content in 环境配置 on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Dec 2023 21:06:09 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Jul 2025 23:38:28 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RustDesk自建Server搭建</title>
+      <link>https://vincent-233.github.io/blog/2025/07/11/rustdesk-setup/</link>
+      <pubDate>Fri, 11 Jul 2025 23:38:28 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2025/07/11/rustdesk-setup/</guid>
+      <description>在没有公网IP的情况下想远程访问家里的电脑，网上有很多方法，之前也用过TeamViewer和向日葵，均需要注册账号，免费版会有更多限制，而且</description>
+    </item>
+    
+    <item>
+      <title>OpenWrt安装代理软件</title>
+      <link>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</link>
+      <pubDate>Tue, 11 Mar 2025 21:18:39 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</guid>
+      <description>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装代理软件openclash，建议路由器的 RAM 至少 256MB ，避免带不动的情况。 在网页版管理界</description>
+    </item>
+    
     <item>
       <title>Git alias设置</title>
       <link>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</link>
