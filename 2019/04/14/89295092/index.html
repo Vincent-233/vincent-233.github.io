@@ -117,13 +117,13 @@
 			<p>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫<a href="https://www.sql-workbench.eu">SQL Workbench/J</a>的免费产品，试用了一下，发现功能还挺强大，特此记录几个我目前比较关注的功能：</p>
 <h3 id="数据库连接">数据库连接</h3>
 <p>用JDBC连接数据库，支持大多数支持JDBC驱动的数据库，包括Hive，见<a href="https://aws.amazon.com/blogs/big-data/using-amazon-emr-with-sql-workbench-and-other-bi-tools/">这个例子</a><br>
-<img src="/blog/img/20190414120147565.png" alt=""></p>
+<img src="/img/20190414120147565.png" alt=""></p>
 <blockquote>
 <p>连接数据库需要对应的JDBC驱动包（jar文件，一般对应的数据库官网均可下载）</p>
 </blockquote>
 <h3 id="生成ddl脚本">生成DDL脚本</h3>
 <p>除了可以在图形界面，通过选中单个或多个对象（不限于Table、View等），右键Show Source外（见下图），还可以用命令行以更灵活的方式生成DDL。<br>
-<img src="/blog/img/20190414115956412.png" alt=""><br>
+<img src="/img/20190414115956412.png" alt=""><br>
 命令生成DDL一例：<br>
 运行安装目录下的 sqlwbconsole64.exe，弹出命令行窗口，然后运行<br>
 wbconnect <em>profilename</em> （请将profilename替换为实际名称）进行连接，连接成功后贴/键入如下命令，<strong>或直接在GUI编辑界面中输入</strong>：</p>
@@ -140,7 +140,7 @@ wbconnect <em>profilename</em> （请将profilename替换为实际名称）进�
 </span></span></code></pre></div><p>即可生成上述3个表的CREATE脚本，生成脚本命令的参数说明见此<a href="https://www.sql-workbench.eu/manual/script-generation.html">链接</a></p>
 <h3 id="生成insert脚本">生成Insert脚本</h3>
 <p>同样可以在图形界面右键Export Data，然后选择生成SQL脚本的方式，如下图：<br>
-<img src="/blog/img/20190414121522264.png" alt=""><br>
+<img src="/img/20190414121522264.png" alt=""><br>
 下面介绍用命令行以更灵活的方式生成Insert脚本的方式：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 生成Insert 脚本，某个架构的多个表
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>WbExport
@@ -171,9 +171,9 @@ wbconnect <em>profilename</em> （请将profilename替换为实际名称）进�
 </blockquote>
 <h3 id="insert语句字段对应提示">Insert语句字段对应提示</h3>
 <p>若Insert目标表字段太多，字段容易错位（特别是事后对比时），此软件可以设快捷建出现字段对应的提示：<br>
-<img src="/blog/img/20190415001131292.png" alt=""><br>
+<img src="/img/20190415001131292.png" alt=""><br>
 另外，在新定Insert语句时，除上述方式，也可事先生成Insert字段模板，再逐一替换：<br>
-<img src="/blog/img/20190415001745242.png" alt=""></p>
+<img src="/img/20190415001745242.png" alt=""></p>
 <h3 id="其它说明">其它说明</h3>
 <ul>
 <li>QL Workbench/J作为开源的免费的产品，在跨平台和跨数据库方面已经做很好了</li>

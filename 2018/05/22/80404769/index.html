@@ -180,7 +180,7 @@
 </span></span><span style="display:flex;"><span>     percent_complete <span style="color:#66d9ef">AS</span> PercentComplete
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.dm_database_encryption_keys;
 </span></span></code></pre></div><p>结果如下：<br>
-<img src="/blog/img/20180522135931580" alt=""><br>
+<img src="/img/20180522135931580" alt=""><br>
 可以发现除了刚刚创建的数据库外，TempDB也被加密了。其实只要实例中有一个数据库被加密，TempDB也会被跟着加密。</p>
 <h3 id="迁移到新实例服务器">迁移到新实例/服务器</h3>
 <p>如果没有新实例的测试环境，可以先将Master Key和Certificate删除：</p>

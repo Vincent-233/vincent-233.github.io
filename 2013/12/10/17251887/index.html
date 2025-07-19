@@ -118,7 +118,7 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>假设某公司的人员组织结构如下图：</p>
-<p><img src="/blog/img/20131210222929796" alt=""></p>
+<p><img src="/img/20131210222929796" alt=""></p>
 <p>数据库表：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ORG
 </span></span><span style="display:flex;"><span>(
@@ -137,7 +137,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> ORG <span style="color:#66d9ef">VALUES</span>(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;Mark&#39;</span>, <span style="color:#ae81ff">6</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
 </span></span></code></pre></div><h2 id="需求一-查询tom管理的所有员工的名字">需求一： 查询TOM管理的所有员工的名字</h2>
-<p><img src="/blog/img/20131210222936750" alt=""></p>
+<p><img src="/img/20131210222936750" alt=""></p>
 <p>查询代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
 </span></span><span style="display:flex;"><span>(
@@ -172,7 +172,7 @@
 </tbody>
 </table>
 <h2 id="需求二从下往上查询mark报告链">需求二：从下往上，查询Mark报告链</h2>
-<p><img src="/blog/img/20131210222950390" alt=""></p>
+<p><img src="/img/20131210222950390" alt=""></p>
 <p>查询代码:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>;<span style="color:#66d9ef">WITH</span> cte <span style="color:#66d9ef">AS</span>
 </span></span><span style="display:flex;"><span>(

@@ -102,7 +102,7 @@
 MTD（Month To Date）：从月初到当前日期<br>
 YTD（Year To Date）：从年初到当前日期</p>
 <p>假设有表EmpLeaveCNT(LeaveDate,LeaveCount)，代表每个日期的离职人数（如下图所示），现要求查询离职人数每天的MTD和YTD。<br>
-<img src="/blog/img/20181008104611386" alt=""></p>
+<img src="/img/20181008104611386" alt=""></p>
 <p>这其实是一个Running Total的问题，方法有非常多，传统可用标量子查询、自连接的方式，如果是SQL Server 2012及以上版本，可以用窗口函数解决：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> LeaveDate
 </span></span><span style="display:flex;"><span>	,LeaveCount
@@ -118,7 +118,7 @@ YTD（Year To Date）：从年初到当前日期</p>
 </span></span><span style="display:flex;"><span>		) <span style="color:#66d9ef">AS</span> YTD_LeaveCount
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> EmpLeaveCNT
 </span></span></code></pre></div><p>结果如下：<br>
-<img src="/blog/img/20181008104736370" alt=""></p>
+<img src="/img/20181008104736370" alt=""></p>
 
 		</div>
 		<footer class="post__footer">

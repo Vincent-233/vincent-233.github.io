@@ -116,9 +116,9 @@
 			<h3 id="概述">概述</h3>
 <p>登陆名的作用域是SQL Server数据库引擎，要连接到具体的数据库并进行相应操作，登陆名还需要映射到数据库用户名，并为用户名指定数据库角色。<br>
 登陆名有一个服务器角色，如果配置选上sysadmin角色，则不用再映射用户名，就可以对所有数据库进行一切操作，当然这样做是不安全的。<br>
-<img src="/blog/img/20150531141219785" alt=""></p>
+<img src="/img/20150531141219785" alt=""></p>
 <p>用户名的作用域是具体数据库级别，登陆名要映射到每个数据库的用户名（一般默认为自带用户名dbo），进一步地，还可以为配置其数据库角色<br>
-<img src="/blog/img/20170320160621950" alt=""><br>
+<img src="/img/20170320160621950" alt=""><br>
 架构就是一个命名空间，标识一系统对象的集合，与用户名是完全独立的，一个架构可被任何用户拥有，并且是可转移的。</p>
 <h3 id="相关示例脚本">相关示例脚本</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">--创建登陆名（首次登陆必须改密码）

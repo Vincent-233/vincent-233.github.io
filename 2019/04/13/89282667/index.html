@@ -131,9 +131,9 @@ ubuntu查看ip信息命令：</li>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 若提示找不到命令，则需安装 net-tools</span>
 </span></span><span style="display:flex;"><span>sudo apt-get install net-tools
 </span></span></code></pre></div><p>如下图，代表ip地址：<br>
-<img src="/blog/img/20190413150331665.png" alt=""><br>
+<img src="/img/20190413150331665.png" alt=""><br>
 或直接通过VirtualBox右下角图标查看：<br>
-<img src="/blog/img/20190413153303240.png" alt=""><br>
+<img src="/img/20190413153303240.png" alt=""><br>
 注：若 <code>ifconfig</code> 提示找不到命令，安装<code>net-tools</code>也未果，可能是因为<code>ifconfig</code>已不被推荐使用，可用 <code>ip addr show</code> 命令代替，一样可以显示出IP地址。</p>
 <h4 id="ubuntu安装ssh服务">ubuntu安装ssh服务</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 安装 openssh 服务</span>
@@ -153,7 +153,7 @@ ubuntu查看ip信息命令：</li>
 </span></span></code></pre></div><p>验证22端口是否开启：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo firewall-cmd --list-all
 </span></span></code></pre></div><p>若结果中含有22端口，表示已开启：<br>
-<img src="/blog/img/20190413144906870.png" alt=""></p>
+<img src="/img/20190413144906870.png" alt=""></p>
 <h4 id="远程ssh登陆">远程SSH登陆</h4>
 <p>最后就是登陆啦，在宿主机或同网段其它计算中，用命令行或各类SSH客户端（如Putty）登陆即可，这里不再描述，若想配置通过密钥登录，可以看<a href="https://vincent-233.github.io/2019/04/08/89082770/">这篇文章</a></p>
 

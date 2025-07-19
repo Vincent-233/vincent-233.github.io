@@ -120,7 +120,7 @@
 			<p>上一篇介绍了<a href="https://vincent-233.github.io/2020/03/01/104594475/">如何用纯SQL生成测试数据</a>，但SQL功能有限，本篇介绍python faker库的使用。</p>
 <h3 id="需求">需求</h3>
 <p>生成5000条记录，字段如下：<br>
-<img src="/blog/img/20200301185645306.png" alt=""></p>
+<img src="/img/20200301185645306.png" alt=""></p>
 <h3 id="faker简单使用">faker简单使用</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
 </span></span><span style="display:flex;"><span>fake <span style="color:#f92672">=</span> Faker() <span style="color:#75715e"># 默认为英文locale</span>
@@ -162,7 +162,7 @@
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;男&#39;</span> <span style="color:#66d9ef">if</span> int(self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">16</span>:<span style="color:#ae81ff">17</span>])<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;女&#39;</span>
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>birthday <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">14</span>]
 </span></span></code></pre></div><p>创建一个类试验一下：<br>
-<img src="/blog/img/20200301191602222.png" alt=""><br>
+<img src="/img/20200301191602222.png" alt=""><br>
 看来效果不错，下面可以批量构造并将数据持久化保存。</p>
 <h3 id="保存为csv">保存为csv</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> csv

@@ -109,9 +109,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> aa <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;杨静,马丽萍,时晶晶&#39;</span>,	<span style="color:#e6db74">&#39;美容师,美体师,顾问&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
 </span></span></code></pre></div><p>需求：</p>
-<p><img src="/blog/img/20131209222833906" alt=""></p>
+<p><img src="/img/20131209222833906" alt=""></p>
 <p><strong>变成：</strong></p>
-<p><img src="/blog/img/20131209222845171" alt=""></p>
+<p><img src="/img/20131209222845171" alt=""></p>
 <p>咋一看真的会感觉无从下手，但有句话说得好：当你要钉钉子的时候，你所看到的一切都是锤子。</p>
 <p>所以我马上搜索已有的知识，发现用 <a href="https://vincent-233.github.io/2013/10/20/12889707/"><strong>拆分</strong></a> <strong>+</strong> <a href="https://vincent-233.github.io/2013/11/23/16897427/"><strong>cross apply</strong></a> <strong>+</strong> <a href="https://vincent-233.github.io/2013/12/08/17202973/"><strong>行转列</strong></a> 可以实现上述需求，而这三个知识点，我之前刚好有用心学习过，刚好可以当做我的锤子。</p>
 <p>思路：先将字符串分拆成列表后与第一列交叉连接，变成中间结果，再行转列。</p>
@@ -140,9 +140,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> t_name_job PIVOT(<span style="color:#66d9ef">MAX</span>(cola) <span style="color:#66d9ef">FOR</span> colb <span style="color:#66d9ef">IN</span>(<span style="color:#960050;background-color:#1e0010">美容师</span>,<span style="color:#960050;background-color:#1e0010">美体师</span>,<span style="color:#960050;background-color:#1e0010">顾问</span>)) a
 </span></span></code></pre></div><p>也写了一个类似的动态版本，但有些缺点，不能控制列标题的出现顺序，它自动排序了。但好处还是有的，动态的就不用管具体有哪些值了，比如加一行后的需求：</p>
-<p><img src="/blog/img/20131209231609015" alt=""></p>
+<p><img src="/img/20131209231609015" alt=""></p>
 <p><strong>变成：</strong></p>
-<p><img src="/blog/img/20131209231614203" alt=""></p>
+<p><img src="/img/20131209231614203" alt=""></p>
 <p>下述代码也可以一样实现：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">IF</span> OBJECT_ID(<span style="color:#e6db74">&#39;tempdb..#tmp&#39;</span>) <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> tempdb..<span style="color:#f92672">#</span>tmp;

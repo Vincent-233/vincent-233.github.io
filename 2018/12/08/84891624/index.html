@@ -193,7 +193,7 @@ CTE的结果是每个分隔符号的起始位置，最外层查询是利用起�
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>  [dbo].[SplitString_CTE](<span style="color:#e6db74">&#39;12,123,21312&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span>  [dbo].[SplitString_XML](<span style="color:#e6db74">&#39;12,123,21312&#39;</span>,<span style="color:#e6db74">&#39;,&#39;</span>)
 </span></span></code></pre></div><p>均得到了正确的结果：<br>
-<img src="/blog/img/20181208121706810.png" alt=""></p>
+<img src="/img/20181208121706810.png" alt=""></p>
 <h4 id="性能提示">性能提示</h4>
 <p>通过执行计划评估以及时间统计，发现CTE版本的性能最好。但如果分隔的项目太多，可能会超过SQL Server默认的最大100层递归，需要在查询后面加上OPTION(MAXRECURSION 0)以防止报错。<br>
 常用的循环法性能次之，主要消耗在每次的表变量插入上。<br>
@@ -201,7 +201,7 @@ XML的性能最差，不建议使用。</p>
 <h2 id="分列">分列</h2>
 <p>有了以上对单个字符串进行拆分的函数，可以利用它们进行字符串分列（根据分隔符将字符串拆分为多列）。<br>
 如下，左边的列表，想要变为右边的列表。<br>
-<img src="/blog/img/20181208124829267.png" alt=""><br>
+<img src="/img/20181208124829267.png" alt=""><br>
 选择以上函数中的一种实现，代码如下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 生成测试数据
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Test_TB(Title NVARCHAR(<span style="color:#ae81ff">200</span>))
@@ -214,7 +214,7 @@ XML的性能最差，不建议使用。</p>
 </span></span><span style="display:flex;"><span>) <span style="color:#66d9ef">AS</span> a
 </span></span><span style="display:flex;"><span>PIVOT(<span style="color:#66d9ef">MAX</span>(Value) <span style="color:#66d9ef">FOR</span> ID <span style="color:#66d9ef">IN</span> ([<span style="color:#ae81ff">1</span>],[<span style="color:#ae81ff">2</span>],[<span style="color:#ae81ff">3</span>])) <span style="color:#66d9ef">AS</span> b
 </span></span></code></pre></div><p>结果如下：<br>
-<img src="/blog/img/20181208125652620.png" alt=""></p>
+<img src="/img/20181208125652620.png" alt=""></p>
 <h2 id="后话">后话</h2>
 <p>最后说一点题外话，SQL Server 2016对字符串的拆分和合并已经有了内置的系统函数<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-split-transact-sql?view=sql-server-2017">STRING_SPLIT</a>和<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-2017">STRING_AGG</a>。以后再也没有自己实现的乐趣了，感慨编程语言越来越强大，轮子越来越多，多年以后可能傻瓜都会编程了，编程将和英语一样成为一门多数人都要会的通用技能。</p>
 

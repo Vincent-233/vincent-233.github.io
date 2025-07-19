@@ -156,14 +156,14 @@
 </span></span></code></pre></div><p>用 <code>docker ps</code> 确认容器运行状态，若一切正常会在 data 目录下生成几个文件，其中有一个<code>id_ed25519.pub</code> 为公钥，记下其内容，后面需要配置在 rustdesk 客户端中。</p>
 <h2 id="vps-开放相关端口">vps 开放相关端口</h2>
 <p>在云端控制台配置防火墙规则，开放 tcp 的 21114 到 21119 端口，以及 udp 的 21116 端口。
-<img src="/blog/img/rustdesk-setup-img-1.png" alt=""></p>
+<img src="/img/rustdesk-setup-img-1.png" alt=""></p>
 <p>vps机器上也开启一下端口：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw allow 21114:21119/tcp
 </span></span><span style="display:flex;"><span>ufw allow 21116/udp
 </span></span><span style="display:flex;"><span>sudo ufw enable
 </span></span></code></pre></div><h2 id="配置客户端">配置客户端</h2>
 <p>主控和被控端<a href="https://github.com/rustdesk/rustdesk/releases">下载</a>对应平台的客户端后安装，两边都配置上vps的公网IP和上面第一步服务启动时生成的公钥，即可正常使用</p>
-<p><img src="/blog/img/rustdesk-setup-img-2.png" alt=""></p>
+<p><img src="/img/rustdesk-setup-img-2.png" alt=""></p>
 <h2 id="问题与解决">问题与解决</h2>
 <p>在国内的网络环境下，多少会遇到一些问题，这里记录一下我遇到的问题和解决办法</p>
 <ul>
@@ -197,7 +197,7 @@
 <li>
 <p><strong>如何判断连接是直接还是通过 Relay Server 中转？</strong></p>
 <p>鼠标放到连接 session 的标签页上即可出现 direct 还是 Relayed 的字样
-<img src="/blog/img/rustdesk-setup-img-3.png" alt=""></p>
+<img src="/img/rustdesk-setup-img-3.png" alt=""></p>
 </li>
 <li>
 <p><strong>远程到家里电脑还有别的方式推荐吗？</strong><br>

@@ -115,10 +115,10 @@
 </div><div class="content post__content clearfix">
 			<h3 id="问题描述">问题描述</h3>
 <p>今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&quot;deploy_project_internal&quot;期间出现.Net Framework错误……Error:6522，具体见截图：<br>
-<img src="/blog/img/20191126223052897.png" alt=""></p>
+<img src="/img/20191126223052897.png" alt=""></p>
 <h3 id="解决方案">解决方案</h3>
 <p>出现以上问题是因为权限不足，经过一番试探，最终通过<strong>将SQL Server服务和SSIS服务的登陆账户改为Local System并重启服务</strong>之后解决：</p>
-<p><img src="/blog/img/20191126223136415.png" alt=""></p>
+<p><img src="/img/20191126223136415.png" alt=""></p>
 <blockquote>
 <p>说明：若改为 Local System 之后仍无法解决，可以尝试改为以administrator账户登陆。</p>
 </blockquote>

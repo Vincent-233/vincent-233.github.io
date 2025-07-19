@@ -131,7 +131,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
 </span></span></code></pre></div><p>以第一个元素作为基准，维护左右两个指针，从后往前遍历数组S，找到第一个比基准数小的元素，从前往后遍历数组，找到第一个比基准数大的元素，交换这两个数，重复以上过程，直到指针下标相等，最后再将基准元素与指针所在元素交换。<br>
 每一次交换如下：<br>
-<img src="/blog/img/20210105212349186.png" alt=""><br>
+<img src="/img/20210105212349186.png" alt=""><br>
 <strong>实现二</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
 </span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot, treat ls[left] as an hole</span>
@@ -151,7 +151,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
 </span></span></code></pre></div><p>以上代码看上去有点奇怪，每次只是赋值，并没有像第一种方法一样进行交换操作，实际可以这样理解：移出pivot，ls[0]的值已重复多余，就当它是一个空白/洞，等着别的值来覆盖/填充，然后右边找到第一个比pivot小的元素ls[j]，将它填充到ls[0]，此时轮到ls[j]的值重复多余……，最后用pivot的值覆盖ls[i]。<br>
 第一轮交换：<br>
-<img src="/blog/img/20210105213111631.png" alt=""><br>
+<img src="/img/20210105213111631.png" alt=""><br>
 <strong>实现三</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
 </span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot</span>
@@ -170,7 +170,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
 </span></span></code></pre></div><p>以上代码与实现二有点相似，唯一的差别在于每次都交换，所以不用像实现二一样做最后一次将pivot归位的操作。<br>
 第一轮交换：<br>
-<img src="/blog/img/20210105213212808.png" alt=""></p>
+<img src="/img/20210105213212808.png" alt=""></p>
 <h3 id="主函数">主函数</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort</span>(ls, left, right):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&lt;</span> right:

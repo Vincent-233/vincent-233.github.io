@@ -133,7 +133,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">或</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA,TB
 </span></span></code></pre></div><p>的结果是一样的：</p>
-<p><img src="/blog/img/20131123102018328" alt=""></p>
+<p><img src="/img/20131123102018328" alt=""></p>
 <h2 id="2-cross--outer-apply">2. Cross / Outer Apply</h2>
 <p>请看下面这条语句：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TA a <span style="color:#66d9ef">cross</span> apply (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> TB <span style="color:#66d9ef">where</span> Bcol1<span style="color:#f92672">=</span>a.Acol) b

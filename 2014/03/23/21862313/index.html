@@ -145,15 +145,15 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> MyVIew <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
 </span></span></code></pre></div><p>运行 SELECT * FROM MyVIew ，一切正常：</p>
-<p><img src="/blog/img/20140323112214593" alt=""></p>
+<p><img src="/img/20140323112214593" alt=""></p>
 <p>更改MyTable的结构信息：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> colA varchar(<span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> MyTable <span style="color:#66d9ef">ADD</span> ColE varchar(<span style="color:#ae81ff">10</span>)
 </span></span></code></pre></div><p>再运行 SELECT *FROM MyVIew ，结果居然还是老样子！</p>
 <p>而运行视图的定义：SELECT * FROM MyTable ，结果是预期中的：</p>
-<p><img src="/blog/img/20140323112503484" alt=""></p>
+<p><img src="/img/20140323112503484" alt=""></p>
 <p>对比一下MyTable 和 MyView的结构信息(sp_help &lsquo;MyTable&rsquo; 、 sp_help &lsquo;MyView&rsquo;)，会发现MyViews仍保持原样：</p>
-<p><img src="/blog/img/20140323113148640" alt=""></p>
+<p><img src="/img/20140323113148640" alt=""></p>
 <p>而Table已更新：</p>
 <h3 id="3问题解决">3.问题解决</h3>
 <p>用原来的定义重新ALTER一下，或刷新视图</p>

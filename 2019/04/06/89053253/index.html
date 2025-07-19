@@ -129,17 +129,17 @@
   config.vm.box = &#34;ubuntu/trusty64&#34;
 end
 </code></pre><p>如果是windows系统，可以新建一个txt文件，然后将上面内容复制进去，然后保存后将后缀名去除。<br>
-<img src="/blog/img/20190406102534365.png" alt=""></p>
+<img src="/img/20190406102534365.png" alt=""></p>
 <h3 id="vagrant-up">vagrant up</h3>
 <p>命令行切换到工作空间文件夹目录，运行vagrant up<br>
 结果如下：<br>
-<img src="/blog/img/20190406103451518.png" alt=""><br>
+<img src="/img/20190406103451518.png" alt=""><br>
 如上图所示，vagrant发现配置文件中描述的box不存在，会自动从网上下载文件后添加。运行完毕之后Ubuntu就已装好，在VirtualBox中也可以看到它在运行中了：<br>
-<img src="/blog/img/20190406105633606.png" alt=""><br>
+<img src="/img/20190406105633606.png" alt=""><br>
 下一步就是远程连接它了。</p>
 <h3 id="ssh连接">SSH连接</h3>
 <p>同样在工作目录下，运行vagrant ssh<br>
-<img src="/blog/img/20190406105018428.png" alt=""><br>
+<img src="/img/20190406105018428.png" alt=""><br>
 如上图，已正常登陆，接下来就可以运行Linux的各种命令啦</p>
 <h3 id="其他说明">其他说明</h3>
 <ul>

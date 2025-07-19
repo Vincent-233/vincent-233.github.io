@@ -117,7 +117,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Sales.Customers b <span style="color:#66d9ef">ON</span> b.custid <span style="color:#f92672">=</span> a.custid
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> HR.Employees <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.empid <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.empid
 </span></span></code></pre></div><p>结果：<br>
-<img src="/blog/img/20180429203241889" alt=""></p>
+<img src="/img/20180429203241889" alt=""></p>
 <h2 id="for-xml-raw">For XML Raw</h2>
 <ul>
 <li>sql</li>
@@ -129,7 +129,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML RAW
 </span></span></code></pre></div><ul>
 <li>结果<br>
-<img src="/blog/img/20180429204049811" alt=""></li>
+<img src="/img/20180429204049811" alt=""></li>
 <li>说明<br>
 每一条记录就是一行，row是固定的标签名，列名对应里面的属性名</li>
 </ul>
@@ -144,7 +144,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML PATH(<span style="color:#e6db74">&#39;MyOrders&#39;</span>),ROOT(<span style="color:#e6db74">&#39;Root&#39;</span>)
 </span></span></code></pre></div><ul>
 <li>结果<br>
-<img src="/blog/img/20180429203704748" alt=""></li>
+<img src="/img/20180429203704748" alt=""></li>
 <li>说明<br>
 Root（可选）参数的值作为第一层，Path参数的值作为第二层，列名作为第三层，全部以标签的形式展现，最多三层，列与列平级。</li>
 </ul>
@@ -159,7 +159,7 @@ Root（可选）参数的值作为第一层，Path参数的值作为第二层，
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML Auto
 </span></span></code></pre></div><ul>
 <li>结果<br>
-<img src="/blog/img/20180429204609562" alt=""></li>
+<img src="/img/20180429204609562" alt=""></li>
 <li>说明<br>
 根据表的别名，列出现的顺序（第一个列是哪个表的，哪个表名就在最外层），自动依次缩进生成XML，列名是表名中的属性，有多少个表，就有多少层</li>
 </ul>
@@ -174,7 +174,7 @@ Root（可选）参数的值作为第一层，Path参数的值作为第二层，
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> XML Auto<span style="color:#960050;background-color:#1e0010">，</span>Element
 </span></span></code></pre></div><ul>
 <li>结果<br>
-<img src="/blog/img/20180429205052660" alt=""></li>
+<img src="/img/20180429205052660" alt=""></li>
 <li>说明<br>
 在For XML Auto的基础上，将原来是属性的列名变为了标签。</li>
 </ul>

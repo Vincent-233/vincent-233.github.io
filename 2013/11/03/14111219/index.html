@@ -111,7 +111,7 @@
 </div><div class="content post__content clearfix">
 			<h2 id="需求">需求：</h2>
 <p>有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。</p>
-<p><img src="/blog/img/20131103231231390" alt=""></p>
+<p><img src="/img/20131103231231390" alt=""></p>
 <h2 id="分析">分析：</h2>
 <p>员工的下属也可能是其他员工的上司，即下属也有下属，这样一直找，直到某员工没有下属为止。SQL SERVER 从 2005 起，开始支持 CTE 表达式，可以帮助我们更好的处理这样的一类递归问题。为了体现出递归的简洁，我们先给出非递归即迭代解法：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> object_id(<span style="color:#e6db74">&#39;dbo.findEmp&#39;</span>,<span style="color:#e6db74">&#39;TF&#39;</span>) <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>

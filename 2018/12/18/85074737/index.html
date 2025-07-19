@@ -112,7 +112,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> NOCOUNT <span style="color:#66d9ef">ON</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">table</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>ROWCOUNT
-</span></span></code></pre></div><p><img src="/blog/img/20181218185840307.png" alt=""></p>
+</span></span></code></pre></div><p><img src="/img/20181218185840307.png" alt=""></p>
 <ul>
 <li>触发器之内，@@ROWCOUNT 被 SET NOCOUNT ON 清零</li>
 </ul>
@@ -136,7 +136,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 查看@@ROWCOUNT
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> RowCNT
 </span></span></code></pre></div><p>结果如下：<br>
-<img src="/blog/img/20181218190333531.png" alt=""><br>
+<img src="/img/20181218190333531.png" alt=""><br>
 若将上述触发器中的Set NoCount On去掉，再次运行Update语句后，发现@@ROWCOUNT恢复正常。</p>
 
 		</div>

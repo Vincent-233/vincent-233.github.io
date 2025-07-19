@@ -114,7 +114,7 @@
 <p>实施上就是一个数据访问接口，用于在office文件和非office应用程序间传输数据。例如Microsoft Office Access 2010（<em>.mdb和</em>.accdb）文件和Microsoft Office Excel 2010（<em>.xls、</em>.xlsx和*.xlsb）文件）与其他资料源（例如Microsoft SQL Server）之间传输资料。</p>
 <h2 id="2microsoftaceoledb120-在-mssql中的应用">2.Microsoft.ACE.OLEDB.12.0 在 MSSQL中的应用</h2>
 <p>进入SSMS后，在对象资源管理器中，位次展开&quot;服务器对象&quot;&mdash; &ldquo;链接服务器&rdquo;&mdash;&ldquo;访问接口&rdquo;，如果在访问接口下面找到了Microsoft.ACE.OLEDB.12.0（如下图），则说明已经安装此接口。也有可能版本号不是12.0，此版本是对应Office 2010的。一般情况下，如果安装了Office，此接口会跟著一起被安装。</p>
-<p><img src="/blog/img/19000277.png" alt=""></p>
+<p><img src="/img/19000277.png" alt=""></p>
 <p>如果没能找到此接口，说明系统没有安装Office或者所安装版本（32bit或64bit）与SQL Server版本不一致。可以有如下解决方案：</p>
 <p>a) 若Office与MSSQL位数不一致，重新安装与SQL Server位数相同的Office，同为32bit或64bit；<br>
 b) 若不准备安装Office，可以单独安装Microsoft.ACE.OLEDB.12.0：<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine.exe">32bit</a>下载或<a href="http://download.microsoft.com/download/E/4/2/E4220252-5FAE-4F0A-B1B9-0B48B5FBCCF9/AccessDatabaseEngine_X64.exe">64bit</a>下载。</p>

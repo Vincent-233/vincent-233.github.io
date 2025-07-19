@@ -122,16 +122,16 @@
 <p>注意：由于SSDT目前只有32位版本，最好安装32bit的ACE驱动，而且相同版本的驱动或Office软件，要么装32位，要么装64位，无法并存。比如已安装了Office 2016 64 bit，就无法安装ACE16.0 32bit，但可以同时安装ACE 12.0 64bit。</p>
 <h3 id="多余空行">多余空行</h3>
 <p>用户提供的Excel中间存在空行，或肉眼看上去没有空行，但实际SSIS抽取的数据中最后会有多余空行。<br>
-<img src="/blog/img/20191204225708725.png" alt=""><br>
+<img src="/img/20191204225708725.png" alt=""><br>
 如何去除这些空行呢？方法两有种：</p>
 <ul>
 <li>SSIS不做任何转换，先将原始数据加载到一个中间表，比如stg_xxx，然后再执行过滤空行的SQL语句，将中间表数据加载到最终表；</li>
 <li>在SSIS中用 Conditional Split 组件过滤空行<br>
-<img src="/blog/img/20191204230733163.png" alt=""></li>
+<img src="/img/20191204230733163.png" alt=""></li>
 </ul>
 <h3 id="excel中有值但抽出来为null">Excel中有值，但抽出来为NULL</h3>
 <p>这种情况一般出现在含纯数字文本的列中，Excel默认按前8行数据推测数据类型，若某列前8行数据都是数字，ACE抽出来的数，会认定为Float类型，后续行若与Float类型不兼容，会被自动转为NULL。<br>
-<img src="/blog/img/2019120423235678.png" alt=""></p>
+<img src="/img/2019120423235678.png" alt=""></p>
 <p>避免以上情况也有两种办法：</p>
 <ul>
 <li>a）<strong>更新注册表，将默认8行，改为更大的数，或者0（无限大），同时连接字符串加上IMEX=1</strong>
@@ -141,14 +141,14 @@
 <ul>
 <li>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Office\14.0\Access Connectivity Engine\Engines\Excel\TypeGuessRows（32位）</li>
 <li>HKEY_LOCAL_MACHINE\Software\Microsoft\Office\14.0\Access Connectivity Engine\Engines\Excel\TypeGuessRows （64位）<br>
-<img src="/blog/img/20191204234847699.png" alt=""></li>
+<img src="/img/20191204234847699.png" alt=""></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>b）<strong>将Excel中对应列都改为Text类型，而不是General类型</strong><br>
 若没有权限无法更新注册表，就只能更新Excel文件单元格字段属性<br>
-<img src="/blog/img/20191205000223664.png" alt=""></li>
+<img src="/img/20191205000223664.png" alt=""></li>
 </ul>
 <h3 id="总结">总结</h3>
 <p>用SSIS直接抽取Excel数据真是问题多多，如果可以，还是用平面文件（如CSV）更方便。<br>

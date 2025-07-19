@@ -115,7 +115,7 @@
 </div><div class="content post__content clearfix">
 			<h3 id="问题场景">问题场景</h3>
 <p>仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python.exe无法顺利引用第三方库。<br>
-<img src="/blog/img/20190810174048670.png" alt=""><br>
+<img src="/img/20190810174048670.png" alt=""><br>
 如上图所示，若不用conda激活python虚拟环境，直接切换到conda目录运行python，会各种警告，import pandas更是报错，基本只能用python标准库。</p>
 <h3 id="解决方案">解决方案</h3>
 <p>一条命令无法解决，那就用多条，于是想到模拟Anaconda Prompt的激活过程，新建一CMD或PowerShell脚本，先激活环境再运行python文件即可。</p>

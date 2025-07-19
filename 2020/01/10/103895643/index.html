@@ -139,9 +139,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FULL</span> <span style="color:#66d9ef">OUTER</span> <span style="color:#66d9ef">JOIN</span> TB b <span style="color:#66d9ef">ON</span> a.ID <span style="color:#f92672">=</span> b.ID
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FULL</span> <span style="color:#66d9ef">OUTER</span> <span style="color:#66d9ef">JOIN</span> TC <span style="color:#66d9ef">c</span> <span style="color:#66d9ef">ON</span> a.ID <span style="color:#f92672">=</span> <span style="color:#66d9ef">c</span>.ID
 </span></span></code></pre></div><p>查询结果如下：<br>
-<img src="/blog/img/20200110104121912.png" alt=""><br>
+<img src="/img/20200110104121912.png" alt=""><br>
 可以发现ID会有重复，所以这样写是不稳妥的，但为什么会错误呢，请看下图：<br>
-<img src="/blog/img/20200110105617928.png" alt=""><br>
+<img src="/img/20200110105617928.png" alt=""><br>
 由于两个Full Join的条件都是与TA进行ID相等性连接，那么对TA中不存在且TB和TC都存在的ID，就会出现两条不同的记录。</p>
 <h3 id="正确写法">正确写法</h3>
 <ul>
