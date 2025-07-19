@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/tools/</link>
+    <link>https://vincent-233.github.io/tags/tools/</link>
     <description>Recent content in Tools on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Apr 2019 04:41:52 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Apr 2019 04:41:52 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用SQL Workbench/J批量生成DDL和Insert脚本</title>
-      <link>https://vincent-233.github.io/blog/2019/04/14/89295092/</link>
+      <link>https://vincent-233.github.io/2019/04/14/89295092/</link>
       <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
+      <guid>https://vincent-233.github.io/2019/04/14/89295092/</guid>
       <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     

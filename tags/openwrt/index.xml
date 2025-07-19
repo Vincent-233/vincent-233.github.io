@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenWrt on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/openwrt/</link>
+    <link>https://vincent-233.github.io/tags/openwrt/</link>
     <description>Recent content in OpenWrt on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Mar 2025 21:18:39 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/openwrt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Mar 2025 21:18:39 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/openwrt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OpenWrt安装代理软件</title>
-      <link>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</link>
+      <link>https://vincent-233.github.io/2025/03/11/soft_router_usage/</link>
       <pubDate>Tue, 11 Mar 2025 21:18:39 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2025/03/11/soft_router_usage/</guid>
+      <guid>https://vincent-233.github.io/2025/03/11/soft_router_usage/</guid>
       <description>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装代理软件openclash，建议路由器的 RAM 至少 256MB ，避免带不动的情况。 在网页版管理界</description>
     </item>
     

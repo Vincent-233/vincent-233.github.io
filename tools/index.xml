@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tools/</link>
+    <link>https://vincent-233.github.io/tools/</link>
     <description>Recent content in Tools on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2023 00:11:23 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Dec 2023 00:11:23 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>提升SSMS使用效率的一些Tips</title>
-      <link>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</link>
+      <link>https://vincent-233.github.io/2023/12/19/ssms_tips/</link>
       <pubDate>Tue, 19 Dec 2023 00:11:23 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</guid>
+      <guid>https://vincent-233.github.io/2023/12/19/ssms_tips/</guid>
       <description>本人工作中最常用的数据库就是Microsoft SQL Server，SSMS这个软件自然也是使用了多年，如果能搭配SQL Prompt这个插件，效率</description>
     </item>
     
     <item>
       <title>sqlcmd使用体验</title>
-      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
+      <link>https://vincent-233.github.io/2020/06/14/106740950/</link>
       <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
+      <guid>https://vincent-233.github.io/2020/06/14/106740950/</guid>
       <description>为何要用SQLCMD 平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常</description>
     </item>
     
     <item>
       <title>无管理员权限如何运行Everything</title>
-      <link>https://vincent-233.github.io/blog/2020/05/16/106153966/</link>
+      <link>https://vincent-233.github.io/2020/05/16/106153966/</link>
       <pubDate>Sat, 16 May 2020 09:23:58 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/05/16/106153966/</guid>
+      <guid>https://vincent-233.github.io/2020/05/16/106153966/</guid>
       <description>场景 公司电脑无管理员权限，无法自行安装软件，经申请安装上了everything（通过域管理自动安装），但启动时提示需要管理员权限，让输入账号</description>
     </item>
     
     <item>
       <title>配置everything支持网络路径共享文件夹搜索</title>
-      <link>https://vincent-233.github.io/blog/2019/07/09/95170415/</link>
+      <link>https://vincent-233.github.io/2019/07/09/95170415/</link>
       <pubDate>Tue, 09 Jul 2019 10:15:53 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/09/95170415/</guid>
+      <guid>https://vincent-233.github.io/2019/07/09/95170415/</guid>
       <description>everything已经成为我windows平台下的重度依赖软件，其对本地文件的搜索高效快速准确，但默认是不支持网络路径文件夹内文件搜索的：</description>
     </item>
     
     <item>
       <title>用SQL Workbench/J批量生成DDL和Insert脚本</title>
-      <link>https://vincent-233.github.io/blog/2019/04/14/89295092/</link>
+      <link>https://vincent-233.github.io/2019/04/14/89295092/</link>
       <pubDate>Sun, 14 Apr 2019 04:41:52 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/14/89295092/</guid>
+      <guid>https://vincent-233.github.io/2019/04/14/89295092/</guid>
       <description>最近项目上用到Amazon的Redshift数据库， 由于没有官方客户端，于是去网上找通用SQL客户端，发现一个叫SQL Workbench/J</description>
     </item>
     

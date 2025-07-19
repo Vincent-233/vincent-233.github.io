@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>virtual box on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/virtual-box/</link>
+    <link>https://vincent-233.github.io/tags/virtual-box/</link>
     <description>Recent content in virtual box on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Apr 2019 13:56:35 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/virtual-box/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Apr 2019 13:56:35 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/virtual-box/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VirtualBox找不到桥接网卡问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/04/13/89281652/</link>
+      <link>https://vincent-233.github.io/2019/04/13/89281652/</link>
       <pubDate>Sat, 13 Apr 2019 13:56:35 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/13/89281652/</guid>
+      <guid>https://vincent-233.github.io/2019/04/13/89281652/</guid>
       <description>配置虚拟机桥接上网模式时，发现选择不了网卡，找资料发现需要在网络适配器中开启如下选项： 如果发现电脑上无此选项，可以如下操作： 找到virtua</description>
     </item>
     

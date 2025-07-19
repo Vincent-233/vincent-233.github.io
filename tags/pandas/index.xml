@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pandas on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/pandas/</link>
+    <link>https://vincent-233.github.io/tags/pandas/</link>
     <description>Recent content in pandas on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jun 2020 23:55:02 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jun 2020 23:55:02 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>pandas数据处理，行列转换</title>
-      <link>https://vincent-233.github.io/blog/2020/06/21/106893478/</link>
+      <link>https://vincent-233.github.io/2020/06/21/106893478/</link>
       <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/21/106893478/</guid>
+      <guid>https://vincent-233.github.io/2020/06/21/106893478/</guid>
       <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3</description>
     </item>
     
     <item>
       <title>Pandas读取Excel数据，简单清洗后存入数据库</title>
-      <link>https://vincent-233.github.io/blog/2019/04/18/89390714/</link>
+      <link>https://vincent-233.github.io/2019/04/18/89390714/</link>
       <pubDate>Thu, 18 Apr 2019 23:32:36 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/18/89390714/</guid>
+      <guid>https://vincent-233.github.io/2019/04/18/89390714/</guid>
       <description>场景描述 客户提供的Excel文件，需要进行简单清洗之后导入数据库。 代码实现 import pandas as pd import numpy as np import os from sqlalchemy import create_engine from sqlalchemy import text from sqlalchemy.types import Integer from sqlalchemy.types import NVARCHAR # Excel文</description>
     </item>
     

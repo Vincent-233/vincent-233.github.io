@@ -2,467 +2,467 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>数据库开发 on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</link>
+    <link>https://vincent-233.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 数据库开发 on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Mar 2025 23:20:36 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 23:20:36 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SQL Server中几个重要的SET OPTION，非必要不建议修改</title>
-      <link>https://vincent-233.github.io/blog/2025/03/23/mssql_two_common_set_option/</link>
+      <link>https://vincent-233.github.io/2025/03/23/mssql_two_common_set_option/</link>
       <pubDate>Sun, 23 Mar 2025 23:20:36 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2025/03/23/mssql_two_common_set_option/</guid>
+      <guid>https://vincent-233.github.io/2025/03/23/mssql_two_common_set_option/</guid>
       <description>SQL Server 中以下两个 SET OPTION 在非必要的情况下均设为ON，可以避免很多意外 SET ANSI_PADDING ON 微软文档中推荐此选项应一直为 ON，且新版本将不支持设为 OFF. 若设置为 OFF，</description>
     </item>
     
     <item>
       <title>IF语句会将@@ROWCOUNT重置为0</title>
-      <link>https://vincent-233.github.io/blog/2025/03/09/mssql_rowcount_variable/</link>
+      <link>https://vincent-233.github.io/2025/03/09/mssql_rowcount_variable/</link>
       <pubDate>Sun, 09 Mar 2025 17:14:40 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2025/03/09/mssql_rowcount_variable/</guid>
+      <guid>https://vincent-233.github.io/2025/03/09/mssql_rowcount_variable/</guid>
       <description>最近遇到一个关于全局变量 @@ROWCOUNT 的值意外变化的问题，代码逻辑是根据不同条件执行不同的 SELECT 语句，然后记录返回行数，大致代码如下： DECLARE @type VARCHAR(20) = &amp;#39;A&amp;#39; IF @type = &amp;#39;A&amp;#39; BEGIN SELECT</description>
     </item>
     
     <item>
       <title>一些有用的T-SQL功能点</title>
-      <link>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</link>
+      <link>https://vincent-233.github.io/2024/07/27/tsql_specfic_feature/</link>
       <pubDate>Sat, 27 Jul 2024 10:25:50 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2024/07/27/tsql_specfic_feature/</guid>
+      <guid>https://vincent-233.github.io/2024/07/27/tsql_specfic_feature/</guid>
       <description>不同的SQL引擎在一定程度上支持SQL标准之外，还有一些自己的特有语法，一般称为SQL方言，本文主要记录我觉得比较有用的“冷门”SQL Ser</description>
     </item>
     
     <item>
       <title>MSSQL 2016 - 2019，新功能</title>
-      <link>https://vincent-233.github.io/blog/2023/09/15/mssql_2016_to_2019_new_feature/</link>
+      <link>https://vincent-233.github.io/2023/09/15/mssql_2016_to_2019_new_feature/</link>
       <pubDate>Fri, 15 Sep 2023 22:32:38 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/09/15/mssql_2016_to_2019_new_feature/</guid>
+      <guid>https://vincent-233.github.io/2023/09/15/mssql_2016_to_2019_new_feature/</guid>
       <description>我最近才开始接触SQL Server 2019，从2014版本到2019它新增了很多功能，但我暂时都用不上，这里主要从一个传统的数据库开发者角度去记录一些</description>
     </item>
     
     <item>
       <title>Python运行MSSQL存储过程采坑记</title>
-      <link>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</link>
+      <link>https://vincent-233.github.io/2023/08/21/notes_about_pyodbc_and_mssql_sp/</link>
       <pubDate>Mon, 21 Aug 2023 00:02:42 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/08/21/notes_about_pyodbc_and_mssql_sp/</guid>
+      <guid>https://vincent-233.github.io/2023/08/21/notes_about_pyodbc_and_mssql_sp/</guid>
       <description>虽然入门Python已近4年，但由于日常工作中，特别是生产环境上没有Python项目，对Python一直不算非常熟练，基本上只是偶尔用它在本</description>
     </item>
     
     <item>
       <title>T-SQL聚合拼接或求和，不可靠（SELECT @x = @x &#43; ...）</title>
-      <link>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</link>
+      <link>https://vincent-233.github.io/2022/12/04/agg_select_string_concat_unreliable/</link>
       <pubDate>Sun, 04 Dec 2022 11:00:05 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/12/04/agg_select_string_concat_unreliable/</guid>
+      <guid>https://vincent-233.github.io/2022/12/04/agg_select_string_concat_unreliable/</guid>
       <description>背景 写T-SQL的人经常会看到通过如下方式进行字符串拼接或求和： DECLARE @x_str VARCHAR(100) = &amp;#39;&amp;#39;, @x_sum INT = 0; -- 字符串拼接 SELECT @x_str = @x_str + col_str FROM Table_x; PRINT @x_str; -- 数值求和 SELECT @x_sum = @x_sum + col_int FROM Table_x;</description>
     </item>
     
     <item>
       <title>SQL Server空表依然占用空间</title>
-      <link>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</link>
+      <link>https://vincent-233.github.io/2022/09/04/mssql_delete_no_space_release/</link>
       <pubDate>Sun, 04 Sep 2022 17:08:34 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/09/04/mssql_delete_no_space_release/</guid>
+      <guid>https://vincent-233.github.io/2022/09/04/mssql_delete_no_space_release/</guid>
       <description>最近查看表空间占用情况时，发现有个表行数为0，但占用空间依然非常高，对database进行Shrink也不会释放，百思不得其解，后面查资料发</description>
     </item>
     
     <item>
       <title>关于SQL Server LocalDB的使用</title>
-      <link>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</link>
+      <link>https://vincent-233.github.io/2022/04/23/about-mssql-local-db/</link>
       <pubDate>Sat, 23 Apr 2022 20:17:46 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/04/23/about-mssql-local-db/</guid>
+      <guid>https://vincent-233.github.io/2022/04/23/about-mssql-local-db/</guid>
       <description>日常工作电脑不方便自行安装SQL Server实例，服务器又是多人共享开发，权限也管理得很严格，不方便个人测试和临时数据存储，好在安装的SSD</description>
     </item>
     
     <item>
       <title>sqlcmd使用体验</title>
-      <link>https://vincent-233.github.io/blog/2020/06/14/106740950/</link>
+      <link>https://vincent-233.github.io/2020/06/14/106740950/</link>
       <pubDate>Sun, 14 Jun 2020 17:02:48 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/14/106740950/</guid>
+      <guid>https://vincent-233.github.io/2020/06/14/106740950/</guid>
       <description>为何要用SQLCMD 平时习惯了在SSMS中做开发，有什么变动也直接在SSMS的查询界面中执行，更新的对象和步骤少还好，如果一下子需要执行非常</description>
     </item>
     
     <item>
       <title>SQL数据处理，字符串先拆分后合并</title>
-      <link>https://vincent-233.github.io/blog/2020/06/13/106734253/</link>
+      <link>https://vincent-233.github.io/2020/06/13/106734253/</link>
       <pubDate>Sat, 13 Jun 2020 17:35:24 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/13/106734253/</guid>
+      <guid>https://vincent-233.github.io/2020/06/13/106734253/</guid>
       <description>需求 以上数据样例，需要转为： 实际业务数据可能不止以上两列，而且数据量比较大，实现时要考虑性能。 本文用SQL实现。 思路 看上去是简单的字符串拆分</description>
     </item>
     
     <item>
       <title>根据日历表生成财年及周编号</title>
-      <link>https://vincent-233.github.io/blog/2020/03/20/104987643/</link>
+      <link>https://vincent-233.github.io/2020/03/20/104987643/</link>
       <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/20/104987643/</guid>
+      <guid>https://vincent-233.github.io/2020/03/20/104987643/</guid>
       <description>概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字</description>
     </item>
     
     <item>
       <title>数据库生成测试数据（SQL实现）</title>
-      <link>https://vincent-233.github.io/blog/2020/03/01/104594475/</link>
+      <link>https://vincent-233.github.io/2020/03/01/104594475/</link>
       <pubDate>Sun, 01 Mar 2020 18:19:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/03/01/104594475/</guid>
+      <guid>https://vincent-233.github.io/2020/03/01/104594475/</guid>
       <description>需求 项目中偶尔会有造数据进行测试的情况，根据常见的数据特征，我这里假设数据某表Table_X含4个字段，每个字段的要求如下，需要造出5000</description>
     </item>
     
     <item>
       <title>多表Full Outer Join的问题</title>
-      <link>https://vincent-233.github.io/blog/2020/01/10/103895643/</link>
+      <link>https://vincent-233.github.io/2020/01/10/103895643/</link>
       <pubDate>Fri, 10 Jan 2020 11:39:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/01/10/103895643/</guid>
+      <guid>https://vincent-233.github.io/2020/01/10/103895643/</guid>
       <description>熟悉SQL的开发者都知道Full Join（同Full Outer Join）是左右两个表的记录都取，但若多个表之间Full Join，较容易出现意料之外的</description>
     </item>
     
     <item>
       <title>Python数据库编程（以pyodbc和SQLAlchemy为例）</title>
-      <link>https://vincent-233.github.io/blog/2019/09/14/100814954/</link>
+      <link>https://vincent-233.github.io/2019/09/14/100814954/</link>
       <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
+      <guid>https://vincent-233.github.io/2019/09/14/100814954/</guid>
       <description>概述 本文以pyodbc和sqlalchemy操作SQL Server为例说明python的数据库编程。 pyodbc pyodbc只是众多python database dr</description>
     </item>
     
     <item>
       <title>SQL Server用Cross Apply、Cross Join实现列转行</title>
-      <link>https://vincent-233.github.io/blog/2019/07/20/96520306/</link>
+      <link>https://vincent-233.github.io/2019/07/20/96520306/</link>
       <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/20/96520306/</guid>
+      <guid>https://vincent-233.github.io/2019/07/20/96520306/</guid>
       <description>今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&amp;#39;Q1&amp;#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL</description>
     </item>
     
     <item>
       <title>交叉表转换为横表</title>
-      <link>https://vincent-233.github.io/blog/2019/07/16/95868267/</link>
+      <link>https://vincent-233.github.io/2019/07/16/95868267/</link>
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/07/16/95868267/</guid>
+      <guid>https://vincent-233.github.io/2019/07/16/95868267/</guid>
       <description>做BI或数据分析时，经常会遇到各类格式转换，这里将最近遇到的一个例子记录一下，分享几种SQL写法。 需求 千言万语抵不上一张图： 数据准备 CREATE TABLE dbo.CategoryConfig(Category VARCHAR(20),[Level]</description>
     </item>
     
     <item>
       <title>Set NoCount On导致触发器@@RowCount为0</title>
-      <link>https://vincent-233.github.io/blog/2018/12/18/85074737/</link>
+      <link>https://vincent-233.github.io/2018/12/18/85074737/</link>
       <pubDate>Tue, 18 Dec 2018 19:08:35 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/12/18/85074737/</guid>
+      <guid>https://vincent-233.github.io/2018/12/18/85074737/</guid>
       <description>今天无意中发现SQL Server一个疑似Bug的特性，特此记录。 由于对表的DML操作无论有无数据被影响，Trigger都会被执行，所以为提升</description>
     </item>
     
     <item>
       <title>再谈SQL Server字符串拆分与分列</title>
-      <link>https://vincent-233.github.io/blog/2018/12/08/84891624/</link>
+      <link>https://vincent-233.github.io/2018/12/08/84891624/</link>
       <pubDate>Sat, 08 Dec 2018 12:58:21 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/12/08/84891624/</guid>
+      <guid>https://vincent-233.github.io/2018/12/08/84891624/</guid>
       <description>字符串拆分函数 刚工作那会写了一篇关于字符串拆分的文章，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。 为了考</description>
     </item>
     
     <item>
       <title>报表动态MTD、YTD查询语句</title>
-      <link>https://vincent-233.github.io/blog/2018/10/08/82964958/</link>
+      <link>https://vincent-233.github.io/2018/10/08/82964958/</link>
       <pubDate>Mon, 08 Oct 2018 10:49:11 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/10/08/82964958/</guid>
+      <guid>https://vincent-233.github.io/2018/10/08/82964958/</guid>
       <description>经常会有报表需要动态查询MTD和YTD汇总。这里解释一下含义： MTD（Month To Date）：从月初到当前日期 YTD（Year To Date）：</description>
     </item>
     
     <item>
       <title>SQL Server Audit 功能体验</title>
-      <link>https://vincent-233.github.io/blog/2018/09/24/82832350/</link>
+      <link>https://vincent-233.github.io/2018/09/24/82832350/</link>
       <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/09/24/82832350/</guid>
+      <guid>https://vincent-233.github.io/2018/09/24/82832350/</guid>
       <description>@[TOC](SQL Server Audit 功能体验 ) SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法还请自行翻阅联机</description>
     </item>
     
     <item>
       <title>SQL Server 邮件功能使用</title>
-      <link>https://vincent-233.github.io/blog/2018/08/07/81481585/</link>
+      <link>https://vincent-233.github.io/2018/08/07/81481585/</link>
       <pubDate>Tue, 07 Aug 2018 15:07:49 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/08/07/81481585/</guid>
+      <guid>https://vincent-233.github.io/2018/08/07/81481585/</guid>
       <description>SQL Server有自带的邮件服务，可以用它来做一些自动通知提醒的邮件，如警报和通知。下面总结一下它的配置与使用。 配置Database Mail 配置入口</description>
     </item>
     
     <item>
       <title>SQL复制（订阅、发布）实践问题记录</title>
-      <link>https://vincent-233.github.io/blog/2018/06/18/80724609/</link>
+      <link>https://vincent-233.github.io/2018/06/18/80724609/</link>
       <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/06/18/80724609/</guid>
+      <guid>https://vincent-233.github.io/2018/06/18/80724609/</guid>
       <description>关于SQL复制的具体操作步骤网上有很多教程我就不说明了，这里主要记录下我的实践，以及过程中遇到的问题与解决方法： 本机不同数据库间复制 本机配置</description>
     </item>
     
     <item>
       <title>SQL Server FileStream 体验</title>
-      <link>https://vincent-233.github.io/blog/2018/06/03/80553895/</link>
+      <link>https://vincent-233.github.io/2018/06/03/80553895/</link>
       <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/06/03/80553895/</guid>
+      <guid>https://vincent-233.github.io/2018/06/03/80553895/</guid>
       <description>FileStream是SQL Server 2008提供的新特性，之前附件在SQL的存储一种是直接放数据库，一种是存储一个路径，附件单独放在磁盘上。前一种</description>
     </item>
     
     <item>
       <title>SQL Server透明数据加密（TDE）实践</title>
-      <link>https://vincent-233.github.io/blog/2018/05/22/80404769/</link>
+      <link>https://vincent-233.github.io/2018/05/22/80404769/</link>
       <pubDate>Tue, 22 May 2018 14:19:56 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/05/22/80404769/</guid>
+      <guid>https://vincent-233.github.io/2018/05/22/80404769/</guid>
       <description>透明数据加密（Transparent Data Encryption）主要用于防止数据库文件被未经授权地拷贝或服务器被盗后通过附加/还原等操作访问数据</description>
     </item>
     
     <item>
       <title>SQL Server分区表实践</title>
-      <link>https://vincent-233.github.io/blog/2018/05/21/80387148/</link>
+      <link>https://vincent-233.github.io/2018/05/21/80387148/</link>
       <pubDate>Mon, 21 May 2018 00:38:33 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/05/21/80387148/</guid>
+      <guid>https://vincent-233.github.io/2018/05/21/80387148/</guid>
       <description>建立分区表的步骤： 新建文件组（FileGroups） 新建用于承载具体分区的文件组，数据库默认有只有一个Primary文件组。 也可以在单个文件</description>
     </item>
     
     <item>
       <title>SQL Server 常见For XML语句比较</title>
-      <link>https://vincent-233.github.io/blog/2018/04/29/80145292/</link>
+      <link>https://vincent-233.github.io/2018/04/29/80145292/</link>
       <pubDate>Sun, 29 Apr 2018 20:58:42 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2018/04/29/80145292/</guid>
+      <guid>https://vincent-233.github.io/2018/04/29/80145292/</guid>
       <description>SQL语句： SELECT TOP (3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid 结果： For XML Raw sql SELECT TOP(3) a.orderid,b.companyname,c.firstname FROM Sales.MyOrders a INNER JOIN Sales.Customers b ON b.custid = a.custid INNER JOIN HR.Employees c ON a.empid = c.empid FOR XML RAW 结果 说明 每一条记录</description>
     </item>
     
     <item>
       <title>SQL Server中的小数近似处理实例</title>
-      <link>https://vincent-233.github.io/blog/2017/08/10/77043631/</link>
+      <link>https://vincent-233.github.io/2017/08/10/77043631/</link>
       <pubDate>Thu, 10 Aug 2017 11:14:16 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/08/10/77043631/</guid>
+      <guid>https://vincent-233.github.io/2017/08/10/77043631/</guid>
       <description>-- 四舍五入，在小数点后1位舍入 SELECT ROUND(54.565,1) -- 54.600 -- 四舍五入，取整 SELECT ROUND(54.565,0) -- 55.000 -- 四舍五入，在小数点前1位舍入 SELECT ROUND(55.565,-1) -- 60.000 -- 向上取整 SELECT CEILING(34.634) -- 35 -- 向下取整 SELECT FLOOR(34.634) -- 34 -- 小</description>
     </item>
     
     <item>
       <title>SQL CLR函数（以正则表达式为例）</title>
-      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
+      <link>https://vincent-233.github.io/2017/03/04/60332993/</link>
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <guid>https://vincent-233.github.io/2017/03/04/60332993/</guid>
       <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
     </item>
     
     <item>
       <title>DBA眼中的CLR (译)</title>
-      <link>https://vincent-233.github.io/blog/2017/03/04/60330115/</link>
+      <link>https://vincent-233.github.io/2017/03/04/60330115/</link>
       <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/03/04/60330115/</guid>
+      <guid>https://vincent-233.github.io/2017/03/04/60330115/</guid>
       <description>SQL Server 2005引入CLR之后，开发者们热情地接受了它。 CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</description>
     </item>
     
     <item>
       <title>从登陆名与用户名的区别说起，谈SQL Server安全性初步</title>
-      <link>https://vincent-233.github.io/blog/2015/05/31/46288335/</link>
+      <link>https://vincent-233.github.io/2015/05/31/46288335/</link>
       <pubDate>Sun, 31 May 2015 14:17:04 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/31/46288335/</guid>
+      <guid>https://vincent-233.github.io/2015/05/31/46288335/</guid>
       <description>概述 登陆名的作用域是SQL Server数据库引擎，要连接到具体的数据库并进行相应操作，登陆名还需要映射到数据库用户名，并为用户名指定数据库角</description>
     </item>
     
     <item>
       <title>生成连续ID记录行</title>
-      <link>https://vincent-233.github.io/blog/2015/05/20/45874623/</link>
+      <link>https://vincent-233.github.io/2015/05/20/45874623/</link>
       <pubDate>Wed, 20 May 2015 19:44:59 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/20/45874623/</guid>
+      <guid>https://vincent-233.github.io/2015/05/20/45874623/</guid>
       <description>ID值记录行，即每一个数字一行的集合，有些时候在SQL中可以作为辅助表使用，从而用SQL的集合思维去高效解决问题，而不是用循环。 用自定义函数</description>
     </item>
     
     <item>
       <title>SQL Server事务性编程总结</title>
-      <link>https://vincent-233.github.io/blog/2015/05/17/45775271/</link>
+      <link>https://vincent-233.github.io/2015/05/17/45775271/</link>
       <pubDate>Sun, 17 May 2015 00:19:12 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/17/45775271/</guid>
+      <guid>https://vincent-233.github.io/2015/05/17/45775271/</guid>
       <description>为了保证数据的一致性，事务在数据库编程中经常用到，这里对T-SQL中事务的写法做一下总结与解读。 T-SQL中三种事务写法 SQL Sever 2000时代的写</description>
     </item>
     
     <item>
       <title>SQL Server返回随机记录</title>
-      <link>https://vincent-233.github.io/blog/2015/05/15/45741533/</link>
+      <link>https://vincent-233.github.io/2015/05/15/45741533/</link>
       <pubDate>Fri, 15 May 2015 11:32:20 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/05/15/45741533/</guid>
+      <guid>https://vincent-233.github.io/2015/05/15/45741533/</guid>
       <description>###常见的，不一定是最好的 说到返回随机行，很人一般会想到用GUID来排序，这是网上最常用的解决方案： Select Top 100 * From Sales.SalesOrderDetail Order By NewID() 但是这个方案的性能并</description>
     </item>
     
     <item>
       <title>SQL Server 中Merge 的使用</title>
-      <link>https://vincent-233.github.io/blog/2014/12/30/42275987/</link>
+      <link>https://vincent-233.github.io/2014/12/30/42275987/</link>
       <pubDate>Tue, 30 Dec 2014 15:00:04 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/12/30/42275987/</guid>
+      <guid>https://vincent-233.github.io/2014/12/30/42275987/</guid>
       <description>很多人都知道ORACLE中有Merge关键字，其实SQL Server从2008版本开始也支持Merge了。 从而也可以像ORACLE一样在一条</description>
     </item>
     
     <item>
       <title>ORACLE递归查询</title>
-      <link>https://vincent-233.github.io/blog/2014/07/26/38146339/</link>
+      <link>https://vincent-233.github.io/2014/07/26/38146339/</link>
       <pubDate>Sat, 26 Jul 2014 08:36:10 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/07/26/38146339/</guid>
+      <guid>https://vincent-233.github.io/2014/07/26/38146339/</guid>
       <description>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。 这里通过一个简单的例子来介绍</description>
     </item>
     
     <item>
       <title>ORACLE列值合并</title>
-      <link>https://vincent-233.github.io/blog/2014/07/26/38145329/</link>
+      <link>https://vincent-233.github.io/2014/07/26/38145329/</link>
       <pubDate>Sat, 26 Jul 2014 07:46:40 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/07/26/38145329/</guid>
+      <guid>https://vincent-233.github.io/2014/07/26/38145329/</guid>
       <description>合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&amp;#39;北京&amp;#39; FROM dual UNION ALL SELECT</description>
     </item>
     
     <item>
       <title>ORACLE字符串拆分</title>
-      <link>https://vincent-233.github.io/blog/2014/07/26/38139137/</link>
+      <link>https://vincent-233.github.io/2014/07/26/38139137/</link>
       <pubDate>Sat, 26 Jul 2014 01:24:56 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/07/26/38139137/</guid>
+      <guid>https://vincent-233.github.io/2014/07/26/38139137/</guid>
       <description>ORACLE不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。 -- Nested Table CREATE OR REPLACE TYPE</description>
     </item>
     
     <item>
       <title>SQL Server无法删除数据库的解决方法</title>
-      <link>https://vincent-233.github.io/blog/2014/07/11/37717375/</link>
+      <link>https://vincent-233.github.io/2014/07/11/37717375/</link>
       <pubDate>Fri, 11 Jul 2014 18:41:45 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/07/11/37717375/</guid>
+      <guid>https://vincent-233.github.io/2014/07/11/37717375/</guid>
       <description>思路：先删除与此数据库连接的进程，再删除数据库 直接上脚本： -- 删除与此数据库相关的连接 DECLARE @sql VARCHAR(4000) SELECT @sql = ISNULL(@sql,&amp;#39;&amp;#39;) + &amp;#39;kill &amp;#39; + LTRIM(spid) + CHAR(13) from sysprocesses WHERE dbid = DB_ID(&amp;#39;DB_Name&amp;#39;) EXEC(@sql) -- 删除与此数据</description>
     </item>
     
     <item>
       <title>断号查询（查找不连续ID记录）</title>
-      <link>https://vincent-233.github.io/blog/2014/05/18/26179859/</link>
+      <link>https://vincent-233.github.io/2014/05/18/26179859/</link>
       <pubDate>Sun, 18 May 2014 16:06:25 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/05/18/26179859/</guid>
+      <guid>https://vincent-233.github.io/2014/05/18/26179859/</guid>
       <description>需求：找出某列断流的ID号. 例如：1，2，7，8，9. 断流的ID是 3 至 6. 直接上代码算了： 不分组，单列： IF object_ID(&amp;#39;tempdb..#Tab&amp;#39;) IS NOT NULL DROP TABLE #Tab CREATE TABLE #Tab(ID INT) GO INSERT #Tab(ID) SELECT 1 UNION ALL</description>
     </item>
     
     <item>
       <title>SQL Server自增列（Identity列）的所有操作</title>
-      <link>https://vincent-233.github.io/blog/2014/04/13/23562967/</link>
+      <link>https://vincent-233.github.io/2014/04/13/23562967/</link>
       <pubDate>Sun, 13 Apr 2014 06:13:58 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/04/13/23562967/</guid>
+      <guid>https://vincent-233.github.io/2014/04/13/23562967/</guid>
       <description>一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最</description>
     </item>
     
     <item>
       <title>为什么要刷新视图</title>
-      <link>https://vincent-233.github.io/blog/2014/03/23/21862313/</link>
+      <link>https://vincent-233.github.io/2014/03/23/21862313/</link>
       <pubDate>Sun, 23 Mar 2014 03:29:18 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2014/03/23/21862313/</guid>
+      <guid>https://vincent-233.github.io/2014/03/23/21862313/</guid>
       <description>1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶</description>
     </item>
     
     <item>
       <title>SQL Server 2005 无日志文件附加数据库</title>
-      <link>https://vincent-233.github.io/blog/2013/12/27/17620647/</link>
+      <link>https://vincent-233.github.io/2013/12/27/17620647/</link>
       <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/27/17620647/</guid>
+      <guid>https://vincent-233.github.io/2013/12/27/17620647/</guid>
       <description>虽然目前本人用的是2008R2，但很多客户仍然还是2005版本的，所以还是将这篇文章转过来，以备不时之需。在2008下附加2005的mdf应</description>
     </item>
     
     <item>
       <title>SQL递归查询实战</title>
-      <link>https://vincent-233.github.io/blog/2013/12/10/17251887/</link>
+      <link>https://vincent-233.github.io/2013/12/10/17251887/</link>
       <pubDate>Tue, 10 Dec 2013 16:12:08 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/10/17251887/</guid>
+      <guid>https://vincent-233.github.io/2013/12/10/17251887/</guid>
       <description>假设某公司的人员组织结构如下图： 数据库表： CREATE TABLE ORG ( EMPID INT NOT NULL, EMPNAME VARCHAR(128) NOT NULL, MGRID INT NOT NULL ); GO INSERT INTO ORG VALUES(1, &amp;#39;Jack&amp;#39;, 0); INSERT INTO ORG VALUES(2, &amp;#39;Mary&amp;#39;, 1); INSERT INTO ORG VALUES(3, &amp;#39;Tom&amp;#39;, 1); INSERT INTO ORG VALUES(4, &amp;#39;Ben&amp;#39;, 2); INSERT INTO ORG VALUES(5, &amp;#39;John&amp;#39;, 3); INSERT</description>
     </item>
     
     <item>
       <title>奇葩的需求</title>
-      <link>https://vincent-233.github.io/blog/2013/12/09/17231863/</link>
+      <link>https://vincent-233.github.io/2013/12/09/17231863/</link>
       <pubDate>Mon, 09 Dec 2013 15:18:18 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/09/17231863/</guid>
+      <guid>https://vincent-233.github.io/2013/12/09/17231863/</guid>
       <description>生成测试数据： CREATE TABLE [dbo].[aa]( [a] [nchar](10) NULL, [b] [nvarchar](50) NULL, [c] [nvarchar](50) NULL ) ON [PRIMARY] GO INSERT INTO aa VALUES (&amp;#39;a&amp;#39;,&amp;#39;杨静,马丽萍&amp;#39;, &amp;#39;美容师,美体师&amp;</description>
     </item>
     
     <item>
       <title>SQL行转列与列转行</title>
-      <link>https://vincent-233.github.io/blog/2013/12/08/17202973/</link>
+      <link>https://vincent-233.github.io/2013/12/08/17202973/</link>
       <pubDate>Sun, 08 Dec 2013 10:44:16 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/12/08/17202973/</guid>
+      <guid>https://vincent-233.github.io/2013/12/08/17202973/</guid>
       <description>先准备点数据： CREATE TABLE Sell ( [Year] INT, [Quarter] NVARCHAR(10), Quantity INT ) GO INSERT INTO Sell SELECT 2006, &amp;#39;Q1&amp;#39;, 20 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 15 UNION ALL SELECT 2006, &amp;#39;Q2&amp;#39;, 4 UNION ALL SELECT 2006, &amp;#39;Q3&amp;#39;, 12 UNION ALL SELECT 2006, &amp;#39;Q4&amp;#39;, 18 UNION ALL SELECT 2007, &amp;#39;Q1&amp;#39;, 10 UNION ALL SELECT 2007, &amp;#39;Q2&amp;#39;, 10 UNION ALL SELECT 2008, &amp;#39;Q1&amp;#39;, 8 UNION ALL</description>
     </item>
     
     <item>
       <title>Sql提取(去除)字符串中所有汉字、字母、数字</title>
-      <link>https://vincent-233.github.io/blog/2013/11/23/16911599/</link>
+      <link>https://vincent-233.github.io/2013/11/23/16911599/</link>
       <pubDate>Sat, 23 Nov 2013 16:37:54 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/23/16911599/</guid>
+      <guid>https://vincent-233.github.io/2013/11/23/16911599/</guid>
       <description>核心思想在于下面几个模式的组合使用： %[0-9]%： 所有数字 %[A-Za-z]%: 所有字母 %[吖-咗]%: 所有汉字 1. 去除汉字(字母、数字)： 举出一例，其他类似：</description>
     </item>
     
     <item>
       <title>关于Cross Join 和 Outer/Cross Apply</title>
-      <link>https://vincent-233.github.io/blog/2013/11/23/16897427/</link>
+      <link>https://vincent-233.github.io/2013/11/23/16897427/</link>
       <pubDate>Sat, 23 Nov 2013 02:22:07 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/23/16897427/</guid>
+      <guid>https://vincent-233.github.io/2013/11/23/16897427/</guid>
       <description>先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &amp;#39;a&amp;#39; UNION ALL SELECT 1, &amp;#39;b&amp;#39; UNION ALL SELECT 3, &amp;#39;c&amp;#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积</description>
     </item>
     
     <item>
       <title>关于SQL Server 排序规则</title>
-      <link>https://vincent-233.github.io/blog/2013/11/17/16645847/</link>
+      <link>https://vincent-233.github.io/2013/11/17/16645847/</link>
       <pubDate>Sun, 17 Nov 2013 14:18:46 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/17/16645847/</guid>
+      <guid>https://vincent-233.github.io/2013/11/17/16645847/</guid>
       <description>今天写一SQL语句时，被提示&amp;quot; 无法解决 equal to操作中 &amp;ldquo;SQL_Latin1_General_CP1_CI_AS&amp;quot</description>
     </item>
     
     <item>
       <title>SQL 递归查询初体验</title>
-      <link>https://vincent-233.github.io/blog/2013/11/03/14111219/</link>
+      <link>https://vincent-233.github.io/2013/11/03/14111219/</link>
       <pubDate>Sun, 03 Nov 2013 16:00:25 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/11/03/14111219/</guid>
+      <guid>https://vincent-233.github.io/2013/11/03/14111219/</guid>
       <description>需求： 有如下一张职员上司表，要求给一个职工名，返回他直接或间接管理的所有职工名，写一个函数实现。 分析： 员工的下属也可能是其他员工的上司，即下</description>
     </item>
     
     <item>
       <title>SQL练习题（2）</title>
-      <link>https://vincent-233.github.io/blog/2013/07/27/9532985/</link>
+      <link>https://vincent-233.github.io/2013/07/27/9532985/</link>
       <pubDate>Sat, 27 Jul 2013 14:43:45 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/07/27/9532985/</guid>
+      <guid>https://vincent-233.github.io/2013/07/27/9532985/</guid>
       <description>设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称</description>
     </item>
     
     <item>
       <title>SQL练习题（1）</title>
-      <link>https://vincent-233.github.io/blog/2013/07/03/9237409/</link>
+      <link>https://vincent-233.github.io/2013/07/03/9237409/</link>
       <pubDate>Wed, 03 Jul 2013 14:28:57 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/07/03/9237409/</guid>
+      <guid>https://vincent-233.github.io/2013/07/03/9237409/</guid>
       <description>1. 查询每一年加之前年份的积累销售额。比如查询2003年的，就是将2003的销售金额加上以前的销售金额。 原始数据： id ta_year ta_num 1 2001 500 2 2002 300 3 2003 600 查询</description>
     </item>
     

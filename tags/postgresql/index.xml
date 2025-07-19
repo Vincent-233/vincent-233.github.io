@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PostgreSQL on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/postgresql/</link>
+    <link>https://vincent-233.github.io/tags/postgresql/</link>
     <description>Recent content in PostgreSQL on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 May 2019 23:41:55 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 May 2019 23:41:55 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>虚拟机Linux安装PostgreSQL，并让宿主机连接</title>
-      <link>https://vincent-233.github.io/blog/2019/05/14/90217603/</link>
+      <link>https://vincent-233.github.io/2019/05/14/90217603/</link>
       <pubDate>Tue, 14 May 2019 23:41:55 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/05/14/90217603/</guid>
+      <guid>https://vincent-233.github.io/2019/05/14/90217603/</guid>
       <description>安装PostgreSQL 运行如下命令进行安装： sudo apt-get install postgresql Linux本地登陆并修改密码 安装完成之后，Linux会自动创建postgres同名账户</description>
     </item>
     

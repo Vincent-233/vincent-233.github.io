@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Batch on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/batch/</link>
+    <link>https://vincent-233.github.io/tags/batch/</link>
     <description>Recent content in Batch on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/batch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 12:45:47 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/batch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>windows batch script小结</title>
-      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <link>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</link>
       <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <guid>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</guid>
       <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Windows下快速合并文本文件</title>
-      <link>https://vincent-233.github.io/blog/2021/05/16/116887159/</link>
+      <link>https://vincent-233.github.io/2021/05/16/116887159/</link>
       <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
+      <guid>https://vincent-233.github.io/2021/05/16/116887159/</guid>
       <description>需求：将当前目录下所有文本文件合并成一个新文件。 CMD实现 copy *.txt cmd_new.txt 以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的</description>
     </item>
     
     <item>
       <title>定时运行conda虚拟环境的python脚本，问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/08/10/99091928/</link>
+      <link>https://vincent-233.github.io/2019/08/10/99091928/</link>
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
+      <guid>https://vincent-233.github.io/2019/08/10/99091928/</guid>
       <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     

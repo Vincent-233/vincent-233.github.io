@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>windows on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/windows/</link>
+    <link>https://vincent-233.github.io/tags/windows/</link>
     <description>Recent content in windows on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2023 23:55:42 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Sep 2023 23:55:42 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows使用小技巧搜集</title>
-      <link>https://vincent-233.github.io/blog/2023/09/20/windows_tips_collect_keep_updating/</link>
+      <link>https://vincent-233.github.io/2023/09/20/windows_tips_collect_keep_updating/</link>
       <pubDate>Wed, 20 Sep 2023 23:55:42 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/09/20/windows_tips_collect_keep_updating/</guid>
+      <guid>https://vincent-233.github.io/2023/09/20/windows_tips_collect_keep_updating/</guid>
       <description>日常使用中搜集一些有用的windows平台小技巧，持续更新。 复制文件路径 (copy as path) 选中文件，正常右键菜单里没有复制文件路径的选项，按住shfit</description>
     </item>
     
     <item>
       <title>windows batch script小结</title>
-      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <link>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</link>
       <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <guid>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</guid>
       <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>windows conda环境在cmd/powershell/git-bash下的配置</title>
-      <link>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</link>
+      <link>https://vincent-233.github.io/2021/08/15/conda-config-windows/</link>
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2021/08/15/conda-config-windows/</guid>
+      <guid>https://vincent-233.github.io/2021/08/15/conda-config-windows/</guid>
       <description>在windows各类常用的命令行工具下如何快速启动Anaconda环境下的python呢？ 本文介绍一下我的配置。 cmd 任选一在PATH环境变量内</description>
     </item>
     
     <item>
       <title>win10英文版安装笔记</title>
-      <link>https://vincent-233.github.io/blog/2015/09/26/48754333/</link>
+      <link>https://vincent-233.github.io/2015/09/26/48754333/</link>
       <pubDate>Sat, 26 Sep 2015 20:36:16 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/09/26/48754333/</guid>
+      <guid>https://vincent-233.github.io/2015/09/26/48754333/</guid>
       <description>下载与安装 1、在官网下载好系统安装工具，按工具提示，将安装包下载到本地或USB存储介质中; 2、第1步中我选择的是英文安装包，所以最后安装的是</description>
     </item>
     

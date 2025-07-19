@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ubuntu on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/ubuntu/</link>
+    <link>https://vincent-233.github.io/tags/ubuntu/</link>
     <description>Recent content in ubuntu on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Apr 2019 14:52:13 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Apr 2019 14:52:13 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>配置ubuntu允许远程SSH连接</title>
-      <link>https://vincent-233.github.io/blog/2019/04/13/89282667/</link>
+      <link>https://vincent-233.github.io/2019/04/13/89282667/</link>
       <pubDate>Sat, 13 Apr 2019 14:52:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/13/89282667/</guid>
+      <guid>https://vincent-233.github.io/2019/04/13/89282667/</guid>
       <description>前面有篇Blog记录了如何通过vagrant快速安装Ubuntu，但vagrant中的一些Box基本都是事先安装好了一些软件，做好了一些配置</description>
     </item>
     

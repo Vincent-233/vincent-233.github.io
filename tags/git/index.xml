@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GIT on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/git/</link>
+    <link>https://vincent-233.github.io/tags/git/</link>
     <description>Recent content in GIT on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jul 2024 00:07:19 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于回车换行符</title>
-      <link>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</link>
+      <link>https://vincent-233.github.io/2024/07/26/notes_about_crlf/</link>
       <pubDate>Fri, 26 Jul 2024 00:07:19 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</guid>
+      <guid>https://vincent-233.github.io/2024/07/26/notes_about_crlf/</guid>
       <description>术语 回车（Carriage Return, CR, ASCII 13, 通常表示为\r) 换行（Line Feed, LF, ASCII 10，通常表示为\n) 默认值 对于文本文件，Windows默认换行符号为</description>
     </item>
     
     <item>
       <title>Git常见命令</title>
-      <link>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</link>
+      <link>https://vincent-233.github.io/2023/12/17/git_notes_frequently_used_cmd/</link>
       <pubDate>Sun, 17 Dec 2023 21:40:52 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</guid>
+      <guid>https://vincent-233.github.io/2023/12/17/git_notes_frequently_used_cmd/</guid>
       <description>简单罗列一下本人日常使用到的一些git命令 branch git branch -l # 列出本地分支 git branch -a # 列出分支（远程和本地） git branch &amp;lt;new branch name&amp;gt; # 从当前分支创建新分支 git checkout -b &amp;lt;new branch name&amp;gt; #</description>
     </item>
     
     <item>
       <title>Git alias设置</title>
-      <link>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</link>
+      <link>https://vincent-233.github.io/2023/12/17/git_alias_setup/</link>
       <pubDate>Sun, 17 Dec 2023 21:06:09 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/12/17/git_alias_setup/</guid>
+      <guid>https://vincent-233.github.io/2023/12/17/git_alias_setup/</guid>
       <description>一些有用的git command通常非常冗长，alias可以将一些常用的命令简化，从而提高效率。 本文介绍一下我个人使用的alias配置。 step 1 -</description>
     </item>
     
     <item>
       <title>配置Mac/Linux命令行中的Git显示当前Branch名称</title>
-      <link>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</link>
+      <link>https://vincent-233.github.io/2023/11/16/git-mac-config-show-branch/</link>
       <pubDate>Thu, 16 Nov 2023 23:50:00 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/11/16/git-mac-config-show-branch/</guid>
+      <guid>https://vincent-233.github.io/2023/11/16/git-mac-config-show-branch/</guid>
       <description>问题 用过git for windows的都知道它可以在git repo目录下自动显示当前的branch名称，而且当前目录和命令缓冲区分两行显示： 在Ma</description>
     </item>
     
     <item>
       <title>自动为git commit message添加JIRA号</title>
-      <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>
+      <link>https://vincent-233.github.io/2022/09/04/auto_add_jira_commit_msg/</link>
       <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
+      <guid>https://vincent-233.github.io/2022/09/04/auto_add_jira_commit_msg/</guid>
       <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
     </item>
     

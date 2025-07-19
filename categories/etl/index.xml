@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ETL on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/categories/etl/</link>
+    <link>https://vincent-233.github.io/categories/etl/</link>
     <description>Recent content in ETL on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/etl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/categories/etl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSIS脚本任务中动态引入外部dll</title>
-      <link>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</link>
+      <link>https://vincent-233.github.io/2024/07/25/ssis_script_task_external_dll/</link>
       <pubDate>Thu, 25 Jul 2024 16:40:10 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2024/07/25/ssis_script_task_external_dll/</guid>
+      <guid>https://vincent-233.github.io/2024/07/25/ssis_script_task_external_dll/</guid>
       <description>问题 SSIS Script Task中如果要引入第三方dll，通常可以将dll注册到GAC后引用，只要在本地和服务器上都注册，开发和部署都会比较方便，但注册GA</description>
     </item>
     
     <item>
       <title>bcp导入导出报错，字段名含空格</title>
-      <link>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>
+      <link>https://vincent-233.github.io/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>
       <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/02/10/bcp_format_file_error_with_space_in_column_name/</guid>
+      <guid>https://vincent-233.github.io/2023/02/10/bcp_format_file_error_with_space_in_column_name/</guid>
       <description>问题描述 用SQL Server的bcp工具通过导入导出在不同server之间同步表数据，有使用format file，若表字段名称中含有空白字符</description>
     </item>
     
     <item>
       <title>SSIS - 旧版本OLEDB不支持Always On Availability Group</title>
-      <link>https://vincent-233.github.io/blog/2021/06/11/117827867/</link>
+      <link>https://vincent-233.github.io/2021/06/11/117827867/</link>
       <pubDate>Fri, 11 Jun 2021 23:22:57 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2021/06/11/117827867/</guid>
+      <guid>https://vincent-233.github.io/2021/06/11/117827867/</guid>
       <description>问题 数仓项目中有上游将SQL Server升级为Always On高可用集群，导致我们使用OLEDB连接方式的SSIS Package在运行时出现</description>
     </item>
     
     <item>
       <title>pandas数据处理，字符串先拆分再合并</title>
-      <link>https://vincent-233.github.io/blog/2020/06/23/106913549/</link>
+      <link>https://vincent-233.github.io/2020/06/23/106913549/</link>
       <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2020/06/23/106913549/</guid>
+      <guid>https://vincent-233.github.io/2020/06/23/106913549/</guid>
       <description>概述 实现之前文章中用SQL实现的功能： 得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行： 代码 读</description>
     </item>
     
     <item>
       <title>SSIS读取Excel空值问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/12/04/103395928/</link>
+      <link>https://vincent-233.github.io/2019/12/04/103395928/</link>
       <pubDate>Wed, 04 Dec 2019 23:54:10 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/12/04/103395928/</guid>
+      <guid>https://vincent-233.github.io/2019/12/04/103395928/</guid>
       <description>SSIS抽Excel数据，遇到一些问题，特将解决办法记录之，一来备忘，二来给广大开发网友提供参考： 数据访问驱动问题 报错：Microsoft.</description>
     </item>
     
     <item>
       <title>DTExec运行SSIS包日志设置无效问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/11/29/103303254/</link>
+      <link>https://vincent-233.github.io/2019/11/29/103303254/</link>
       <pubDate>Fri, 29 Nov 2019 00:29:45 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/11/29/103303254/</guid>
+      <guid>https://vincent-233.github.io/2019/11/29/103303254/</guid>
       <description>问题描述 Package属性中开启了Logging功能，设置将Log写到SQL Server，在SSDT中运行时，一切正常，日志有写到所设置数据</description>
     </item>
     
     <item>
       <title>SSIS部署报6522错误问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/11/26/103266182/</link>
+      <link>https://vincent-233.github.io/2019/11/26/103266182/</link>
       <pubDate>Tue, 26 Nov 2019 22:36:01 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/11/26/103266182/</guid>
+      <guid>https://vincent-233.github.io/2019/11/26/103266182/</guid>
       <description>问题描述 今日试验SSIS部署，没想到报错了，无论用SSDT或SSMS部署，最后都会报错：在执行用户定义例程或聚合&amp;quot;deploy_p</description>
     </item>
     
     <item>
       <title>pyspark读写S3文件与简单处理（指定Schema，直接写S3或先本地再上传）</title>
-      <link>https://vincent-233.github.io/blog/2019/08/17/99691961/</link>
+      <link>https://vincent-233.github.io/2019/08/17/99691961/</link>
       <pubDate>Sat, 17 Aug 2019 13:47:05 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/08/17/99691961/</guid>
+      <guid>https://vincent-233.github.io/2019/08/17/99691961/</guid>
       <description>概述 随着AWS的流行，越来越多的企业将数据存储在S3上构建数据湖，本文示例如何用PySpark读取S3上的数据，并用结构化API处理与展示，</description>
     </item>
     

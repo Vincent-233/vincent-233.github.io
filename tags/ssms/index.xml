@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SSMS on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/ssms/</link>
+    <link>https://vincent-233.github.io/tags/ssms/</link>
     <description>Recent content in SSMS on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2023 00:11:23 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/ssms/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Dec 2023 00:11:23 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/ssms/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>提升SSMS使用效率的一些Tips</title>
-      <link>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</link>
+      <link>https://vincent-233.github.io/2023/12/19/ssms_tips/</link>
       <pubDate>Tue, 19 Dec 2023 00:11:23 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/12/19/ssms_tips/</guid>
+      <guid>https://vincent-233.github.io/2023/12/19/ssms_tips/</guid>
       <description>本人工作中最常用的数据库就是Microsoft SQL Server，SSMS这个软件自然也是使用了多年，如果能搭配SQL Prompt这个插件，效率</description>
     </item>
     

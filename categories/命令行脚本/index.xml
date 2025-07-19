@@ -2,98 +2,98 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>命令行脚本 on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</link>
+    <link>https://vincent-233.github.io/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/</link>
     <description>Recent content in 命令行脚本 on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Dec 2023 21:40:52 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Dec 2023 21:40:52 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git常见命令</title>
-      <link>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</link>
+      <link>https://vincent-233.github.io/2023/12/17/git_notes_frequently_used_cmd/</link>
       <pubDate>Sun, 17 Dec 2023 21:40:52 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/12/17/git_notes_frequently_used_cmd/</guid>
+      <guid>https://vincent-233.github.io/2023/12/17/git_notes_frequently_used_cmd/</guid>
       <description>简单罗列一下本人日常使用到的一些git命令 branch git branch -l # 列出本地分支 git branch -a # 列出分支（远程和本地） git branch &amp;lt;new branch name&amp;gt; # 从当前分支创建新分支 git checkout -b &amp;lt;new branch name&amp;gt; #</description>
     </item>
     
     <item>
       <title>windows batch script小结</title>
-      <link>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</link>
+      <link>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</link>
       <pubDate>Sun, 05 Mar 2023 12:45:47 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2023/03/05/windows-batch-script-quick-reference/</guid>
+      <guid>https://vincent-233.github.io/2023/03/05/windows-batch-script-quick-reference/</guid>
       <description>&lt;p&gt;本文是关于windows batch script的简单小结，便于个人快速参考。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>自动为git commit message添加JIRA号</title>
-      <link>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</link>
+      <link>https://vincent-233.github.io/2022/09/04/auto_add_jira_commit_msg/</link>
       <pubDate>Sun, 04 Sep 2022 18:59:49 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/09/04/auto_add_jira_commit_msg/</guid>
+      <guid>https://vincent-233.github.io/2022/09/04/auto_add_jira_commit_msg/</guid>
       <description>很多大企业都在用Atlassian全家桶，用JIRA/Confluence/Bitbucket强强组合进行敏捷开发。Bitbucket是Gi</description>
     </item>
     
     <item>
       <title>windows下robocopy的使用</title>
-      <link>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</link>
+      <link>https://vincent-233.github.io/2022/03/26/robocopy-usage/</link>
       <pubDate>Sat, 26 Mar 2022 19:17:46 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2022/03/26/robocopy-usage/</guid>
+      <guid>https://vincent-233.github.io/2022/03/26/robocopy-usage/</guid>
       <description>robocopy是Windows平台下非常好用的同步工具，比起简单的copy，它的功能更强大 比如： 多线程模式。/MT选项 镜像模式，copy时</description>
     </item>
     
     <item>
       <title>Windows下快速合并文本文件</title>
-      <link>https://vincent-233.github.io/blog/2021/05/16/116887159/</link>
+      <link>https://vincent-233.github.io/2021/05/16/116887159/</link>
       <pubDate>Sun, 16 May 2021 12:01:29 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2021/05/16/116887159/</guid>
+      <guid>https://vincent-233.github.io/2021/05/16/116887159/</guid>
       <description>需求：将当前目录下所有文本文件合并成一个新文件。 CMD实现 copy *.txt cmd_new.txt 以上写法有个小小不足之处，若有文件最后一行无换行符，合并后会出现后一个文件的</description>
     </item>
     
     <item>
       <title>PowerShell调用外部程序或脚本的几种方式</title>
-      <link>https://vincent-233.github.io/blog/2019/12/30/103766391/</link>
+      <link>https://vincent-233.github.io/2019/12/30/103766391/</link>
       <pubDate>Mon, 30 Dec 2019 14:59:50 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/12/30/103766391/</guid>
+      <guid>https://vincent-233.github.io/2019/12/30/103766391/</guid>
       <description>PowerShell调用外部程序或脚本的方式非常多，下面总结几种调用方式和常规用法。 1. 直接调用 优点：简单易用，但可能不够稳定 说明：直接用程序</description>
     </item>
     
     <item>
       <title>定时运行conda虚拟环境的python脚本，问题解决</title>
-      <link>https://vincent-233.github.io/blog/2019/08/10/99091928/</link>
+      <link>https://vincent-233.github.io/2019/08/10/99091928/</link>
       <pubDate>Sat, 10 Aug 2019 19:12:13 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/08/10/99091928/</guid>
+      <guid>https://vincent-233.github.io/2019/08/10/99091928/</guid>
       <description>问题场景 仅安装了conda版的python环境，需要在Task Schedule中定时运行某python脚本，可是直接在命令中运行python</description>
     </item>
     
     <item>
       <title>SVN批量移动文件，并保留版本日志</title>
-      <link>https://vincent-233.github.io/blog/2019/04/27/89609806/</link>
+      <link>https://vincent-233.github.io/2019/04/27/89609806/</link>
       <pubDate>Sat, 27 Apr 2019 23:37:19 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/27/89609806/</guid>
+      <guid>https://vincent-233.github.io/2019/04/27/89609806/</guid>
       <description>场景 希望将SVN文件移动到其它文件夹下，且保存SVN日志。如果是少数几个文件还好 ，对每个文件分别用SVN的rename功能（或选中多个右键拖</description>
     </item>
     
     <item>
       <title>ls -l命令结果解析</title>
-      <link>https://vincent-233.github.io/blog/2019/04/09/89160917/</link>
+      <link>https://vincent-233.github.io/2019/04/09/89160917/</link>
       <pubDate>Tue, 09 Apr 2019 20:26:25 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/04/09/89160917/</guid>
+      <guid>https://vincent-233.github.io/2019/04/09/89160917/</guid>
       <description>使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图： vagrant@vagrant-ubuntu-trusty-64:~$ ls -l total 528 -rw-r--r-- 1 vagrant vagrant 1656 Jul 17 2015 cephalopods.txt -rw-r--r-- 1 vagrant vagrant 1264 Jul 17 2015 gastropods_draft.txt -rw-r--r-- 1 vagrant vagrant 1585</description>
     </item>
     
     <item>
       <title>用Powershell对文件批量重命名</title>
-      <link>https://vincent-233.github.io/blog/2015/02/08/43637581/</link>
+      <link>https://vincent-233.github.io/2015/02/08/43637581/</link>
       <pubDate>Sun, 08 Feb 2015 08:25:19 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2015/02/08/43637581/</guid>
+      <guid>https://vincent-233.github.io/2015/02/08/43637581/</guid>
       <description>需求：将D盘For PS文件夹下的A.txt文件重命名为aa.txt rename-Item &amp;#39;D:\For PS\A.txt&amp;#39; -NewName &amp;#39;aa.txt&amp;#39; 需求：将D盘For PS文件夹下的所有的txt文件改为html文件</description>
     </item>
     

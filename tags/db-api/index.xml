@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DB-API on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/tags/db-api/</link>
+    <link>https://vincent-233.github.io/tags/db-api/</link>
     <description>Recent content in DB-API on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Sep 2019 00:34:24 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/tags/db-api/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Sep 2019 00:34:24 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/db-api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python数据库编程（以pyodbc和SQLAlchemy为例）</title>
-      <link>https://vincent-233.github.io/blog/2019/09/14/100814954/</link>
+      <link>https://vincent-233.github.io/2019/09/14/100814954/</link>
       <pubDate>Sat, 14 Sep 2019 00:34:24 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/09/14/100814954/</guid>
+      <guid>https://vincent-233.github.io/2019/09/14/100814954/</guid>
       <description>概述 本文以pyodbc和sqlalchemy操作SQL Server为例说明python的数据库编程。 pyodbc pyodbc只是众多python database dr</description>
     </item>
     

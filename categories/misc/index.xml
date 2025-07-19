@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Misc on 人生短短几個秋</title>
-    <link>https://vincent-233.github.io/blog/categories/misc/</link>
+    <link>https://vincent-233.github.io/categories/misc/</link>
     <description>Recent content in Misc on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 May 2025 21:36:12 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/blog/categories/misc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 May 2025 21:36:12 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/categories/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何阅读一本书</title>
-      <link>https://vincent-233.github.io/blog/2025/05/01/how_to_read/</link>
+      <link>https://vincent-233.github.io/2025/05/01/how_to_read/</link>
       <pubDate>Thu, 01 May 2025 21:36:12 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2025/05/01/how_to_read/</guid>
+      <guid>https://vincent-233.github.io/2025/05/01/how_to_read/</guid>
       <description>偶然间刷到一个仅11页的小册子，由密西根大学教授Paul N. Edwards所写，原文在这里，本文记录一些我觉得有用的观点。 Note：这不是那本</description>
     </item>
     
     <item>
       <title>关于回车换行符</title>
-      <link>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</link>
+      <link>https://vincent-233.github.io/2024/07/26/notes_about_crlf/</link>
       <pubDate>Fri, 26 Jul 2024 00:07:19 +0800</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2024/07/26/notes_about_crlf/</guid>
+      <guid>https://vincent-233.github.io/2024/07/26/notes_about_crlf/</guid>
       <description>术语 回车（Carriage Return, CR, ASCII 13, 通常表示为\r) 换行（Line Feed, LF, ASCII 10，通常表示为\n) 默认值 对于文本文件，Windows默认换行符号为</description>
     </item>
     
     <item>
       <title>用VBA将xml格式的excel另存为xlsx</title>
-      <link>https://vincent-233.github.io/blog/2019/06/15/92030849/</link>
+      <link>https://vincent-233.github.io/2019/06/15/92030849/</link>
       <pubDate>Sat, 15 Jun 2019 01:46:26 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2019/06/15/92030849/</guid>
+      <guid>https://vincent-233.github.io/2019/06/15/92030849/</guid>
       <description>需求背景 需要将从数据库提取的数据交给用户，由于数据量较大（好几十万行），若导出为有固定分隔符的文本文件给用户，一来体验上不太好，二来若文本字</description>
     </item>
     
     <item>
       <title>SQL CLR函数（以正则表达式为例）</title>
-      <link>https://vincent-233.github.io/blog/2017/03/04/60332993/</link>
+      <link>https://vincent-233.github.io/2017/03/04/60332993/</link>
       <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2017/03/04/60332993/</guid>
+      <guid>https://vincent-233.github.io/2017/03/04/60332993/</guid>
       <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
     </item>
     
     <item>
       <title>面试逻辑题</title>
-      <link>https://vincent-233.github.io/blog/2013/07/07/9263455/</link>
+      <link>https://vincent-233.github.io/2013/07/07/9263455/</link>
       <pubDate>Sun, 07 Jul 2013 08:13:43 +0000</pubDate>
       
-      <guid>https://vincent-233.github.io/blog/2013/07/07/9263455/</guid>
+      <guid>https://vincent-233.github.io/2013/07/07/9263455/</guid>
       <description>1. 工人工作7天，给工人的回报是一根金条，金条平分成相连的7段，必须在每天结束时给他们一段金条，如果只允许两次把金条弄断，如何给工人付费？ 答：</description>
     </item>
     
