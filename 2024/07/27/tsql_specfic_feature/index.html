@@ -113,8 +113,8 @@
     <li><a href="#apply-操作符">APPLY 操作符</a>
       <ul>
         <li><a href="#应用举例1---top-n-per-group">应用举例1 - top N per group</a></li>
-        <li><a href="#应用举例2---unpivot-列转行逆透视">应用举例2 - unpivot (列转行/逆透视)</a></li>
-        <li><a href="#应用举例3---columnreuse-of-column-aliases-列别名复用">应用举例3 - column（reuse of column aliases, 列别名复用）</a></li>
+        <li><a href="#应用举例2---unpivot列转行逆透视">应用举例2 - unpivot(列转行/逆透视)</a></li>
+        <li><a href="#应用举例3---reuse-column-aliases列别名复用">应用举例3 - reuse column aliases(列别名复用)</a></li>
       </ul>
     </li>
     <li><a href="#dml-output子句">DML Output子句</a></li>
@@ -193,9 +193,9 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>custid<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>a.custid<span style="color:#bbb"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">ORDER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>orderdate<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DESC</span>,<span style="color:#bbb"> </span>orderid<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DESC</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>)<span style="color:#bbb"> </span>b<span style="color:#bbb">
-</span></span></span></code></pre></div><h3 id="应用举例2---unpivot-列转行逆透视">应用举例2 - unpivot (列转行/逆透视)</h3>
+</span></span></span></code></pre></div><h3 id="应用举例2---unpivot列转行逆透视">应用举例2 - unpivot(列转行/逆透视)</h3>
 <p>见另一篇笔记 <a href="https://vincent-233.github.io/2019/07/20/96520306/">SQL Server用Cross Apply、Cross Join实现列转行</a></p>
-<h3 id="应用举例3---columnreuse-of-column-aliases-列别名复用">应用举例3 - column（reuse of column aliases, 列别名复用）</h3>
+<h3 id="应用举例3---reuse-column-aliases列别名复用">应用举例3 - reuse column aliases(列别名复用)</h3>
 <p>T-SQL无法像duckdb一样原生支持列别名复用，如果SQL的select列表中有一个长表达式A，另外一个表达式B需要引用A的结果，甚至是case when分支中的多次引用，通常做法是将A表达式copy后作为B表达式的一部分，或者通过嵌套子查询的方式去复用表达A的结果，这样的代码会看上去会非常冗长和晦涩。用cross apply可以让代码列更简洁一些:</p>
 <ul>
 <li>VALUE 形式<br>

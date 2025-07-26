@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Git alias设置 - 人生短短几個秋</title>
+	<title>Git Alias设置 - 人生短短几個秋</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +90,7 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Git alias设置</h1>
+			<h1 class="post__title">Git Alias设置</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2023-12-17T21:06:09&#43;08:00">2023-12-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>
@@ -118,11 +118,11 @@
 <h3 id="step-1---下载alias文件">step 1 - 下载alias文件</h3>
 <p>网上有一个网友整理好的<a href="https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt">alias</a>文件，可以下载按需修改拿来使用。</p>
 <p>我一般会将log显示设置修改一下：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># Show log list with our preferred information, a.k.a. `ll`</span>
-</span></span><span style="display:flex;"><span>  log-list <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %C(blue)[%cn]%Creset&#39;</span> --color<span style="color:#666">=</span>always
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Show log list with our preferred information, a.k.a. `ll`</span>
+</span></span><span style="display:flex;"><span>log-list <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %C(blue)[%cn]%Creset&#39;</span> --color<span style="color:#666">=</span>always
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># Show log  list with our preferred information with long formats, a.k.a. `lll`</span>
-</span></span><span style="display:flex;"><span>  log-list-long <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --no-abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn &lt;%ce&gt;]%Creset&#39;</span> --color<span style="color:#666">=</span>always
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Show log  list with our preferred information with long formats, a.k.a. `lll`</span>
+</span></span><span style="display:flex;"><span>log-list-long <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --no-abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn &lt;%ce&gt;]%Creset&#39;</span> --color<span style="color:#666">=</span>always
 </span></span></code></pre></div><h3 id="step-2---修改gitconfig文件">step 2 - 修改.gitconfig文件</h3>
 <p>假设下载好路径为<code>/Users/xman/config/gitalias.txt</code></p>
 <p>在<code>～/.gitconfig</code>文件中加入</p>

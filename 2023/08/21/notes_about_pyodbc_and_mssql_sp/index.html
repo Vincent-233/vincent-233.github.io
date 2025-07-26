@@ -111,12 +111,17 @@
         <li><a href="#code-exit-before-sp-complete">Code exit before SP complete</a></li>
       </ul>
     </li>
-    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#解决方案">解决方案</a>
+      <ul>
+        <li><a href="#1---考虑多结果集">1 - 考虑多结果集</a></li>
+        <li><a href="#2---放弃dbapi通过调用-sqlcmd-去执行sp">2 - 放弃DBAPI，通过调用 SQLCMD 去执行SP</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 	</div>
 </div><div class="content post__content clearfix">
-			<p>虽然入门Python已近4年，但由于日常工作中，特别是生产环境上没有Python项目，对Python一直不算非常熟练，基本上只是偶尔用它在本地写一些工具性脚本。最近又用它造轮子，核心功能就是按配置去自动执行一些SQL和SP。遇到了一些问题，特此记录之。</p>
+			<p>虽然入门Python已经多年，但由于日常工作中，特别是生产环境上没有Python项目，对Python一直不算非常熟练，基本上只是偶尔用它在本地写一些工具性脚本。最近又用它造轮子，核心功能就是按配置去自动执行一些SQL和SP。遇到了一些问题，特此记录之。</p>
 <h2 id="问题描述">问题描述</h2>
 <p>pyodbc执行单条SQL时非常顺利，但在执行某些SP时出现了奇怪的现象：</p>
 <ul>
@@ -141,7 +146,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#b44">        select 1/0;
 </span></span></span><span style="display:flex;"><span><span style="color:#b44">    &#34;&#34;&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(cur<span style="color:#666">.</span>fetchall())
-</span></span></code></pre></div><p>以上代码可正常输出表test_table的行数，但却不报错</p>
+</span></span></code></pre></div><p>以上代码可正常输出表test_table的行数，却不报错（最后有个除以0的语句，理应报错）</p>
 <h3 id="code-exit-before-sp-complete">Code exit before SP complete</h3>
 <ul>
 <li>测试SP</li>
@@ -219,9 +224,10 @@
 用xEvent或profiler的TSQL_SPs模板跟踪SQL执行情况，发现最后两句SQL没执行SP就退出了
 <img src="https://s2.loli.net/2023/08/21/JuBbj9ZYwCMhDpX.png" alt="Pasted image 20230821010929.png"></p>
 <h2 id="解决方案">解决方案</h2>
-<p>前面已经说过了，解决方案当然是考虑多结果集，采用类似下面的代码</p>
+<h3 id="1---考虑多结果集">1 - 考虑多结果集</h3>
+<p>若调用的SP会返回多个结果集或message，可采用类似下面的代码</p>
 <ul>
-<li>示例代码 1 - 获取scalar结果和返回message直至没有更多输出</li>
+<li><strong>示例代码 1 - 获取scalar结果和返回message直至没有更多输出</strong></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pyodbc</span>
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>
@@ -238,7 +244,7 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> cur<span style="color:#666">.</span>nextset():
 </span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>
 </span></span></code></pre></div><ul>
-<li>示例代码 2 - 获取最后一个select结果集</li>
+<li><strong>示例代码 2 - 获取最后一个select结果集</strong></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_last_result</span>(cusor):
 </span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">None</span>
@@ -257,6 +263,16 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> error_msg:
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">raise</span> <span style="color:#d2413a;font-weight:bold">Exception</span>(error_msg)
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
+</span></span></code></pre></div><h3 id="2---放弃dbapi通过调用-sqlcmd-去执行sp">2 - 放弃DBAPI，通过调用 SQLCMD 去执行SP</h3>
+<p>若不用获取SP返回的结果，则可直接通过SQL Server官方命令行工具SQLCMD去执行SP，示例代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">subprocess</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">execute_sql_query</span>(query):
+</span></span><span style="display:flex;"><span>    command <span style="color:#666">=</span> <span style="color:#b44">fr</span><span style="color:#b44">&#39;sqlcmd -S localhost -T -Q &#34;</span><span style="color:#b68;font-weight:bold">{</span>query<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        result <span style="color:#666">=</span> subprocess<span style="color:#666">.</span>run(command, shell<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>, check<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>, text<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>, capture_output<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> result<span style="color:#666">.</span>stdout
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> subprocess<span style="color:#666">.</span>CalledProcessError <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">raise</span> <span style="color:#d2413a;font-weight:bold">Exception</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;SQL query execution failed: </span><span style="color:#b68;font-weight:bold">{</span>e<span style="color:#666">.</span>stderr<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>) <span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">e</span>
 </span></span></code></pre></div><p>其它相关Blog:  <a href="https://vincent-233.github.io/2019/09/14/100814954/">Python数据库编程（以pyodbc和SQLAlchemy为例）</a></p>
 
 		</div>
