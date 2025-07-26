@@ -118,16 +118,16 @@
 <h3 id="step-1---下载alias文件">step 1 - 下载alias文件</h3>
 <p>网上有一个网友整理好的<a href="https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt">alias</a>文件，可以下载按需修改拿来使用。</p>
 <p>我一般会将log显示设置修改一下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#75715e"># Show log list with our preferred information, a.k.a. `ll`</span>
-</span></span><span style="display:flex;"><span>  log-list <span style="color:#f92672">=</span> log --graph --topo-order --date<span style="color:#f92672">=</span>iso --abbrev-commit --decorate --all --boundary --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %C(blue)[%cn]%Creset&#39;</span> --color<span style="color:#f92672">=</span>always
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># Show log list with our preferred information, a.k.a. `ll`</span>
+</span></span><span style="display:flex;"><span>  log-list <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %C(blue)[%cn]%Creset&#39;</span> --color<span style="color:#666">=</span>always
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Show log  list with our preferred information with long formats, a.k.a. `lll`</span>
-</span></span><span style="display:flex;"><span>  log-list-long <span style="color:#f92672">=</span> log --graph --topo-order --date<span style="color:#f92672">=</span>iso --no-abbrev-commit --decorate --all --boundary --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn &lt;%ce&gt;]%Creset&#39;</span> --color<span style="color:#f92672">=</span>always
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># Show log  list with our preferred information with long formats, a.k.a. `lll`</span>
+</span></span><span style="display:flex;"><span>  log-list-long <span style="color:#666">=</span> log --graph --topo-order --date<span style="color:#666">=</span>iso --no-abbrev-commit --decorate --all --boundary --pretty<span style="color:#666">=</span>format:<span style="color:#b44">&#39;%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn &lt;%ce&gt;]%Creset&#39;</span> --color<span style="color:#666">=</span>always
 </span></span></code></pre></div><h3 id="step-2---修改gitconfig文件">step 2 - 修改.gitconfig文件</h3>
 <p>假设下载好路径为<code>/Users/xman/config/gitalias.txt</code></p>
 <p>在<code>～/.gitconfig</code>文件中加入</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>include<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>    path <span style="color:#f92672">=</span> /Users/xman/config/gitalias.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#666">[</span>include<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b8860b">path</span> <span style="color:#666">=</span> /Users/xman/config/gitalias.txt
 </span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">

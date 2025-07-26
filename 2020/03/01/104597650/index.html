@@ -122,92 +122,92 @@
 <p>生成5000条记录，字段如下：<br>
 <img src="/img/20200301185645306.png" alt=""></p>
 <h3 id="faker简单使用">faker简单使用</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
-</span></span><span style="display:flex;"><span>fake <span style="color:#f92672">=</span> Faker() <span style="color:#75715e"># 默认为英文locale</span>
-</span></span><span style="display:flex;"><span>fake_zh_cn <span style="color:#f92672">=</span> Faker(locale<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;zh_CN&#39;</span>)  <span style="color:#75715e"># 设置为中文locale</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">faker</span> <span style="color:#a2f;font-weight:bold">import</span> Faker
+</span></span><span style="display:flex;"><span>fake <span style="color:#666">=</span> Faker() <span style="color:#080;font-style:italic"># 默认为英文locale</span>
+</span></span><span style="display:flex;"><span>fake_zh_cn <span style="color:#666">=</span> Faker(locale<span style="color:#666">=</span><span style="color:#b44">&#39;zh_CN&#39;</span>)  <span style="color:#080;font-style:italic"># 设置为中文locale</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(fake_zh_cn<span style="color:#f92672">.</span>name()) <span style="color:#75715e"># 随机输出中文姓名</span>
-</span></span><span style="display:flex;"><span>print(fake<span style="color:#f92672">.</span>file_path()) <span style="color:#75715e"># 随机文件路径</span>
-</span></span><span style="display:flex;"><span>print(fake_zh_cn<span style="color:#f92672">.</span>file_path()) <span style="color:#75715e"># 随机中文文件路径</span>
-</span></span><span style="display:flex;"><span>print(fake<span style="color:#f92672">.</span>ssn()) <span style="color:#75715e"># 随机社会保障号</span>
-</span></span><span style="display:flex;"><span>print(fake_zh_cn<span style="color:#f92672">.</span>ssn()) <span style="color:#75715e"># 随机身份证号</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(fake_zh_cn<span style="color:#666">.</span>name()) <span style="color:#080;font-style:italic"># 随机输出中文姓名</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(fake<span style="color:#666">.</span>file_path()) <span style="color:#080;font-style:italic"># 随机文件路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(fake_zh_cn<span style="color:#666">.</span>file_path()) <span style="color:#080;font-style:italic"># 随机中文文件路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(fake<span style="color:#666">.</span>ssn()) <span style="color:#080;font-style:italic"># 随机社会保障号</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(fake_zh_cn<span style="color:#666">.</span>ssn()) <span style="color:#080;font-style:italic"># 随机身份证号</span>
 </span></span></code></pre></div><p>更多faker支持的数据种类，可参考<a href="https://faker.readthedocs.io/en/stable/providers.html">API文档</a></p>
 <h3 id="faker--dataclass-快速生成字典或元组记录">faker + dataclass 快速生成字典或元组记录</h3>
 <p>有了造数工具，接下来让容纳数据的载体<a href="https://docs.python.org/3/library/dataclasses.html">dataclass</a>（仅3.6+版本支持）登场，使用dataclass可以十分简洁的方式实现数据类的基本功能，简化数据初始化、打印回显（repr、print）、数据序列化（比如to json等）等等的操作。构造一个含需求中字段的类，并指定各字段的数据初始化的方法，代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass,field,asdict,astuple
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">faker</span> <span style="color:#a2f;font-weight:bold">import</span> Faker
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">dataclasses</span> <span style="color:#a2f;font-weight:bold">import</span> dataclass,field,asdict,astuple
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@dataclass</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Emp</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># dataclass 字段</span>
-</span></span><span style="display:flex;"><span>    badge:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>:str(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">8000</span>))<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>    name:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>name)
-</span></span><span style="display:flex;"><span>    ename:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>name)
-</span></span><span style="display:flex;"><span>    department:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span>:random<span style="color:#f92672">.</span>choice(Emp<span style="color:#f92672">.</span>dept))
-</span></span><span style="display:flex;"><span>    job:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>job)
-</span></span><span style="display:flex;"><span>    idcard:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>ssn)
-</span></span><span style="display:flex;"><span>    phone:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>phone_number)
-</span></span><span style="display:flex;"><span>    gender:str <span style="color:#f92672">=</span> field(init <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>    birthday:str <span style="color:#f92672">=</span> field(init <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>    postcode:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>postalcode)
-</span></span><span style="display:flex;"><span>    email:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>email)
-</span></span><span style="display:flex;"><span>    workcity:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>city)
-</span></span><span style="display:flex;"><span>    address:str <span style="color:#f92672">=</span> field(default_factory <span style="color:#f92672">=</span> fake_zh_cn<span style="color:#f92672">.</span>address)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@dataclass</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Emp</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># dataclass 字段</span>
+</span></span><span style="display:flex;"><span>    badge:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">lambda</span>:<span style="color:#a2f">str</span>(random<span style="color:#666">.</span>randrange(<span style="color:#666">1</span>,<span style="color:#666">8000</span>))<span style="color:#666">.</span>zfill(<span style="color:#666">5</span>))
+</span></span><span style="display:flex;"><span>    name:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake_zh_cn<span style="color:#666">.</span>name)
+</span></span><span style="display:flex;"><span>    ename:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake<span style="color:#666">.</span>name)
+</span></span><span style="display:flex;"><span>    department:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">lambda</span>:random<span style="color:#666">.</span>choice(Emp<span style="color:#666">.</span>dept))
+</span></span><span style="display:flex;"><span>    job:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake<span style="color:#666">.</span>job)
+</span></span><span style="display:flex;"><span>    idcard:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake_zh_cn<span style="color:#666">.</span>ssn)
+</span></span><span style="display:flex;"><span>    phone:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake_zh_cn<span style="color:#666">.</span>phone_number)
+</span></span><span style="display:flex;"><span>    gender:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(init <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>    birthday:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(init <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>    postcode:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake<span style="color:#666">.</span>postalcode)
+</span></span><span style="display:flex;"><span>    email:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake<span style="color:#666">.</span>email)
+</span></span><span style="display:flex;"><span>    workcity:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake_zh_cn<span style="color:#666">.</span>city)
+</span></span><span style="display:flex;"><span>    address:<span style="color:#a2f">str</span> <span style="color:#666">=</span> field(default_factory <span style="color:#666">=</span> fake_zh_cn<span style="color:#666">.</span>address)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 辅助字段</span>
-</span></span><span style="display:flex;"><span>    dept <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;IT部&#39;</span>,<span style="color:#e6db74">&#39;人事部&#39;</span>,<span style="color:#e6db74">&#39;财务部&#39;</span>,<span style="color:#e6db74">&#39;采购部&#39;</span>,<span style="color:#e6db74">&#39;运营部&#39;</span>,<span style="color:#e6db74">&#39;市场部&#39;</span>,<span style="color:#e6db74">&#39;销售部&#39;</span>,<span style="color:#e6db74">&#39;客服部&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 辅助字段</span>
+</span></span><span style="display:flex;"><span>    dept <span style="color:#666">=</span> [<span style="color:#b44">&#39;IT部&#39;</span>,<span style="color:#b44">&#39;人事部&#39;</span>,<span style="color:#b44">&#39;财务部&#39;</span>,<span style="color:#b44">&#39;采购部&#39;</span>,<span style="color:#b44">&#39;运营部&#39;</span>,<span style="color:#b44">&#39;市场部&#39;</span>,<span style="color:#b44">&#39;销售部&#39;</span>,<span style="color:#b44">&#39;客服部&#39;</span>]
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 关联字段（根据身份证获取性别和生日）</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__post_init__</span>(self):
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;男&#39;</span> <span style="color:#66d9ef">if</span> int(self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">16</span>:<span style="color:#ae81ff">17</span>])<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;女&#39;</span>
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>birthday <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>idcard[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">14</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 关联字段（根据身份证获取性别和生日）</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">__post_init__</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#666">.</span>gender <span style="color:#666">=</span> <span style="color:#b44">&#39;男&#39;</span> <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">int</span>(self<span style="color:#666">.</span>idcard[<span style="color:#666">16</span>:<span style="color:#666">17</span>])<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#b44">&#39;女&#39;</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#666">.</span>birthday <span style="color:#666">=</span> self<span style="color:#666">.</span>idcard[<span style="color:#666">6</span>:<span style="color:#666">14</span>]
 </span></span></code></pre></div><p>创建一个类试验一下：<br>
 <img src="/img/20200301191602222.png" alt=""><br>
 看来效果不错，下面可以批量构造并将数据持久化保存。</p>
 <h3 id="保存为csv">保存为csv</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> csv
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake.csv&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>,newline<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    csv_writer <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f,delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;|&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> [astuple(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]:
-</span></span><span style="display:flex;"><span>        csv_writer<span style="color:#f92672">.</span>writerow(list(emp))
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">csv</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">r</span><span style="color:#b44">&#39;D:\Temp\emp_fake.csv&#39;</span>,<span style="color:#b44">&#39;w&#39;</span>,newline<span style="color:#666">=</span><span style="color:#b44">&#39;&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    csv_writer <span style="color:#666">=</span> csv<span style="color:#666">.</span>writer(f,delimiter<span style="color:#666">=</span><span style="color:#b44">&#39;|&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> emp <span style="color:#a2f;font-weight:bold">in</span> [astuple(Emp()) <span style="color:#a2f;font-weight:bold">for</span> _ <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">5000</span>)]:
+</span></span><span style="display:flex;"><span>        csv_writer<span style="color:#666">.</span>writerow(<span style="color:#a2f">list</span>(emp))
 </span></span></code></pre></div><h3 id="保存为json">保存为json</h3>
 <ul>
 <li>单个json array对象</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
-</span></span><span style="display:flex;"><span>emp <span style="color:#f92672">=</span> [asdict(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake_json_list.json&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    json<span style="color:#f92672">.</span>dump(emp,f,ensure_ascii<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,indent<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">json</span>
+</span></span><span style="display:flex;"><span>emp <span style="color:#666">=</span> [asdict(Emp()) <span style="color:#a2f;font-weight:bold">for</span> _ <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">5000</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">r</span><span style="color:#b44">&#39;D:\Temp\emp_fake_json_list.json&#39;</span>,<span style="color:#b44">&#39;w&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    json<span style="color:#666">.</span>dump(emp,f,ensure_ascii<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">False</span>,indent<span style="color:#666">=</span><span style="color:#666">4</span>)
 </span></span></code></pre></div><ul>
 <li>每行一个单独的json对象</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\Temp\emp_fake_json_line.json&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>):
-</span></span><span style="display:flex;"><span>        json<span style="color:#f92672">.</span>dump(asdict(Emp()),f,ensure_ascii<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">json</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">r</span><span style="color:#b44">&#39;D:\Temp\emp_fake_json_line.json&#39;</span>,<span style="color:#b44">&#39;w&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> _ <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">5000</span>):
+</span></span><span style="display:flex;"><span>        json<span style="color:#666">.</span>dump(asdict(Emp()),f,ensure_ascii<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">False</span>)
+</span></span><span style="display:flex;"><span>        f<span style="color:#666">.</span>write(<span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>)
 </span></span></code></pre></div><h3 id="保存到数据库">保存到数据库</h3>
 <p>若要保存到数据库，可以不使用上面的dataclass，转而使用python的ORM框架（比如SQLAlchemy）构造一个含所需字段的类，然后赋值后保存即可，全程不用写SQL语句。当然也可以循环直接构造Insert SQL语句后执行。下面使用一种偷懒的做法，先转化为pandas的dataframe作为中转，然后将数据保存到数据库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.types <span style="color:#f92672">import</span> NVARCHAR,DATE
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pandas</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">pd</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy.types</span> <span style="color:#a2f;font-weight:bold">import</span> NVARCHAR,DATE
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy</span> <span style="color:#a2f;font-weight:bold">import</span> create_engine
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置数据库连接DSN</span>
-</span></span><span style="display:flex;"><span>db_con_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mssql+pyodbc://@AdventureWorks2012&#39;</span>
-</span></span><span style="display:flex;"><span>engine <span style="color:#f92672">=</span> create_engine(db_con_str)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 设置数据库连接DSN</span>
+</span></span><span style="display:flex;"><span>db_con_str <span style="color:#666">=</span> <span style="color:#b44">&#39;mssql+pyodbc://@AdventureWorks2012&#39;</span>
+</span></span><span style="display:flex;"><span>engine <span style="color:#666">=</span> create_engine(db_con_str)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成数据转并化为字典列表</span>
-</span></span><span style="display:flex;"><span>emp <span style="color:#f92672">=</span> [asdict(Emp()) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]
-</span></span><span style="display:flex;"><span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;badge&#39;</span>,<span style="color:#e6db74">&#39;ename&#39;</span>,<span style="color:#e6db74">&#39;name&#39;</span>,<span style="color:#e6db74">&#39;department&#39;</span>,<span style="color:#e6db74">&#39;job&#39;</span>,<span style="color:#e6db74">&#39;idcard&#39;</span>,<span style="color:#e6db74">&#39;phone&#39;</span>
-</span></span><span style="display:flex;"><span>          ,<span style="color:#e6db74">&#39;gender&#39;</span>,<span style="color:#e6db74">&#39;birthday&#39;</span>,<span style="color:#e6db74">&#39;postcode&#39;</span>,<span style="color:#e6db74">&#39;email&#39;</span>,<span style="color:#e6db74">&#39;workcity&#39;</span>,<span style="color:#e6db74">&#39;address&#39;</span>]
-</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(emp,columns <span style="color:#f92672">=</span> columns)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 生成数据转并化为字典列表</span>
+</span></span><span style="display:flex;"><span>emp <span style="color:#666">=</span> [asdict(Emp()) <span style="color:#a2f;font-weight:bold">for</span> _ <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">5000</span>)]
+</span></span><span style="display:flex;"><span>columns <span style="color:#666">=</span> [<span style="color:#b44">&#39;badge&#39;</span>,<span style="color:#b44">&#39;ename&#39;</span>,<span style="color:#b44">&#39;name&#39;</span>,<span style="color:#b44">&#39;department&#39;</span>,<span style="color:#b44">&#39;job&#39;</span>,<span style="color:#b44">&#39;idcard&#39;</span>,<span style="color:#b44">&#39;phone&#39;</span>
+</span></span><span style="display:flex;"><span>          ,<span style="color:#b44">&#39;gender&#39;</span>,<span style="color:#b44">&#39;birthday&#39;</span>,<span style="color:#b44">&#39;postcode&#39;</span>,<span style="color:#b44">&#39;email&#39;</span>,<span style="color:#b44">&#39;workcity&#39;</span>,<span style="color:#b44">&#39;address&#39;</span>]
+</span></span><span style="display:flex;"><span>df <span style="color:#666">=</span> pd<span style="color:#666">.</span>DataFrame(emp,columns <span style="color:#666">=</span> columns)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 指定字段类型</span>
-</span></span><span style="display:flex;"><span>dtype <span style="color:#f92672">=</span> {column:NVARCHAR(<span style="color:#ae81ff">2000</span>) <span style="color:#66d9ef">for</span> column <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>columns}
-</span></span><span style="display:flex;"><span>dtype[<span style="color:#e6db74">&#39;birthday&#39;</span>] <span style="color:#f92672">=</span> DATE
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 指定字段类型</span>
+</span></span><span style="display:flex;"><span>dtype <span style="color:#666">=</span> {column:NVARCHAR(<span style="color:#666">2000</span>) <span style="color:#a2f;font-weight:bold">for</span> column <span style="color:#a2f;font-weight:bold">in</span> df<span style="color:#666">.</span>columns}
+</span></span><span style="display:flex;"><span>dtype[<span style="color:#b44">&#39;birthday&#39;</span>] <span style="color:#666">=</span> DATE
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 保存到数据库</span>
-</span></span><span style="display:flex;"><span>df<span style="color:#f92672">.</span>to_sql(<span style="color:#e6db74">&#39;employee&#39;</span>,con <span style="color:#f92672">=</span> engine,if_exists <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;replace&#39;</span>,dtype <span style="color:#f92672">=</span> dtype,index <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 保存到数据库</span>
+</span></span><span style="display:flex;"><span>df<span style="color:#666">.</span>to_sql(<span style="color:#b44">&#39;employee&#39;</span>,con <span style="color:#666">=</span> engine,if_exists <span style="color:#666">=</span> <span style="color:#b44">&#39;replace&#39;</span>,dtype <span style="color:#666">=</span> dtype,index <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>)
 </span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">

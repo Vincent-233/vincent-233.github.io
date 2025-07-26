@@ -115,58 +115,58 @@
 			<h4 id="场景描述">场景描述</h4>
 <p>客户提供的Excel文件，需要进行简单清洗之后导入数据库。</p>
 <h4 id="代码实现">代码实现</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> text
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.types <span style="color:#f92672">import</span> Integer
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.types <span style="color:#f92672">import</span> NVARCHAR
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pandas</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">pd</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy</span> <span style="color:#a2f;font-weight:bold">import</span> create_engine
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy</span> <span style="color:#a2f;font-weight:bold">import</span> text
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy.types</span> <span style="color:#a2f;font-weight:bold">import</span> Integer
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy.types</span> <span style="color:#a2f;font-weight:bold">import</span> NVARCHAR
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Excel文件所在路径</span>
-</span></span><span style="display:flex;"><span>workpath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;D:/Users/Temp/working&#39;</span>
-</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(workpath)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Excel文件所在路径</span>
+</span></span><span style="display:flex;"><span>workpath <span style="color:#666">=</span> <span style="color:#b44">&#39;D:/Users/Temp/working&#39;</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#666">.</span>chdir(workpath)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数据库 odbc 连接</span>
-</span></span><span style="display:flex;"><span>con_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://username:pwd@127.0.01/MyMSSQL?driver=SQL+Server&#34;</span>
-</span></span><span style="display:flex;"><span>engine <span style="color:#f92672">=</span> create_engine(con_string)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 数据库 odbc 连接</span>
+</span></span><span style="display:flex;"><span>con_string <span style="color:#666">=</span> <span style="color:#b44">&#34;mssql+pyodbc://username:pwd@127.0.01/MyMSSQL?driver=SQL+Server&#34;</span>
+</span></span><span style="display:flex;"><span>engine <span style="color:#666">=</span> create_engine(con_string)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置数据库字段类型</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapping_df_types</span>(df):
-</span></span><span style="display:flex;"><span>    dtype_dict <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> col, dtype <span style="color:#f92672">in</span> zip(df<span style="color:#f92672">.</span>columns, df<span style="color:#f92672">.</span>dtypes):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> str(dtype) <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;object&#39;</span>,<span style="color:#e6db74">&#39;float64&#39;</span>]:
-</span></span><span style="display:flex;"><span>            dtype_dict<span style="color:#f92672">.</span>update({col: NVARCHAR(length<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>)})
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> str(dtype) <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;int64&#39;</span>,<span style="color:#e6db74">&#39;int&#39;</span>]:
-</span></span><span style="display:flex;"><span>            dtype_dict<span style="color:#f92672">.</span>update({col: Integer()})            
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dtype_dict
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 设置数据库字段类型</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">mapping_df_types</span>(df):
+</span></span><span style="display:flex;"><span>    dtype_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> col, dtype <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">zip</span>(df<span style="color:#666">.</span>columns, df<span style="color:#666">.</span>dtypes):
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">str</span>(dtype) <span style="color:#a2f;font-weight:bold">in</span> [<span style="color:#b44">&#39;object&#39;</span>,<span style="color:#b44">&#39;float64&#39;</span>]:
+</span></span><span style="display:flex;"><span>            dtype_dict<span style="color:#666">.</span>update({col: NVARCHAR(length<span style="color:#666">=</span><span style="color:#666">2000</span>)})
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">str</span>(dtype) <span style="color:#a2f;font-weight:bold">in</span> [<span style="color:#b44">&#39;int64&#39;</span>,<span style="color:#b44">&#39;int&#39;</span>]:
+</span></span><span style="display:flex;"><span>            dtype_dict<span style="color:#666">.</span>update({col: Integer()})            
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dtype_dict
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Trim所有字符串列</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">col_strip</span>(df):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> list(df): <span style="color:#75715e"># 遍历列名</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> df[col]<span style="color:#f92672">.</span>dtype<span style="color:#f92672">.</span>kind <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;O&#39;</span>: <span style="color:#75715e"># 若为字符串，strip一下</span>
-</span></span><span style="display:flex;"><span>            df[col] <span style="color:#f92672">=</span> df[col]<span style="color:#f92672">.</span>astype(str)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Trim所有字符串列</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">col_strip</span>(df):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> col <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">list</span>(df): <span style="color:#080;font-style:italic"># 遍历列名</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> df[col]<span style="color:#666">.</span>dtype<span style="color:#666">.</span>kind <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>: <span style="color:#080;font-style:italic"># 若为字符串，strip一下</span>
+</span></span><span style="display:flex;"><span>            df[col] <span style="color:#666">=</span> df[col]<span style="color:#666">.</span>astype(<span style="color:#a2f">str</span>)<span style="color:#666">.</span>str<span style="color:#666">.</span>strip()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 某些需要特别指定数据类型的字段</span>
-</span></span><span style="display:flex;"><span>dtype <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;EmpNo&#39;</span>:str,<span style="color:#e6db74">&#39;OldEmpNo&#39;</span>:str,<span style="color:#e6db74">&#39;xCode&#39;</span>:str,<span style="color:#e6db74">&#39;Mobile&#39;</span>:str,<span style="color:#e6db74">&#39;TEL&#39;</span>:str}
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 某些需要特别指定数据类型的字段</span>
+</span></span><span style="display:flex;"><span>dtype <span style="color:#666">=</span> {<span style="color:#b44">&#39;EmpNo&#39;</span>:<span style="color:#a2f">str</span>,<span style="color:#b44">&#39;OldEmpNo&#39;</span>:<span style="color:#a2f">str</span>,<span style="color:#b44">&#39;xCode&#39;</span>:<span style="color:#a2f">str</span>,<span style="color:#b44">&#39;Mobile&#39;</span>:<span style="color:#a2f">str</span>,<span style="color:#b44">&#39;TEL&#39;</span>:<span style="color:#a2f">str</span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取excel文件</span>
-</span></span><span style="display:flex;"><span>df_Emp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">&#39;导入数据.xlsx&#39;</span>, sheet_name<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,header<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,dtype<span style="color:#f92672">=</span>dtype)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 读取excel文件</span>
+</span></span><span style="display:flex;"><span>df_Emp <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_excel(<span style="color:#b44">&#39;导入数据.xlsx&#39;</span>, sheet_name<span style="color:#666">=</span><span style="color:#666">0</span>,header<span style="color:#666">=</span><span style="color:#666">0</span>,dtype<span style="color:#666">=</span>dtype)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将 code-title 形式的 xcode 拆为仅 code </span>
-</span></span><span style="display:flex;"><span>df_Emp[<span style="color:#e6db74">&#39;xCode&#39;</span>] <span style="color:#f92672">=</span> df_Emp<span style="color:#f92672">.</span>xCode<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;-&#39;</span>,expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 将 code-title 形式的 xcode 拆为仅 code </span>
+</span></span><span style="display:flex;"><span>df_Emp[<span style="color:#b44">&#39;xCode&#39;</span>] <span style="color:#666">=</span> df_Emp<span style="color:#666">.</span>xCode<span style="color:#666">.</span>str<span style="color:#666">.</span>split(<span style="color:#b44">&#39;-&#39;</span>,expand <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">True</span>)[<span style="color:#666">0</span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将所有读取出来的 nan 替换为空串</span>
-</span></span><span style="display:flex;"><span>df_Emp <span style="color:#f92672">=</span> df_Emp<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;nan&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 将所有读取出来的 nan 替换为空串</span>
+</span></span><span style="display:flex;"><span>df_Emp <span style="color:#666">=</span> df_Emp<span style="color:#666">.</span>replace(<span style="color:#b44">&#39;nan&#39;</span>, <span style="color:#b44">&#39;&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># trip所有字符串</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># trip所有字符串</span>
 </span></span><span style="display:flex;"><span>col_strip(df_Emp)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置数据库字段类型</span>
-</span></span><span style="display:flex;"><span>dtype_dict <span style="color:#f92672">=</span> mapping_df_types(df_Emp)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 设置数据库字段类型</span>
+</span></span><span style="display:flex;"><span>dtype_dict <span style="color:#666">=</span> mapping_df_types(df_Emp)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数据插入数据库</span>
-</span></span><span style="display:flex;"><span>df_Emp<span style="color:#f92672">.</span>to_sql(<span style="color:#e6db74">&#39;DataImport&#39;</span>,con<span style="color:#f92672">=</span>engine,if_exists<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;replace&#39;</span>,dtype<span style="color:#f92672">=</span>dtype_dict,index <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 数据插入数据库</span>
+</span></span><span style="display:flex;"><span>df_Emp<span style="color:#666">.</span>to_sql(<span style="color:#b44">&#39;DataImport&#39;</span>,con<span style="color:#666">=</span>engine,if_exists<span style="color:#666">=</span><span style="color:#b44">&#39;replace&#39;</span>,dtype<span style="color:#666">=</span>dtype_dict,index <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>)
 </span></span></code></pre></div><h4 id="说明">说明</h4>
 <ul>
 <li>通过Pandas读取Excel，可以自动识别字段类型，然后再部分指定字段类型，最后直接通过to_sql函数，一条语句即实现建表和插入数据的功能；</li>

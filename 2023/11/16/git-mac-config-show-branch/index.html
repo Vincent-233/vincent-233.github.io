@@ -122,11 +122,11 @@
 <p>要实现这个功能得先弄清楚为什么git for windows会有以上的显示，在dollar符号前面的那一串字符实际上是环境变量<code>PS1</code>的内容，PS1全称Prompt String 1，即提示字符串，一般会配置为显示当前用户名，当前主机名，当前工作目录等信息。</p>
 <p>git for windows安装目录的 <code>\GitWP\etc\profile.d</code>目录下有一个叫<code>git-prompt.sh</code>的文件，里面有对PS1变量进行修改的代码，而profile.d这个目录下的脚本是会在启动终端时自动执行的，所以每次打开git-bash都会有以上效果。</p>
 <p>只要在Mac上也做类似的设置即可实现相同效果，首先下载<a href="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh">git-prompt</a> ，放到home目录下命名为.git-prompt.sh，然后修改你常用的shell对应的profile文件，比如我更想用bash，那么修改~/.bashrc为：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># set for the git prompt</span>
-</span></span><span style="display:flex;"><span>GIT_PS1_SHOWCOLORHINTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span>
-</span></span><span style="display:flex;"><span>source ~/.git-prompt.sh
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># set for the git prompt</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">GIT_PS1_SHOWCOLORHINTS</span><span style="color:#666">=</span><span style="color:#b44">&#34;yes&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">source</span> ~/.git-prompt.sh
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[\u@\h:\w]$(__git_ps1 &#34; (%s)&#34;) \n\$ &#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">PS1</span><span style="color:#666">=</span><span style="color:#b44">&#39;[\u@\h:\w]$(__git_ps1 &#34; (%s)&#34;) \n\$ &#39;</span>
 </span></span></code></pre></div><p>下次启动bash并切换目录到某个git repo下时，就会非常nice地显示当前branch name。</p>
 <h3 id="其它参考">其它参考</h3>
 <p>PS1常见变量：</p>

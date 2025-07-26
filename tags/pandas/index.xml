@@ -13,7 +13,7 @@
       <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/2020/06/21/106893478/</guid>
-      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3</description>
+      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; } 方法一，先列转行</description>
     </item>
     
     <item>

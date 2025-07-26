@@ -99,21 +99,21 @@
 		</header>
 		<div class="content post__content clearfix">
 			<p>使用Linux经常用到ls命令，若加上l参数，会用长格式的形式显示文件列表。如下图：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vagrant@vagrant-ubuntu-trusty-64:~$ ls -l
-</span></span><span style="display:flex;"><span>total <span style="color:#ae81ff">528</span>
-</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1656</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> cephalopods.txt
-</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1264</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> gastropods_draft.txt
-</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1585</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> gastropods.txt
-</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:52 globbing
-</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#ae81ff">3</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> junk
-</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#ae81ff">1</span> vagrant vagrant   <span style="color:#ae81ff">1450</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> mustelidae.txt
-</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#ae81ff">3</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:52 ocean
-</span></span><span style="display:flex;"><span>drwxrwxr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 17:02 test
-</span></span><span style="display:flex;"><span>drwxrwxr-x <span style="color:#ae81ff">2</span> vagrant vagrant   <span style="color:#ae81ff">4096</span> Apr  <span style="color:#ae81ff">6</span> 15:56 Test
-</span></span><span style="display:flex;"><span>-rw-r----- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">351483</span> Jul <span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">2015</span> TheWindintheWillows.txt
-</span></span><span style="display:flex;"><span>-rw-rw-r-- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">147843</span> Apr  <span style="color:#ae81ff">1</span> 17:31 things.zip
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vagrant@vagrant-ubuntu-trusty-64:~$ ls -l
+</span></span><span style="display:flex;"><span>total <span style="color:#666">528</span>
+</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#666">1</span> vagrant vagrant   <span style="color:#666">1656</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> cephalopods.txt
+</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#666">1</span> vagrant vagrant   <span style="color:#666">1264</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> gastropods_draft.txt
+</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#666">1</span> vagrant vagrant   <span style="color:#666">1585</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> gastropods.txt
+</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#666">2</span> vagrant vagrant   <span style="color:#666">4096</span> Apr  <span style="color:#666">6</span> 15:52 globbing
+</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#666">3</span> vagrant vagrant   <span style="color:#666">4096</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> junk
+</span></span><span style="display:flex;"><span>-rw-r--r-- <span style="color:#666">1</span> vagrant vagrant   <span style="color:#666">1450</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> mustelidae.txt
+</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#666">3</span> vagrant vagrant   <span style="color:#666">4096</span> Apr  <span style="color:#666">6</span> 15:52 ocean
+</span></span><span style="display:flex;"><span>drwxrwxr-x <span style="color:#666">2</span> vagrant vagrant   <span style="color:#666">4096</span> Apr  <span style="color:#666">6</span> 17:02 <span style="color:#a2f">test</span>
+</span></span><span style="display:flex;"><span>drwxrwxr-x <span style="color:#666">2</span> vagrant vagrant   <span style="color:#666">4096</span> Apr  <span style="color:#666">6</span> 15:56 Test
+</span></span><span style="display:flex;"><span>-rw-r----- <span style="color:#666">1</span> vagrant vagrant <span style="color:#666">351483</span> Jul <span style="color:#666">17</span>  <span style="color:#666">2015</span> TheWindintheWillows.txt
+</span></span><span style="display:flex;"><span>-rw-rw-r-- <span style="color:#666">1</span> vagrant vagrant <span style="color:#666">147843</span> Apr  <span style="color:#666">1</span> 17:31 things.zip
 </span></span></code></pre></div><p>我们单拿一行为例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>-rw-rw-r-- <span style="color:#ae81ff">1</span> vagrant vagrant <span style="color:#ae81ff">147843</span> Apr  <span style="color:#ae81ff">1</span> 17:31 things.zip
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>-rw-rw-r-- <span style="color:#666">1</span> vagrant vagrant <span style="color:#666">147843</span> Apr  <span style="color:#666">1</span> 17:31 things.zip
 </span></span></code></pre></div><p>将其拆分成10个字段来说明：</p>
 <table>
 <thead>

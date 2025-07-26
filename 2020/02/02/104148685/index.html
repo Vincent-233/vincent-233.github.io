@@ -124,59 +124,59 @@
 			<p>装饰器（decorator）是python特有的语法特性，通过函数封装扩展原函数的功能。<br>
 下面一步步通过例子说明它的作用和用法。</p>
 <h3 id="函数中定义函数">函数中定义函数</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parent</span>():
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Printing from the parent() function&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">parent</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Printing from the parent() function&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">first_child</span>():
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Printing from the first_child() function&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">first_child</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Printing from the first_child() function&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">second_child</span>():
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Printing from the second_child() function&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">second_child</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Printing from the second_child() function&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    second_child()
 </span></span><span style="display:flex;"><span>    first_child()
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>parent()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>parent()
 </span></span></code></pre></div><pre><code>Printing from the parent() function  
 Printing from the second_child() function  
 Printing from the first_child() function  
 </code></pre>
 <h3 id="函数引用类似函数指针">函数引用（类似函数指针）</h3>
 <p>函数也是一个对象，可以赋值给变量，传引用，相当于起了一个别名</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>my_print <span style="color:#f92672">=</span> print
-</span></span><span style="display:flex;"><span>my_print(<span style="color:#e6db74">&#39;Hello World&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>my_print <span style="color:#666">=</span> <span style="color:#a2f">print</span>
+</span></span><span style="display:flex;"><span>my_print(<span style="color:#b44">&#39;Hello World&#39;</span>)
 </span></span></code></pre></div><pre><code>Hello World  
 </code></pre>
 <h3 id="返回函数引用的函数">返回函数引用的函数</h3>
 <p>既然函数也是一个对象，那就可以被函数当做返回值，如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parent</span>(num):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">first_child</span>():
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hi,I am Melody&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">second_child</span>():
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Call me Susan&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">parent</span>(num):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">first_child</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Hi,I am Melody&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">second_child</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Call me Susan&#34;</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> first_child
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> second_child
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>first <span style="color:#f92672">=</span> parent(<span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>second <span style="color:#f92672">=</span> parent(<span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>print(first())
-</span></span><span style="display:flex;"><span>print(second())
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> num<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> first_child
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> second_child
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>first <span style="color:#666">=</span> parent(<span style="color:#666">3</span>)
+</span></span><span style="display:flex;"><span>second <span style="color:#666">=</span> parent(<span style="color:#666">4</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(first())
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(second())
 </span></span></code></pre></div><pre><code>Hi,I am Melody  
 Call me Susan  
 </code></pre>
 <p>以上代码根据参数不同，执行不同的函数</p>
 <h3 id="简单装饰器">简单装饰器</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_decorator</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>():
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;do something before </span><span style="color:#e6db74">{</span>func<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74"> is called&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">my_decorator</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;do something before </span><span style="color:#b68;font-weight:bold">{</span>func<span style="color:#666">.</span>__name__<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> is called&#34;</span>)
 </span></span><span style="display:flex;"><span>        func()
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;do something after </span><span style="color:#e6db74">{</span>func<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74"> is called&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;do something after </span><span style="color:#b68;font-weight:bold">{</span>func<span style="color:#666">.</span>__name__<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> is called&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello&#34;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>say_hello <span style="color:#f92672">=</span> my_decorator(say_hello)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Hello&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>say_hello <span style="color:#666">=</span> my_decorator(say_hello)
 </span></span><span style="display:flex;"><span>say_hello()
 </span></span></code></pre></div><pre><code>do something before say_hello is called  
 Hello  
@@ -184,16 +184,16 @@ do something after say_hello is called
 </code></pre>
 <p>以上例子说明：<strong>装饰器就是一种特殊的函数，接收函数引用作为参数，对函数进行封装，然后改变或改进它的行为，最后返回一个函数引用。</strong></p>
 <h3 id="装饰器语法糖">装饰器语法糖</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_decorator</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>():
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;do something before </span><span style="color:#e6db74">{</span>func<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74"> is called&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">my_decorator</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;do something before </span><span style="color:#b68;font-weight:bold">{</span>func<span style="color:#666">.</span>__name__<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> is called&#34;</span>)
 </span></span><span style="display:flex;"><span>        func()
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;do something after </span><span style="color:#e6db74">{</span>func<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74"> is called&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;do something after </span><span style="color:#b68;font-weight:bold">{</span>func<span style="color:#666">.</span>__name__<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> is called&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@my_decorator</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@my_decorator</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Hello&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>say_hello()
 </span></span></code></pre></div><pre><code>do something before say_hello is called  
@@ -204,114 +204,114 @@ do something after say_hello is called
 这里需要注意，my_decorator不一定返回另一个函数的引用，它也可以执行一些额外的代码后，还是返回被装饰函数本身。</p>
 <h3 id="装饰器复用">装饰器复用</h3>
 <p>可以将一些常用的函数包装器放在一个文件中方便后续进行复用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 文件 decorators.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_twice</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_do_twice</span>():
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 文件 decorators.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">do_twice</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper_do_twice</span>():
 </span></span><span style="display:flex;"><span>        func()
 </span></span><span style="display:flex;"><span>        func()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper_do_twice
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 引用上述文件中的方法</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> decorators <span style="color:#f92672">import</span> do_twice
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper_do_twice
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 引用上述文件中的方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">decorators</span> <span style="color:#a2f;font-weight:bold">import</span> do_twice
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@do_twice</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@do_twice</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;Hello&#34;</span>)
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>say_hello()
 </span></span></code></pre></div><pre><code>Hello  
 Hello  
 </code></pre>
 <h3 id="带参数的装饰器">带参数的装饰器</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> decorators <span style="color:#f92672">import</span> do_twice
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">decorators</span> <span style="color:#a2f;font-weight:bold">import</span> do_twice
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@do_twice</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello_to</span>(name):
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@do_twice</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello_to</span>(name):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;Hello, </span><span style="color:#b68;font-weight:bold">{</span>name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#e6db74">&#34;Susan&#34;</span>)
-</span></span></code></pre></div><p>执行后报错：<code>TypeError: wrapper_do_twice() takes 0 positional arguments but 1 was given</code><br><br>
+</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#b44">&#34;Susan&#34;</span>)
+</span></span></code></pre></div><p>执行后报错：<code>TypeError: wrapper_do_twice() takes 0 positional arguments but 1 was given</code><!-- raw HTML omitted --><br>
 那要如何避免上述问题呢，答案是用<code>*args</code>和<code>**wargs</code><br>
 在decorators.py中加入如下新函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 文件 decorators.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_twice_parms</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_do_twice</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
-</span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper_do_twice
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> decorators <span style="color:#f92672">import</span> do_twice_parms
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 文件 decorators.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">do_twice_parms</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper_do_twice</span>(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        func(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        func(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper_do_twice
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">decorators</span> <span style="color:#a2f;font-weight:bold">import</span> do_twice_parms
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@do_twice_parms</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello_to</span>(name):
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@do_twice_parms</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello_to</span>(name):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;Hello, </span><span style="color:#b68;font-weight:bold">{</span>name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#e6db74">&#34;Susan&#34;</span>)
+</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#b44">&#34;Susan&#34;</span>)
 </span></span></code></pre></div><pre><code>Hello, Susan  
 Hello, Susan  
 </code></pre>
 <h3 id="被装饰函数的元数据更新">被装饰函数的元数据更新</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>help(say_hello_to)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>help(say_hello_to)
 </span></span></code></pre></div><pre><code>Help on function wrapper_do_twice in module decorators:
 wrapper_do_twice(*args, **kwargs)
 </code></pre>
-<p>可以发现查看say_hello_to函数相关信息（元数据）时，指示为装饰器函数内的wrapper_do_twice，显然这不是我们想要的，如何改进呢？<br><br>
+<p>可以发现查看say_hello_to函数相关信息（元数据）时，指示为装饰器函数内的wrapper_do_twice，显然这不是我们想要的，如何改进呢？<!-- raw HTML omitted --><br>
 本质上需要更新函数的<code>__name__、__doc__、__module__</code>属性，让其指向原函数，python有个惯用手法来解决此问题，那就是用functools模块的wrap方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">functools</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_twice_parms</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_do_twice</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
-</span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>        func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper_do_twice
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">do_twice_parms</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">@functools.wraps</span>(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper_do_twice</span>(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        func(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        func(<span style="color:#666">*</span>args,<span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper_do_twice
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@do_twice_parms</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello_to</span>(name):
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@do_twice_parms</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">say_hello_to</span>(name):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;Hello, </span><span style="color:#b68;font-weight:bold">{</span>name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#e6db74">&#34;Susan&#34;</span>)
+</span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#b44">&#34;Susan&#34;</span>)
 </span></span></code></pre></div><pre><code>Hello, Susan  
 Hello, Susan  
 </code></pre>
 <p>再次查看say_hello_to的帮助信息，已指向原函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>help(say_hello_to)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>help(say_hello_to)
 </span></span></code></pre></div><pre><code>Help on function say_hello_to in module __main__:  
 say_hello_to(name)  
 </code></pre>
 <h3 id="装饰器常用模板">装饰器常用模板</h3>
 <p>从以上例子我们可以总结出装饰器函数的常用模板：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">functools</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_decorator</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Do something before</span>
-</span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Do something after</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> value
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper_decorator
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decorator</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">@functools.wraps</span>(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper_decorator</span>(<span style="color:#666">*</span>args, <span style="color:#666">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># Do something before</span>
+</span></span><span style="display:flex;"><span>        value <span style="color:#666">=</span> func(<span style="color:#666">*</span>args, <span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># Do something after</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> value
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper_decorator
 </span></span></code></pre></div><h3 id="实际应用函数执行时间">实际应用：函数执行时间</h3>
 <p>下面举个实际应用的例子，调用函数时，同时打印执行的时间</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> functools
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">functools</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">time</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timer</span>(func):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;打印函数执行的时长&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@functools.wraps</span>(func)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper_timer</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
-</span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
-</span></span><span style="display:flex;"><span>        value <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>        end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Finished </span><span style="color:#e6db74">{</span>func<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74"> in </span><span style="color:#e6db74">{</span>end_time<span style="color:#f92672">-</span>start_time<span style="color:#e6db74">:</span><span style="color:#e6db74">.3f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds&#34;</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> value
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper_timer
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">timer</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;打印函数执行的时长&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">@functools.wraps</span>(func)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">wrapper_timer</span>(<span style="color:#666">*</span>args, <span style="color:#666">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        start_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span>        value <span style="color:#666">=</span> func(<span style="color:#666">*</span>args, <span style="color:#666">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        end_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;Finished </span><span style="color:#b68;font-weight:bold">{</span>func<span style="color:#666">.</span>__name__<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> in </span><span style="color:#b68;font-weight:bold">{</span>end_time<span style="color:#666">-</span>start_time<span style="color:#b68;font-weight:bold">:</span><span style="color:#b44">.3f</span><span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> seconds&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> value
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wrapper_timer
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@timer</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_some_loops</span>(num_times):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(num_times):
-</span></span><span style="display:flex;"><span>        sum([i<span style="color:#f92672">*</span>i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>)])
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>do_some_loops(<span style="color:#ae81ff">9</span>)
-</span></span><span style="display:flex;"><span>do_some_loops(<span style="color:#ae81ff">99</span>)
-</span></span><span style="display:flex;"><span>do_some_loops(<span style="color:#ae81ff">999</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">@timer</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">do_some_loops</span>(num_times):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> _ <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(num_times):
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">sum</span>([i<span style="color:#666">*</span>i <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">10000</span>)])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>do_some_loops(<span style="color:#666">9</span>)
+</span></span><span style="display:flex;"><span>do_some_loops(<span style="color:#666">99</span>)
+</span></span><span style="display:flex;"><span>do_some_loops(<span style="color:#666">999</span>)
 </span></span></code></pre></div><pre><code>Finished do_some_loops in 0.020 seconds  
 Finished do_some_loops in 0.165 seconds  
 Finished do_some_loops in 1.234 seconds  

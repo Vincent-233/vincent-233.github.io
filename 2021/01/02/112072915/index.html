@@ -117,71 +117,71 @@
 快排算法利用分治法（divide and conquer）思想，每次将数组中的一个基准元素(pivot)放在其应该在的位置，所有比基准小的数放在其左边，比基准大的元素放在其右边。然后将左右两个子序列进行递归处理。算法的关键是用基准将数组拆分成两个子序列，我们暂且将这个过程称之为partition，具体有几种不同的实现方法。这里均用python实现。</p>
 <h3 id="partition函数">partition函数</h3>
 <p><strong>实现一</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
-</span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot</span>
-</span></span><span style="display:flex;"><span>    i, j <span style="color:#f92672">=</span> left, right
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:      <span style="color:#75715e"># check j first, the order is important</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
-</span></span><span style="display:flex;"><span>    ls[i], ls[left] <span style="color:#f92672">=</span> ls[left], ls[i]
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">partition</span>(ls, left, right):
+</span></span><span style="display:flex;"><span>    pivot <span style="color:#666">=</span> ls[left]  <span style="color:#080;font-style:italic"># first element as pivot</span>
+</span></span><span style="display:flex;"><span>    i, j <span style="color:#666">=</span> left, right
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> i <span style="color:#666">&lt;</span> j:      <span style="color:#080;font-style:italic"># check j first, the order is important</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[j] <span style="color:#666">&gt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            j <span style="color:#666">-=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[i] <span style="color:#666">&lt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            i <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#666">=</span> ls[j], ls[i]
+</span></span><span style="display:flex;"><span>    ls[i], ls[left] <span style="color:#666">=</span> ls[left], ls[i]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i
 </span></span></code></pre></div><p>以第一个元素作为基准，维护左右两个指针，从后往前遍历数组S，找到第一个比基准数小的元素，从前往后遍历数组，找到第一个比基准数大的元素，交换这两个数，重复以上过程，直到指针下标相等，最后再将基准元素与指针所在元素交换。<br>
 每一次交换如下：<br>
 <img src="/img/20210105212349186.png" alt=""><br>
 <strong>实现二</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
-</span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot, treat ls[left] as an hole</span>
-</span></span><span style="display:flex;"><span>    i, j <span style="color:#f92672">=</span> left, right
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:    <span style="color:#75715e"># find ls[j] less than pivot, put it to the hole ls[i], then move i forward </span>
-</span></span><span style="display:flex;"><span>            ls[i] <span style="color:#f92672">=</span> ls[j]
-</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:  
-</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:   <span style="color:#75715e"># find ls[i] greater than pivot, put it to the hole ls[j], then move j backward</span>
-</span></span><span style="display:flex;"><span>            ls[j] <span style="color:#f92672">=</span> ls[i]
-</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    ls[i] <span style="color:#f92672">=</span> pivot   <span style="color:#75715e"># if i == j, put pivot back to hole</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">partition</span>(ls, left, right):
+</span></span><span style="display:flex;"><span>    pivot <span style="color:#666">=</span> ls[left]  <span style="color:#080;font-style:italic"># first element as pivot, treat ls[left] as an hole</span>
+</span></span><span style="display:flex;"><span>    i, j <span style="color:#666">=</span> left, right
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[j] <span style="color:#666">&gt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            j <span style="color:#666">-=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> j:    <span style="color:#080;font-style:italic"># find ls[j] less than pivot, put it to the hole ls[i], then move i forward </span>
+</span></span><span style="display:flex;"><span>            ls[i] <span style="color:#666">=</span> ls[j]
+</span></span><span style="display:flex;"><span>            i <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[i] <span style="color:#666">&lt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:  
+</span></span><span style="display:flex;"><span>            i <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> j:   <span style="color:#080;font-style:italic"># find ls[i] greater than pivot, put it to the hole ls[j], then move j backward</span>
+</span></span><span style="display:flex;"><span>            ls[j] <span style="color:#666">=</span> ls[i]
+</span></span><span style="display:flex;"><span>            j <span style="color:#666">-=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>    ls[i] <span style="color:#666">=</span> pivot   <span style="color:#080;font-style:italic"># if i == j, put pivot back to hole</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i
 </span></span></code></pre></div><p>以上代码看上去有点奇怪，每次只是赋值，并没有像第一种方法一样进行交换操作，实际可以这样理解：移出pivot，ls[0]的值已重复多余，就当它是一个空白/洞，等着别的值来覆盖/填充，然后右边找到第一个比pivot小的元素ls[j]，将它填充到ls[0]，此时轮到ls[j]的值重复多余……，最后用pivot的值覆盖ls[i]。<br>
 第一轮交换：<br>
 <img src="/img/20210105213111631.png" alt=""><br>
 <strong>实现三</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partition</span>(ls, left, right):
-</span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> ls[left]  <span style="color:#75715e"># first element as pivot</span>
-</span></span><span style="display:flex;"><span>    i, j <span style="color:#f92672">=</span> left, right
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> j:      <span style="color:#75715e"># check j first, the order is important</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[j] <span style="color:#f92672">&gt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:     <span style="color:#75715e"># find a[j] &lt; pivot, swap them, then move i forward</span>
-</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
-</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ls[i] <span style="color:#f92672">&lt;=</span> pivot <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> j:
-</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> j:     <span style="color:#75715e"># find a[i] &gt; pivot, swap them, then move j backward</span>
-</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#f92672">=</span> ls[j], ls[i]
-</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">partition</span>(ls, left, right):
+</span></span><span style="display:flex;"><span>    pivot <span style="color:#666">=</span> ls[left]  <span style="color:#080;font-style:italic"># first element as pivot</span>
+</span></span><span style="display:flex;"><span>    i, j <span style="color:#666">=</span> left, right
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> i <span style="color:#666">&lt;</span> j:      <span style="color:#080;font-style:italic"># check j first, the order is important</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[j] <span style="color:#666">&gt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            j <span style="color:#666">-=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> j:     <span style="color:#080;font-style:italic"># find a[j] &lt; pivot, swap them, then move i forward</span>
+</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#666">=</span> ls[j], ls[i]
+</span></span><span style="display:flex;"><span>            i <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> ls[i] <span style="color:#666">&lt;=</span> pivot <span style="color:#a2f;font-weight:bold">and</span> i <span style="color:#666">&lt;</span> j:
+</span></span><span style="display:flex;"><span>            i <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">&lt;</span> j:     <span style="color:#080;font-style:italic"># find a[i] &gt; pivot, swap them, then move j backward</span>
+</span></span><span style="display:flex;"><span>            ls[i], ls[j] <span style="color:#666">=</span> ls[j], ls[i]
+</span></span><span style="display:flex;"><span>            j <span style="color:#666">-=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i
 </span></span></code></pre></div><p>以上代码与实现二有点相似，唯一的差别在于每次都交换，所以不用像实现二一样做最后一次将pivot归位的操作。<br>
 第一轮交换：<br>
 <img src="/img/20210105213212808.png" alt=""></p>
 <h3 id="主函数">主函数</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort</span>(ls, left, right):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&lt;</span> right:
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> partition(ls, left, right)
-</span></span><span style="display:flex;"><span>        quick_sort(ls, left, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>        quick_sort(ls, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">quick_sort</span>(ls, left, right):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> left <span style="color:#666">&lt;</span> right:
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">=</span> partition(ls, left, right)
+</span></span><span style="display:flex;"><span>        quick_sort(ls, left, i <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        quick_sort(ls, i <span style="color:#666">+</span> <span style="color:#666">1</span>, right)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">63</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">85</span>]
-</span></span><span style="display:flex;"><span>    quick_sort(ls, <span style="color:#ae81ff">0</span>, len(ls) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>    print(ls)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    ls <span style="color:#666">=</span> [<span style="color:#666">85</span>, <span style="color:#666">24</span>, <span style="color:#666">63</span>, <span style="color:#666">45</span>, <span style="color:#666">17</span>, <span style="color:#666">31</span>, <span style="color:#666">96</span>, <span style="color:#666">50</span>, <span style="color:#666">85</span>]
+</span></span><span style="display:flex;"><span>    quick_sort(ls, <span style="color:#666">0</span>, <span style="color:#a2f">len</span>(ls) <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(ls)
 </span></span></code></pre></div><h4 id="代码关键点说明">代码关键点说明</h4>
 <ul>
 <li>partition函数是核心，其中第一版最简洁，交换次数也最少</li>
@@ -211,90 +211,7 @@
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
-	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
-		<label>
-			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
-		</label>
-		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="https://vincent-233.github.io" />
-	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/2025/07/11/rustdesk-setup/">RustDesk自建Server搭建</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/05/01/how_to_read/">如何阅读一本书</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/23/mssql_two_common_set_option/">SQL Server中几个重要的SET OPTION，非必要不建议修改</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/11/soft_router_usage/">OpenWrt安装代理软件</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/09/mssql_rowcount_variable/">IF语句会将@@ROWCOUNT重置为0</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/bigdata/">BigData</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/etl/">ETL</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/linux/">Linux</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/misc/">Misc</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/python/">python</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/batch/" title="Batch">Batch</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cheat-sheet/" title="cheat sheet">cheat sheet</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/db-api/" title="DB-API">DB-API</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/dotnet/" title="dotnet">dotnet</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/duckdb/" title="DuckDB">DuckDB</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/excel/" title="Excel">Excel</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="GIT">GIT</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mac/" title="Mac">Mac</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mssql/" title="MSSQL">MSSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/openwrt/" title="OpenWrt">OpenWrt</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/oracle/" title="ORACLE">ORACLE</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pandas/" title="pandas">pandas</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pl/sql/" title="PL/SQL">PL/SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql/" title="PostgreSQL">PostgreSQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/powershell/" title="powershell">powershell</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/reading/" title="Reading">Reading</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rustdesk/" title="RustDesk">RustDesk</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/selenium/" title="selenium">selenium</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/spark/" title="spark">spark</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssh/" title="SSH">SSH</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssis/" title="SSIS">SSIS</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssms/" title="SSMS">SSMS</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/t-sql/" title="T-SQL">T-SQL</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ubuntu/" title="ubuntu">ubuntu</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vba/" title="VBA">VBA</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vim/" title="vim">vim</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/virtual-box/" title="virtual box">virtual box</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/windows/" title="windows">windows</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">

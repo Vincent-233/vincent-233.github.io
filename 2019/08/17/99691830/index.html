@@ -132,19 +132,19 @@
 	</div>
 </div><div class="content post__content clearfix">
 			<p>本文列举一些pyspark文件读写的示例代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建或获取会话</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyspark
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pyspark.sql <span style="color:#f92672">import</span> SparkSession
-</span></span><span style="display:flex;"><span>spark <span style="color:#f92672">=</span> SparkSession<span style="color:#f92672">.</span>builder<span style="color:#f92672">.</span>appName(<span style="color:#e6db74">&#39;Python Spark SQL example&#39;</span>)<span style="color:#f92672">.</span>getOrCreate()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建或获取会话</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pyspark</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pyspark.sql</span> <span style="color:#a2f;font-weight:bold">import</span> SparkSession
+</span></span><span style="display:flex;"><span>spark <span style="color:#666">=</span> SparkSession<span style="color:#666">.</span>builder<span style="color:#666">.</span>appName(<span style="color:#b44">&#39;Python Spark SQL example&#39;</span>)<span style="color:#666">.</span>getOrCreate()
 </span></span></code></pre></div><h2 id="读取单个文件">读取单个文件</h2>
 <h3 id="csv">CSV</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>csv_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workdata/patients.csv&#39;</span>
-</span></span><span style="display:flex;"><span>df_patient <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;inferSchema&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(csv_path)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 打印 dataframe 架构</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>printSchema()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>csv_path <span style="color:#666">=</span> <span style="color:#b44">&#39;/home/ghost/workdata/patients.csv&#39;</span>
+</span></span><span style="display:flex;"><span>df_patient <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;csv&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;header&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;inferSchema&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(csv_path)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 打印 dataframe 架构</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>printSchema()
 </span></span></code></pre></div><pre><code>root
  |-- patient_id: integer (nullable = true)
  |-- assigned_sex: string (nullable = true)
@@ -162,10 +162,10 @@
  |-- bmi: double (nullable = true)
 </code></pre>
 <h3 id="json">JSON</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>json_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workdata/sparkify_log_small.json&#39;</span>
-</span></span><span style="display:flex;"><span>user_log <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(json_path)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>user_log<span style="color:#f92672">.</span>printSchema()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>json_path <span style="color:#666">=</span> <span style="color:#b44">&#39;/home/ghost/workdata/sparkify_log_small.json&#39;</span>
+</span></span><span style="display:flex;"><span>user_log <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;json&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(json_path)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>user_log<span style="color:#666">.</span>printSchema()
 </span></span></code></pre></div><pre><code>root
  |-- artist: string (nullable = true)
  |-- auth: string (nullable = true)
@@ -189,38 +189,38 @@
 <h2 id="读取多个文件">读取多个文件</h2>
 <h3 id="某文件夹下所有文件---单级目录">某文件夹下所有文件 - 单级目录</h3>
 <p>方法类似，只是 path 参数支持<code>通配符</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>all_csv_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workdata/patients/*.csv&#39;</span>
-</span></span><span style="display:flex;"><span>df_patient <span style="color:#f92672">=</span>  spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;inferSchema&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(all_csv_path)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>count()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>all_csv_path <span style="color:#666">=</span> <span style="color:#b44">&#39;/home/ghost/workdata/patients/*.csv&#39;</span>
+</span></span><span style="display:flex;"><span>df_patient <span style="color:#666">=</span>  spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;csv&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;header&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;inferSchema&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(all_csv_path)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>count()
 </span></span></code></pre></div><pre><code>403
 </code></pre>
 <h3 id="某文件夹下所有文件---多级目录">某文件夹下所有文件 - 多级目录</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>all_json_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/home/ghost/workdata/song_data/*/*/*/*.json&#39;</span>
-</span></span><span style="display:flex;"><span>df_song <span style="color:#f92672">=</span>  spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)<span style="color:#f92672">.</span>load(all_json_path)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;total records:</span><span style="color:#e6db74">{</span>df_song<span style="color:#f92672">.</span>count()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>all_json_path <span style="color:#666">=</span> <span style="color:#b44">&#39;/home/ghost/workdata/song_data/*/*/*/*.json&#39;</span>
+</span></span><span style="display:flex;"><span>df_song <span style="color:#666">=</span>  spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;json&#39;</span>)<span style="color:#666">.</span>load(all_json_path)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;total records:</span><span style="color:#b68;font-weight:bold">{</span>df_song<span style="color:#666">.</span>count()<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>)
 </span></span></code></pre></div><pre><code>total records:71
 </code></pre>
 <p>通过以上实例可知，通配符不仅可以用在文件名上，也可用在目录名上，非常强大</p>
 <h3 id="指定多个文件">指定多个文件</h3>
 <p>通配符和指定文件名结合，给 path 参数传个 list 即可</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>multi_csv_path <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;/home/ghost/workdata/patients/*.csv&#39;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;/home/ghost/workdata/patients-2.csv&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>multi_csv_path <span style="color:#666">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;/home/ghost/workdata/patients/*.csv&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;/home/ghost/workdata/patients-2.csv&#39;</span>
 </span></span><span style="display:flex;"><span>]
-</span></span><span style="display:flex;"><span>df_patient <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;inferSchema&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(multi_csv_path)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>count()
+</span></span><span style="display:flex;"><span>df_patient <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;csv&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;header&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;inferSchema&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(multi_csv_path)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>count()
 </span></span></code></pre></div><pre><code>503
 </code></pre>
 <h2 id="选择与展示">选择与展示</h2>
 <h3 id="dateframe选择与展示">DateFrame选择与展示</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># patient_id列显示前 5 行</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;patient_id&#39;</span>)<span style="color:#f92672">.</span>limit(<span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>show()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># patient_id列显示前 5 行</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>select(<span style="color:#b44">&#39;patient_id&#39;</span>)<span style="color:#666">.</span>limit(<span style="color:#666">5</span>)<span style="color:#666">.</span>show()
 </span></span></code></pre></div><pre><code>+----------+
 |patient_id|
 +----------+
@@ -231,13 +231,13 @@
 |       205|
 +----------+
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 所有列显示第一行</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>limit(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>collect()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 所有列显示第一行</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>limit(<span style="color:#666">1</span>)<span style="color:#666">.</span>collect()
 </span></span></code></pre></div><pre><code>[Row(patient_id=201, assigned_sex='male', given_name='Kifle', surname='Mustafa', address='4535 Prospect Street', city='Pennsauken', state='NJ', zip_code=8110, country='United States', contact='856-655-5415KifleMustafa@gustr.com', birthdate='10/9/1965', weight=186.1, height=69, bmi=27.5)]
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 部分列显示前 5 行</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>select([<span style="color:#e6db74">&#39;patient_id&#39;</span>,<span style="color:#e6db74">&#39;bmi&#39;</span>])<span style="color:#f92672">.</span>take(<span style="color:#ae81ff">5</span>)
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;patient_id&#39;</span>,<span style="color:#e6db74">&#39;bmi&#39;</span>)<span style="color:#f92672">.</span>take(<span style="color:#ae81ff">5</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 部分列显示前 5 行</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>select([<span style="color:#b44">&#39;patient_id&#39;</span>,<span style="color:#b44">&#39;bmi&#39;</span>])<span style="color:#666">.</span>take(<span style="color:#666">5</span>)
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>select(<span style="color:#b44">&#39;patient_id&#39;</span>,<span style="color:#b44">&#39;bmi&#39;</span>)<span style="color:#666">.</span>take(<span style="color:#666">5</span>)
 </span></span></code></pre></div><pre><code>[Row(patient_id=201, bmi=27.5),
  Row(patient_id=202, bmi=22.8),
  Row(patient_id=203, bmi=26.1),
@@ -245,10 +245,10 @@
  Row(patient_id=205, bmi=32.9)]
 </code></pre>
 <h3 id="sql接口展示">SQL接口展示</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建视图供SQL访问</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>createOrReplaceTempView(<span style="color:#e6db74">&#39;dfTable_patient&#39;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 用 SQL 访问 DataFrame 视图</span>
-</span></span><span style="display:flex;"><span>spark<span style="color:#f92672">.</span>sql(<span style="color:#e6db74">&#39;Select * From dfTable_patient Limit 5&#39;</span>)<span style="color:#f92672">.</span>limit(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;patient_id&#39;</span>)<span style="color:#f92672">.</span>show()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建视图供SQL访问</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>createOrReplaceTempView(<span style="color:#b44">&#39;dfTable_patient&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 用 SQL 访问 DataFrame 视图</span>
+</span></span><span style="display:flex;"><span>spark<span style="color:#666">.</span>sql(<span style="color:#b44">&#39;Select * From dfTable_patient Limit 5&#39;</span>)<span style="color:#666">.</span>limit(<span style="color:#666">2</span>)<span style="color:#666">.</span>select(<span style="color:#b44">&#39;patient_id&#39;</span>)<span style="color:#666">.</span>show()
 </span></span></code></pre></div><pre><code>+----------+
 |patient_id|
 +----------+
@@ -257,11 +257,11 @@
 +----------+
 </code></pre>
 <p>从以上例子可以发现，sql接口和DataFrame接口可无缝衔接配合使用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Spark 的 SQL 接口支持大多数SQL标准语法和函数</span>
-</span></span><span style="display:flex;"><span>spark<span style="color:#f92672">.</span>sql(<span style="color:#e6db74">&#39;&#39;&#39;Select assigned_sex,count(*) As CNT
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             From dfTable_patient
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Group By assigned_sex
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#39;&#39;&#39;</span>)<span style="color:#f92672">.</span>show()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Spark 的 SQL 接口支持大多数SQL标准语法和函数</span>
+</span></span><span style="display:flex;"><span>spark<span style="color:#666">.</span>sql(<span style="color:#b44">&#39;&#39;&#39;Select assigned_sex,count(*) As CNT
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">             From dfTable_patient
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">             Group By assigned_sex
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">          &#39;&#39;&#39;</span>)<span style="color:#666">.</span>show()
 </span></span></code></pre></div><pre><code>+------------+---+
 |assigned_sex|CNT|
 +------------+---+
@@ -273,40 +273,40 @@
 <p>写文件也非常方便，代码模式为： df_xxx.write.format(xxx).mode(xxx).option(xxx).save(xxx)  <br>
 保存的文件名实际上是一个文件夹，里面含多个子文件，方便多个节点并行写 <br>
 写文件还支持按某字段进行分区保存，相关例子<a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrameWriter.parquet">见文档</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 写 csv</span>
-</span></span><span style="display:flex;"><span>df_song<span style="color:#f92672">.</span>write<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>mode(<span style="color:#e6db74">&#39;overwrite&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;sep&#39;</span>,<span style="color:#e6db74">&#39;|&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>,<span style="color:#66d9ef">True</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-song.csv&#39;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 虽然 out-song.csv 实际上是一个文件夹，但依然可以正常读回来</span>
-</span></span><span style="display:flex;"><span>df_test <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;csv&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;header&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;inferSchema&#39;</span>, <span style="color:#e6db74">&#39;true&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>option(<span style="color:#e6db74">&#39;sep&#39;</span>, <span style="color:#e6db74">&#39;|&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-song.csv&#39;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 写 json，用 repartition 方法保存到3个子文件中</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>repartition(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>write<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;json&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>mode(<span style="color:#e6db74">&#39;overwrite&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-patient.json&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 写 csv</span>
+</span></span><span style="display:flex;"><span>df_song<span style="color:#666">.</span>write<span style="color:#666">.</span>format(<span style="color:#b44">&#39;csv&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>mode(<span style="color:#b44">&#39;overwrite&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;sep&#39;</span>,<span style="color:#b44">&#39;|&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;header&#39;</span>,<span style="color:#a2f;font-weight:bold">True</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>save(<span style="color:#b44">&#39;/home/ghost/workdata/out-song.csv&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 虽然 out-song.csv 实际上是一个文件夹，但依然可以正常读回来</span>
+</span></span><span style="display:flex;"><span>df_test <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;csv&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;header&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;inferSchema&#39;</span>, <span style="color:#b44">&#39;true&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>option(<span style="color:#b44">&#39;sep&#39;</span>, <span style="color:#b44">&#39;|&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(<span style="color:#b44">&#39;/home/ghost/workdata/out-song.csv&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 写 json，用 repartition 方法保存到3个子文件中</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>repartition(<span style="color:#666">3</span>)<span style="color:#666">.</span>write<span style="color:#666">.</span>format(<span style="color:#b44">&#39;json&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>mode(<span style="color:#b44">&#39;overwrite&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>save(<span style="color:#b44">&#39;/home/ghost/workdata/out-patient.json&#39;</span>)
 </span></span></code></pre></div><h3 id="parquet读写">Parquet读写</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 写 parquet</span>
-</span></span><span style="display:flex;"><span>df_patient<span style="color:#f92672">.</span>write\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>partitionBy(<span style="color:#e6db74">&#39;assigned_sex&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>parquet(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-patient.parquet&#39;</span>,mode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;overwrite&#39;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 查看 parquet 文件目录</span>
-</span></span><span style="display:flex;"><span>ls -l <span style="color:#e6db74">&#34;/home/ghost/workdata/out-patient.parquet&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 写 parquet</span>
+</span></span><span style="display:flex;"><span>df_patient<span style="color:#666">.</span>write\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>partitionBy(<span style="color:#b44">&#39;assigned_sex&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>parquet(<span style="color:#b44">&#39;/home/ghost/workdata/out-patient.parquet&#39;</span>,mode <span style="color:#666">=</span> <span style="color:#b44">&#39;overwrite&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 查看 parquet 文件目录</span>
+</span></span><span style="display:flex;"><span>ls -l <span style="color:#b44">&#34;/home/ghost/workdata/out-patient.parquet&#34;</span>
 </span></span></code></pre></div><pre><code>total 8
 drwxrwxr-x 2 ghost ghost 4096 8月  10 21:44 'assigned_sex=female'
 drwxrwxr-x 2 ghost ghost 4096 8月  10 21:44 'assigned_sex=male'
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 读 parquet</span>
-</span></span><span style="display:flex;"><span>df_parquent <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;parquet&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-patient.parquet&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 读 parquet</span>
+</span></span><span style="display:flex;"><span>df_parquent <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;parquet&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(<span style="color:#b44">&#39;/home/ghost/workdata/out-patient.parquet&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读 parquet，仅某一分区</span>
-</span></span><span style="display:flex;"><span>df_parquent_male <span style="color:#f92672">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;parquet&#39;</span>)\
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;/home/ghost/workdata/out-patient.parquet/assigned_sex=male&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 读 parquet，仅某一分区</span>
+</span></span><span style="display:flex;"><span>df_parquent_male <span style="color:#666">=</span> spark<span style="color:#666">.</span>read<span style="color:#666">.</span>format(<span style="color:#b44">&#39;parquet&#39;</span>)\
+</span></span><span style="display:flex;"><span>    <span style="color:#666">.</span>load(<span style="color:#b44">&#39;/home/ghost/workdata/out-patient.parquet/assigned_sex=male&#39;</span>)
 </span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">

@@ -154,14 +154,14 @@
 这个就不展开了，知道有这个功能，并善加利用即可</p>
 <h2 id="sqlcmd-mode">SQLCMD Mode</h2>
 <p>之前写过<a href="https://vincent-233.github.io/2020/06/14/106740950/">一篇文章</a>简单介绍过这个功能，这里再次推荐一下，sqlcmd非常强大，个人觉得很有用的一点是可以在一个SSMS的Tab里同时查询多个server的数据，结果会一起返回，方便快速对比不同环境的数据，比如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>:<span style="color:#66d9ef">connect</span> server_1
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> Table_A
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>:<span style="color:#66d9ef">connect</span> server_2
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> Table_A
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span>
-</span></span></code></pre></div><p>还支持执行不需要交互的CMD命令行，临时设置结果输出保存到文本等等，更多功能还请参考<a href="https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-use-utility?view=sql-server-ver15&amp;source=recommendations">官方文档</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>:<span style="color:#a2f;font-weight:bold">connect</span><span style="color:#bbb"> </span>server_1<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>Table_A<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">go</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>:<span style="color:#a2f;font-weight:bold">connect</span><span style="color:#bbb"> </span>server_2<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>Table_A<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">go</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>还支持执行不需要交互的CMD命令行，临时设置结果输出保存到文本等等，更多功能还请参考<a href="https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-use-utility?view=sql-server-ver15&amp;source=recommendations">官方文档</a></p>
 <h2 id="split-view">Split view</h2>
 <p>SSMS可以通过拖拽将查询窗口进行左右拆分从而可以同时看到多个TAB，它还支持将同一个TAB进行上下拆分，非常方便对长SP进行调试，或者交替查看对比同一个TAB内相隔很远的两段代码。
 <img src="https://s2.loli.net/2024/01/01/SdFCUxQyp3zRLoO.gif" alt=""></p>

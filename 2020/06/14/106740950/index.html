@@ -126,7 +126,7 @@
 <p>当然sqlcmd也可以像ORALCE的SQL*Plus、MySQL、PostgreSQL的命令行工具一样进行交互式的使用，但总体体验不如它们，可作为临时使用，这里重点介绍执行SQL文件的功能。</p>
 <h2 id="使用举例">使用举例</h2>
 <h3 id="执行单个文件">执行单个文件</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlcmd -S hostname  -U xx -P xx123 -i D:<span style="color:#ae81ff">\0</span>-create_database.sql
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlcmd -S hostname  -U xx -P xx123 -i D:<span style="color:#b62;font-weight:bold">\0</span>-create_database.sql
 </span></span></code></pre></div><p>以上命令将连接到hostname，然后执行D:\0-create_database.sql里的sql代码。</p>
 <h3 id="按顺序执行多个文件且跨不同服务器">按顺序执行多个文件，且跨不同服务器</h3>
 <p>假如如下几个文件需要依次在Server_A和Server_B上执行，均为Window验证。</p>
@@ -142,8 +142,8 @@
 	:r D:\3-create_procedure.sql  
 </code></pre>
 <p>然后命令行执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlcmd -S Server_A -i  D:<span style="color:#ae81ff">\s</span>cripts.sql
-</span></span><span style="display:flex;"><span>sqlcmd -S Server_B -i  D:<span style="color:#ae81ff">\s</span>cripts.sql
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sqlcmd -S Server_A -i  D:<span style="color:#b62;font-weight:bold">\s</span>cripts.sql
+</span></span><span style="display:flex;"><span>sqlcmd -S Server_B -i  D:<span style="color:#b62;font-weight:bold">\s</span>cripts.sql
 </span></span></code></pre></div><p>:r 代表执行脚本，更多命令选项可<a href="https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility?view=sql-server-2014#sqlcmd-commands">参考此链接</a>。</p>
 <h3 id="在ssms中使用sqlcmd模式执行代码">在SSMS中使用sqlcmd模式执行代码</h3>
 <p>切换到sqlcmd后，SSMS的当前查询窗口支持sqlcmd命令：<br>

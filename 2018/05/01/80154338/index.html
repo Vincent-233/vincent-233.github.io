@@ -119,27 +119,27 @@
 资源管理器选中某数据库-属性-选项-允许快照隔离-True</li>
 <li>T-SQL操作</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> DBName <span style="color:#66d9ef">SET</span> ALLOW_SNAPSHOT_ISOLATION <span style="color:#66d9ef">ON</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">ALTER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DATABASE</span><span style="color:#bbb"> </span>DBName<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">SET</span><span style="color:#bbb"> </span>ALLOW_SNAPSHOT_ISOLATION<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb">
+</span></span></span></code></pre></div><ul>
 <li>在事务操作前加SET TRAN ISOLATION LEVEL SNAPSHOT</li>
 <li>例子</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> TRAN <span style="color:#66d9ef">ISOLATION</span> <span style="color:#66d9ef">LEVEL</span> SNAPSHOT
-</span></span><span style="display:flex;"><span> your <span style="color:#66d9ef">transaction</span> code
-</span></span></code></pre></div><h2 id="设置数据库默认为committed_snapshot">设置数据库默认为COMMITTED_SNAPSHOT</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SET</span><span style="color:#bbb"> </span>TRAN<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ISOLATION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">LEVEL</span><span style="color:#bbb"> </span>SNAPSHOT<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"> </span>your<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">transaction</span><span style="color:#bbb"> </span>code<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="设置数据库默认为committed_snapshot">设置数据库默认为COMMITTED_SNAPSHOT</h2>
 <p>数据库默认级别设置后，事务前不用加Set语句就可以起到快照效果</p>
 <ul>
 <li>SSMS设置<br>
 资源管理器选中某数据库-属性-选项-读提交快照处于打开状态-True</li>
 <li>T-SQL设置</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DATABASE</span> DBName <span style="color:#66d9ef">SET</span> READ_COMMITTED_SNAPSHOT <span style="color:#66d9ef">ON</span>
-</span></span></code></pre></div><h2 id="查询数据库是否开启了相关设置">查询数据库是否开启了相关设置</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> database_id,name
-</span></span><span style="display:flex;"><span>      ,snapshot_isolation_state    <span style="color:#75715e">-- 1代表 允许快照隔离
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    ,is_read_committed_snapshot_on <span style="color:#75715e">-- 1 代表 默认隔离级别为 Read Committed SnapShot
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">FROM</span> sys.databases
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALTER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DATABASE</span><span style="color:#bbb"> </span>DBName<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">SET</span><span style="color:#bbb"> </span>READ_COMMITTED_SNAPSHOT<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="查询数据库是否开启了相关设置">查询数据库是否开启了相关设置</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>database_id,name<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>,snapshot_isolation_state<span style="color:#bbb">    </span><span style="color:#080;font-style:italic">-- 1代表 允许快照隔离
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">	    </span>,is_read_committed_snapshot_on<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">-- 1 代表 默认隔离级别为 Read Committed SnapShot
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>sys.databases<span style="color:#bbb">
+</span></span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">
 			

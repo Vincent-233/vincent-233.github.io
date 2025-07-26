@@ -120,10 +120,10 @@
 <p>虚拟机中安装了spark，想要在windows中直接练习pyspark的操作，但又不想在windows中再安装一次spark，于是想到了利用Jupyter Notebook，由于它基于Web，可以在windows上通过Web来访问Linux的pyspark编程环境。</p>
 <h2 id="配置">配置</h2>
 <h3 id="linux中安装jupyter">Linux中安装Jupyter</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip3 install jupyter
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip3 install jupyter
 </span></span></code></pre></div><h3 id="临时允许远程访问的方法">临时允许远程访问的方法</h3>
 <p>只需在启动notebook的时候，加几个参数即可：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>jupyter notebook --ip<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0.0.0.0&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>jupyter notebook --ip<span style="color:#666">=</span><span style="color:#b44">&#39;0.0.0.0&#39;</span>
 </span></span></code></pre></div><p>其中<code>ip</code>参数代表notebook监听的IP，0.0.0.0表示任何IP都可以连接<br>
 更多参数可以用 <code>jupyter notebook --help</code>命令查看</p>
 <h3 id="永久可远程访问的方法">永久可远程访问的方法</h3>

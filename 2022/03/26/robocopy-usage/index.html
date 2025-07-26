@@ -130,34 +130,34 @@
 <p>将电脑个人用户文件夹( $env:USERPROFILE )下某些指定的文件和文件夹同步到H盘的Backup文件夹下。</p>
 <p>方案：写一个ps1脚本，配置在Task scheduler里每天自动执行。</p>
 <h3 id="脚本实现">脚本实现</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	$env:USERPROFILE -&gt; c:\user\your_user_name
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	$env:USERNAME    -&gt; your_user_name
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;</span>
-</span></span><span style="display:flex;"><span>$bk_folder = <span style="color:#e6db74">&#34;H:\Backup&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#080;font-style:italic">&lt;#
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">	$env:USERPROFILE -&gt; c:\user\your_user_name
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">	$env:USERNAME    -&gt; your_user_name
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">$bk_folder</span> = <span style="color:#b44">&#34;H:\Backup&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># backup manifest</span>
-</span></span><span style="display:flex;"><span>$folder = <span style="color:#e6db74">&#39;.bash_history&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.bash_profile&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.bashrc&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.condarc&#39;</span>,,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.gitconfig&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.ssh&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;.vscode&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Desktop&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Downloads&#39;</span>,
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;My Documents&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># backup manifest</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">$folder</span> = <span style="color:#b44">&#39;.bash_history&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.bash_profile&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.bashrc&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.condarc&#39;</span>,,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.gitconfig&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.ssh&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;.vscode&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;Desktop&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;Downloads&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#b44">&#39;My Documents&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># for each of above file and folder perform copy or robocopy</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span>($_ <span style="color:#66d9ef">in</span> $folder)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># for each of above file and folder perform copy or robocopy</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">foreach</span>(<span style="color:#b8860b">$_</span> <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#b8860b">$folder</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (test-path <span style="color:#e6db74">&#34;</span>$env:USERPROFILE<span style="color:#e6db74">\</span>$_<span style="color:#e6db74">&#34;</span> -PathType Leaf)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#a2f">test-path</span> <span style="color:#b44">&#34;</span><span style="color:#b8860b">$env:USERPROFILE</span><span style="color:#b44">\</span><span style="color:#b8860b">$_</span><span style="color:#b44">&#34;</span> -PathType Leaf)
 </span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>		copy <span style="color:#e6db74">&#34;</span>$env:USERPROFILE<span style="color:#e6db74">\</span>$_<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$bk_folder<span style="color:#e6db74">\personal_files\</span>$env:USERNAME<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">copy </span><span style="color:#b44">&#34;</span><span style="color:#b8860b">$env:USERPROFILE</span><span style="color:#b44">\</span><span style="color:#b8860b">$_</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b8860b">$bk_folder</span><span style="color:#b44">\personal_files\</span><span style="color:#b8860b">$env:USERNAME</span><span style="color:#b44">&#34;</span>
 </span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (test-path <span style="color:#e6db74">&#34;</span>$env:USERPROFILE<span style="color:#e6db74">\</span>$_<span style="color:#e6db74">&#34;</span> -PathType Container)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#a2f">test-path</span> <span style="color:#b44">&#34;</span><span style="color:#b8860b">$env:USERPROFILE</span><span style="color:#b44">\</span><span style="color:#b8860b">$_</span><span style="color:#b44">&#34;</span> -PathType Container)
 </span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>		robocopy <span style="color:#e6db74">&#34;</span>$env:USERPROFILE<span style="color:#e6db74">\</span>$_<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$bk_folder<span style="color:#e6db74">\personal_files\</span>$env:USERNAME<span style="color:#e6db74">\</span>$_<span style="color:#e6db74">&#34;</span> /e /xa<span style="color:#960050;background-color:#1e0010">:</span>SHT /mir
+</span></span><span style="display:flex;"><span>		robocopy <span style="color:#b44">&#34;</span><span style="color:#b8860b">$env:USERPROFILE</span><span style="color:#b44">\</span><span style="color:#b8860b">$_</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b8860b">$bk_folder</span><span style="color:#b44">\personal_files\</span><span style="color:#b8860b">$env:USERNAME</span><span style="color:#b44">\</span><span style="color:#b8860b">$_</span><span style="color:#b44">&#34;</span> /e /xa<span style="">:</span>SHT /mir
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>功能说明：先枚举要备份的根目录下的文件和文件夹，然后遍历，如果是文件直接用copy命令，文件夹则用强大的robocopy</p>

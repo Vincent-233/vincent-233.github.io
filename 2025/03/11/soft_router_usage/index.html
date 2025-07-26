@@ -120,31 +120,31 @@
 </div><div class="content post__content clearfix">
 			<p>最近买了一款可安装软件的路由器，这里记录一下如何在上面安装代理软件openclash，建议路由器的 RAM 至少 256MB ，避免带不动的情况。</p>
 <p>在网页版管理界面上进行完最基本的设置后，可以用SSH连接到路由器系统。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># login with your router ip address</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># login with your router ip address</span>
 </span></span><span style="display:flex;"><span>ssh root@192.168.x.x
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># check system info</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># check system info</span>
 </span></span><span style="display:flex;"><span>cat /etc/openwrt_release
 </span></span></code></pre></div><p>类似结果如下：</p>
-<pre tabindex="0"><code>DISTRIB_ID=&#39;OpenWrt&#39;
-DISTRIB_RELEASE=&#39;21.02-SNAPSHOT&#39;
-DISTRIB_REVISION=&#39;r15812+908-46b6ee7ffc&#39;
-DISTRIB_TARGET=&#39;mediatek/mt7981&#39;
-DISTRIB_ARCH=&#39;aarch64_cortex-a53&#39;
-DISTRIB_DESCRIPTION=&#39;OpenWrt 21.02-SNAPSHOT r15812+908-46b6ee7ffc&#39;
-DISTRIB_TAINTS=&#39;busybox override&#39;
-</code></pre><p>上述结果中的<code>DISTRIB_ARCH</code>非常重要，因为这直接影响软件源的设置，名称以aarch开头的arm架构的包比较多，一般软件都会适配， 后面要安装的 istore 就只支持 arm 和 x86架构的 CPU。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>DISTRIB_ID=&#39;OpenWrt&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_RELEASE=&#39;21.02-SNAPSHOT&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_REVISION=&#39;r15812+908-46b6ee7ffc&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_TARGET=&#39;mediatek/mt7981&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_ARCH=&#39;aarch64_cortex-a53&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_DESCRIPTION=&#39;OpenWrt 21.02-SNAPSHOT r15812+908-46b6ee7ffc&#39;
+</span></span><span style="display:flex;"><span>DISTRIB_TAINTS=&#39;busybox override&#39;
+</span></span></code></pre></div><p>上述结果中的<code>DISTRIB_ARCH</code>非常重要，因为这直接影响软件源的设置，名称以aarch开头的arm架构的包比较多，一般软件都会适配， 后面要安装的 istore 就只支持 arm 和 x86架构的 CPU。</p>
 <h2 id="1-更新软件源">1-更新软件源</h2>
 <p>如果更新速度太慢或太多缺失的软件，可更新一下安装源。<br>
 在路由器的 OpenWrt 网页管理界面或ssh远程均可更新，一般改 <code>/etc/opkg/customfeeds.conf</code> 这个配置文件</p>
 <p>例如：</p>
-<pre tabindex="0"><code>src/gz supes https://op.dllkids.xyz/packages/aarch64_cortex-a53/
-</code></pre><p>再如mips_24kc架构的：</p>
-<pre tabindex="0"><code>src/gz openwrt_base https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/base
-src/gz openwrt_luci https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/luci
-src/gz openwrt_packages https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/packages
-src/gz openwrt_routing https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/routing
-src/gz openwrt_telephony https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/telephony
-</code></pre><p>更多关于软件源的设置可以查看这位<a href="https://deeprouter.org/article/Compilation-of-OpenWRT-Software-Sources">大神的博文</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>src/gz supes https://op.dllkids.xyz/packages/aarch64_cortex-a53/
+</span></span></code></pre></div><p>再如mips_24kc架构的：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>src/gz openwrt_base https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/base
+</span></span><span style="display:flex;"><span>src/gz openwrt_luci https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/luci
+</span></span><span style="display:flex;"><span>src/gz openwrt_packages https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/packages
+</span></span><span style="display:flex;"><span>src/gz openwrt_routing https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/routing
+</span></span><span style="display:flex;"><span>src/gz openwrt_telephony https://mirrors.aliyun.com/openwrt/releases/19.07.8/packages/mips_24kc/telephony
+</span></span></code></pre></div><p>更多关于软件源的设置可以查看这位<a href="https://deeprouter.org/article/Compilation-of-OpenWRT-Software-Sources">大神的博文</a></p>
 <h2 id="2-安装istore-可选">2-安装istore （可选）</h2>
 <p>安装方法见<a href="https://github.com/linkease/istore?tab=readme-ov-file#%E5%AE%89%E8%A3%85-istore-%E5%88%B0-openwrt-%E5%AE%98%E6%96%B9%E5%9B%BA%E4%BB%B6">Github官方说明</a>，里面的安装命令需要 ssh 到 OpenWrt 执行。</p>
 <p>或先下载ipk软件包后在网页管理界面上传安装：</p>

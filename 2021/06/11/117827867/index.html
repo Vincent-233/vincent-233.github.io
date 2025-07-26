@@ -142,7 +142,7 @@
 <li>sqlcmd基于ODBC连接，若要支持failover，需要加上-M选项</li>
 <li>bcp也是基于ODBC连接，若要支持failover，需要在ServerName上加上<code>;MultiSubnetFailover=Yes</code>，比如：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bcp testdb.dbo.Table_A out C:<span style="color:#ae81ff">\T</span>est<span style="color:#ae81ff">\T</span>able_A.csv -T -c -t, -S server_name;multisubnetfailover<span style="color:#f92672">=</span>Yes
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>bcp testdb.dbo.Table_A out C:<span style="color:#b62;font-weight:bold">\T</span>est<span style="color:#b62;font-weight:bold">\T</span>able_A.csv -T -c -t, -S server_name;<span style="color:#b8860b">multisubnetfailover</span><span style="color:#666">=</span>Yes
 </span></span></code></pre></div><p>备注：以上均为个人理解，技术也一直在变化（比如OLEDB，一度被微软deprecated，2018年又<a href="https://learn.microsoft.com/en-us/archive/blogs/sqlnativeclient/announcing-the-new-release-of-ole-db-driver-for-sql-server">undeprecated</a>），所以文章仅供参考，若有错漏请指出。</p>
 <h3 id="参考链接">参考链接</h3>
 <ul>

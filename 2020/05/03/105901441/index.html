@@ -137,29 +137,29 @@ subset([1,2]) = subset([2]) + {1 + subset([2])}
               = {[],[1],[2],[1,2]}  
 </code></pre>
 <h3 id="递归版本">递归版本：</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset_sub</span>(ls, index, max_index, result):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;put all subsets of ls[index:max_index] to result&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> index <span style="color:#f92672">==</span> max_index: <span style="color:#75715e"># if last one, add it to result </span>
-</span></span><span style="display:flex;"><span>        result<span style="color:#f92672">.</span>append(ls[index:]) 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
-</span></span><span style="display:flex;"><span>    subset_sub(ls, index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, max_index, result) <span style="color:#75715e"># subset of ls[index + 1：]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> list(result): <span style="color:#75715e"># add ls[index] to every element in result</span>
-</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">=</span> list(x) <span style="color:#75715e"># another list</span>
-</span></span><span style="display:flex;"><span>        y<span style="color:#f92672">.</span>append(ls[index])
-</span></span><span style="display:flex;"><span>        result<span style="color:#f92672">.</span>append(y)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset_sub</span>(ls, index, max_index, result):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;put all subsets of ls[index:max_index] to result&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> index <span style="color:#666">==</span> max_index: <span style="color:#080;font-style:italic"># if last one, add it to result </span>
+</span></span><span style="display:flex;"><span>        result<span style="color:#666">.</span>append(ls[index:]) 
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>    subset_sub(ls, index <span style="color:#666">+</span> <span style="color:#666">1</span>, max_index, result) <span style="color:#080;font-style:italic"># subset of ls[index + 1：]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> x <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">list</span>(result): <span style="color:#080;font-style:italic"># add ls[index] to every element in result</span>
+</span></span><span style="display:flex;"><span>        y <span style="color:#666">=</span> <span style="color:#a2f">list</span>(x) <span style="color:#080;font-style:italic"># another list</span>
+</span></span><span style="display:flex;"><span>        y<span style="color:#666">.</span>append(ls[index])
+</span></span><span style="display:flex;"><span>        result<span style="color:#666">.</span>append(y)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset</span>(ls):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(ls) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [[]]
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> [[]]
-</span></span><span style="display:flex;"><span>    subset_sub(ls, <span style="color:#ae81ff">0</span>, len(ls)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, result)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset</span>(ls):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">len</span>(ls) <span style="color:#666">==</span> <span style="color:#666">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> [[]]
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> [[]]
+</span></span><span style="display:flex;"><span>    subset_sub(ls, <span style="color:#666">0</span>, <span style="color:#a2f">len</span>(ls)<span style="color:#666">-</span><span style="color:#666">1</span>, result)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> subset(ls)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> result:
-</span></span><span style="display:flex;"><span>        print(r)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    ls <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> subset(ls)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> r <span style="color:#a2f;font-weight:bold">in</span> result:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(r)
 </span></span></code></pre></div><pre><code>结果：  
 	[]  
 	[3]  
@@ -171,21 +171,21 @@ subset([1,2]) = subset([2]) + {1 + subset([2])}
 	[3, 2, 1]  
 </code></pre>
 <h3 id="非递归版本">非递归版本：</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset</span>(ls):
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> [[]] <span style="color:#75715e"># empty set</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(ls) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> ls:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(result)): <span style="color:#75715e"># add to current result with each item in ls</span>
-</span></span><span style="display:flex;"><span>            temp_ls <span style="color:#f92672">=</span> list(result[j])
-</span></span><span style="display:flex;"><span>            temp_ls<span style="color:#f92672">.</span>append(i)
-</span></span><span style="display:flex;"><span>            result<span style="color:#f92672">.</span>append(temp_ls)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset</span>(ls):
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> [[]] <span style="color:#080;font-style:italic"># empty set</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">len</span>(ls) <span style="color:#666">==</span> <span style="color:#666">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> ls:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> j <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#a2f">len</span>(result)): <span style="color:#080;font-style:italic"># add to current result with each item in ls</span>
+</span></span><span style="display:flex;"><span>            temp_ls <span style="color:#666">=</span> <span style="color:#a2f">list</span>(result[j])
+</span></span><span style="display:flex;"><span>            temp_ls<span style="color:#666">.</span>append(i)
+</span></span><span style="display:flex;"><span>            result<span style="color:#666">.</span>append(temp_ls)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> subset(ls):
-</span></span><span style="display:flex;"><span>        print(r)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    ls <span style="color:#666">=</span> [<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> r <span style="color:#a2f;font-weight:bold">in</span> subset(ls):
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(r)
 </span></span></code></pre></div><pre><code>结果：  
 	[]  
 	[1]  
@@ -204,31 +204,31 @@ subset([1,2]) = subset([2]) + {1 + subset([2])}
 <li>MaskCode(a[0:n]) = (1 + MaskCode(a[1:n]) + (0 + MaskCode(a[1:n])</li>
 </ul>
 <p>递归依次设置每一位的0或1的状态，代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset_mask</span>(index, max_index, working_set,mask_set):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;put all possible 0/1 mask code of ls[index:max_index] to mask_set&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> index <span style="color:#f92672">&gt;</span> max_index:
-</span></span><span style="display:flex;"><span>        mask_set<span style="color:#f92672">.</span>append(list(working_set))
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        working_set[index] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>        subset_mask(index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, max_index, working_set, mask_set)
-</span></span><span style="display:flex;"><span>        working_set[index] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        subset_mask(index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, max_index, working_set, mask_set)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset_mask</span>(index, max_index, working_set,mask_set):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;put all possible 0/1 mask code of ls[index:max_index] to mask_set&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> index <span style="color:#666">&gt;</span> max_index:
+</span></span><span style="display:flex;"><span>        mask_set<span style="color:#666">.</span>append(<span style="color:#a2f">list</span>(working_set))
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        working_set[index] <span style="color:#666">=</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>        subset_mask(index <span style="color:#666">+</span> <span style="color:#666">1</span>, max_index, working_set, mask_set)
+</span></span><span style="display:flex;"><span>        working_set[index] <span style="color:#666">=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>        subset_mask(index <span style="color:#666">+</span> <span style="color:#666">1</span>, max_index, working_set, mask_set)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset</span>(ls):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;generate subsets according to mask codes&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>    mask_set <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>    working_set <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> len(ls)
-</span></span><span style="display:flex;"><span>    subset_mask(<span style="color:#ae81ff">0</span>,len(working_set) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,working_set,mask_set)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> mask <span style="color:#f92672">in</span> mask_set:
-</span></span><span style="display:flex;"><span>        result<span style="color:#f92672">.</span>append([j <span style="color:#66d9ef">for</span> i,j <span style="color:#f92672">in</span> zip(mask,ls) <span style="color:#66d9ef">if</span> i])
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset</span>(ls):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;generate subsets according to mask codes&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>    mask_set <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>    working_set <span style="color:#666">=</span> [<span style="color:#666">0</span>] <span style="color:#666">*</span> <span style="color:#a2f">len</span>(ls)
+</span></span><span style="display:flex;"><span>    subset_mask(<span style="color:#666">0</span>,<span style="color:#a2f">len</span>(working_set) <span style="color:#666">-</span> <span style="color:#666">1</span>,working_set,mask_set)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> mask <span style="color:#a2f;font-weight:bold">in</span> mask_set:
+</span></span><span style="display:flex;"><span>        result<span style="color:#666">.</span>append([j <span style="color:#a2f;font-weight:bold">for</span> i,j <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">zip</span>(mask,ls) <span style="color:#a2f;font-weight:bold">if</span> i])
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span> ,<span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> subset(ls)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> result:
-</span></span><span style="display:flex;"><span>        print(r)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    ls <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">2</span> ,<span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> subset(ls)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> r <span style="color:#a2f;font-weight:bold">in</span> result:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(r)
 </span></span></code></pre></div><pre><code>结果:  
 	[]  
 	[3]  
@@ -241,28 +241,28 @@ subset([1,2]) = subset([2]) + {1 + subset([2])}
 </code></pre>
 <h3 id="非递归版本-1">非递归版本</h3>
 <p>生成掩码的过程也可以借用二进制的形式，比如全集111对应2^3-1=7，000对应0，所以从0到2^n-1转为二进制形式即可生成所有掩码，代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset_mask</span>(length):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;return all possible 0/1 with length &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    mask_set <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> num <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>: <span style="color:#75715e"># max mask code in decimal mode</span>
-</span></span><span style="display:flex;"><span>        mask_set<span style="color:#f92672">.</span>append(str(bin(num))[<span style="color:#ae81ff">2</span>:]<span style="color:#f92672">.</span>zfill(length))
-</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mask_set
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset_mask</span>(length):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;return all possible 0/1 with length &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    mask_set <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>    num <span style="color:#666">=</span> <span style="color:#666">0</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> num <span style="color:#666">&lt;=</span> <span style="color:#666">2</span> <span style="color:#666">**</span> length <span style="color:#666">-</span> <span style="color:#666">1</span>: <span style="color:#080;font-style:italic"># max mask code in decimal mode</span>
+</span></span><span style="display:flex;"><span>        mask_set<span style="color:#666">.</span>append(<span style="color:#a2f">str</span>(<span style="color:#a2f">bin</span>(num))[<span style="color:#666">2</span>:]<span style="color:#666">.</span>zfill(length))
+</span></span><span style="display:flex;"><span>        num <span style="color:#666">+=</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mask_set
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subset</span>(ls):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;generate subsets according to mask codes&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>    mask_set <span style="color:#f92672">=</span> subset_mask(len(ls))
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> mask <span style="color:#f92672">in</span> mask_set:
-</span></span><span style="display:flex;"><span>        result<span style="color:#f92672">.</span>append([j <span style="color:#66d9ef">for</span> i,j <span style="color:#f92672">in</span> zip(mask,ls) <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>])
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">subset</span>(ls):
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;&#34;&#34;generate subsets according to mask codes&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>    mask_set <span style="color:#666">=</span> subset_mask(<span style="color:#a2f">len</span>(ls))
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> mask <span style="color:#a2f;font-weight:bold">in</span> mask_set:
+</span></span><span style="display:flex;"><span>        result<span style="color:#666">.</span>append([j <span style="color:#a2f;font-weight:bold">for</span> i,j <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">zip</span>(mask,ls) <span style="color:#a2f;font-weight:bold">if</span> i <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> subset(ls)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> result:
-</span></span><span style="display:flex;"><span>        print(r)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    ls <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span>    result <span style="color:#666">=</span> subset(ls)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> r <span style="color:#a2f;font-weight:bold">in</span> result:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(r)
 </span></span></code></pre></div><pre><code>结果：  
 	[]  
 	[3]  

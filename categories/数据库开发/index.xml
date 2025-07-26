@@ -184,7 +184,7 @@
       <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/2018/09/24/82832350/</guid>
-      <description>@[TOC](SQL Server Audit 功能体验 ) SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法还请自行翻阅联机</description>
+      <description>SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法可翻阅联机丛书。 业务场景 对用户d</description>
     </item>
     
     <item>

@@ -114,15 +114,15 @@
 </div><div class="content post__content clearfix">
 			<h4 id="安装postgresql">安装PostgreSQL</h4>
 <p>运行如下命令进行安装：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install postgresql
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install postgresql
 </span></span></code></pre></div><h4 id="linux本地登陆并修改密码">Linux本地登陆并修改密码</h4>
 <p>安装完成之后，Linux会自动创建postgres同名账户，用此账号可直接免密登陆PostgreSQL（类似于SQL Server的Windows账号认证方式）:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo -u postgres psql
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo -u postgres psql
 </span></span></code></pre></div><p>然后可以用 \password命令更新密码，用于之后的远程连接。<br>
 更新之后，就可以密码的方式登陆，例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>psql -U postgres -d postgres -h 127.0.0.1 -p <span style="color:#ae81ff">5432</span> <span style="color:#75715e"># 提示输入密码，输入后登陆到psql</span>
-</span></span><span style="display:flex;"><span>psql -help <span style="color:#75715e"># 显示帮助</span>
-</span></span><span style="display:flex;"><span>psql -l <span style="color:#75715e"># 显示数据库列表然后退出</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>psql -U postgres -d postgres -h 127.0.0.1 -p <span style="color:#666">5432</span> <span style="color:#080;font-style:italic"># 提示输入密码，输入后登陆到psql</span>
+</span></span><span style="display:flex;"><span>psql -help <span style="color:#080;font-style:italic"># 显示帮助</span>
+</span></span><span style="display:flex;"><span>psql -l <span style="color:#080;font-style:italic"># 显示数据库列表然后退出</span>
 </span></span></code></pre></div><blockquote>
 <p>连接到具体的PostgreSQL之后，可用 <code>\?</code> 显示 psql shell 命令帮助，常用命令如下：<br>
 \password：设置密码<br>
@@ -143,23 +143,23 @@
 <ul>
 <li>修改监听</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vi /etc/postgresql/10/main/postgresql.conf 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vi /etc/postgresql/10/main/postgresql.conf 
 </span></span></code></pre></div><p>将 #listen_addresses = &rsquo;localhost&rsquo; 的注释去掉并改为 listen_addresses = &lsquo;*&rsquo;</p>
 <ul>
 <li>修改可访问用户的IP段</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vi /etc/postgresql/10/main/pg_hba.conf 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vi /etc/postgresql/10/main/pg_hba.conf 
 </span></span></code></pre></div><p>在文件末尾添加： host all all 0.0.0.0 0.0.0.0 md5 ，表示允许任何IP连接</p>
 <ul>
 <li>重启数据库</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo /etc/init.d/postgresql restart
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo /etc/init.d/postgresql restart
 </span></span></code></pre></div><h4 id="开启5432端口">开启5432端口</h4>
 <p>上述允许远程连接的设置仅是postgre的设置，真正要让外部可连接，OS层也要设置，即开启相应端口，postgre默认用tcp 5432 端口进行连接，故开启5432端口即可：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 若 firewalld 未安装，则先进行安装： sudo apt install firewalld</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 允许 tcp 5432 端口</span>
-</span></span><span style="display:flex;"><span>sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>5432/tcp
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># reload 防火墙，应用规则</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 若 firewalld 未安装，则先进行安装： sudo apt install firewalld</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 允许 tcp 5432 端口</span>
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --permanent --add-port<span style="color:#666">=</span>5432/tcp
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># reload 防火墙，应用规则</span>
 </span></span><span style="display:flex;"><span>sudo systemctl reload firewalld
 </span></span></code></pre></div><h4 id="配置宿主机连接postgresql">配置宿主机连接PostgreSQL</h4>
 <ul>

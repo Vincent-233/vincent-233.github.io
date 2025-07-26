@@ -125,10 +125,10 @@
 <h3 id="建立工作空间文件夹创建vagrantfile">建立工作空间文件夹，创建vagrantfile</h3>
 <p>vagrant需要有存放vagrantfile的文件夹，之后所有命令的运行都要在那个目录下。同时vagrant也会将这个文件夹设置为和虚拟机之间的共享文件夹。<br>
 可以根据个人情况建立一个文件夹，然后在那个文件夹下创建vagrantfile，实际就是一个配置文件，里面含要安装的Liunx的版本等相关信息。可以在这个网址选择一个，这里以最流行的<a href="https://app.vagrantup.com/ubuntu/boxes/trusty64">ubuntu/trusty64</a>为例：</p>
-<pre tabindex="0"><code>Vagrant.configure(&#34;2&#34;) do |config|
-  config.vm.box = &#34;ubuntu/trusty64&#34;
-end
-</code></pre><p>如果是windows系统，可以新建一个txt文件，然后将上面内容复制进去，然后保存后将后缀名去除。<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Vagrant.configure(&#34;2&#34;) do |config|
+</span></span><span style="display:flex;"><span>  config.vm.box = &#34;ubuntu/trusty64&#34;
+</span></span><span style="display:flex;"><span>end
+</span></span></code></pre></div><p>如果是windows系统，可以新建一个txt文件，然后将上面内容复制进去，然后保存后将后缀名去除。<br>
 <img src="/img/20190406102534365.png" alt=""></p>
 <h3 id="vagrant-up">vagrant up</h3>
 <p>命令行切换到工作空间文件夹目录，运行vagrant up<br>

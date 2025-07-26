@@ -170,15 +170,6 @@
     </item>
     
     <item>
-      <title>为何公司的OpenSSH无法免密登陆</title>
-      <link>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</link>
-      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</guid>
-      <description>问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id</description>
-    </item>
-    
-    <item>
       <title>bcp导入导出报错，字段名含空格</title>
       <link>https://vincent-233.github.io/2023/02/10/bcp_format_file_error_with_space_in_column_name/</link>
       <pubDate>Fri, 10 Feb 2023 00:07:56 +0800</pubDate>
@@ -310,7 +301,7 @@
       <pubDate>Sun, 21 Jun 2020 23:55:02 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/2020/06/21/106893478/</guid>
-      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df Category Level A B C D 0 Online 1 234 345 644 987 1 Online 2 213 456 543 657 2 Online 3</description>
+      <description>概述 用Python实现之前文章中用SQL实现的转换，交叉表转为长宽表。 数据准备 import pandas as pd df = pd.read_csv(r&amp;#39;D:\CategoryConfig.csv&amp;#39;) df .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; } 方法一，先列转行</description>
     </item>
     
     <item>
@@ -733,7 +724,7 @@
       <pubDate>Mon, 24 Sep 2018 21:52:38 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/2018/09/24/82832350/</guid>
-      <description>@[TOC](SQL Server Audit 功能体验 ) SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法还请自行翻阅联机</description>
+      <description>SQL Server 的Audit功能可以用来对数据库进行某种审计。下面用一个简单的例子来说明一下它的用法和效果。更多详细用法可翻阅联机丛书。 业务场景 对用户d</description>
     </item>
     
     <item>

@@ -131,8 +131,8 @@
 <li>如果git repo的使用人开发部署都在同一种操作系统中，那可以设置为false，这样它不会做任何转换</li>
 </ul>
 <p>除了用<a href="https://git-scm.com/docs/git-config">git config</a>进行相对全局的设置，也可在Repo级别用<code>.gitattributes</code>文件来指定特定后缀文件的换行符。比如想在checkout时让<code>*.sh</code>文件的换行符号永远为LF，不管在Windows还是Linux/Mac，可以这样设置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Declare files that will always have LF line endings on checkout.</span>
-</span></span><span style="display:flex;"><span>*.sh text eol<span style="color:#f92672">=</span>lf
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Declare files that will always have LF line endings on checkout.</span>
+</span></span><span style="display:flex;"><span>*.sh text <span style="color:#b8860b">eol</span><span style="color:#666">=</span>lf
 </span></span></code></pre></div><h2 id="查询文件换行符">查询文件换行符</h2>
 <p>Windows上查看文件换行符的工具太多，我就不列举了，win11连自带的notepad都支持，更不用说NotePad++和VS Code。在只能SSH连接的Linux系统中，如何查看某文本文件的换行符呢？目前知道的可以用以下工具：</p>
 <h3 id="file命令">file命令</h3>
@@ -143,14 +143,14 @@
 <h3 id="od命令">od命令</h3>
 <p>od -c 可打印文本中所有字符，包括隐藏字符，例如 <code>od -c my_file.py |head -50</code>
 结果为</p>
-<pre tabindex="0"><code>0000000    i   m   p   o   r   t       o   s  \r  \n   i   m   p   o   r
-0000020    t       d   a   t   e   t   i   m   e  \r  \n  \r  \n   #
-0000040   从  **  **  生  **  **  产  **  **  环  **  **  境  **  **  导
-0000060   **  **  出  **  **  数  **  **  据  **  **  到  **  **   S   3
-0000100   的  **  **  脚  **  **  本  **  **  \r  \n   d   e   f       g
-0000120    e   t   _   p   r   o   _   s   c   r   i   p   t   (   )   :
-0000140   \r  \n                   s   c   r   i   p   t       =       &#34;
-</code></pre><p>从以上结果中可以看到好几处<code>\r\n</code>，所以换行符号为CRLF。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0000000    i   m   p   o   r   t       o   s  \r  \n   i   m   p   o   r
+</span></span><span style="display:flex;"><span>0000020    t       d   a   t   e   t   i   m   e  \r  \n  \r  \n   #
+</span></span><span style="display:flex;"><span>0000040   从  **  **  生  **  **  产  **  **  环  **  **  境  **  **  导
+</span></span><span style="display:flex;"><span>0000060   **  **  出  **  **  数  **  **  据  **  **  到  **  **   S   3
+</span></span><span style="display:flex;"><span>0000100   的  **  **  脚  **  **  本  **  **  \r  \n   d   e   f       g
+</span></span><span style="display:flex;"><span>0000120    e   t   _   p   r   o   _   s   c   r   i   p   t   (   )   :
+</span></span><span style="display:flex;"><span>0000140   \r  \n                   s   c   r   i   p   t       =       &#34;
+</span></span></code></pre></div><p>从以上结果中可以看到好几处<code>\r\n</code>，所以换行符号为CRLF。</p>
 <h2 id="python对文本换行符的处理">python对文本换行符的处理</h2>
 <p>python读写文本文件存在自动处理规则，依平台而不同，读文件到字符串时统一显示为<code>\n</code>，写文件时只需指定<code>\n</code>，python会自动将其转换为平台特定的换行符。文档原文：</p>
 <blockquote>

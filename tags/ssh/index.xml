@@ -6,16 +6,7 @@
     <description>Recent content in SSH on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Feb 2023 13:34:13 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>为何公司的OpenSSH无法免密登陆</title>
-      <link>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</link>
-      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</guid>
-      <description>问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id</description>
-    </item>
-    
+    <lastBuildDate>Mon, 08 Apr 2019 10:22:22 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows通过密钥SSH登陆Linux</title>
       <link>https://vincent-233.github.io/2019/04/08/89082770/</link>

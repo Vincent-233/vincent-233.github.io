@@ -94,26 +94,6 @@
 	
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/2017/03/04/60332993/" rel="bookmark">
-			SQL CLR函数（以正则表达式为例）
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-03-04T17:13:51Z">2017-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>, <a class="meta__link" href="/categories/misc/" rel="category">Misc</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择...
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/2017/03/04/60332993/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	
-	<header class="list__header">
-		<h2 class="list__title post__title">
 			<a href="/2017/03/04/60330115/" rel="bookmark">
 			DBA眼中的CLR (译)
 			</a>
@@ -389,6 +369,26 @@
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/2014/05/18/26179859/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/2014/04/13/23562967/" rel="bookmark">
+			SQL Server自增列（Identity列）的所有操作
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-04-13T06:13:58Z">2014-04-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/" rel="category">数据库开发</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		一、定义 在CREATE TABLE 中： CREATE TABLE dbo.Identity_test ( ID INT IDENTITY(1,1), --(seed = 1,increment = 1) 从1开始,每次递增1 Content NVARCHAR(200) ) 在SELECT INTO 中： SELECT IDENTITY(INT,100,1) ID, ColName INTO #temp FROM TableName 二、自增列属性函数 一个表最...
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/2014/04/13/23562967/">Read more…</a>
 	</div>
 </article>
 </main>

@@ -106,25 +106,25 @@
 <li>Branch Name以Issue Nubmer开头</li>
 <li>Issue Number格式为GroupID-SerieNumber，比如G1234-98734，G1234对开发者而言固定</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>COMMIT_MSG_FILE<span style="color:#f92672">=</span>$1
-</span></span><span style="display:flex;"><span>COMMIT_SOURCE<span style="color:#f92672">=</span>$2
-</span></span><span style="display:flex;"><span>SHA1<span style="color:#f92672">=</span>$3
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#b8860b">COMMIT_MSG_FILE</span><span style="color:#666">=</span><span style="color:#b8860b">$1</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">COMMIT_SOURCE</span><span style="color:#666">=</span><span style="color:#b8860b">$2</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">SHA1</span><span style="color:#666">=</span><span style="color:#b8860b">$3</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#COMMIT_MSG_FILE=&#39; echo &#34;$HOME/Desktop/Temp/temp_msg.txt&#39;”</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#COMMIT_MSG_FILE=&#39; echo &#34;$HOME/Desktop/Temp/temp_msg.txt&#39;”</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>branch_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git symbolic-ref --short HEAD<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>commit_msg<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat $COMMIT_MSG_FILE<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># if original commit message contain &#34;[g1234&#34;, just leave it as it is</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">${</span>commit_msg,,<span style="color:#e6db74">}</span> <span style="color:#f92672">==</span> *<span style="color:#e6db74">&#34;[g1234&#34;</span>* <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>	exit <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># if branch match G1234-xxx-xxxxxxxxx</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $branch_name <span style="color:#f92672">=</span>~ ^<span style="color:#f92672">[</span>gG<span style="color:#f92672">]</span>1234<span style="color:#f92672">[</span>_-<span style="color:#f92672">][</span>0-9<span style="color:#f92672">]</span>+<span style="color:#f92672">[</span>_-<span style="color:#f92672">]</span>.+ <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>	jira_comment<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$branch_name<span style="color:#e6db74">&#34;</span>|awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;-|_&#34;} {printf &#34;[%s-%s]: &#34;,$1,$2}&#39;</span><span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>	sed -i <span style="color:#e6db74">&#34;1s/^/</span>$jira_comment<span style="color:#e6db74">/&#34;</span> $COMMIT_MSG_FILE
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># echo $jira_comment</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># echo $COMMIT_MSG_FILE</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">branch_name</span><span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">$(</span>git symbolic-ref --short HEAD<span style="color:#a2f;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">commit_msg</span><span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">$(</span>cat <span style="color:#b8860b">$COMMIT_MSG_FILE</span><span style="color:#a2f;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># if original commit message contain &#34;[g1234&#34;, just leave it as it is</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">[[</span> <span style="color:#b68;font-weight:bold">${</span><span style="color:#b8860b">commit_msg</span>,,<span style="color:#b68;font-weight:bold">}</span> <span style="color:#666">==</span> *<span style="color:#b44">&#34;[g1234&#34;</span>* <span style="color:#666">]]</span>; <span style="color:#a2f;font-weight:bold">then</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f">exit</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># if branch match G1234-xxx-xxxxxxxxx</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">[[</span> <span style="color:#b8860b">$branch_name</span> <span style="color:#666">=</span>~ ^<span style="color:#666">[</span>gG<span style="color:#666">]</span>1234<span style="color:#666">[</span>_-<span style="color:#666">][</span>0-9<span style="color:#666">]</span>+<span style="color:#666">[</span>_-<span style="color:#666">]</span>.+ <span style="color:#666">]]</span>; <span style="color:#a2f;font-weight:bold">then</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#b8860b">jira_comment</span><span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">$(</span><span style="color:#a2f">echo</span> <span style="color:#b44">&#34;</span><span style="color:#b8860b">$branch_name</span><span style="color:#b44">&#34;</span>|awk <span style="color:#b44">&#39;BEGIN {FS=&#34;-|_&#34;} {printf &#34;[%s-%s]: &#34;,$1,$2}&#39;</span><span style="color:#a2f;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	sed -i <span style="color:#b44">&#34;1s/^/</span><span style="color:#b8860b">$jira_comment</span><span style="color:#b44">/&#34;</span> <span style="color:#b8860b">$COMMIT_MSG_FILE</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># echo $jira_comment</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># echo $COMMIT_MSG_FILE</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">fi</span>
 </span></span></code></pre></div><p>代码大致逻辑：</p>
 <ul>
 <li>先获取Branch名，若以G1234-98734这样风格的字符开头，就截取之将其加入到commmit message中，格式为<code>[jira-number]: commit message</code>；</li>

@@ -99,21 +99,21 @@
 		</header>
 		<div class="content post__content clearfix">
 			<p>需求：将D盘For PS文件夹下的A.txt文件重命名为aa.txt</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>rename-Item &#39;D:\For PS\A.txt&#39; -NewName &#39;aa.txt&#39;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>rename-Item &#39;D:\For PS\A.txt&#39; -NewName &#39;aa.txt&#39;
 </span></span></code></pre></div><p>需求：将D盘For PS文件夹下的所有的txt文件改为html文件，即.txt改为.html</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>get-childItem &#39;D:\For PS&#39; *.txt | rename-item -newname { $_.name -replace &#39;\.txt&#39;,&#39;.html&#39; }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>get-childItem &#39;D:\For PS&#39; *.txt | rename-item -newname { $_.name -replace &#39;\.txt&#39;,&#39;.html&#39; }
 </span></span></code></pre></div><p>备注：由于replace的模式匹配字符串参数支持正则表达式，&rsquo;.txt&rsquo;要转义成&rsquo;.txt&rsquo;。</p>
 <p>需求：将D盘For PS文件夹下的所有的txt文件加上一个&quot;Test_&ldquo;的前缀</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>cd &#39;D:\For PS&#39;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>cd &#39;D:\For PS&#39;
 </span></span><span style="display:flex;"><span>get-childItem  -r *.txt | rename-Item -newname{&#39;Test_&#39;+$_.name}
 </span></span></code></pre></div><p>如果觉得上面的命令太精简，看不太懂，可以用如下语句，更好理解些：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>$dir = dir D:\ForPS *.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>$dir = dir D:\ForPS *.txt
 </span></span><span style="display:flex;"><span>foreach($_ in $dir)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    rename-Item $_.FullName -NewName (&#39;Test_&#39;+$_.Name)
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>将D盘For PS文件夹下的所有的txt文件重命名为 Note1.txt、Note2.txt这样的形式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>get-childItem  &#39;D:\For PS&#39; -r  *.txt | foreach-Object -Begin {$count = 1}  -Process{
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>get-childItem  &#39;D:\For PS&#39; -r  *.txt | foreach-Object -Begin {$count = 1}  -Process{
 </span></span><span style="display:flex;"><span>rename-Item $_.fullname -NewName &#34;Note$count.txt&#34;;$count++}
 </span></span></code></pre></div><p>用PowerShell以编程的思想去操作文件，还可以实现更多更复杂的需求。</p>
 

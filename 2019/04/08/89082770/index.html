@@ -125,38 +125,38 @@
 <ol>
 <li>生成密钥对</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ssh-keygen
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~<span style="color:#b8860b">$ssh</span>-keygen
 </span></span><span style="display:flex;"><span>Generating public/private rsa key pair.
-</span></span><span style="display:flex;"><span>Enter file in which to save the key <span style="color:#f92672">(</span>/home/student/.ssh/id_rsa<span style="color:#f92672">)</span>:这里按enter默认或另外写路径和文件名
-</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#f92672">(</span>empty <span style="color:#66d9ef">for</span> no passphrase<span style="color:#f92672">)</span>:是否给私密再加一次密，无需则不填
+</span></span><span style="display:flex;"><span>Enter file in which to save the key <span style="color:#666">(</span>/home/student/.ssh/id_rsa<span style="color:#666">)</span>:这里按enter默认或另外写路径和文件名
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#666">(</span>empty <span style="color:#a2f;font-weight:bold">for</span> no passphrase<span style="color:#666">)</span>:是否给私密再加一次密，无需则不填
 </span></span><span style="display:flex;"><span>Enter same passphrase again:由于我有设置，这里需要再输入一次密码
 </span></span><span style="display:flex;"><span>Your identification has been saved in /home/student/.ssh/id_rsa.
 </span></span><span style="display:flex;"><span>Your public key has been saved in /home/student/.ssh/id_rsa.pub.
 </span></span><span style="display:flex;"><span>The key fingerprint is:
 </span></span><span style="display:flex;"><span>78:ad:4c:7e:cc:a4:9b:ac:34:50:4c:59:c8:ff:60:a1 student@vagrant-ubuntu-trusty-64
-</span></span><span style="display:flex;"><span>The key<span style="color:#960050;background-color:#1e0010">&#39;</span>s randomart image is:
-</span></span><span style="display:flex;"><span>+--<span style="color:#f92672">[</span> RSA 2048<span style="color:#f92672">]</span>----+
+</span></span><span style="display:flex;"><span>The key<span style="">&#39;</span>s randomart image is:
+</span></span><span style="display:flex;"><span>+--<span style="color:#666">[</span> RSA 2048<span style="color:#666">]</span>----+
 </span></span><span style="display:flex;"><span>|     ..+.        |
 </span></span><span style="display:flex;"><span>|     o+ .        |
 </span></span><span style="display:flex;"><span>|      oo .       |
 </span></span><span style="display:flex;"><span>|     .E.+.       |
 </span></span><span style="display:flex;"><span>|    . ..Soo      |
-</span></span><span style="display:flex;"><span>|     . <span style="color:#f92672">=</span> *.      |
-</span></span><span style="display:flex;"><span>|      o <span style="color:#f92672">=</span> +      |
+</span></span><span style="display:flex;"><span>|     . <span style="color:#666">=</span> *.      |
+</span></span><span style="display:flex;"><span>|      <span style="color:#b8860b">o</span> <span style="color:#666">=</span> +      |
 </span></span><span style="display:flex;"><span>|     . o +       |
 </span></span><span style="display:flex;"><span>|      ..+        |
 </span></span><span style="display:flex;"><span>+-----------------+
 </span></span></code></pre></div><ol start="2">
 <li>配置公钥</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 查看密钥对是否生成</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 查看密钥对是否生成</span>
 </span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ ls .ssh
 </span></span><span style="display:flex;"><span>id_rsa  id_rsa.pub
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将公钥放置在 authorized_keys 中</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 将公钥放置在 authorized_keys 中</span>
 </span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ cat .ssh/id_rsa.pub &gt;&gt; .ssh/authorized_keys
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置权限</span>
-</span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#ae81ff">600</span> .ssh/authorized_keys
-</span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#ae81ff">700</span> .ssh
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 设置权限</span>
+</span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#666">600</span> .ssh/authorized_keys
+</span></span><span style="display:flex;"><span>student@vagrant-ubuntu-trusty-64:~$ chmod <span style="color:#666">700</span> .ssh
 </span></span></code></pre></div><blockquote>
 <p>上面将公钥放置在 authorized_keys中的步骤用到了输出重定向，如果不嫌麻烦可以用mkdir .ssh和touch .ssh/authorized_keys手动创建，然后cat出id_rsa.pub的内容，用vim或nano将其复制到authorized_keys中。</p>
 </blockquote>
@@ -167,25 +167,25 @@
 <li>手工操作方式：本地新建一个文本文件，将上述id_rsa中内容复制进去</li>
 <li>通过scp命令复制：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\XXX&gt; scp -P <span style="color:#ae81ff">2222</span> student@127.0.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span>/home/student/.ssh/id_rsa D:\key
-</span></span><span style="display:flex;"><span>student@127.0.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">&#39;</span>s password<span style="color:#960050;background-color:#1e0010">:</span> 这里输入密码
-</span></span><span style="display:flex;"><span>id_rsa   <span style="color:#ae81ff">100</span>% <span style="color:#ae81ff">1766</span>     <span style="color:#ae81ff">1.7</span>KB/s   <span style="color:#ae81ff">00</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">00</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#a2f">PS </span>C:\Users\XXX&gt; scp -P <span style="color:#666">2222</span> student<span style="color:#b8860b">@127</span>.0.0.<span style="color:#666">1</span><span style="">:</span>/home/student/.ssh/id_rsa D:\key
+</span></span><span style="display:flex;"><span>student<span style="color:#b8860b">@127</span>.0.0.<span style="color:#666">1</span><span style="">&#39;</span>s password<span style="">:</span> 这里输入密码
+</span></span><span style="display:flex;"><span>id_rsa   <span style="color:#666">100</span>% <span style="color:#666">1766</span>     <span style="color:#666">1.7</span>KB/s   <span style="color:#666">00</span><span style="">:</span><span style="color:#666">00</span>
 </span></span></code></pre></div><blockquote>
 <p>上述命令加入了端口号，一般默认22，不用加</p>
 </blockquote>
 <ol start="4">
 <li>通过密钥登陆</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Users\xxx&gt; ssh student@127.0.0.1 -p <span style="color:#ae81ff">2222</span> -i D:\id_rsa
-</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#66d9ef">for</span> key <span style="color:#e6db74">&#39;D:\id_rsa&#39;</span><span style="color:#960050;background-color:#1e0010">:</span> 这里输入密钥保护密码
-</span></span><span style="display:flex;"><span>Welcome to Ubuntu <span style="color:#ae81ff">14.04</span>.6 LTS (GNU/Linux <span style="color:#ae81ff">3.13</span>.<span style="color:#ae81ff">0</span>-<span style="color:#ae81ff">167</span>-generic x86_64)
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">……</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#a2f">PS </span>C:\Users\xxx&gt; ssh student<span style="color:#b8860b">@127</span>.0.0.1 -p <span style="color:#666">2222</span> -i D:\id_rsa
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#a2f;font-weight:bold">for</span> key <span style="color:#b44">&#39;D:\id_rsa&#39;</span><span style="">:</span> 这里输入密钥保护密码
+</span></span><span style="display:flex;"><span>Welcome to Ubuntu <span style="color:#666">14.04</span>.6 LTS (GNU/Linux <span style="color:#666">3.13</span>.<span style="color:#666">0</span>-<span style="color:#666">167</span>-generic x86_64)
+</span></span><span style="display:flex;"><span><span style="">……</span>
 </span></span></code></pre></div><blockquote>
 <p>登陆成功！这里只输入了密钥保护密码，而不用再输入账号本身的口令，如果之前设置不用给密钥再加密，这里可直接登陆</p>
 </blockquote>
 <h3 id="问题与解决">问题与解决</h3>
 <p>从远程复制到windows的密钥，在登陆时可能会出现如下提示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Permissions <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;D:\id_rsa&#39;</span> are too open.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Permissions <span style="color:#a2f;font-weight:bold">for</span> <span style="color:#b44">&#39;D:\id_rsa&#39;</span> are too open.
 </span></span><span style="display:flex;"><span>It is required that your private key files are NOT accessible by others.
 </span></span><span style="display:flex;"><span>This private key will be ignored.
 </span></span></code></pre></div><p>同样，这是权限的问题，在密钥文件的安全设置中将只加入当前用户的权限即可。操作截图如下：</p>

@@ -124,22 +124,22 @@
 			<p>玩了一段时间Ubuntu之后发现很多操作还是用命令行更方便，GUI显得没太多作用，毕竟Ubuntu只在VM中，GUI有Windows或Mac就够了，所以想关掉GUI，同时也关掉烦人的自动更新。</p>
 <h2 id="一关闭自动更新">一、关闭自动更新</h2>
 <h3 id="临时关闭">临时关闭</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl stop snapd.service
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl stop snapd.service
 </span></span></code></pre></div><h3 id="持久关闭">持久关闭</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl stop snapd.service
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl stop snapd.service
 </span></span><span style="display:flex;"><span>sudo systemctl disable snapd.service
 </span></span><span style="display:flex;"><span>sudo systemctl mask snapd.service
 </span></span></code></pre></div><h3 id="重新开启">重新开启</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl unmask snapd.service
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl unmask snapd.service
 </span></span><span style="display:flex;"><span>sudo systemctl reenable snapd.service
 </span></span><span style="display:flex;"><span>sudo systemctl start snapd.service
 </span></span></code></pre></div><h2 id="二关闭gui">二、关闭GUI</h2>
 <h3 id="临时关闭-1">临时关闭</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo service lightdm stop
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo service lightdm stop
 </span></span></code></pre></div><h3 id="持久关闭-1">持久关闭</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl set-default multi-user.target
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl set-default multi-user.target
 </span></span></code></pre></div><h3 id="持久开启通过ctrlaltf7快捷键进入gui界面">持久开启（通过Ctrl+Alt+F7快捷键进入GUI界面）</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl set-default graphical.target
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl set-default graphical.target
 </span></span></code></pre></div>
 		</div>
 		<footer class="post__footer">

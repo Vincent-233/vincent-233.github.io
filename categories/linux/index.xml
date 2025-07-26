@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>为何公司的OpenSSH无法免密登陆</title>
-      <link>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</link>
-      <pubDate>Sat, 11 Feb 2023 13:34:13 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/2023/02/11/why_openssh_pubkey_login_not_work/</guid>
-      <description>问题 发现常规的SSH免密登陆配置对公司的Linux无效。 已在本地的~/.ssh目录下生成公私钥对id_rsa和id_rsa.pub，已将id</description>
-    </item>
-    
-    <item>
       <title>VIM常用命令</title>
       <link>https://vincent-233.github.io/2019/05/26/90581596/</link>
       <pubDate>Sun, 26 May 2019 22:09:42 +0000</pubDate>

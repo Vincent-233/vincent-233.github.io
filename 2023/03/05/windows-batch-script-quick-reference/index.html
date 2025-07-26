@@ -168,48 +168,48 @@
 </ul>
 <h2 id="命令结果传给变量">命令结果传给变量</h2>
 <p>Batch没有直接的方式，只能通过<code>for /f</code>的形式：</p>
-<pre tabindex="0"><code>for /f &#34;delims=&#34; %%i in (&#39;command&#39;) do set var=%%i
-</code></pre><p>更多细节见此<a href="https://devblogs.microsoft.com/oldnewthing/20120731-00/?p=7003">Blog</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>for /f &#34;delims=&#34; %%i in (&#39;command&#39;) do set var=%%i
+</span></span></code></pre></div><p>更多细节见此<a href="https://devblogs.microsoft.com/oldnewthing/20120731-00/?p=7003">Blog</a></p>
 <h2 id="字符串相关">字符串相关</h2>
 <ul>
 <li>子串 substring</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>set a<span style="color:#f92672">=</span>abcdefgh
-</span></span><span style="display:flex;"><span>echo %a:~0,1%   &amp; rem from index 0, length 1; result: a
-</span></span><span style="display:flex;"><span>echo %a:~1,1%   &amp; rem from index 1, length 1; result: b
-</span></span><span style="display:flex;"><span>echo %a:~0,2%   &amp; rem from index 0, length 2; result: ab
-</span></span><span style="display:flex;"><span>echo %a:~1,2%   &amp; rem from index 1, length 2; result: bc
-</span></span><span style="display:flex;"><span>echo %a:~1%     &amp; rem from index <span style="color:#ae81ff">1</span> to the end; result: bcdefgh
-</span></span><span style="display:flex;"><span>echo %a:~-1%    &amp; rem from index -1 <span style="color:#f92672">(</span>last char<span style="color:#f92672">)</span> to the end; result: h
-</span></span><span style="display:flex;"><span>echo %a:~-2%    &amp; rem from index -2 <span style="color:#f92672">(</span>next-to-last<span style="color:#f92672">)</span> to the end; result: gh
-</span></span><span style="display:flex;"><span>echo %a:~0,-2%  &amp; rem from index <span style="color:#ae81ff">0</span> to index -2, excl.; result: abcdef
-</span></span><span style="display:flex;"><span>echo %a:~0,-1%  &amp; rem from index <span style="color:#ae81ff">0</span> to index -1, excl.; result: abcdefg
-</span></span><span style="display:flex;"><span>echo %a:~1,-1%  &amp; rem from index <span style="color:#ae81ff">1</span> to index -1, excl.; result: bcdefg
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f">set</span> <span style="color:#b8860b">a</span><span style="color:#666">=</span>abcdefgh
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~0,1%   &amp; rem from index 0, length 1; result: a
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~1,1%   &amp; rem from index 1, length 1; result: b
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~0,2%   &amp; rem from index 0, length 2; result: ab
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~1,2%   &amp; rem from index 1, length 2; result: bc
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~1%     &amp; rem from index <span style="color:#666">1</span> to the end; result: bcdefgh
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~-1%    &amp; rem from index -1 <span style="color:#666">(</span>last char<span style="color:#666">)</span> to the end; result: h
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~-2%    &amp; rem from index -2 <span style="color:#666">(</span>next-to-last<span style="color:#666">)</span> to the end; result: gh
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~0,-2%  &amp; rem from index <span style="color:#666">0</span> to index -2, excl.; result: abcdef
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~0,-1%  &amp; rem from index <span style="color:#666">0</span> to index -1, excl.; result: abcdefg
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> %a:~1,-1%  &amp; rem from index <span style="color:#666">1</span> to index -1, excl.; result: bcdefg
 </span></span></code></pre></div><ul>
 <li>替换 （replace )</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>set a<span style="color:#f92672">=</span>abcd &amp; echo %a:c<span style="color:#f92672">=</span>%   &amp; rem replace c with nothing; result: abd
-</span></span><span style="display:flex;"><span>set a<span style="color:#f92672">=</span>abcd &amp; echo %a:c<span style="color:#f92672">=</span>e%  &amp; rem replace c with e; result: abed; 
-</span></span><span style="display:flex;"><span>set a<span style="color:#f92672">=</span>abcd &amp; echo %a:*c<span style="color:#f92672">=</span>%  &amp; rem replace all up to c with nothing; result: d
-</span></span><span style="display:flex;"><span>rem Above, the asterisk <span style="color:#f92672">(</span>*<span style="color:#f92672">)</span> only works at the beginning of the sought pattern.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f">set</span> <span style="color:#b8860b">a</span><span style="color:#666">=</span>abcd &amp; <span style="color:#a2f">echo</span> %a:c<span style="color:#666">=</span>%   &amp; rem replace c with nothing; result: abd
+</span></span><span style="display:flex;"><span><span style="color:#a2f">set</span> <span style="color:#b8860b">a</span><span style="color:#666">=</span>abcd &amp; <span style="color:#a2f">echo</span> %a:c<span style="color:#666">=</span>e%  &amp; rem replace c with e; result: abed; 
+</span></span><span style="display:flex;"><span><span style="color:#a2f">set</span> <span style="color:#b8860b">a</span><span style="color:#666">=</span>abcd &amp; <span style="color:#a2f">echo</span> %a:*c<span style="color:#666">=</span>%  &amp; rem replace all up to c with nothing; result: d
+</span></span><span style="display:flex;"><span>rem Above, the asterisk <span style="color:#666">(</span>*<span style="color:#666">)</span> only works at the beginning of the sought pattern.
 </span></span></code></pre></div><ul>
 <li>包含判断 (contain/like，不支持含引号的情况）
 如果a包含bc，则echo yes</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not <span style="color:#e6db74">&#34;%a:bc=%&#34;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;%a%&#34;</span> echo yes 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#b44">&#34;%a:bc=%&#34;</span><span style="color:#666">==</span><span style="color:#b44">&#34;%a%&#34;</span> <span style="color:#a2f">echo</span> yes 
 </span></span></code></pre></div><ul>
 <li>开头判断 (start with)</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> %a:~0,1%<span style="color:#f92672">==</span>a echo yes   &amp; rem If variable a starts with <span style="color:#e6db74">&#34;a&#34;</span>, echo <span style="color:#e6db74">&#34;yes&#34;</span>.
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> %a:~0,2%<span style="color:#f92672">==</span>ab echo yes  &amp; rem If variable a starts with <span style="color:#e6db74">&#34;ab&#34;</span>, echo <span style="color:#e6db74">&#34;yes&#34;</span>.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> %a:~0,1%<span style="color:#666">==</span>a <span style="color:#a2f">echo</span> yes   &amp; rem If variable a starts with <span style="color:#b44">&#34;a&#34;</span>, <span style="color:#a2f">echo</span> <span style="color:#b44">&#34;yes&#34;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> %a:~0,2%<span style="color:#666">==</span>ab <span style="color:#a2f">echo</span> yes  &amp; rem If variable a starts with <span style="color:#b44">&#34;ab&#34;</span>, <span style="color:#a2f">echo</span> <span style="color:#b44">&#34;yes&#34;</span>.
 </span></span></code></pre></div><h2 id="流程控制">流程控制</h2>
 <h3 id="条件判断">条件判断</h3>
 <ul>
 <li>if 判断 （用 if /? 获取语法帮助）
 语法：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>exist &lt;filename&gt;
-</span></span><span style="display:flex;"><span>&lt;string&gt;<span style="color:#f92672">==</span>&lt;string&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>exist &lt;filename&gt;
+</span></span><span style="display:flex;"><span>&lt;string&gt;<span style="color:#666">==</span>&lt;string&gt;
 </span></span><span style="display:flex;"><span>&lt;expression1&gt; equ &lt;expression2&gt; -- equals
 </span></span><span style="display:flex;"><span>&lt;expression1&gt; neq &lt;expression2&gt; -- not equal
 </span></span><span style="display:flex;"><span>&lt;expression1&gt; lss &lt;expression2&gt; -- less than
@@ -223,33 +223,33 @@
 <p>注意： 条件判断仅可以加上NOT，无法用 AND/OR 进行链接，只能通过<a href="https://www.tutorialspoint.com/batch_script/batch_script_logical_operators.htm">嵌套IF ELSE</a> 变通实现</p>
 </blockquote>
 <p>例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not <span style="color:#ae81ff">1</span> equ <span style="color:#ae81ff">0</span> echo Not equal
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">1</span> equ <span style="color:#ae81ff">0</span> echo A &amp; echo B
-</span></span><span style="display:flex;"><span>	Does nothing; both echo commands are subject to the condition.
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not <span style="color:#ae81ff">1</span> equ <span style="color:#ae81ff">0</span> goto :mylabel
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not a geq b echo Not greater
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> b geq a echo Greater
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> b geq A echo Greater in a <span style="color:#66d9ef">case</span>-insensitive comparison
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> B geq a echo Greater in a <span style="color:#66d9ef">case</span>-insensitive comparison
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> equ <span style="color:#ae81ff">00</span> echo Numerical equality
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not 0<span style="color:#f92672">==</span><span style="color:#ae81ff">00</span> echo String inequality
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">01</span> geq <span style="color:#ae81ff">1</span> echo Numerical comparison
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not <span style="color:#e6db74">&#34;01&#34;</span> geq <span style="color:#e6db74">&#34;1&#34;</span> echo String comparison
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">1</span> equ <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>echo Equal<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> echo Unequal
-</span></span><span style="display:flex;"><span>	Notice the brackets around the positive <span style="color:#66d9ef">then</span>-part to make it work.
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> not a<span style="color:#f92672">==</span>A echo Case-sensitive inequality
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> /i a<span style="color:#f92672">==</span>A echo Case-insensitive equality
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> /i<span style="color:#f92672">==</span>/i echo This does not work
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;/i&#34;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;/i&#34;</span> 
-</span></span><span style="display:flex;"><span>	echo Equal, using quotation marks to prevent the literal meaning of /i
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#666">1</span> equ <span style="color:#666">0</span> <span style="color:#a2f">echo</span> Not equal
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">1</span> equ <span style="color:#666">0</span> <span style="color:#a2f">echo</span> A &amp; <span style="color:#a2f">echo</span> B
+</span></span><span style="display:flex;"><span>	Does nothing; both <span style="color:#a2f">echo</span> commands are subject to the condition.
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#666">1</span> equ <span style="color:#666">0</span> goto :mylabel
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not a geq b <span style="color:#a2f">echo</span> Not greater
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> b geq a <span style="color:#a2f">echo</span> Greater
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> b geq A <span style="color:#a2f">echo</span> Greater in a <span style="color:#a2f;font-weight:bold">case</span>-insensitive comparison
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> B geq a <span style="color:#a2f">echo</span> Greater in a <span style="color:#a2f;font-weight:bold">case</span>-insensitive comparison
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">0</span> equ <span style="color:#666">00</span> <span style="color:#a2f">echo</span> Numerical equality
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#b8860b">0</span><span style="color:#666">==</span><span style="color:#666">00</span> <span style="color:#a2f">echo</span> String inequality
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">01</span> geq <span style="color:#666">1</span> <span style="color:#a2f">echo</span> Numerical comparison
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#b44">&#34;01&#34;</span> geq <span style="color:#b44">&#34;1&#34;</span> <span style="color:#a2f">echo</span> String comparison
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#666">1</span> equ <span style="color:#666">0</span> <span style="color:#666">(</span><span style="color:#a2f">echo</span> Equal<span style="color:#666">)</span> <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f">echo</span> Unequal
+</span></span><span style="display:flex;"><span>	Notice the brackets around the positive <span style="color:#a2f;font-weight:bold">then</span>-part to make it work.
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> not <span style="color:#b8860b">a</span><span style="color:#666">==</span>A <span style="color:#a2f">echo</span> Case-sensitive inequality
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> /i <span style="color:#b8860b">a</span><span style="color:#666">==</span>A <span style="color:#a2f">echo</span> Case-insensitive equality
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> /i<span style="color:#666">==</span>/i <span style="color:#a2f">echo</span> This does not work
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> <span style="color:#b44">&#34;/i&#34;</span><span style="color:#666">==</span><span style="color:#b44">&#34;/i&#34;</span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f">echo</span> Equal, using quotation marks to prevent the literal meaning of /i
 </span></span></code></pre></div><h3 id="for">FOR</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>FOR %variable IN <span style="color:#f92672">(</span>set<span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>FOR /D %variable IN <span style="color:#f92672">(</span>set<span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span> 
-</span></span><span style="display:flex;"><span>FOR /L %variable IN <span style="color:#f92672">(</span>start,step,end<span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>FOR /R <span style="color:#f92672">[[</span>drive:<span style="color:#f92672">]</span>path<span style="color:#f92672">]</span> %variable IN <span style="color:#f92672">(</span>set<span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>FOR /F <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;options&#34;</span><span style="color:#f92672">]</span> %variable IN <span style="color:#f92672">(</span>file-set<span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>FOR /F <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;options&#34;</span><span style="color:#f92672">]</span> %variable IN <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;string&#39;</span><span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
-</span></span><span style="display:flex;"><span>FOR /F <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;options&#34;</span><span style="color:#f92672">]</span> %variable IN <span style="color:#f92672">(</span><span style="color:#e6db74">`</span>command<span style="color:#e6db74">`</span><span style="color:#f92672">)</span> DO command <span style="color:#f92672">[</span>command-parameters<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>FOR %variable IN <span style="color:#666">(</span><span style="color:#a2f">set</span><span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>FOR /D %variable IN <span style="color:#666">(</span><span style="color:#a2f">set</span><span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span> 
+</span></span><span style="display:flex;"><span>FOR /L %variable IN <span style="color:#666">(</span>start,step,end<span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>FOR /R <span style="color:#666">[[</span>drive:<span style="color:#666">]</span>path<span style="color:#666">]</span> %variable IN <span style="color:#666">(</span><span style="color:#a2f">set</span><span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>FOR /F <span style="color:#666">[</span><span style="color:#b44">&#34;options&#34;</span><span style="color:#666">]</span> %variable IN <span style="color:#666">(</span>file-set<span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>FOR /F <span style="color:#666">[</span><span style="color:#b44">&#34;options&#34;</span><span style="color:#666">]</span> %variable IN <span style="color:#666">(</span><span style="color:#b44">&#39;string&#39;</span><span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>FOR /F <span style="color:#666">[</span><span style="color:#b44">&#34;options&#34;</span><span style="color:#666">]</span> %variable IN <span style="color:#666">(</span><span style="color:#b44">`</span><span style="color:#a2f">command</span><span style="color:#b44">`</span><span style="color:#666">)</span> DO <span style="color:#a2f">command</span> <span style="color:#666">[</span>command-parameters<span style="color:#666">]</span>
 </span></span></code></pre></div><ul>
 <li>for中的变量名只能是单个字母，而且大小写敏感</li>
 <li>在interactive的命令行中用<code>%x</code>，在batch中用<code>%%x</code>，请注意不是%i%和%%i%%，要和正常的变量进行区分</li>
@@ -289,9 +289,9 @@
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/2023/02/11/why_openssh_pubkey_login_not_work/" rel="prev">
+		<a class="pager__link" href="/2023/02/10/bcp_format_file_error_with_space_in_column_name/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">为何公司的OpenSSH无法免密登陆</p>
+			<p class="pager__title">bcp导入导出报错，字段名含空格</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">

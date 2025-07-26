@@ -118,31 +118,31 @@
 但若文件非常多，且具有某类特殊属性，比如<code>某文件夹下的，文件名都包含某关键词的文件</code>就比较棘手,这个时候就体现出了命令行的优势，SVN可以用GUI方式操作的功能，都可以找到对应的命令。</p>
 <h4 id="svn命令行">SVN命令行</h4>
 <p>经查阅<a href="https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-cli-main.html">文档</a>，SVN Rename命令的语法如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>svn rename CURR_PATH NEW_PATH
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>svn rename CURR_PATH NEW_PATH
 </span></span></code></pre></div><p>下面看如何对某文件夹下的文件批量生成cmd命令并运行</p>
 <h4 id="powershell动态生成cmd命令并调动">PowerShell动态生成CMD命令并调动</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># SVN文件，移动到新建的文件夹下，并保存日志信息</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 需求：KS-Code根目录下，文件名中不包含“脚本”的sql文件，转移到新的文件夹“增加字段”中</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 说明：新文件夹已经进入SVN版本管理体系</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># SVN文件，移动到新建的文件夹下，并保存日志信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 需求：KS-Code根目录下，文件名中不包含“脚本”的sql文件，转移到新的文件夹“增加字段”中</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 说明：新文件夹已经进入SVN版本管理体系</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件目录</span>
-</span></span><span style="display:flex;"><span>$path = <span style="color:#e6db74">&#39;D:\KS\2019-BP\KS-Code&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获取文件名</span>
-</span></span><span style="display:flex;"><span>$dir = invoke-expression <span style="color:#e6db74">&#34;dir </span>$path<span style="color:#e6db74"> *.sql&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 文件目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">$path</span> = <span style="color:#b44">&#39;D:\KS\2019-BP\KS-Code&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 获取文件名</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">$dir</span> = <span style="color:#a2f">invoke-expression</span> <span style="color:#b44">&#34;dir </span><span style="color:#b8860b">$path</span><span style="color:#b44"> *.sql&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span>($_ <span style="color:#66d9ef">in</span> $dir)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">foreach</span>(<span style="color:#b8860b">$_</span> <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#b8860b">$dir</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>($_.Name <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;脚本&#34;</span>) 
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#b8860b">$_</span>.Name <span style="color:#666">-notmatch</span> <span style="color:#b44">&#34;脚本&#34;</span>) 
 </span></span><span style="display:flex;"><span>	{	
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># 路径，考虑空格异常，故前后加引号</span>
-</span></span><span style="display:flex;"><span>		$oldpath = <span style="color:#e6db74">&#39;&#34;&#39;</span> + $path + <span style="color:#e6db74">&#39;\&#39;</span> + $_.Name + <span style="color:#e6db74">&#39;&#34;&#39;</span>
-</span></span><span style="display:flex;"><span>		$newpath = <span style="color:#e6db74">&#39;&#34;&#39;</span> + $path + <span style="color:#e6db74">&#39;\增加字段\&#39;</span> + $_.Name + <span style="color:#e6db74">&#39;&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic"># 路径，考虑空格异常，故前后加引号</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#b8860b">$oldpath</span> = <span style="color:#b44">&#39;&#34;&#39;</span> + <span style="color:#b8860b">$path</span> + <span style="color:#b44">&#39;\&#39;</span> + <span style="color:#b8860b">$_</span>.Name + <span style="color:#b44">&#39;&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#b8860b">$newpath</span> = <span style="color:#b44">&#39;&#34;&#39;</span> + <span style="color:#b8860b">$path</span> + <span style="color:#b44">&#39;\增加字段\&#39;</span> + <span style="color:#b8860b">$_</span>.Name + <span style="color:#b44">&#39;&#34;&#39;</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># svn重命名命令： svn rename CURR_PATH NEW_PATH</span>
-</span></span><span style="display:flex;"><span>		$cmd = <span style="color:#e6db74">&#34;svn rename </span>$oldpath<span style="color:#e6db74"> </span>$newpath<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic"># svn重命名命令： svn rename CURR_PATH NEW_PATH</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#b8860b">$cmd</span> = <span style="color:#b44">&#34;svn rename </span><span style="color:#b8860b">$oldpath</span><span style="color:#b44"> </span><span style="color:#b8860b">$newpath</span><span style="color:#b44">&#34;</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># 调用命令</span>
-</span></span><span style="display:flex;"><span>		invoke-expression $cmd
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic"># 调用命令</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">invoke-expression</span> <span style="color:#b8860b">$cmd</span>
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h4 id="说明">说明</h4>

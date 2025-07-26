@@ -134,33 +134,33 @@
 <code>runas.exe</code>可以达到目的，比如用管理身份运行notepad：</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>runas /user:Administrator <span style="color:#e6db74">&#34;notepad&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>runas /user:Administrator <span style="color:#b44">&#34;notepad&#34;</span>
 </span></span></code></pre></div><p>需要注意的是用这种方式以管理员身份运行程序时需要输入密码，所以需要事先启用Administrator账户并设置密码，这和右键“以管理员身份运行”是不一样的。</p>
 <p>再举一例，以xman这个账号运行一个powershell脚本，然后停留在powershell界面：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>runas /u:xman <span style="color:#e6db74">&#34;powershell.exe -noexit -command c:\ps_init_script.ps1&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>runas /u:xman <span style="color:#b44">&#34;powershell.exe -noexit -command c:\ps_init_script.ps1&#34;</span>
 </span></span></code></pre></div><h2 id="清理快速访问中的最近打开文件">清理快速访问中的最近打开文件</h2>
 <p>每次打开资源管理器（file explorer)，&ldquo;快速访问&quot;中的&quot;最近打开文件列表&quot;会显示一系列文件，如果担心暴露隐私，不想让它显示，除了手动清理和设置不显示以外（方法见下图）<br>
 <img src="https://s2.loli.net/2023/09/28/6djfl87sD3VnPJz.png" alt=""><br>
 如何自动清理呢？答案是直接删除<code>%AppData%\Microsoft\Windows\Recent\</code>下文件。<br>
 可用脚本清理：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell -NonInteractive -NoProfile -Command <span style="color:#e6db74">&#34;Remove-Item %AppData%\Microsoft\Windows\Recent\* -Recurse -Force&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell -NonInteractive -NoProfile -Command <span style="color:#b44">&#34;Remove-Item %AppData%\Microsoft\Windows\Recent\* -Recurse -Force&#34;</span>
 </span></span></code></pre></div><p>根据需要在Task Scheduler或其它任务调度软件中设置每隔一段时间自动运行即可。</p>
 <h2 id="组名称和成员查询-ad-group-and-members">组名称和成员查询 (AD Group and Members)</h2>
 <p>这里是以一个普通用户的视角，而不是域管理员的视角来记录一些操作。
 如果是域管理员会有更加大的权限和工具去查询，这里不会涉及。</p>
 <h3 id="查看用户所在的组">查看用户所在的组</h3>
 <p><strong>方法一：gpresult命令</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpresult -v
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpresult -v
 </span></span></code></pre></div><p>此命令可以非常详细地显示Group Policy相关信息，其中包括所在AD group的名称，但仅限当前登陆用户</p>
 <p><strong>方法二：whoami命令</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>whoami /groups
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>whoami /groups
 </span></span></code></pre></div><p>此命令显示AD Group名称，SID等信息，也仅限当前登陆用户</p>
 <p><strong>方法三：net user命令</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net user &lt;username&gt; /domain
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net user &lt;username&gt; /domain
 </span></span></code></pre></div><p>此命令显示所查用户的详细信息，比如账户状态，密码上次修改日期和过期日期等，顺便也有所在Group的信息，但如果group名太长可能会被截断。</p>
 <h3 id="查看组成员">查看组成员</h3>
 <p><strong>方法一： net group / net localgroup 命令</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net localgroup &lt;group_name&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>net localgroup &lt;group_name&gt;
 </span></span><span style="display:flex;"><span>net localgroup &lt;group_name&gt; /domain
 </span></span><span style="display:flex;"><span>net group &lt;group_name&gt; /domain
 </span></span></code></pre></div><p>比如 <code>net localgroup administrators</code> 可显示本地管理员组成员。 <br>

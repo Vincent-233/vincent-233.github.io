@@ -122,68 +122,68 @@
 <h2 id="selenium模拟登陆csdn">selenium模拟登陆CSDN</h2>
 <p>selenium的基本操作实际上就是在网页上查找Web元素，然后输入内容(send_key)或点击(click)各种按钮。<br>
 以下是我用firefox登陆csdn的代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">selenium</span> <span style="color:#a2f;font-weight:bold">import</span> webdriver
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">time</span> <span style="color:#a2f;font-weight:bold">import</span> sleep
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>usr_name <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;username: &#39;</span>)
-</span></span><span style="display:flex;"><span>pwd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;password: &#39;</span>)
+</span></span><span style="display:flex;"><span>usr_name <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#39;username: &#39;</span>)
+</span></span><span style="display:flex;"><span>pwd <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#39;password: &#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Firefox()
+</span></span><span style="display:flex;"><span>driver <span style="color:#666">=</span> webdriver<span style="color:#666">.</span>Firefox()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># open website and wait for loading</span>
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
-</span></span><span style="display:flex;"><span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># open website and wait for loading</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>get(<span style="color:#b44">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
+</span></span><span style="display:flex;"><span>sleep(<span style="color:#666">1</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># use xpath to locate login by user &amp; pwd</span>
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;/html/body/div[2]/div/div[2]/div[2]/div[1]/div[1]/div[1]/span[4]&#34;</span>)<span style="color:#f92672">.</span>click()
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># use xpath to locate login by user &amp; pwd</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>find_element_by_xpath(<span style="color:#b44">&#34;/html/body/div[2]/div/div[2]/div[2]/div[1]/div[1]/div[1]/span[4]&#34;</span>)<span style="color:#666">.</span>click()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># send username &amp; pwd to login</span>
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_css_selector(<span style="color:#e6db74">&#39;[autocomplete=&#34;username&#34;]&#39;</span>)<span style="color:#f92672">.</span>send_keys(usr_name)
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_css_selector(<span style="color:#e6db74">&#39;[autocomplete=&#34;current-password&#34;]&#39;</span>)<span style="color:#f92672">.</span>send_keys(pwd)
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>find_element_by_class_name(<span style="color:#e6db74">&#39;base-button&#39;</span>)<span style="color:#f92672">.</span>click()
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># send username &amp; pwd to login</span>
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>find_element_by_css_selector(<span style="color:#b44">&#39;[autocomplete=&#34;username&#34;]&#39;</span>)<span style="color:#666">.</span>send_keys(usr_name)
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>find_element_by_css_selector(<span style="color:#b44">&#39;[autocomplete=&#34;current-password&#34;]&#39;</span>)<span style="color:#666">.</span>send_keys(pwd)
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>find_element_by_class_name(<span style="color:#b44">&#39;base-button&#39;</span>)<span style="color:#666">.</span>click()
 </span></span></code></pre></div><p>代码执行后会弹出新的窗口进行登陆。由于第一次用selenium，在不断尝试的过程中会重复以上登陆过程，次数多了会出现拖滑块的验证码操作，于是想到能否先手动登陆，然后让selenium连接已有Session。
 经研究，Chrome的<a href="https://chromedevtools.github.io/devtools-protocol/">DevTools Protocol</a>可以轻松实现。</p>
 <h2 id="让chrome重用已有session">让Chrome重用已有Session</h2>
 <p>根据DevTools Protocol的操作指引，在CMD命令行下CD到chrome.exe路径后，执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chrome.exe --remote-debugging-port<span style="color:#f92672">=</span><span style="color:#ae81ff">9222</span>  --user-data-dir<span style="color:#f92672">=</span>C:<span style="color:#ae81ff">\t</span>emp-chrome-data
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chrome.exe --remote-debugging-port<span style="color:#666">=</span><span style="color:#666">9222</span>  --user-data-dir<span style="color:#666">=</span>C:<span style="color:#b62;font-weight:bold">\t</span>emp-chrome-data
 </span></span></code></pre></div><p>执行后会弹出新的Chrome窗口，先在这里面手动完成CSDN的登陆，然后可用如下代码连接这个已打开的会话：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>chrome_opts <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>ChromeOptions()
-</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#f92672">.</span>add_experimental_option(<span style="color:#e6db74">&#34;debuggerAddress&#34;</span>, <span style="color:#e6db74">&#34;127.0.0.1:9222&#34;</span>)
-</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome(options<span style="color:#f92672">=</span>chrome_opts)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>chrome_opts <span style="color:#666">=</span> webdriver<span style="color:#666">.</span>ChromeOptions()
+</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#666">.</span>add_experimental_option(<span style="color:#b44">&#34;debuggerAddress&#34;</span>, <span style="color:#b44">&#34;127.0.0.1:9222&#34;</span>)
+</span></span><span style="display:flex;"><span>driver <span style="color:#666">=</span> webdriver<span style="color:#666">.</span>Chrome(options<span style="color:#666">=</span>chrome_opts)
 </span></span></code></pre></div><p>不用担心登陆操作之后，就可以专心定位删除按钮进行点击。</p>
 <h2 id="最终代码">最终代码</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> selenium.webdriver <span style="color:#f92672">import</span> ActionChains
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">selenium</span> <span style="color:#a2f;font-weight:bold">import</span> webdriver
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">time</span> <span style="color:#a2f;font-weight:bold">import</span> sleep
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">selenium.webdriver</span> <span style="color:#a2f;font-weight:bold">import</span> ActionChains
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>chrome_opts <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>ChromeOptions()
-</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#f92672">.</span>add_experimental_option(<span style="color:#e6db74">&#34;debuggerAddress&#34;</span>, <span style="color:#e6db74">&#34;127.0.0.1:9222&#34;</span>)
-</span></span><span style="display:flex;"><span>driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Chrome(options<span style="color:#f92672">=</span>chrome_opts)
+</span></span><span style="display:flex;"><span>chrome_opts <span style="color:#666">=</span> webdriver<span style="color:#666">.</span>ChromeOptions()
+</span></span><span style="display:flex;"><span>chrome_opts<span style="color:#666">.</span>add_experimental_option(<span style="color:#b44">&#34;debuggerAddress&#34;</span>, <span style="color:#b44">&#34;127.0.0.1:9222&#34;</span>)
+</span></span><span style="display:flex;"><span>driver <span style="color:#666">=</span> webdriver<span style="color:#666">.</span>Chrome(options<span style="color:#666">=</span>chrome_opts)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
-</span></span><span style="display:flex;"><span>sleep(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>driver<span style="color:#666">.</span>get(<span style="color:#b44">&#34;https://mp.csdn.net/mp_blog/manage/article&#34;</span>)
+</span></span><span style="display:flex;"><span>sleep(<span style="color:#666">6</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># delete all the articles except first one ( my customized requirement )</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-</span></span><span style="display:flex;"><span>    dots_elements <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span>find_elements_by_class_name(<span style="color:#e6db74">&#39;el-dropdown-selfdefine&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(dots_elements) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># delete all the articles except first one ( my customized requirement )</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> <span style="color:#a2f;font-weight:bold">True</span>:
+</span></span><span style="display:flex;"><span>    dots_elements <span style="color:#666">=</span> driver<span style="color:#666">.</span>find_elements_by_class_name(<span style="color:#b44">&#39;el-dropdown-selfdefine&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">len</span>(dots_elements) <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># get article title to be deleted</span>
-</span></span><span style="display:flex;"><span>    title <span style="color:#f92672">=</span> dots_elements[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#39;../../../..//div[1]/p[1]/a&#39;</span>)<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># get article title to be deleted</span>
+</span></span><span style="display:flex;"><span>    title <span style="color:#666">=</span> dots_elements[<span style="color:#666">1</span>]<span style="color:#666">.</span>find_element_by_xpath(<span style="color:#b44">&#39;../../../..//div[1]/p[1]/a&#39;</span>)<span style="color:#666">.</span>text
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># delete second one</span>
-</span></span><span style="display:flex;"><span>    ActionChains(driver)<span style="color:#f92672">.</span>move_to_element(dots_elements[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">.</span>perform()
-</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># delete second one</span>
+</span></span><span style="display:flex;"><span>    ActionChains(driver)<span style="color:#666">.</span>move_to_element(dots_elements[<span style="color:#666">1</span>])<span style="color:#666">.</span>perform()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#666">1</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># delete and confirm</span>
-</span></span><span style="display:flex;"><span>    driver<span style="color:#f92672">.</span>find_element_by_link_text(<span style="color:#e6db74">&#34;删除&#34;</span>)<span style="color:#f92672">.</span>click()
-</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># delete and confirm</span>
+</span></span><span style="display:flex;"><span>    driver<span style="color:#666">.</span>find_element_by_link_text(<span style="color:#b44">&#34;删除&#34;</span>)<span style="color:#666">.</span>click()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#666">1</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    driver<span style="color:#f92672">.</span>find_element_by_class_name(<span style="color:#e6db74">&#39;el-button--primary&#39;</span>)<span style="color:#f92672">.</span>click()
-</span></span><span style="display:flex;"><span>    sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    driver<span style="color:#666">.</span>find_element_by_class_name(<span style="color:#b44">&#39;el-button--primary&#39;</span>)<span style="color:#666">.</span>click()
+</span></span><span style="display:flex;"><span>    sleep(<span style="color:#666">1</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Deleted: </span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;Deleted: </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
 </span></span></code></pre></div><h2 id="代码说明">代码说明</h2>
 <ul>
 <li>以上代码会持续寻找所有删除按钮，然后删除第二篇文章直到剩下最后一篇，除了删除动作，还打印出了被删除文章的标题</li>

@@ -100,24 +100,24 @@
 		<div class="content post__content clearfix">
 			<p>模块（python module）就是一个python文件，包（package）就是一个带<code>__init__.py</code>文件的文件夹，可以理解为模块的集合。<br>
 假设项目项目如下：</p>
-<pre tabindex="0"><code>Project
-    │  app_1.py
-    │  app_2.py
-    │
-    ├─common
-    │      module_1.py
-    │      module_2.py
-    │      __init__.py
-    │
-    └─test
-            test_1.py
-            test_2.py
-</code></pre><p>在module_2.py中引用module_1.py</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> module_1 <span style="color:#f92672">import</span> class_a
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Project
+</span></span><span style="display:flex;"><span>    │  app_1.py
+</span></span><span style="display:flex;"><span>    │  app_2.py
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    ├─common
+</span></span><span style="display:flex;"><span>    │      module_1.py
+</span></span><span style="display:flex;"><span>    │      module_2.py
+</span></span><span style="display:flex;"><span>    │      __init__.py
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    └─test
+</span></span><span style="display:flex;"><span>            test_1.py
+</span></span><span style="display:flex;"><span>            test_2.py
+</span></span></code></pre></div><p>在module_2.py中引用module_1.py</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">module_1</span> <span style="color:#a2f;font-weight:bold">import</span> class_a
 </span></span></code></pre></div><p>然后直接通过python.exe运行module_1.py，一切正常。<br>
 但在app_1.py中引用module_1.py后执行app_1.py却会提示找不到模块module_1。<br>
 后改为</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">common.module_1</span> <span style="color:#a2f;font-weight:bold">import</span> xxx
 </span></span></code></pre></div><p>app_1.py运行正常，但运行module_1.py提到找不到模块common。<br>
 还真是按下葫芦浮起瓢呢，让人感觉相当困惑，更加让人震惊的是以上两种情况在vscode下会再现，但通过pycharm运行则一切正常。<br>
 <strong>这是因为pycharm默认将要运行的py文件所在目录以及项目根目录加入到sys.path中了</strong>。</p>
@@ -126,14 +126,14 @@
 <ul>
 <li>方式一： 新建一个py文件然后对其进行引用后执行，若py文件不在项目目录下，可在import前加上:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
-</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;your_project_path&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> common.module_1 <span style="color:#f92672">import</span> xxx
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(<span style="color:#b44">&#39;your_project_path&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">common.module_1</span> <span style="color:#a2f;font-weight:bold">import</span> xxx
 </span></span></code></pre></div><p>若担心模块名称同名，希望保证引用的是正确的模块，可将append操作改为insert: <code>sys.path.insert(0, 'your_project_path')</code></p>
 <ul>
 <li>方式二：在Project目录下用执行模块的方式运行：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m common.module_1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m common.module_1
 </span></span></code></pre></div><p>注意不要加.py后缀名</p>
 
 		</div>

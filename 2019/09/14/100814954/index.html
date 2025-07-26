@@ -128,60 +128,60 @@
 <p>pyodbc只是众多python database driver（适配器）之一，其它诸如turbodbc，以及适用于PostgreSQL的psycopg2等也有大量的使用。<br>
 但不管哪种driver均在一定程度上遵循python的<a href="https://www.python.org/dev/peps/pep-0249/#id7">DB-API</a>标准，所以编程模式还是挺一致的。</p>
 <h3 id="连接">连接</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pyodbc
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性</span>
-</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性（ 设置failover选项，always on group listener ）</span>
-</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password;MultiSubnetFailover=Yes&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pyodbc</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 显式指定连接属性</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#666">=</span> pyodbc<span style="color:#666">.</span>connect(<span style="color:#b44">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 显式指定连接属性（ 设置failover选项，always on group listener ）</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#666">=</span> pyodbc<span style="color:#666">.</span>connect(<span style="color:#b44">&#39;DRIVER={ODBC Driver 13 for SQL Server};SERVER=localhost;DATABASE=TestDB;UID=sa;PWD=password;MultiSubnetFailover=Yes&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用 ODBC的 DSN (data source name)</span>
-</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DSN=DSN_Name;UID=sa;PWD=password&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Windows认证方式</span>
-</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pyodbc<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;DSN=DSN_Name;Trusted_Connection=yes&#39;</span>,autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 用 ODBC的 DSN (data source name)</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#666">=</span> pyodbc<span style="color:#666">.</span>connect(<span style="color:#b44">&#39;DSN=DSN_Name;UID=sa;PWD=password&#39;</span>,autocommit<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Windows认证方式</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#666">=</span> pyodbc<span style="color:#666">.</span>connect(<span style="color:#b44">&#39;DSN=DSN_Name;Trusted_Connection=yes&#39;</span>,autocommit<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)
 </span></span></code></pre></div><h3 id="查询与数据获取">查询与数据获取</h3>
 <ul>
 <li>建表、插入数据</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 声明游标</span>
-</span></span><span style="display:flex;"><span>cur <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建表</span>
-</span></span><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;DROP TABLE IF EXISTS dbo.Product&#39;</span>)
-</span></span><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;CREATE TABLE dbo.Product(SKU INT,ProductName NVARCHAR(200))&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 插入数据</span>
-</span></span><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    INSERT INTO dbo.Product(SKU,ProductName) VALUES
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        (1,&#39;React-270&#39;),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        (2,&#39;Element-55&#39;),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        (3,&#39;BRA&#39;)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 声明游标</span>
+</span></span><span style="display:flex;"><span>cur <span style="color:#666">=</span> conn<span style="color:#666">.</span>cursor()
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 建表</span>
+</span></span><span style="display:flex;"><span>cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;DROP TABLE IF EXISTS dbo.Product&#39;</span>)
+</span></span><span style="display:flex;"><span>cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;CREATE TABLE dbo.Product(SKU INT,ProductName NVARCHAR(200))&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 插入数据</span>
+</span></span><span style="display:flex;"><span>cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">    INSERT INTO dbo.Product(SKU,ProductName) VALUES
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">        (1,&#39;React-270&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">        (2,&#39;Element-55&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">        (3,&#39;BRA&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select Top 1 SKU,ProductName From dbo.Product&#39;</span>)
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> cur<span style="color:#f92672">.</span>fetchone()
-</span></span><span style="display:flex;"><span>print(result)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select Top 1 SKU,ProductName From dbo.Product&#39;</span>)
+</span></span><span style="display:flex;"><span>result <span style="color:#666">=</span> cur<span style="color:#666">.</span>fetchone()
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(result)
 </span></span></code></pre></div><pre><code>(1, 'React-270')  
 </code></pre>
 <ul>
 <li>获取字段数据</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 下标形式</span>
-</span></span><span style="display:flex;"><span>print(result[<span style="color:#ae81ff">0</span>],result[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 字段名形式</span>
-</span></span><span style="display:flex;"><span>print(result<span style="color:#f92672">.</span>SKU,result<span style="color:#f92672">.</span>ProductName)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 下标形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(result[<span style="color:#666">0</span>],result[<span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 字段名形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(result<span style="color:#666">.</span>SKU,result<span style="color:#666">.</span>ProductName)
 </span></span></code></pre></div><pre><code>1 React-270  
 1 React-270  
 </code></pre>
 <ul>
 <li>一次获取一行或多行记录</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select SKU,ProductName From dbo.Product&#39;</span>):
-</span></span><span style="display:flex;"><span>    print(row)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> row <span style="color:#a2f;font-weight:bold">in</span> cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select SKU,ProductName From dbo.Product&#39;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(row)
 </span></span></code></pre></div><pre><code>(1, 'React 270')  
 (2, 'Element 55')  
 (3, 'BRA')  
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rows <span style="color:#f92672">=</span> cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select SKU,ProductName From dbo.Product&#39;</span>)<span style="color:#f92672">.</span>fetchall()
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows:
-</span></span><span style="display:flex;"><span>    print(row)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rows <span style="color:#666">=</span> cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select SKU,ProductName From dbo.Product&#39;</span>)<span style="color:#666">.</span>fetchall()
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> row <span style="color:#a2f;font-weight:bold">in</span> rows:
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(row)
 </span></span></code></pre></div><pre><code>(1, 'React-270')  
 (2, 'Element-55')  
 (3, 'BRA')  
@@ -189,48 +189,48 @@
 <ul>
 <li>参数化查询</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>result <span style="color:#f92672">=</span> cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select ProductName From dbo.Product Where SKU = ?&#39;</span>,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>fetchone()[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>print(result)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>result <span style="color:#666">=</span> cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select ProductName From dbo.Product Where SKU = ?&#39;</span>,<span style="color:#666">1</span>)<span style="color:#666">.</span>fetchone()[<span style="color:#666">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(result)
 </span></span></code></pre></div><pre><code>React-270  
 </code></pre>
 <ul>
 <li>with风格的上下文管理器</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> conn<span style="color:#f92672">.</span>cursor() <span style="color:#66d9ef">as</span> cur:
-</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;Update dbo.Product Set ProductName = &#39;ELE 56&#39; Where SKU = 3&#34;</span>)
-</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;Delete dbo.Product Where SKU = 2&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> conn<span style="color:#666">.</span>cursor() <span style="color:#a2f;font-weight:bold">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#34;Update dbo.Product Set ProductName = &#39;ELE 56&#39; Where SKU = 3&#34;</span>)
+</span></span><span style="display:flex;"><span>    cur<span style="color:#666">.</span>execute(<span style="color:#b44">&#34;Delete dbo.Product Where SKU = 2&#34;</span>)
 </span></span></code></pre></div><p>以上with语句内操作，执行完毕后会自动commit，但若有异常不会rollback<br>
 更多用法与提示，参考官方<a href="https://github.com/mkleehammer/pyodbc/wiki">github主页</a></p>
 <h2 id="sqlalchemy">sqlalchemy</h2>
-<p>sqlalchemy功能非常强大，其在数据库驱动的基础上完成了更高级的抽象，支持对象化操作，相当于将数据库里的一行当做对象的一个实例。<br><br>
+<p>sqlalchemy功能非常强大，其在数据库驱动的基础上完成了更高级的抽象，支持对象化操作，相当于将数据库里的一行当做对象的一个实例。<!-- raw HTML omitted --><br>
 但本文仅关注更加SQL化的操作。</p>
 <h3 id="连接字符串">连接字符串</h3>
-<p>模板：dialect+driver://username:password@host:port/database<br><br>
+<p>模板：dialect+driver://username:password@host:port/database<!-- raw HTML omitted --><br>
 dialect指具体的SQL方言，比如mssql、mysql、postgresql等</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># DSN</span>
-</span></span><span style="display:flex;"><span>con_string_dsn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://sa:password@DSN_Name&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 显式指定连接属性</span>
-</span></span><span style="display:flex;"><span>con_string_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://sa:password@localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&amp;MultiSubnetFailover=Yes&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 忽略用户名和密码，则为 windows 验证</span>
-</span></span><span style="display:flex;"><span>con_string_2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mssql+pyodbc://localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy</span> <span style="color:#a2f;font-weight:bold">import</span> create_engine
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># DSN</span>
+</span></span><span style="display:flex;"><span>con_string_dsn <span style="color:#666">=</span> <span style="color:#b44">&#34;mssql+pyodbc://sa:password@DSN_Name&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 显式指定连接属性</span>
+</span></span><span style="display:flex;"><span>con_string_1 <span style="color:#666">=</span> <span style="color:#b44">&#34;mssql+pyodbc://sa:password@localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&amp;MultiSubnetFailover=Yes&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 忽略用户名和密码，则为 windows 验证</span>
+</span></span><span style="display:flex;"><span>con_string_2 <span style="color:#666">=</span> <span style="color:#b44">&#34;mssql+pyodbc://localhost/TestDB?driver=ODBC+Driver+13+for+SQL+Server&#34;</span>
 </span></span></code></pre></div><h3 id="查询与客户端获取">查询与客户端获取</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 引擎，可直接运行SQL</span>
-</span></span><span style="display:flex;"><span>engine <span style="color:#f92672">=</span> create_engine(con_string_2)
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> engine<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select Top 1 ProductName From dbo.Product&#39;</span>)<span style="color:#f92672">.</span>fetchall()
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 连接</span>
-</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> engine<span style="color:#f92672">.</span>connect()
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;Select Top 1 ProductName From dbo.Product&#39;</span>)<span style="color:#f92672">.</span>fetchall()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 引擎，可直接运行SQL</span>
+</span></span><span style="display:flex;"><span>engine <span style="color:#666">=</span> create_engine(con_string_2)
+</span></span><span style="display:flex;"><span>result <span style="color:#666">=</span> engine<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select Top 1 ProductName From dbo.Product&#39;</span>)<span style="color:#666">.</span>fetchall()
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 连接</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#666">=</span> engine<span style="color:#666">.</span>connect()
+</span></span><span style="display:flex;"><span>result <span style="color:#666">=</span> conn<span style="color:#666">.</span>execute(<span style="color:#b44">&#39;Select Top 1 ProductName From dbo.Product&#39;</span>)<span style="color:#666">.</span>fetchall()
 </span></span></code></pre></div><h3 id="with语法">with语法</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> engine<span style="color:#f92672">.</span>begin() <span style="color:#66d9ef">as</span> conn:
-</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;Update dbo.Product Set ProductName = &#39;ELE 98&#39; Where SKU = 3&#34;</span>)
-</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;Delete dbo.Product Where SKU = 2&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> engine<span style="color:#666">.</span>begin() <span style="color:#a2f;font-weight:bold">as</span> conn:
+</span></span><span style="display:flex;"><span>    conn<span style="color:#666">.</span>execute(<span style="color:#b44">&#34;Update dbo.Product Set ProductName = &#39;ELE 98&#39; Where SKU = 3&#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#666">.</span>execute(<span style="color:#b44">&#34;Delete dbo.Product Where SKU = 2&#34;</span>)
 </span></span></code></pre></div><p>以上操作将自动commit，若遇到异常则会自动rollback，非常方便执行DML操作</p>
 <h3 id="使用原生driver">使用原生driver</h3>
 <p>若高层抽象方法不包括某些数据库特有的方法（如并不是所有驱动都支持的存储过程调用方法callproc），则可使用原生driver</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> engine<span style="color:#f92672">.</span>raw_connection()
-</span></span><span style="display:flex;"><span>cur <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
-</span></span><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>callproc(<span style="color:#e6db74">&#39;ProcName&#39;</span>,(parm1,parm2))
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>conn <span style="color:#666">=</span> engine<span style="color:#666">.</span>raw_connection()
+</span></span><span style="display:flex;"><span>cur <span style="color:#666">=</span> conn<span style="color:#666">.</span>cursor()
+</span></span><span style="display:flex;"><span>cur<span style="color:#666">.</span>callproc(<span style="color:#b44">&#39;ProcName&#39;</span>,(parm1,parm2))
 </span></span></code></pre></div><p>更多详情详见<a href="https://docs.sqlalchemy.org/en/13/core/connections.html#working-with-raw-dbapi-connections">官网</a></p>
 
 		</div>

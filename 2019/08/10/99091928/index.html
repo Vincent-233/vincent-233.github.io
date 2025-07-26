@@ -121,38 +121,38 @@
 <p>一条命令无法解决，那就用多条，于是想到模拟Anaconda Prompt的激活过程，新建一CMD或PowerShell脚本，先激活环境再运行python文件即可。</p>
 <h5 id="原命令">原命令</h5>
 <p>原做法是直接一条命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>D:\Anaconda\Anaconda3\Python  D:\prog\script.py
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>D:\Anaconda\Anaconda3\Python  D:\prog\script.py
 </span></span></code></pre></div><h5 id="改进后命令">改进后命令</h5>
 <p>改进后要先写一个windows shell脚本文件，然后在schedule中配置执行此shell文件</p>
 <ul>
 <li>CMD版本（<code>script.cmd</code>）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>REM conda activate base python environment
-</span></span><span style="display:flex;"><span>call D:<span style="color:#ae81ff">\A</span>naconda<span style="color:#ae81ff">\A</span>naconda3<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate.bat D:<span style="color:#ae81ff">\A</span>naconda<span style="color:#ae81ff">\A</span>naconda3
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>REM conda activate base python environment
+</span></span><span style="display:flex;"><span>call D:<span style="color:#b62;font-weight:bold">\A</span>naconda<span style="color:#b62;font-weight:bold">\A</span>naconda3<span style="color:#b62;font-weight:bold">\S</span>cripts<span style="color:#b62;font-weight:bold">\a</span>ctivate.bat D:<span style="color:#b62;font-weight:bold">\A</span>naconda<span style="color:#b62;font-weight:bold">\A</span>naconda3
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>REM run python file
-</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;D:\prog\&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">python script.py
+</span></span><span style="display:flex;"><span><span style="color:#a2f">cd</span> <span style="color:#b44">&#34;D:\prog\&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#b44">python script.py
 </span></span></span></code></pre></div><ul>
 <li>PowerShell版本（<code>script.ps1</code>）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># conda activate base python environment</span>
-</span></span><span style="display:flex;"><span>&amp; <span style="color:#e6db74">&#39;D:\Anaconda\Anaconda3\shell\condabin\conda-hook.ps1&#39;</span>
-</span></span><span style="display:flex;"><span>conda activate <span style="color:#e6db74">&#39;D:\Anaconda\Anaconda3&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># conda activate base python environment</span>
+</span></span><span style="display:flex;"><span>&amp; <span style="color:#b44">&#39;D:\Anaconda\Anaconda3\shell\condabin\conda-hook.ps1&#39;</span>
+</span></span><span style="display:flex;"><span>conda activate <span style="color:#b44">&#39;D:\Anaconda\Anaconda3&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># run python file</span>
-</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;D:\prog\&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># run python file</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">cd </span><span style="color:#b44">&#34;D:\prog\&#34;</span>
 </span></span><span style="display:flex;"><span>python script.py
 </span></span></code></pre></div><h6 id="执行脚本语句">执行脚本语句</h6>
 <p>在Task schedule中配置如下：</p>
 <ul>
 <li>cmd版本</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>D:\proc\script.cmd
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>D:\proc\script.cmd
 </span></span></code></pre></div><ul>
 <li>powershell版本</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell <span style="color:#f92672">-file</span> <span style="color:#e6db74">&#34;D:\proc\script.ps1&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell <span style="color:#666">-file</span> <span style="color:#b44">&#34;D:\proc\script.ps1&#34;</span>
 </span></span></code></pre></div><blockquote>
 <p>附加说明：</p>
 <ul>
