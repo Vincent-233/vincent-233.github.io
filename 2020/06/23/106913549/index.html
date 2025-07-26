@@ -135,7 +135,11 @@
 </span></span></code></pre></div><h5 id="原始样本数据">原始样本数据</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># org data where id in (2,3,32) </span>
 </span></span><span style="display:flex;"><span>df[df[<span style="color:#b44">&#39;id&#39;</span>]<span style="color:#666">.</span>isin([<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">32</span>])]
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>  
+<style scoped>  
+    .dataframe tbody tr th:only-of-type {  
+        vertical-align: middle;  
+    }  
 <pre><code>.dataframe tbody tr th {  
     vertical-align: top;  
 }  
@@ -144,8 +148,34 @@
     text-align: right;  
 }  
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">  
+  <thead>  
+    <tr style="text-align: right;">  
+      <th></th>  
+      <th>id</th>  
+      <th>result</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <th>2</th>  
+      <td>2</td>  
+      <td>/*乙型肝炎病毒核酸定量\8.05E+6\</td>  
+    </tr>  
+    <tr>  
+      <th>3</th>  
+      <td>3</td>  
+      <td>/*甲胎蛋白(化学发光微粒子免疫检测法)\1.4\</td>  
+    </tr>  
+    <tr>  
+      <th>32</th>  
+      <td>32</td>  
+      <td>/乙肝e抗原(化学发光微粒子免疫检测法)\88.15\乙肝e抗体(化学发光微粒子免疫检测法)...</td>  
+    </tr>  
+  </tbody>  
+</table>  
+</div>  
 <h5 id="关键代码">关键代码</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># strip and split to list</span>
 </span></span><span style="display:flex;"><span>df[<span style="color:#b44">&#39;result&#39;</span>] <span style="color:#666">=</span> df[<span style="color:#b44">&#39;result&#39;</span>]<span style="color:#666">.</span>str<span style="color:#666">.</span>strip(<span style="color:#b44">&#39;/</span><span style="color:#b62;font-weight:bold">\\</span><span style="color:#b44">&#39;</span>)<span style="color:#666">.</span>str<span style="color:#666">.</span>split(<span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\\</span><span style="color:#b44">&#39;</span>)
@@ -158,7 +188,11 @@
 </span></span></code></pre></div><h5 id="结果样本数据">结果样本数据</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># see result where id in (2,3,32) </span>
 </span></span><span style="display:flex;"><span>df[df[<span style="color:#b44">&#39;id&#39;</span>]<span style="color:#666">.</span>isin([<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">32</span>])]
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><div>  
+<style scoped>  
+    .dataframe tbody tr th:only-of-type {  
+        vertical-align: middle;  
+    }  
 <pre><code>.dataframe tbody tr th {  
     vertical-align: top;  
 }  
@@ -167,8 +201,39 @@
     text-align: right;  
 }  
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">  
+  <thead>  
+    <tr style="text-align: right;">  
+      <th></th>  
+      <th>id</th>  
+      <th>result</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <th>51</th>  
+      <td>2</td>  
+      <td>*乙型肝炎病毒核酸定量:8.05E+6</td>  
+    </tr>  
+    <tr>  
+      <th>52</th>  
+      <td>3</td>  
+      <td>*甲胎蛋白(化学发光微粒子免疫检测法):1.4</td>  
+    </tr>  
+    <tr>  
+      <th>279</th>  
+      <td>32</td>  
+      <td>乙肝e抗原(化学发光微粒子免疫检测法):88.15</td>  
+    </tr>  
+    <tr>  
+      <th>280</th>  
+      <td>32</td>  
+      <td>乙肝e抗体(化学发光微粒子免疫检测法):11.42</td>  
+    </tr>  
+  </tbody>  
+</table>  
+</div>  
 <h3 id="说明">说明</h3>
 <ul>
 <li>第一步，将字符拆分拆分为列表，用series.str.split实现</li>

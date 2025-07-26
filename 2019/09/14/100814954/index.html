@@ -202,10 +202,10 @@
 </span></span></code></pre></div><p>以上with语句内操作，执行完毕后会自动commit，但若有异常不会rollback<br>
 更多用法与提示，参考官方<a href="https://github.com/mkleehammer/pyodbc/wiki">github主页</a></p>
 <h2 id="sqlalchemy">sqlalchemy</h2>
-<p>sqlalchemy功能非常强大，其在数据库驱动的基础上完成了更高级的抽象，支持对象化操作，相当于将数据库里的一行当做对象的一个实例。<!-- raw HTML omitted --><br>
+<p>sqlalchemy功能非常强大，其在数据库驱动的基础上完成了更高级的抽象，支持对象化操作，相当于将数据库里的一行当做对象的一个实例。<br><br>
 但本文仅关注更加SQL化的操作。</p>
 <h3 id="连接字符串">连接字符串</h3>
-<p>模板：dialect+driver://username:password@host:port/database<!-- raw HTML omitted --><br>
+<p>模板：dialect+driver://username:password@host:port/database<br><br>
 dialect指具体的SQL方言，比如mssql、mysql、postgresql等</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">sqlalchemy</span> <span style="color:#a2f;font-weight:bold">import</span> create_engine
 </span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># DSN</span>

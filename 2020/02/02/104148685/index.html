@@ -229,7 +229,7 @@ Hello
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#34;Hello, </span><span style="color:#b68;font-weight:bold">{</span>name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>)
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>say_hello_to(<span style="color:#b44">&#34;Susan&#34;</span>)
-</span></span></code></pre></div><p>执行后报错：<code>TypeError: wrapper_do_twice() takes 0 positional arguments but 1 was given</code><!-- raw HTML omitted --><br>
+</span></span></code></pre></div><p>执行后报错：<code>TypeError: wrapper_do_twice() takes 0 positional arguments but 1 was given</code><br><br>
 那要如何避免上述问题呢，答案是用<code>*args</code>和<code>**wargs</code><br>
 在decorators.py中加入如下新函数：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 文件 decorators.py</span>
@@ -253,7 +253,7 @@ Hello, Susan
 </span></span></code></pre></div><pre><code>Help on function wrapper_do_twice in module decorators:
 wrapper_do_twice(*args, **kwargs)
 </code></pre>
-<p>可以发现查看say_hello_to函数相关信息（元数据）时，指示为装饰器函数内的wrapper_do_twice，显然这不是我们想要的，如何改进呢？<!-- raw HTML omitted --><br>
+<p>可以发现查看say_hello_to函数相关信息（元数据）时，指示为装饰器函数内的wrapper_do_twice，显然这不是我们想要的，如何改进呢？<br><br>
 本质上需要更新函数的<code>__name__、__doc__、__module__</code>属性，让其指向原函数，python有个惯用手法来解决此问题，那就是用functools模块的wrap方法：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">functools</span>
 </span></span><span style="display:flex;"><span>
