@@ -120,32 +120,31 @@
 <p>后面想更进一步，将导出的xml文件打开后另存为正常的xlsx格式再给用户，但如果导出的文件很多，一个个打开再另存，比较繁琐，于是想有无办法<strong>自动将那些xml批量另存为xlsx</strong>。</p>
 <h3 id="解决办法">解决办法</h3>
 <p>本来想用python解决，但网上找资料发现很多都是去解析xml再写到excel，代码量大而且消耗太多内存，速度也不快。理想方案应该是充分利用excel本身的功能，模拟<strong>直接打开xml后再另存为xlsx</strong>的这个过程。最后发现还是VBA合适，毕竟专为office而生，具体参考代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Public Sub ConvertXmlToXlsx()
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-VB.Net" data-lang="VB.Net"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Public</span> <span style="color:#a2f;font-weight:bold">Sub</span> <span style="color:#00a000">ConvertXmlToXlsx</span>()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Application.ScreenUpdating = False
-</span></span><span style="display:flex;"><span>Application.DisplayAlerts = False
+</span></span><span style="display:flex;"><span>Application.ScreenUpdating <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>Application.DisplayAlerts <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">False</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Dim objFSO As Object
-</span></span><span style="display:flex;"><span>Dim objFolder As Object
-</span></span><span style="display:flex;"><span>Dim objFile As Object
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Dim</span> objFSO <span style="color:#a2f;font-weight:bold">As</span> <span style="color:#0b0;font-weight:bold">Object</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Dim</span> objFolder <span style="color:#a2f;font-weight:bold">As</span> <span style="color:#0b0;font-weight:bold">Object</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Dim</span> objFile <span style="color:#a2f;font-weight:bold">As</span> <span style="color:#0b0;font-weight:bold">Object</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>xmlFolder = &#34;D:\Users\Documents\Temp\Working\xml\&#34;
-</span></span><span style="display:flex;"><span>convFolder = &#34;D:\Users\Documents\Temp\Working\xls\&#34;
+</span></span><span style="display:flex;"><span>xmlFolder <span style="color:#666">=</span> <span style="color:#b44">&#34;D:\Users\Documents\Temp\Working\xml\&#34;</span>
+</span></span><span style="display:flex;"><span>convFolder <span style="color:#666">=</span> <span style="color:#b44">&#34;D:\Users\Documents\Temp\Working\xls\&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Set objFSO = CreateObject(&#34;Scripting.FileSystemObject&#34;)
-</span></span><span style="display:flex;"><span>Set objFolder = objFSO.GetFolder(xmlFolder)
-</span></span><span style="display:flex;"><span>For Each objFile In objFolder.Files
-</span></span><span style="display:flex;"><span>    If UCase(Right(objFile.Name, Len(XML))) = UCase(XML) Then
-</span></span><span style="display:flex;"><span>        NewFileName = convFolder &amp; Left(objFile.Name, Len(objFile.Name) - 4) &amp; &#34;.xlsx&#34;
-</span></span><span style="display:flex;"><span>        Set ConvertThis = Workbooks.Open(objFolder &amp; &#34;\&#34; &amp; objFile.Name)
-</span></span><span style="display:flex;"><span>        ConvertThis.SaveAs Filename:=NewFileName, FileFormat:=xlOpenXMLWorkbook
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Set</span> objFSO <span style="color:#666">=</span> CreateObject(<span style="color:#b44">&#34;Scripting.FileSystemObject&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Set</span> objFolder <span style="color:#666">=</span> objFSO.GetFolder(xmlFolder)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">For</span> <span style="color:#a2f;font-weight:bold">Each</span> objFile <span style="color:#a2f;font-weight:bold">In</span> objFolder.Files
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">If</span> UCase(Right(objFile.Name, Len(XML))) <span style="color:#666">=</span> UCase(XML) <span style="color:#a2f;font-weight:bold">Then</span>
+</span></span><span style="display:flex;"><span>        NewFileName <span style="color:#666">=</span> convFolder <span style="color:#666">&amp;</span> Left(objFile.Name, Len(objFile.Name) <span style="color:#666">-</span> 4) <span style="color:#666">&amp;</span> <span style="color:#b44">&#34;.xlsx&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">Set</span> ConvertThis <span style="color:#666">=</span> Workbooks.Open(objFolder <span style="color:#666">&amp;</span> <span style="color:#b44">&#34;\&#34;</span> <span style="color:#666">&amp;</span> objFile.Name)
+</span></span><span style="display:flex;"><span>        ConvertThis.SaveAs Filename:<span style="color:#666">=</span>NewFileName, FileFormat:<span style="color:#666">=</span>xlOpenXMLWorkbook
 </span></span><span style="display:flex;"><span>        ConvertThis.Close
-</span></span><span style="display:flex;"><span>    End If
-</span></span><span style="display:flex;"><span>Next objFile
-</span></span><span style="display:flex;"><span>End Sub
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">End</span> <span style="color:#a2f;font-weight:bold">If</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">Next</span> objFile
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">End</span> <span style="color:#a2f;font-weight:bold">Sub</span>
 </span></span></code></pre></div><h3 id="vba运行方法">VBA运行方法</h3>
-<p>新建一个Excel，按ALT+F11调出 VBA编辑器，菜单：插入-&gt;模块，然后贴上脚本，修改相关路径等，然后运行即可。<br>
-另外，上述脚本将xml改为xls后，应该还可以实现批量将xls转为xlsx的功能。</p>
+<p>新建一个Excel，按ALT+F11调出 VBA编辑器，菜单：插入-&gt;模块，然后贴上脚本，修改相关路径等，然后运行即可。</p>
 <p>参考资料：https://stackoverflow.com/questions/38587755/convert-xml-file-to-xlsx-file-with-vba</p>
 
 		</div>
