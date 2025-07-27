@@ -116,15 +116,20 @@
 </nav>
 	</div>
 </div><div class="content post__content clearfix">
-			<p>SQL Server 中以下两个 SET OPTION 在非必要的情况下均设为ON，可以避免很多意外</p>
+			<p>为何写这个话题？因为项目中出现过几次有开发者copy之前的release脚本，没注意到其中的set option的影响，最终造成release报错的情况。<br>
+SQL Server中以下两个 SET OPTION 在非必要的情况下均设为ON，可以避免很多意外。</p>
 <h2 id="set-ansi_padding-on">SET ANSI_PADDING ON</h2>
-<p>微软文档中推荐此选项应一直为 ON，且新版本将不支持设为 OFF.<br>
-若设置为 OFF，会影响新建表的 varchar 等可变长度类型，新增数据时会自动将结尾的空格或0去掉，出现想插入的值和实际存储的值不一致的现象，而这是不合理的。</p>
-<p>在创建 computed column上的index，或filtered index 等情形下，此 optiion 要为 ON。</p>
+<p>此选项默认即为ON，且微软文档中推荐此选项应一直为 ON，且新版本将不支持设为 OFF.<br>
+若设置为 OFF，会影响新建表的 varchar 等可变长度类型，新增数据时会自动将结尾的空格或0去掉，出现想插入的值和实际存储的值不一致的现象，而这是不合理的。
+一些特殊情况下也会有影响，比如：</p>
+<ul>
+<li>创建filtered index或在computed column上创建index情形下，此 optiion 要为 ON。</li>
+<li>为分区表创建同结构的staging表用于后续switch时，此选项要和创建原分区表时保持一致。</li>
+</ul>
 <h2 id="set-quoted_identifier-on">SET QUOTED_IDENTIFIER ON</h2>
 <p>在创建 filtered index 或 使用XML相关方法(xQuery等)时此选项必须为 ON。</p>
 <blockquote>
-<p>注： Windows 上的SQLCMD此选项默认为 OFF，而 SSMS默认为 ON</p>
+<p>注： Windows上的SQLCMD此选项默认为OFF，而SSMS默认为ON</p>
 </blockquote>
 <h2 id="其它参考">其它参考</h2>
 <h3 id="set-ansi_defaults-on">SET ANSI_DEFAULTS ON</h3>
