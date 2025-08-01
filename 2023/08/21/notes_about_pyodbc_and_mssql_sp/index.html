@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">raise</span> <span style="color:#d2413a;font-weight:bold">Exception</span>(error_msg)
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result
 </span></span></code></pre></div><h3 id="2---放弃dbapi通过调用-sqlcmd-去执行sp">2 - 放弃DBAPI，通过调用 SQLCMD 去执行SP</h3>
-<p>若不用获取SP返回的结果，则可直接通过SQL Server官方命令行工具SQLCMD去执行SP，示例代码如下：</p>
+<p>若不用获取SP返回的结果，仅需知道SP是否执行成功，则可直接通过SQL Server官方命令行工具SQLCMD去执行SP，示例代码如下：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">subprocess</span>
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">execute_sql_query</span>(query):
 </span></span><span style="display:flex;"><span>    command <span style="color:#666">=</span> <span style="color:#b44">fr</span><span style="color:#b44">&#39;sqlcmd -S localhost -T -Q &#34;</span><span style="color:#b68;font-weight:bold">{</span>query<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;&#39;</span>
