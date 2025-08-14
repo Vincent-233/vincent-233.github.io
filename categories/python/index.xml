@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on 人生短短几個秋</title>
+    <title>Python on 人生短短几個秋</title>
     <link>https://vincent-233.github.io/categories/python/</link>
-    <description>Recent content in python on 人生短短几個秋</description>
+    <description>Recent content in Python on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 13 Jul 2024 17:26:11 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
@@ -50,6 +50,15 @@
       
       <guid>https://vincent-233.github.io/2021/08/08/119496995/</guid>
       <description>模块（python module）就是一个python文件，包（package）就是一个带__init__.py文件的文件夹，可以理解为模块的</description>
+    </item>
+    
+    <item>
+      <title>pandas数据处理，字符串先拆分再合并</title>
+      <link>https://vincent-233.github.io/2020/06/23/106913549/</link>
+      <pubDate>Tue, 23 Jun 2020 00:45:35 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2020/06/23/106913549/</guid>
+      <description>概述 实现之前文章中用SQL实现的功能： 得益于python简洁的表达式，以及pandas库的强大功能，实现起来非常轻松，关键代码仅三行： 代码 读</description>
     </item>
     
     <item>

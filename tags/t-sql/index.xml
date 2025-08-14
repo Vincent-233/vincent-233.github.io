@@ -278,6 +278,15 @@
     </item>
     
     <item>
+      <title>字符串拆分为列表（函数）</title>
+      <link>https://vincent-233.github.io/2013/10/20/12889707/</link>
+      <pubDate>Sun, 20 Oct 2013 13:56:03 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2013/10/20/12889707/</guid>
+      <description>今天试著自己实现了将字符串拆分为列表的功能，中间也有找一些资料，但我知道光看是没有用的，必须要自己试著实现印象才会深刻，必须要在实现过程中遇</description>
+    </item>
+    
+    <item>
       <title>SQL练习题（2）</title>
       <link>https://vincent-233.github.io/2013/07/27/9532985/</link>
       <pubDate>Sat, 27 Jul 2013 14:43:45 +0000</pubDate>

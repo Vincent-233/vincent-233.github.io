@@ -6,7 +6,16 @@
     <description>Recent content in Teches on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Jul 2025 23:38:28 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Aug 2025 13:27:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</title>
+      <link>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</link>
+      <pubDate>Wed, 13 Aug 2025 13:27:49 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</guid>
+      <description>出于测试和学习的目的，最近想在Ubuntu Linux上安装oracle server端并在windows上通过客户端连接使用。发现可通过Doc</description>
+    </item>
+    
     <item>
       <title>RustDesk自建Server搭建</title>
       <link>https://vincent-233.github.io/2025/07/11/rustdesk-setup/</link>
@@ -683,24 +692,6 @@
     </item>
     
     <item>
-      <title>SQL复制（订阅、发布）实践问题记录</title>
-      <link>https://vincent-233.github.io/2018/06/18/80724609/</link>
-      <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2018/06/18/80724609/</guid>
-      <description>关于SQL复制的具体操作步骤网上有很多教程我就不说明了，这里主要记录下我的实践，以及过程中遇到的问题与解决方法： 本机不同数据库间复制 本机配置</description>
-    </item>
-    
-    <item>
-      <title>SQL Server数据库复制向导报错解决</title>
-      <link>https://vincent-233.github.io/2018/06/05/80583991/</link>
-      <pubDate>Tue, 05 Jun 2018 17:02:16 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2018/06/05/80583991/</guid>
-      <description>今天利用数据库复制向导（Copy Database Wizard）将2012版本的数据库复制到2014时，遇到了一些错误，并最终解决，特此记录： 数据库兼容级别</description>
-    </item>
-    
-    <item>
       <title>SQL Server FileStream 体验</title>
       <link>https://vincent-233.github.io/2018/06/03/80553895/</link>
       <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
@@ -728,7 +719,7 @@
     </item>
     
     <item>
-      <title>关于数据库隔离级别-快照(SnapShot)</title>
+      <title>关于MSSQL数据库隔离级别-快照(SnapShot)</title>
       <link>https://vincent-233.github.io/2018/05/01/80154338/</link>
       <pubDate>Tue, 01 May 2018 10:10:04 +0000</pubDate>
       
@@ -823,7 +814,7 @@
       <pubDate>Mon, 04 May 2015 05:17:50 +0000</pubDate>
       
       <guid>https://vincent-233.github.io/2015/05/04/45478729/</guid>
-      <description>PL/SQL Developer是用得比较多的ORACLE开发工具，一般人在使用时都会对此软件进行个性化配置，比如快捷键、代码提示与自动补全等，但是每次</description>
+      <description>PL/SQL Developer是用得比较多的ORACLE开发工具，一般在使用时都会对此软件进行个性化配置，比如快捷键、代码提示与自动补全等，但是每次新</description>
     </item>
     
     <item>
@@ -1022,6 +1013,15 @@
       
       <guid>https://vincent-233.github.io/2013/07/27/9532985/</guid>
       <description>设教务管理系统中有3个基本表： 学生信息表 S(SNO, SNAME, AGE, SEX) ，其属性分别表示学号、学生姓名、年龄和性别； 课程信息表 C(CNO, CNAME, CTEACHER) ，其属性分别表示课程号、课程名称</description>
+    </item>
+    
+    <item>
+      <title>倒水问题</title>
+      <link>https://vincent-233.github.io/2013/07/23/9428537/</link>
+      <pubDate>Tue, 23 Jul 2013 13:50:40 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2013/07/23/9428537/</guid>
+      <description>今日又试著刷了一道CSDN英雄会的题，可惜挑战失败，但不管怎样，在寻求解决方案的过程中也是有不少收获的。 有两个容器，容积分别为A升和B升，有</description>
     </item>
     
     <item>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接 - 人生短短几個秋</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="人生短短几個秋" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">人生短短几個秋</div>
+					<div class="logo__tagline">实践是最好的成长，发表是最好的回忆</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">首页</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tech/">
+				
+				<span class="menu__text">技术笔记</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tools/">
+				
+				<span class="menu__text">工具技巧</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/thinking/">
+				
+				<span class="menu__text">生活随想</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/archive">
+				
+				<span class="menu__text">归档</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2025-08-13T13:27:49&#43;08:00">2025-08-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="category">环境配置</a>, <a class="meta__link" href="/categories/oracle/" rel="category">Oracle</a>
+	</span>
+</div></div>
+		</header>
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#拉取镜像">拉取镜像</a></li>
+    <li><a href="#运行容器">运行容器</a></li>
+    <li><a href="#更新配置和创建用户">更新配置和创建用户</a></li>
+    <li><a href="#客户端连接">客户端连接</a></li>
+    <li><a href="#创建表空间并执行sql">创建表空间并执行SQL</a></li>
+    <li><a href="#附---相关命令--关闭和重启容器oracle服务">附 - 相关命令- 关闭和重启容器/ORACLE服务</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>出于测试和学习的目的，最近想在Ubuntu Linux上安装oracle server端并在windows上通过客户端连接使用。发现可通过Docker快速安装和配置，这里以12c版本为例记录一下我的安装配置过程。</p>
+<h2 id="拉取镜像">拉取镜像</h2>
+<p>假定docker已安装，镜像源已配置。<br>
+这里为省事就直接用了第三方镜像（若用oracle官方镜像需要先注册，会稍麻烦一些，参考<a href="https://datmt.com/backend/how-to-install-oracle-database-on-docker/">这篇文章</a>）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull truevoly/oracle-12c
+</span></span></code></pre></div><p>这个第三方镜像相关说明可参考<a href="https://github.com/MaksymBilenko/docker-oracle-12c">github页面</a>
+下载好后可运行 <code>docker image ls</code> 确认大小，运行 <code>docker inspect truevoly/oracle-12c</code> 查看imager详情</p>
+<h2 id="运行容器">运行容器</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># create local folder for mapping</span>
+</span></span><span style="display:flex;"><span>mkdir -p /home/user_name/app/oracle
+</span></span><span style="display:flex;"><span>chmod <span style="color:#666">777</span> /home/user_name/app/oracle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># start container</span>
+</span></span><span style="display:flex;"><span>docker run -d --name oracle-12c <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>	-p 9090:8080 -p 1521:1521 <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>	-v /home/user_name/app/oracle:/u01/app/oracle/ <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>	 truevoly/oracle-12c
+</span></span></code></pre></div><p>Note：上面的p选项和v选项分别用于配置host机到容器的端口(port) 和 文件目录/卷 (volume)映射，port选项为了端口转发，volume选项为了数据共享和持久化</p>
+<p>启动后运行命令 <code>docker logs oracle-12c</code> 可查看日志，日志中出现 Database ready to use. Enjoy! ;)  说明一切就绪，可以开始下一步</p>
+<p><img src="/img/20250813-oracle-0.png" alt=""></p>
+<h2 id="更新配置和创建用户">更新配置和创建用户</h2>
+<p>根据上述github页面说明，容器运行成功之后会有预设的超级用户system和sys，密码均为oracle，其中sys可以sysdba方式连接（<code>sqlplus sys/oracle as sysdba</code>）</p>
+<p>进入容器，将 $ORACLE_HOME/bin 加入环境变量，让运行sqlplus更方便</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># enter container</span>
+</span></span><span style="display:flex;"><span>docker <span style="color:#a2f">exec</span> -it oracle-12c /bin/bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># add env vairable</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">echo</span> <span style="color:#b44">&#34;export PATH=</span><span style="color:#b8860b">$PATH</span><span style="color:#b44">:</span><span style="color:#b8860b">$ORACLE_HOME</span><span style="color:#b44">/bin&#34;</span>  &gt;&gt;  ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#a2f">source</span>  ~/.bashrc
+</span></span></code></pre></div><p>创建普通用户名 ora_user 并分配权限</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># enter sqlplus</span>
+</span></span><span style="display:flex;"><span>sqlplus system/oracle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># or connect as sysdba</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># sqlplus sys/oracle as sysdba</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SQL&gt; ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;
+</span></span><span style="display:flex;"><span>SQL&gt; CREATE USER ora_user IDENTIFIED BY ora_user;
+</span></span><span style="display:flex;"><span>SQL&gt; GRANT ALL PRIVILEGES TO ora_user;
+</span></span></code></pre></div><h2 id="客户端连接">客户端连接</h2>
+<p>以DBeaver为例，用普通用户ora_user进行连接：
+<img src="/img/20250813-oracle-1.png" alt=""></p>
+<h2 id="创建表空间并执行sql">创建表空间并执行SQL</h2>
+<p>在DBeaver中执行SQL创建表空间</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- Create tablespace, default path is $ORACLE_HOME/dbs
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span>TABLESPACE<span style="color:#bbb"> </span>ORA_USER_DATA<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>DATAFILE<span style="color:#bbb"> </span><span style="color:#b44">&#39;ora_user_data_01.dbf&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">SIZE</span><span style="color:#bbb"> </span><span style="color:#666">100</span>M<span style="color:#bbb"> </span>AUTOEXTEND<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">NEXT</span><span style="color:#bbb"> </span><span style="color:#666">10</span>M<span style="color:#bbb"> </span>MAXSIZE<span style="color:#bbb"> </span><span style="color:#666">1</span><span style="color:#a2f;font-weight:bold">G</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="/img/20250813-oracle-2.png" alt=""><br>
+创建Table，然后插入测试数，进行查询:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>students<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>student_id<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>first_name<span style="color:#bbb"> </span>VARCHAR2(<span style="color:#666">50</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>last_name<span style="color:#bbb"> </span>VARCHAR2(<span style="color:#666">50</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>birth_date<span style="color:#bbb"> </span><span style="color:#a2f">DATE</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>enrollment_date<span style="color:#bbb"> </span><span style="color:#a2f">DATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DEFAULT</span><span style="color:#bbb"> </span>SYSDATE<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>students<span style="color:#bbb"> </span>(student_id,<span style="color:#bbb"> </span>first_name,<span style="color:#bbb"> </span>last_name,<span style="color:#bbb"> </span>birth_date,<span style="color:#bbb"> </span>enrollment_date)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#666">1</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;Terry&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;Zhang&#39;</span>,<span style="color:#bbb"> </span>TO_DATE(<span style="color:#b44">&#39;2001-01-01&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;YYYY-MM-DD&#39;</span>),<span style="color:#bbb"> </span>TO_DATE(<span style="color:#b44">&#39;20250801&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;YYYYMMDD&#39;</span>));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>students;<span style="color:#bbb"> 
+</span></span></span></code></pre></div><p><img src="/img/20250813-oracle-3.png" alt=""></p>
+<p>至此本地ORACLE测试环境准备完毕， 后续可以按需进行更多操作。</p>
+<h2 id="附---相关命令--关闭和重启容器oracle服务">附 - 相关命令- 关闭和重启容器/ORACLE服务</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic">#### stop and start container</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># docker container ls -as</span>
+</span></span><span style="display:flex;"><span>docker container stop oracle-12c
+</span></span><span style="display:flex;"><span>docker container start oracle-12c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#### just stop lister</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># stop listener</span>
+</span></span><span style="display:flex;"><span>docker <span style="color:#a2f">exec</span> -it oracle-12c /bin/bash
+</span></span><span style="display:flex;"><span>lsnrctl status
+</span></span><span style="display:flex;"><span>lsnrctl stop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#### just stop oracle instance</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># stop service</span>
+</span></span><span style="display:flex;"><span>sqlplus sys/oracle as sysdba
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># shut down service</span>
+</span></span><span style="display:flex;"><span>SQL&gt; shutdown immediate;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># start service</span>
+</span></span><span style="display:flex;"><span>SQL&gt; startup;
+</span></span></code></pre></div><p>Note: oracle在未启动状态时，可通过<code>sqlplus sys/oracle as sysdba</code>连接，或切换到oracle用户后通过<code>sqlplus / as sysdba</code>连接</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/truevoly/oracle-12c">https://hub.docker.com/r/truevoly/oracle-12c</a></li>
+<li><a href="https://github.com/MaksymBilenko/docker-oracle-12c">https://github.com/MaksymBilenko/docker-oracle-12c</a></li>
+<li><a href="https://hub.docker.com/r/konnecteam/docker-oracle-12c/">https://hub.docker.com/r/konnecteam/docker-oracle-12c</a></li>
+<li>ORACLE官方镜像，<a href="https://container-registry.oracle.com/ords/f?p=113:4:14332975502605:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:9,9,Oracle%20Database%20Enterprise%20Edition,Oracle%20Database%20Enterprise%20Edition,1,0&amp;cs=3ru1PrOSvW5_AdFvha7uQqpas5HkWXBkEdcuVe9-6PlYGvgrjaBXs9D4VuOnHBjdNOajGEciNk_kDpwMTgNwOUw">企业版</a>、<a href="https://container-registry.oracle.com/ords/f?p=113:4:14332975502605:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:1863,1863,Oracle%20Database%20Free,Oracle%20Database%20Free,1,0&amp;cs=3JwMaYr9fJIn7K7ESlNtaTPAd5SAXi_lpGnp14dA8esa70vB3NrSfeQajdN5hTxJwuJnoCrmNocDW2v9JF6G20g">免费版</a></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/docker/" rel="tag">Docker</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/2025/07/11/rustdesk-setup/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">RustDesk自建Server搭建</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2025 人生短短几個秋.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>

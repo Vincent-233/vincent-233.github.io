@@ -43,5 +43,14 @@
       <description>概述 本文由浅入深，由特殊到一般说明全排列的递归实现。 需求 编写程序，输出所有由a，b，c，d四个字母都出现一次所组成的字符串。 分析 这实际是全排</description>
     </item>
     
+    <item>
+      <title>倒水问题</title>
+      <link>https://vincent-233.github.io/2013/07/23/9428537/</link>
+      <pubDate>Tue, 23 Jul 2013 13:50:40 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2013/07/23/9428537/</guid>
+      <description>今日又试著刷了一道CSDN英雄会的题，可惜挑战失败，但不管怎样，在寻求解决方案的过程中也是有不少收获的。 有两个容器，容积分别为A升和B升，有</description>
+    </item>
+    
   </channel>
 </rss>

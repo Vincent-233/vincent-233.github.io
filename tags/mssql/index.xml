@@ -143,24 +143,6 @@
     </item>
     
     <item>
-      <title>SQL复制（订阅、发布）实践问题记录</title>
-      <link>https://vincent-233.github.io/2018/06/18/80724609/</link>
-      <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2018/06/18/80724609/</guid>
-      <description>关于SQL复制的具体操作步骤网上有很多教程我就不说明了，这里主要记录下我的实践，以及过程中遇到的问题与解决方法： 本机不同数据库间复制 本机配置</description>
-    </item>
-    
-    <item>
-      <title>SQL Server数据库复制向导报错解决</title>
-      <link>https://vincent-233.github.io/2018/06/05/80583991/</link>
-      <pubDate>Tue, 05 Jun 2018 17:02:16 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2018/06/05/80583991/</guid>
-      <description>今天利用数据库复制向导（Copy Database Wizard）将2012版本的数据库复制到2014时，遇到了一些错误，并最终解决，特此记录： 数据库兼容级别</description>
-    </item>
-    
-    <item>
       <title>SQL Server FileStream 体验</title>
       <link>https://vincent-233.github.io/2018/06/03/80553895/</link>
       <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
@@ -188,7 +170,7 @@
     </item>
     
     <item>
-      <title>关于数据库隔离级别-快照(SnapShot)</title>
+      <title>关于MSSQL数据库隔离级别-快照(SnapShot)</title>
       <link>https://vincent-233.github.io/2018/05/01/80154338/</link>
       <pubDate>Tue, 01 May 2018 10:10:04 +0000</pubDate>
       

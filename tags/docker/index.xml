@@ -6,7 +6,16 @@
     <description>Recent content in Docker on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Jul 2025 23:38:28 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Aug 2025 13:27:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</title>
+      <link>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</link>
+      <pubDate>Wed, 13 Aug 2025 13:27:49 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</guid>
+      <description>出于测试和学习的目的，最近想在Ubuntu Linux上安装oracle server端并在windows上通过客户端连接使用。发现可通过Doc</description>
+    </item>
+    
     <item>
       <title>RustDesk自建Server搭建</title>
       <link>https://vincent-233.github.io/2025/07/11/rustdesk-setup/</link>

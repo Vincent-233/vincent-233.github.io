@@ -44,6 +44,15 @@
     </item>
     
     <item>
+      <title>根据日历表生成财年及周编号</title>
+      <link>https://vincent-233.github.io/2020/03/20/104987643/</link>
+      <pubDate>Fri, 20 Mar 2020 16:02:29 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2020/03/20/104987643/</guid>
+      <description>概述 数仓中经常会有一张日历维表，里面预存了很多日期截取和计算相关的字段，便于与事实表关联之后进行各类基于日期相关的分析。 现假定已有日历维表字</description>
+    </item>
+    
+    <item>
       <title>SSIS读取Excel空值问题解决</title>
       <link>https://vincent-233.github.io/2019/12/04/103395928/</link>
       <pubDate>Wed, 04 Dec 2019 23:54:10 +0000</pubDate>

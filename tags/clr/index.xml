@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CLR on 人生短短几個秋</title>
+    <link>https://vincent-233.github.io/tags/clr/</link>
+    <description>Recent content in CLR on 人生短短几個秋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Mar 2017 17:13:51 +0000</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/clr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL CLR函数（以正则表达式为例）</title>
+      <link>https://vincent-233.github.io/2017/03/04/60332993/</link>
+      <pubDate>Sat, 04 Mar 2017 17:13:51 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2017/03/04/60332993/</guid>
+      <description>创建CLR程序集 VS中新建项目，类型为Database，模板选择SQL Server项目，然后在解决方案资源管理器中，选中项目，右键添加，选择</description>
+    </item>
+    
+    <item>
+      <title>DBA眼中的CLR (译)</title>
+      <link>https://vincent-233.github.io/2017/03/04/60330115/</link>
+      <pubDate>Sat, 04 Mar 2017 16:13:25 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2017/03/04/60330115/</guid>
+      <description>SQL Server 2005引入CLR之后，开发者们热情地接受了它。 CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</description>
+    </item>
+    
+  </channel>
+</rss>

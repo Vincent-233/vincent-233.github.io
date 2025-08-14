@@ -197,15 +197,6 @@
     </item>
     
     <item>
-      <title>SQL复制（订阅、发布）实践问题记录</title>
-      <link>https://vincent-233.github.io/2018/06/18/80724609/</link>
-      <pubDate>Mon, 18 Jun 2018 16:32:46 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2018/06/18/80724609/</guid>
-      <description>关于SQL复制的具体操作步骤网上有很多教程我就不说明了，这里主要记录下我的实践，以及过程中遇到的问题与解决方法： 本机不同数据库间复制 本机配置</description>
-    </item>
-    
-    <item>
       <title>SQL Server FileStream 体验</title>
       <link>https://vincent-233.github.io/2018/06/03/80553895/</link>
       <pubDate>Sun, 03 Jun 2018 07:50:47 +0000</pubDate>
@@ -266,15 +257,6 @@
       
       <guid>https://vincent-233.github.io/2017/03/04/60330115/</guid>
       <description>SQL Server 2005引入CLR之后，开发者们热情地接受了它。 CLR作为一个强有力的工具，开发者可在数据库中利用它调用其他面向对象语言编写而成的功能。</description>
-    </item>
-    
-    <item>
-      <title>从登陆名与用户名的区别说起，谈SQL Server安全性初步</title>
-      <link>https://vincent-233.github.io/2015/05/31/46288335/</link>
-      <pubDate>Sun, 31 May 2015 14:17:04 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2015/05/31/46288335/</guid>
-      <description>概述 登陆名的作用域是SQL Server数据库引擎，要连接到具体的数据库并进行相应操作，登陆名还需要映射到数据库用户名，并为用户名指定数据库角</description>
     </item>
     
     <item>
@@ -341,15 +323,6 @@
     </item>
     
     <item>
-      <title>SQL Server无法删除数据库的解决方法</title>
-      <link>https://vincent-233.github.io/2014/07/11/37717375/</link>
-      <pubDate>Fri, 11 Jul 2014 18:41:45 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2014/07/11/37717375/</guid>
-      <description>思路：先删除与此数据库连接的进程，再删除数据库 直接上脚本： -- 删除与此数据库相关的连接 DECLARE @sql VARCHAR(4000) SELECT @sql = ISNULL(@sql,&amp;#39;&amp;#39;) + &amp;#39;kill &amp;#39; + LTRIM(spid) + CHAR(13) from sysprocesses WHERE dbid = DB_ID(&amp;#39;DB_Name&amp;#39;) EXEC(@sql) -- 删除与此数据</description>
-    </item>
-    
-    <item>
       <title>断号查询（查找不连续ID记录）</title>
       <link>https://vincent-233.github.io/2014/05/18/26179859/</link>
       <pubDate>Sun, 18 May 2014 16:06:25 +0000</pubDate>
@@ -374,15 +347,6 @@
       
       <guid>https://vincent-233.github.io/2014/03/23/21862313/</guid>
       <description>1.问题描述 有时候会出现这样的情况：从视图中select 出的数据和直接用创建视图的语句选出的数据有差异。 很多人第一次遇到此情况时，会非常惊讶</description>
-    </item>
-    
-    <item>
-      <title>SQL Server 2005 无日志文件附加数据库</title>
-      <link>https://vincent-233.github.io/2013/12/27/17620647/</link>
-      <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2013/12/27/17620647/</guid>
-      <description>虽然目前本人用的是2008R2，但很多客户仍然还是2005版本的，所以还是将这篇文章转过来，以备不时之需。在2008下附加2005的mdf应</description>
     </item>
     
     <item>
@@ -428,15 +392,6 @@
       
       <guid>https://vincent-233.github.io/2013/11/23/16897427/</guid>
       <description>先为大家准备点数据： CREATE TABLE TA(Acol INT); GO INSERT INTO TA SELECT 1 UNION ALL SELECT 2; GO CREATE TABLE TB(Bcol1 INT,Bcol2 VARCHAR(10)); GO INSERT INTO TB SELECT -1, &amp;#39;a&amp;#39; UNION ALL SELECT 1, &amp;#39;b&amp;#39; UNION ALL SELECT 3, &amp;#39;c&amp;#39;; GO 1. Cross Join Cross Join，交叉联接，其实就是笛卡尔积</description>
-    </item>
-    
-    <item>
-      <title>关于SQL Server 排序规则</title>
-      <link>https://vincent-233.github.io/2013/11/17/16645847/</link>
-      <pubDate>Sun, 17 Nov 2013 14:18:46 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2013/11/17/16645847/</guid>
-      <description>今天写一SQL语句时，被提示&amp;quot; 无法解决 equal to操作中 &amp;ldquo;SQL_Latin1_General_CP1_CI_AS&amp;quot</description>
     </item>
     
     <item>
