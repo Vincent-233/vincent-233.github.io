@@ -105,7 +105,10 @@
   <ul>
     <li><a href="#字符串拆分函数">字符串拆分函数</a>
       <ul>
-        <li></li>
+        <li><a href="#循环拆分实现">循环拆分实现</a></li>
+        <li><a href="#递归函数实现">递归函数实现</a></li>
+        <li><a href="#xml实现">XML实现</a></li>
+        <li><a href="#结果展示">结果展示</a></li>
       </ul>
     </li>
     <li><a href="#分列">分列</a></li>
@@ -117,7 +120,7 @@
 			<h2 id="字符串拆分函数">字符串拆分函数</h2>
 <p>刚工作那会写了一篇关于字符串拆分的<a href="https://vincent-233.github.io/2013/10/20/12889707/">文章</a>，那时仅仅是考虑实现就可以了，没考虑性能、简洁等因素，现总结一下常用方法以及优劣。<br>
 为了考虑代码的可读性和复用性，一般用函数将实现细节封装，下面介绍几种常用的方法：</p>
-<h4 id="循环拆分实现">循环拆分实现</h4>
+<h3 id="循环拆分实现">循环拆分实现</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FUNCTION</span><span style="color:#bbb"> </span>[dbo].[SplitString]<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#666">@</span>str<span style="color:#bbb"> </span>NVARCHAR(<span style="color:#666">4000</span>)<span style="color:#bbb">
@@ -133,14 +136,14 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">SET</span><span style="color:#bbb"> </span><span style="color:#666">@</span>str<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">@</span>str<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span><span style="color:#666">@</span><span style="color:#a2f">char</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>WHILE<span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#a2f;font-weight:bold">BEGIN</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#666">@</span>SplitStr<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">SUBSTRING</span>(<span style="color:#666">@</span>str,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f">char</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>)<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">  </span><span style="color:#666">@</span>str<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">RIGHT</span>(<span style="color:#666">@</span>str,<span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f">char</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>(LEN(<span style="color:#666">@</span><span style="color:#a2f">char</span>)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>))<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#666">@</span>SplitStr(Value)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">SUBSTRING</span>(<span style="color:#666">@</span>str,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f">char</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">@</span>str<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">RIGHT</span>(<span style="color:#666">@</span>str,<span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f">char</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>(LEN(<span style="color:#666">@</span><span style="color:#a2f">char</span>)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>))<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb">   
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">RETURN</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb">
 </span></span></span></code></pre></div><p>以上方法从SQL SERVER 2000时代就可以使用，可以说是最具版本兼容性的写法。</p>
-<h4 id="递归函数实现">递归函数实现</h4>
+<h3 id="递归函数实现">递归函数实现</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FUNCTION</span><span style="color:#bbb"> </span>[dbo].[SplitString_CTE]<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#666">@</span>String<span style="color:#bbb"> </span>NVARCHAR(<span style="color:#666">4000</span>),<span style="color:#bbb">
@@ -152,21 +155,21 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">WITH</span><span style="color:#bbb"> </span>Split(StartPos,EndPos)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>(<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>StartPos,<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>,<span style="color:#666">@</span>String)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>EndPos<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>StartPos,<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>String)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>EndPos<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>EndPos<span style="color:#666">+</span>LEN(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>),<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>,<span style="color:#666">@</span>String,EndPos<span style="color:#666">+</span>LEN(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>))<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>EndPos<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>),<span style="color:#bbb"> </span>CHARINDEX(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>,<span style="color:#bbb"> </span><span style="color:#666">@</span>String,<span style="color:#bbb"> </span>EndPos<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span><span style="color:#a2f;font-weight:bold">Delimiter</span>))<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>Split<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>EndPos<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>)<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>ROW_NUMBER()<span style="color:#bbb"> </span>OVER<span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">ORDER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>))<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>ID<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>,<span style="color:#a2f;font-weight:bold">SUBSTRING</span>(<span style="color:#666">@</span>String,StartPos,COALESCE(<span style="color:#a2f;font-weight:bold">NULLIF</span>(EndPos,<span style="color:#666">0</span>),LEN(<span style="color:#666">@</span>String)<span style="color:#666">+</span><span style="color:#666">1</span>)<span style="color:#666">-</span>StartPos)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>Value<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>,<span style="color:#a2f;font-weight:bold">SUBSTRING</span>(<span style="color:#666">@</span>String,<span style="color:#bbb"> </span>StartPos,<span style="color:#bbb"> </span>COALESCE(<span style="color:#a2f;font-weight:bold">NULLIF</span>(EndPos,<span style="color:#bbb"> </span><span style="color:#666">0</span>),<span style="color:#bbb"> </span>LEN(<span style="color:#666">@</span>String)<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span><span style="color:#666">1</span>)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>StartPos)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>Value<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>Split<span style="color:#bbb"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">	</span><span style="color:#080;font-style:italic">--OPTION(MAXRECURSION 0) 这里不能使用，要放在最终查询中使用
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>)<span style="color:#bbb">
 </span></span></span></code></pre></div><p>从SQL SERVER 2005 开始，出现了公共表达式这一利器，可以实现递归查询，于有了上面的版本。<br>
 基本思路是从上一次查询分隔符的位置加1开始成为新的起点，一直递归到找不到分隔符为止。<br>
 CTE的结果是每个分隔符号的起始位置，最外层查询是利用起始位置查询出最终结果。</p>
-<h4 id="xml实现">XML实现</h4>
+<h3 id="xml实现">XML实现</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FUNCTION</span><span style="color:#bbb"> </span>[dbo].[SplitString_XML]<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#666">@</span>String<span style="color:#bbb"> </span>NVARCHAR(<span style="color:#666">4000</span>),<span style="color:#bbb">
@@ -188,7 +191,7 @@ CTE的结果是每个分隔符号的起始位置，最外层查询是利用起�
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">	</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>b<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>)<span style="color:#bbb">
 </span></span></span></code></pre></div><p>此方法通过构造XML字符串去使用XML的特有方法进行实现。</p>
-<h4 id="结果展示">结果展示</h4>
+<h3 id="结果展示">结果展示</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb">  </span>[dbo].[SplitString](<span style="color:#b44">&#39;12,123,21312&#39;</span>,<span style="color:#b44">&#39;,&#39;</span>)<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb">  </span>[dbo].[SplitString_CTE](<span style="color:#b44">&#39;12,123,21312&#39;</span>,<span style="color:#b44">&#39;,&#39;</span>)<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb">  </span>[dbo].[SplitString_XML](<span style="color:#b44">&#39;12,123,21312&#39;</span>,<span style="color:#b44">&#39;,&#39;</span>)<span style="color:#bbb">
@@ -216,7 +219,7 @@ XML的性能最差，不建议使用。</p>
 </span></span></span></code></pre></div><p>结果如下：<br>
 <img src="/img/20181208125652620.png" alt=""></p>
 <h2 id="后话">后话</h2>
-<p>最后说一点题外话，SQL Server 2016对字符串的拆分和合并已经有了内置的系统函数<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-split-transact-sql?view=sql-server-2017">STRING_SPLIT</a>和<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-2017">STRING_AGG</a>。以后再也没有自己实现的乐趣了，感慨编程语言越来越强大，轮子越来越多，多年以后可能傻瓜都会编程了，编程将和英语一样成为一门多数人都要会的通用技能。</p>
+<p>最后说一点题外话，SQL Server 2016开始对字符串的拆分和合并已经有了内置的系统函数<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-split-transact-sql?view=sql-server-2017">STRING_SPLIT</a>（仅支持单分隔符）和<a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-2017">STRING_AGG</a>。以后再也没有自己实现的乐趣了，感慨编程语言越来越强大，轮子越来越多，多年以后可能傻瓜都会编程了，编程将和英语一样成为一门多数人都要会的通用技能。</p>
 
 		</div>
 		<footer class="post__footer">
@@ -251,117 +254,7 @@ XML的性能最差，不建议使用。</p>
 
 
 			</div>
-			<aside class="sidebar">
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/2025/08/13/oracle_docker_install_ubuntu/">Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/07/11/rustdesk-setup/">RustDesk自建Server搭建</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/05/01/how_to_read/">如何阅读一本书</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/23/mssql_two_common_set_option/">SQL Server中几个重要的SET OPTION，非必要不建议修改</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/11/soft_router_usage/">OpenWrt安装代理软件</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-  <h4 class="widget__title">分类</h4>
-  <div class="widget__content">
-    <ul class="widget__list">
-
-      
-
-      
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/sql-server/">SQL Server</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">32</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/etl/">ETL</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">9</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/python/">Python</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">18</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/oracle/">Oracle</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">5</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/bigdata/">BigData</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">3</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">17</span>
-          </li>
-
-      
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">46</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">10</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/linux/">Linux</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">5</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">5</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">4</span>
-        </li>
-
-    </ul>
-  </div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/batch/" title="Batch">Batch (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cheat-sheet/" title="cheat sheet">cheat sheet (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/clr/" title="CLR">CLR (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/db-api/" title="DB-API">DB-API (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/dotnet/" title="dotnet">dotnet (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/duckdb/" title="DuckDB">DuckDB (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/excel/" title="Excel">Excel (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="GIT">GIT (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mac/" title="Mac">Mac (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mssql/" title="MSSQL">MSSQL (26)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/openwrt/" title="OpenWrt">OpenWrt (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/oracle/" title="ORACLE">ORACLE (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pandas/" title="pandas">pandas (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pl/sql/" title="PL/SQL">PL/SQL (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql/" title="PostgreSQL">PostgreSQL (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/powershell/" title="powershell">powershell (6)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python (22)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/reading/" title="Reading">Reading (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/redshift/" title="RedShift">RedShift (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rustdesk/" title="RustDesk">RustDesk (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/selenium/" title="selenium">selenium (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/spark/" title="spark">spark (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssh/" title="SSH">SSH (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssis/" title="SSIS">SSIS (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssms/" title="SSMS">SSMS (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/t-sql/" title="T-SQL">T-SQL (33)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ubuntu/" title="ubuntu">ubuntu (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vba/" title="VBA">VBA (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vim/" title="vim">vim (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/virtual-box/" title="virtual box">virtual box (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/windows/" title="windows">windows (4)</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">

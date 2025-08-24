@@ -97,9 +97,21 @@
 	</span>
 </div></div>
 		</header>
-		<div class="content post__content clearfix">
-			<p>ORACLE不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- Nested Table
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#方法1---创建拆分函数">方法1 - 创建拆分函数</a></li>
+    <li><a href="#方法2---用-regexp_substr-实现">方法2 - 用 REGEXP_SUBSTR 实现</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="方法1---创建拆分函数">方法1 - 创建拆分函数</h2>
+<p>ORACLE的函数不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plpgsql" data-lang="plpgsql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- Nested Table
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">OR</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REPLACE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TYPE</span><span style="color:#bbb"> </span>split_str<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">OF</span><span style="color:#bbb"> </span><span style="color:#a2f">VARCHAR</span>(<span style="color:#666">100</span>);<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">/</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
@@ -111,36 +123,49 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>)<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">RETURN</span><span style="color:#bbb"> </span>split_str<span style="color:#bbb"> </span>PIPELINED<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_Str<span style="color:#bbb"> </span><span style="color:#a2f">VARCHAR</span>(<span style="color:#666">4000</span>)<span style="color:#bbb"> </span>:<span style="color:#666">=</span><span style="color:#bbb"> </span>p_Str;<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_Index<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>;<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_SubLength<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_Str<span style="color:#bbb"> </span><span style="color:#a2f">VARCHAR</span>(<span style="color:#666">4000</span>)<span style="color:#bbb"> </span><span style="color:#666">:=</span><span style="color:#bbb"> </span>p_Str;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_Index<span style="color:#bbb"> </span>NUMBER;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_SubLength<span style="color:#bbb"> </span>NUMBER;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">BEGIN</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-style:italic">-- p_Delimiter is null
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-style:italic">-- p_Delimiter is null return empty result
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">IF</span><span style="color:#bbb"> </span>p_Delimiter<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">THEN</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">FOR</span><span style="color:#bbb"> </span>x<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span><span style="color:#666">1</span>..<span style="color:#a2f;font-weight:bold">LENGTH</span>(v_Str)<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>LOOP<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>PIPE<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ROW</span>(SUBSTR(V_Str,x,<span style="color:#666">1</span>));<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span>LOOP;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#a2f;font-weight:bold">RETURN</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IF</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_index<span style="color:#bbb"> </span>:<span style="color:#666">=</span><span style="color:#bbb"> </span>INSTR(v_Str,p_Delimiter);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>WHILE<span style="color:#bbb"> </span>v_Index<span style="color:#bbb"> </span><span style="color:#666">&lt;&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>LOOP<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>v_index<span style="color:#bbb"> </span><span style="color:#666">:=</span><span style="color:#bbb"> </span>INSTR(v_Str,p_Delimiter);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">WHILE</span><span style="color:#bbb"> </span>v_Index<span style="color:#bbb"> </span><span style="color:#666">&lt;&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">LOOP</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>PIPE<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ROW</span>(SUBSTR(v_Str,<span style="color:#666">1</span>,v_Index<span style="color:#666">-</span><span style="color:#666">1</span>));<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_SubLength<span style="color:#bbb"> </span>:<span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">LENGTH</span>(v_Str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>(v_index<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">LENGTH</span>(p_Delimiter)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_Str<span style="color:#bbb"> </span>:<span style="color:#666">=</span><span style="color:#bbb"> </span>SUBSTR(v_Str,<span style="color:#666">-</span>v_SubLength,v_SubLength);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_index<span style="color:#bbb"> </span>:<span style="color:#666">=</span><span style="color:#bbb"> </span>INSTR(v_Str,p_Delimiter);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span>LOOP;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_SubLength<span style="color:#bbb"> </span><span style="color:#666">:=</span><span style="color:#bbb"> </span>LENGTH(v_Str)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>(v_index<span style="color:#bbb"> </span><span style="color:#666">+</span><span style="color:#bbb"> </span>LENGTH(p_Delimiter)<span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">1</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_Str<span style="color:#bbb"> </span><span style="color:#666">:=</span><span style="color:#bbb"> </span>SUBSTR(v_Str,<span style="color:#666">-</span>v_SubLength,v_SubLength);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>v_index<span style="color:#bbb"> </span><span style="color:#666">:=</span><span style="color:#bbb"> </span>INSTR(v_Str,p_Delimiter);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">END</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">LOOP</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>PIPE<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ROW</span>(v_Str);<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">RETURN</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">/</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">-- 调用（第二种方式更好）
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">-- 调用（更推荐第二种方式）
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>fn_split(<span style="color:#b44">&#39;This@@is@@it&#39;</span>,<span style="color:#b44">&#39;@@&#39;</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual;<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">Table</span>(fn_split(<span style="color:#b44">&#39;This@@is@@it&#39;</span>,<span style="color:#b44">&#39;@@&#39;</span>));<span style="color:#bbb">
-</span></span></span></code></pre></div>
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">Table</span>(fn_split(<span style="color:#b44">&#39;This@@is@@it&#39;</span>,<span style="color:#b44">&#39;@@&#39;</span>));<span style="color:#bbb"> 
+</span></span></span></code></pre></div><h2 id="方法2---用-regexp_substr-实现">方法2 - 用 REGEXP_SUBSTR 实现</h2>
+<p>举例如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plpgsql" data-lang="plpgsql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 按一个或多个@符号分割
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>REGEXP_SUBSTR(<span style="color:#b44">&#39;this@is@@a@test&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;[^@]+&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">level</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>parts<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>CONNECT<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>REGEXP_SUBSTR(<span style="color:#b44">&#39;this@is@a@test&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;[^@]+&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">level</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">-- 按两个@@分割
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>REGEXP_SUBSTR(<span style="color:#b44">&#39;this@is@@a@@test&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;(.*?)(@@|$)&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">level</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>parts<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>CONNECT<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>REGEXP_SUBSTR(<span style="color:#b44">&#39;this@is@@a@@test&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;(.*?)(@@|$)&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">level</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb"> </span><span style="color:#666">1</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><blockquote>
+<p>如何理解这里的 connect by 呢？ 它相当于一个行生成器，不断地生成新行，直到 connect by 后面的条件不再满足。</p>
+</blockquote>
+<p>这种方法更灵活，可实现按一个或多个分隔符拆分的逻辑，但可读性略差，逻辑不够直观，且依赖正则表达式，在数据量大的情况下性能无法保证，适合小数据量或者在无法创建UDF的情况下使用。</p>
+
 		</div>
 		<footer class="post__footer">
 			
@@ -177,117 +202,7 @@
 
 
 			</div>
-			<aside class="sidebar">
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/2025/08/13/oracle_docker_install_ubuntu/">Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/07/11/rustdesk-setup/">RustDesk自建Server搭建</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/05/01/how_to_read/">如何阅读一本书</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/23/mssql_two_common_set_option/">SQL Server中几个重要的SET OPTION，非必要不建议修改</a></li>
-			<li class="widget__item"><a class="widget__link" href="/2025/03/11/soft_router_usage/">OpenWrt安装代理软件</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-categories widget">
-  <h4 class="widget__title">分类</h4>
-  <div class="widget__content">
-    <ul class="widget__list">
-
-      
-
-      
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/sql-server/">SQL Server</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">32</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/etl/">ETL</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">9</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/python/">Python</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">18</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/oracle/">Oracle</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">5</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/bigdata/">BigData</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">3</span>
-          </li>
-          <li class="widget__item">
-            <a class="widget__link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">17</span>
-          </li>
-
-      
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91/">数据库开发</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">46</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%84%9A%E6%9C%AC/">命令行脚本</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">10</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/linux/">Linux</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">5</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">5</span>
-        </li>
-        <li class="widget__item">
-          <a class="widget__link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>&nbsp;
-          <span class="widget__counter widget__counter--bubble">4</span>
-        </li>
-
-    </ul>
-  </div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/batch/" title="Batch">Batch (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/cheat-sheet/" title="cheat sheet">cheat sheet (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/clr/" title="CLR">CLR (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/db-api/" title="DB-API">DB-API (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="Docker">Docker (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/dotnet/" title="dotnet">dotnet (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/duckdb/" title="DuckDB">DuckDB (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/excel/" title="Excel">Excel (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="GIT">GIT (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="Linux">Linux (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mac/" title="Mac">Mac (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/mssql/" title="MSSQL">MSSQL (26)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/openwrt/" title="OpenWrt">OpenWrt (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/oracle/" title="ORACLE">ORACLE (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pandas/" title="pandas">pandas (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pl/sql/" title="PL/SQL">PL/SQL (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/postgresql/" title="PostgreSQL">PostgreSQL (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/powershell/" title="powershell">powershell (6)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python (22)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/reading/" title="Reading">Reading (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/redshift/" title="RedShift">RedShift (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rustdesk/" title="RustDesk">RustDesk (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/selenium/" title="selenium">selenium (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/spark/" title="spark">spark (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssh/" title="SSH">SSH (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssis/" title="SSIS">SSIS (5)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ssms/" title="SSMS">SSMS (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/t-sql/" title="T-SQL">T-SQL (33)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/tools/" title="Tools">Tools (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/ubuntu/" title="ubuntu">ubuntu (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vba/" title="VBA">VBA (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/vim/" title="vim">vim (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/virtual-box/" title="virtual box">virtual box (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/windows/" title="windows">windows (4)</a>
-	</div>
-</div>
-</aside>
+			
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">

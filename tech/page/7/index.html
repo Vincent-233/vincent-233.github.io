@@ -146,7 +146,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。 这里通过一个简单的例子来介绍...
+		ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。这里通过一个简单的例子来介绍...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/2014/07/26/38146339/">Read more…</a>
@@ -166,7 +166,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据： CREATE TABLE MyTest(xType NUMBER,City nvarchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,N&#39;北京&#39; FROM dual UNION ALL SELECT...
+		合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。 准备数据 CREATE TABLE MyTest(xType NUMBER,City varchar2(200)); / INSERT INTO MyTest(xType,City) SELECT 1,&#39;北京&#39; FROM dual UNION ALL SELECT 1,...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/2014/07/26/38145329/">Read more…</a>
@@ -186,7 +186,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		ORACLE不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested Table）。 -- Nested Table CREATE OR REPLACE TYPE...
+		方法1 - 创建拆分函数 ORACLE的函数不能像MSSQL那样支持直接返回表类型，所以要先创建一种自定义类型。这里用到的是嵌套表（Nested T...
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/2014/07/26/38139137/">Read more…</a>
@@ -425,7 +425,7 @@
       
           <li class="widget__item">
             <a class="widget__link" href="/categories/sql-server/">SQL Server</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">32</span>
+            <span class="widget__counter widget__counter--bubble">33</span>
           </li>
           <li class="widget__item">
             <a class="widget__link" href="/categories/etl/">ETL</a>&nbsp;

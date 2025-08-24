@@ -134,6 +134,15 @@
     </item>
     
     <item>
+      <title>SQL Server用Cross Apply、Cross Join实现列转行</title>
+      <link>https://vincent-233.github.io/2019/07/20/96520306/</link>
+      <pubDate>Sat, 20 Jul 2019 01:16:07 +0000</pubDate>
+      
+      <guid>https://vincent-233.github.io/2019/07/20/96520306/</guid>
+      <description>今天介绍4种列转行（又称宽表转长表、逆透视等）写法。 数据准备 CREATE TABLE Sales([Year] INT,Q1 INT,Q2 INT,Q3 INT,Q4 INT); GO INSERT INTO Sales([Year],Q1,Q2,Q3,Q4) VALUES (2017,12,123,324,123) ,(2018,13,455,324,878) ,(2019,29,786,473,633); SQL写法 UNION 最传统最通用写法 SELECT [Year],&amp;#39;Q1&amp;#39; AS [Quarter],Q1 AS Amount FROM Sales UNION ALL</description>
+    </item>
+    
+    <item>
       <title>交叉表转换为横表</title>
       <link>https://vincent-233.github.io/2019/07/16/95868267/</link>
       <pubDate>Tue, 16 Jul 2019 15:36:14 +0000</pubDate>

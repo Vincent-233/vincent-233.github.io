@@ -97,35 +97,53 @@
 	</span>
 </div></div>
 		</header>
-		<div class="content post__content clearfix">
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备数据">准备数据</a></li>
+    <li><a href="#使用wm_concat不推荐新版本不一定可用">使用wm_Concat（不推荐，新版本不一定可用）</a></li>
+    <li><a href="#使用listagg">使用ListAgg</a></li>
+    <li><a href="#说明">说明</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
 			<p>合并列值最通用的方法就是写一个自定义函数去实现，这里介绍的是其他方法。</p>
-<p>准备数据：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>MyTest(xType<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>,City<span style="color:#bbb"> </span>nvarchar2(<span style="color:#666">200</span>));<span style="color:#bbb">
+<h2 id="准备数据">准备数据</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>MyTest(xType<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>,City<span style="color:#bbb"> </span>varchar2(<span style="color:#666">200</span>));<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">/</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>MyTest(xType,City)<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,N<span style="color:#b44">&#39;北京&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,N<span style="color:#b44">&#39;上海&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,N<span style="color:#b44">&#39;广州&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,N<span style="color:#b44">&#39;武汉&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,N<span style="color:#b44">&#39;杭州&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,N<span style="color:#b44">&#39;厦门&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#b44">&#39;北京&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#b44">&#39;上海&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">1</span>,<span style="color:#b44">&#39;广州&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,<span style="color:#b44">&#39;武汉&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,<span style="color:#b44">&#39;杭州&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">UNION</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ALL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">2</span>,<span style="color:#b44">&#39;厦门&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>dual<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">COMMIT</span>;<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">/</span><span style="color:#bbb">
-</span></span></span></code></pre></div><p>使用wm_Concat:</p>
+</span></span></span></code></pre></div><h2 id="使用wm_concat不推荐新版本不一定可用">使用wm_Concat（不推荐，新版本不一定可用）</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>xType,wmsys.wm_concat(to_char(City))<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>xCity<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>MyTest<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">GROUP</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>xType<span style="color:#bbb">
-</span></span></span></code></pre></div><p>使用ListAgg:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>xType,<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>ListAgg(to_char(City),<span style="color:#b44">&#39;,&#39;</span>)<span style="color:#bbb"> </span>WITHIN<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">GROUP</span>(<span style="color:#a2f;font-weight:bold">ORDER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>xType)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>xCity<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="使用listagg">使用ListAgg</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>xType<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>,ListAgg(City,<span style="color:#b44">&#39;,&#39;</span>)<span style="color:#bbb"> </span>WITHIN<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">GROUP</span>(<span style="color:#a2f;font-weight:bold">ORDER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>city)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>xCity<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>MyTest<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">GROUP</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span>xType<span style="color:#bbb">
 </span></span></span></code></pre></div><p>结果：</p>
-<p>备注：</p>
-<p>0、上面在City列前都加了To_Char()函数，是为了防止出现乱码的情况；</p>
-<p>1、wm_concat 在ORACEL的官方文档中没有，不能保证各版本的兼容性；</p>
-<p>2、ListAgg是11g版本才出现的新的聚集函数。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>xType xCity
+</span></span><span style="display:flex;"><span>----- --------------
+</span></span><span style="display:flex;"><span>    1 上海,北京,广州
+</span></span><span style="display:flex;"><span>    2 厦门,杭州,武汉
+</span></span></code></pre></div><h2 id="说明">说明</h2>
+<ul>
+<li>上面在City列前都加了To_Char()函数，是为了防止出现乱码的情况</li>
+<li>wm_concat 在ORACEL的官方文档中没有，不能保证各版本的兼容性</li>
+<li>ListAgg是11g版本才出现的新的聚集函数</li>
+</ul>
 
 		</div>
 		<footer class="post__footer">
@@ -186,7 +204,7 @@
       
           <li class="widget__item">
             <a class="widget__link" href="/categories/sql-server/">SQL Server</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">32</span>
+            <span class="widget__counter widget__counter--bubble">33</span>
           </li>
           <li class="widget__item">
             <a class="widget__link" href="/categories/etl/">ETL</a>&nbsp;

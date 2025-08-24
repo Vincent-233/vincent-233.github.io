@@ -97,27 +97,41 @@
 	</span>
 </div></div>
 		</header>
-		<div class="content post__content clearfix">
-			<p>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。</p>
-<p>这里通过一个简单的例子来介绍这两种查询方式。</p>
-<p>数据准备：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>TBL_TEST(<span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>,<span style="color:#bbb">  </span>NAME<span style="color:#bbb"> </span>VARCHAR2(<span style="color:#666">100</span>),<span style="color:#bbb">  </span>PID<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>);<span style="color:#bbb">
+		
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据准备">数据准备</a></li>
+    <li><a href="#oracle特有的递归查询方式---connect-by">ORACLE特有的递归查询方式 - CONNECT BY</a></li>
+    <li><a href="#cte方式">CTE方式</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p>ORACLE支持常规的用CTE递归的方式实现递归查询，也有自己特有的查询方式，ORACLE文档中叫层次数据查询。这里通过一个简单的例子来介绍这两种查询方式。</p>
+<h2 id="数据准备">数据准备</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- PID is parent ID of ID
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>TBL_TEST(<span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>,<span style="color:#bbb">  </span>NAME<span style="color:#bbb"> </span>VARCHAR2(<span style="color:#666">100</span>),<span style="color:#bbb">  </span>PID<span style="color:#bbb"> </span><span style="color:#a2f">NUMBER</span>);<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">/</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">BEGIN</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#b44">&#39;1&#39;</span>,<span style="color:#b44">&#39;10&#39;</span>,<span style="color:#b44">&#39;0&#39;</span>);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#b44">&#39;2&#39;</span>,<span style="color:#b44">&#39;11&#39;</span>,<span style="color:#b44">&#39;1&#39;</span>);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#b44">&#39;3&#39;</span>,<span style="color:#b44">&#39;20&#39;</span>,<span style="color:#b44">&#39;0&#39;</span>);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#b44">&#39;4&#39;</span>,<span style="color:#b44">&#39;12&#39;</span>,<span style="color:#b44">&#39;1&#39;</span>);<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#b44">&#39;5&#39;</span>,<span style="color:#b44">&#39;121&#39;</span>,<span style="color:#b44">&#39;2&#39;</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#666">1</span>,<span style="color:#b44">&#39;a&#39;</span>,<span style="color:#666">0</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#666">2</span>,<span style="color:#b44">&#39;b&#39;</span>,<span style="color:#666">1</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#666">3</span>,<span style="color:#b44">&#39;c&#39;</span>,<span style="color:#666">0</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#666">4</span>,<span style="color:#b44">&#39;d&#39;</span>,<span style="color:#666">1</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>TBL_TEST(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span>(<span style="color:#666">5</span>,<span style="color:#b44">&#39;e&#39;</span>,<span style="color:#666">2</span>);<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">END</span>;<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"> </span><span style="color:#666">/</span><span style="color:#bbb">
-</span></span></span></code></pre></div><p>需求：ID = 1结点下所有的子结点（从表中数据可以看出是1、2、4、5）</p>
-<p>ORACLE特有的递归查询方式：</p>
+</span></span></span></code></pre></div><p><img src="/img/recursive-chart-01.png" alt=""></p>
+<p>需求：显示ID = 1结点及下面所有的子结点（结果应为1、2、4、5）</p>
+<h2 id="oracle特有的递归查询方式---connect-by">ORACLE特有的递归查询方式 - CONNECT BY</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>TBL_Test<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">START</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WITH</span><span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">1</span><span style="color:#bbb">           </span><span style="color:#080;font-style:italic">-- 开始行(start row)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CONNECT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIOR</span><span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>pid;<span style="color:#bbb">  </span><span style="color:#080;font-style:italic">-- prior代表上一行(parent row)
-</span></span></span></code></pre></div><p>CTE方式：</p>
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">START</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WITH</span><span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#666">1</span><span style="color:#bbb"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CONNECT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIOR</span><span style="color:#bbb"> </span>ID<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>pid;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>这种ORACLE特有的层次查询语法简洁而强大， 更多关于ORACLE层次数据查询可参考<a href="https://docs.oracle.com/cd/E11882_01/server.112/e41084/queries003.htm">官方文档</a></p>
+<h2 id="cte方式">CTE方式</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">WITH</span><span style="color:#bbb"> </span>cte(ID,NAME,PID)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>ID,NAME,PID<span style="color:#bbb">
@@ -130,9 +144,18 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>)<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>cte;<span style="color:#bbb">
 </span></span></span></code></pre></div><p>以上两种方法均查出了正确的结果。</p>
-<p>上面第一种方法的Start With 相当于第二种方法的UNION ALL上面的部分，CONNECT BY 则相当于UNION ALL下面的部分。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ID|NAME|PID|
+</span></span><span style="display:flex;"><span>--+----+---+
+</span></span><span style="display:flex;"><span> 1|a   |  0|
+</span></span><span style="display:flex;"><span> 2|b   |  1|
+</span></span><span style="display:flex;"><span> 5|e   |  2|
+</span></span><span style="display:flex;"><span> 4|d   |  1|
+</span></span></code></pre></div><p>上面第一种方法的Start With 相当于第二种方法的UNION ALL上面的部分，CONNECT BY 则相当于UNION ALL下面的部分。</p>
 <p>CTE方法具有可移植性，SQL SERVER和DB2也支持。</p>
-<p>关于CTE方法实现递归的更多实例，还可以看下面两遍文章：</p>
+<p>关于CTE方法实现递归的更多实例，请看下面这篇文章：</p>
+<ul>
+<li><a href="https://vincent-233.github.io/2013/12/10/17251887/">SQL 递归查询实战</a></li>
+</ul>
 
 		</div>
 		<footer class="post__footer">
@@ -193,7 +216,7 @@
       
           <li class="widget__item">
             <a class="widget__link" href="/categories/sql-server/">SQL Server</a>&nbsp;
-            <span class="widget__counter widget__counter--bubble">32</span>
+            <span class="widget__counter widget__counter--bubble">33</span>
           </li>
           <li class="widget__item">
             <a class="widget__link" href="/categories/etl/">ETL</a>&nbsp;
