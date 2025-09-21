@@ -908,15 +908,6 @@
     </item>
     
     <item>
-      <title>本地Oracle服务太占用内存的缓解方法</title>
-      <link>https://vincent-233.github.io/2014/01/16/18375543/</link>
-      <pubDate>Thu, 16 Jan 2014 15:29:59 +0000</pubDate>
-      
-      <guid>https://vincent-233.github.io/2014/01/16/18375543/</guid>
-      <description>初次接触Oracle，第一印象就是安装完之后系统明显变慢了，打开任务管理器一看，原来它的服务吃了太多内存。也许正如别人说的：&amp;ldquo;要</description>
-    </item>
-    
-    <item>
       <title>SQL Server 2005 无日志文件附加数据库</title>
       <link>https://vincent-233.github.io/2013/12/27/17620647/</link>
       <pubDate>Fri, 27 Dec 2013 14:43:35 +0000</pubDate>
