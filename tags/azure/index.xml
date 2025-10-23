@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure on 人生短短几個秋</title>
+    <link>https://vincent-233.github.io/tags/azure/</link>
+    <description>Recent content in Azure on 人生短短几個秋</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Oct 2025 16:55:02 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DP-900 Azure Data Fundamentals笔记</title>
+      <link>https://vincent-233.github.io/2025/10/23/dp-900-notes/</link>
+      <pubDate>Thu, 23 Oct 2025 16:55:02 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/2025/10/23/dp-900-notes/</guid>
+      <description>上个月为了大致了解 Azure 上的 Data 相关服务，花了不到两周时间备考了一个DP-900 Azure Data Fundamentals认证，期间做了一些笔记，为了保持术语的</description>
+    </item>
+    
+  </channel>
+</rss>

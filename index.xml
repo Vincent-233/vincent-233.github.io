@@ -6,7 +6,16 @@
     <description>Recent content on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Aug 2025 13:27:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Oct 2025 16:55:02 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DP-900 Azure Data Fundamentals笔记</title>
+      <link>https://vincent-233.github.io/2025/10/23/dp-900-notes/</link>
+      <pubDate>Thu, 23 Oct 2025 16:55:02 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/2025/10/23/dp-900-notes/</guid>
+      <description>上个月为了大致了解 Azure 上的 Data 相关服务，花了不到两周时间备考了一个DP-900 Azure Data Fundamentals认证，期间做了一些笔记，为了保持术语的</description>
+    </item>
+    
     <item>
       <title>Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</title>
       <link>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</link>

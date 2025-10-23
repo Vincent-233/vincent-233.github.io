@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://vincent-233.github.io/tags/azure/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
     <loc>https://vincent-233.github.io/categories/</loc>
-    <lastmod>2025-08-13T13:27:49+08:00</lastmod>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/2025/10/23/dp-900-notes/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/categories/misc/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/tags/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/tech/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
+  </url><url>
+    <loc>https://vincent-233.github.io/</loc>
+    <lastmod>2025-10-23T16:55:02+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/tags/docker/</loc>
     <lastmod>2025-08-13T13:27:49+08:00</lastmod>
@@ -11,16 +29,7 @@
     <loc>https://vincent-233.github.io/categories/oracle/</loc>
     <lastmod>2025-08-13T13:27:49+08:00</lastmod>
   </url><url>
-    <loc>https://vincent-233.github.io/tags/</loc>
-    <lastmod>2025-08-13T13:27:49+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/tech/</loc>
-    <lastmod>2025-08-13T13:27:49+08:00</lastmod>
-  </url><url>
     <loc>https://vincent-233.github.io/2025/08/13/oracle_docker_install_ubuntu/</loc>
-    <lastmod>2025-08-13T13:27:49+08:00</lastmod>
-  </url><url>
-    <loc>https://vincent-233.github.io/</loc>
     <lastmod>2025-08-13T13:27:49+08:00</lastmod>
   </url><url>
     <loc>https://vincent-233.github.io/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
