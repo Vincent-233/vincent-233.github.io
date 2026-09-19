@@ -6,7 +6,16 @@
     <description>Recent content in Thinkings on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 May 2025 21:36:12 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/thinking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Sep 2026 17:54:25 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/thinking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 之父谈 Vibe Coding - AI不会彻底取代程序员</title>
+      <link>https://vincent-233.github.io/2026/09/19/ai_will_not_replace_programmer/</link>
+      <pubDate>Sat, 19 Sep 2026 17:54:25 +0800</pubDate>
+      
+      <guid>https://vincent-233.github.io/2026/09/19/ai_will_not_replace_programmer/</guid>
+      <description>偶然刷到 Linux 之父 Linus Torvalds 接受采访时谈到对 AI 的看法，觉得很受启发，遂记录之。 观点总结 1. AI 只是“高级代码生成工具”，而非“思考者” Linus 将 AI 的演进与编程历</description>
+    </item>
+    
     <item>
       <title>如何阅读一本书</title>
       <link>https://vincent-233.github.io/2025/05/01/how_to_read/</link>

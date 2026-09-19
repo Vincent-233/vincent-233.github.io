@@ -6,16 +6,7 @@
     <description>Recent content in Teches on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Sep 2026 17:54:25 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Linux 之父谈 Vibe Coding - AI不会彻底取代程序员</title>
-      <link>https://vincent-233.github.io/2026/09/19/ai_will_not_replace_programmer/</link>
-      <pubDate>Sat, 19 Sep 2026 17:54:25 +0800</pubDate>
-      
-      <guid>https://vincent-233.github.io/2026/09/19/ai_will_not_replace_programmer/</guid>
-      <description>偶然刷到 Linux 之父 Linus Torvalds 接受采访时谈到对 AI 的看法，觉得很受启发，遂记录之。 观点总结 1. AI 只是“高级代码生成工具”，而非“思考者” Linus 将 AI 的演进与编程历</description>
-    </item>
-    
+    <lastBuildDate>Thu, 23 Oct 2025 16:55:02 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DP-900 Azure Data Fundamentals笔记</title>
       <link>https://vincent-233.github.io/2025/10/23/dp-900-notes/</link>
