@@ -5,7 +5,7 @@
     <link>https://vincent-233.github.io/tags/docker/</link>
     <description>Recent content in Docker on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Aug 2025 13:27:49 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ubuntu通过Docker安装Oracle 12c并配置DBeaver连接</title>

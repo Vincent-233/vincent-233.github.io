@@ -571,6 +571,40 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 	}
 }
 
+/* Pagefind search */
+:root {
+	--pf-font: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.menu {
+	position: relative;
+}
+
+.menu__search {
+	position: absolute;
+	top: 6px;
+	right: 100px;
+	left: 10px;
+	z-index: 2;
+	--pf-input-height: 32px;
+	--pf-border-radius: 16px;
+	--pf-background: rgba(255, 255, 255, .1);
+	--pf-border: rgba(255, 255, 255, .25);
+	--pf-border-focus: #fff;
+	--pf-hover: rgba(255, 255, 255, .2);
+	--pf-text: #fff;
+	--pf-text-secondary: #f0f0f0;
+	--pf-text-muted: #d4d4d4;
+}
+
+@media screen and (min-width: 767px) {
+	.menu__search {
+		right: 10px;
+		left: auto;
+		width: 220px;
+	}
+}
+
 /* Posts/Pages */
 .post__header,
 .main__header {

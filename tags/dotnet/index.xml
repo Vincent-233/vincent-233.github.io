@@ -5,7 +5,7 @@
     <link>https://vincent-233.github.io/tags/dotnet/</link>
     <description>Recent content in dotnet on 人生短短几個秋</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
     <lastBuildDate>Thu, 25 Jul 2024 16:40:10 +0800</lastBuildDate><atom:link href="https://vincent-233.github.io/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSIS脚本任务中动态引入外部dll</title>
